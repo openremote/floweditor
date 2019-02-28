@@ -124,4 +124,6 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+workspace.xml
+
 # End of https://www.gitignore.io/api/java,gradle,intellij
