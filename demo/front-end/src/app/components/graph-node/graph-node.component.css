@@ -1,0 +1,85 @@
+.node {
+  display: inline-grid;
+  position: initial;
+  background: rgb(80, 80, 80);
+  border-radius: 5px;
+  min-width: 200px;
+  min-height: 100px;
+  padding: 5px;
+
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 24px auto;
+  grid-template-areas:
+    "title title"
+    "input output";
+}
+
+.title {
+  grid-area: title;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sockets {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.socket {
+  height: 14px;
+}
+
+.circle{
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  border-radius: 100%;
+  background: gray;
+}
+
+.label {
+  font-size: 14px;
+  color: white;
+  font-style: italic;
+  margin-left: 5px;
+  margin-right: 5px;
+  vertical-align: top;
+}
+
+.input {
+  align-self: flex-start;
+  text-align: right;
+  transform: translateX(-7px);
+}
+
+.output {
+  align-self: flex-end;
+  text-align: left;
+  transform: translateX(7px);
+}
+
+.node-input{
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.node-input .title{
+  text-align: right;
+}
+
+.node-input .input{
+  display: none;
+}
+
+.node-processor{
+
+}
+
+.node-output{
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.node-output .output{
+  display: none;
+}

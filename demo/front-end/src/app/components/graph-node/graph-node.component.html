@@ -1,0 +1,17 @@
+<div class="node {{node.type | graphNodeTypeClass}}">
+  <div class="title">{{node.name}}</div>
+
+  <div class="sockets" style="grid-area: input">
+    <div class="input socket" *ngFor="let s of node.inputs">
+      <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
+      <span class="label">{{s.name}}</span>
+    </div>
+  </div>
+
+  <div class="sockets" style="grid-area: output">
+      <div class="output socket" *ngFor="let s of node.outputs">
+        <span class="label">{{s.name}}</span>
+        <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
+      </div>
+    </div>
+</div>
