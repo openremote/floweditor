@@ -1,4 +1,8 @@
+package logic;
+
+import logic.groovy.GroovyRuleGenerator;
 import models.*;
+import models.nodes.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +32,7 @@ public class Demo {
         thenNode.setOutputReference(0, splitterNode.getInputProperty(0));
 
         LogNode logNode = new LogNode();
-        logNode.setInputReference(0, counter.getOutputProperty(0));
+        logNode.setInputReference(1, counter.getOutputProperty(0));
         splitterNode.setOutputReference(0, logNode.getInputProperty(0));
 
         VariableSaverNode saverNode = new VariableSaverNode();
@@ -58,7 +62,7 @@ public class Demo {
     }
 
     private static void writeToFile(String ruleText) throws IOException {
-        File f = new File("rule2.groovy");
+        File f = new File("rule.groovy");
         f.createNewFile();
         FileWriter writer = new FileWriter(f);
         writer.write(ruleText);

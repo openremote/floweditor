@@ -1,3 +1,5 @@
+package logic;
+
 import models.Node;
 
 import java.util.List;

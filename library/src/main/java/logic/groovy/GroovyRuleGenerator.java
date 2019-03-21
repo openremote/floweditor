@@ -1,6 +1,11 @@
-import models.Node;
-import models.ThenNode;
+package logic.groovy;
 
+import logic.RuleGenerator;
+import models.Node;
+import models.nodes.ThenNode;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class GroovyRuleGenerator implements RuleGenerator {
@@ -18,13 +23,16 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 return (ThenNode) node;
             }
         }
-        throw new IllegalArgumentException("No Then node");
+        throw new IllegalArgumentException("No Then nodes");
     }
 
     @Override
     public String generate() {
         StringBuilder builder = new StringBuilder();
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        String date = LocalDateTime.now().format(formatter);
+        builder.append("//Rule created on " + date + " using rule-library");
+        builder.append("\n \n");
         builder.append("package demo.rules\n" +
                 "\n" +
                 "import org.openremote.manager.rules.RulesBuilder\n" +
@@ -44,14 +52,16 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "{\n" +
                 "facts -> \n" +
                 "");
-        for (Node node : nodes) {
-            builder.append(node.pre());
-        }
 
 
         ThenNode thenNode = getThenNode();
+        nodes.remove(thenNode);
+        for (Node node : nodes) {
+            builder.append(Groovify.pre(node));
+        }
 
-        builder.append(thenNode.getCondition());
+
+        builder.append(Groovify.toGroovy(thenNode.getConditionNode()));
         builder.append("\n})\n" +
                 ".then(\n" +
                 "{\n" +
@@ -59,10 +69,10 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "\n");
 
         for (Node node : nodes) {
-            builder.append(node.pre());
+            builder.append(Groovify.pre(node));
         }
 
-        builder.append(thenNode.getAction());
+        builder.append(Groovify.toGroovy(thenNode.getActionNode()));
         builder.append("\n" +
                 "})");
         return builder.toString();

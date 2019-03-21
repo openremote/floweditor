@@ -1,4 +1,7 @@
-package models;
+package models.nodes;
+
+import models.Node;
+import models.Property;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +13,7 @@ public class ValueNode<T> extends Node {
 
     public ValueNode() {
 
-        List<OutputProperty> outputProperties= new ArrayList<>();
-        outputProperties.add(new OutputProperty<T>(this));
-        setOutputs(outputProperties);
-    }
-
-    @Override
-    public String toGroovy() {
-        return value.toString();
+       init(0,1);
     }
 
     public T getValue() {

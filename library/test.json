@@ -1,0 +1,27 @@
+[
+    {
+        "name" : "Comparer",
+        "internals" : [
+            {
+                "type" : "Text",
+                "picker" : {
+                    "type" : "Dropdown",
+                     "Options" : [
+                         {
+                             "name" : "bigger than"                  
+                         },
+                         {
+                             "name" : "smaller than"
+                         },
+                         {
+                             "name" : "equals"
+                         }
+                     ]
+                }
+            }
+        ],
+        "inputs" : {
+
+        }
+    }
+] 
