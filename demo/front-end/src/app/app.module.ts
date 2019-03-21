@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -15,10 +17,12 @@ import { GraphSocketTypeColourPipe } from './pipes/graph-socket-type-colour.pipe
     WorkspaceComponent,
     GraphNodeComponent,
     GraphNodeTypeClassPipe,
-    GraphSocketTypeColourPipe
+    GraphSocketTypeColourPipe,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

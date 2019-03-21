@@ -1,20 +1,28 @@
 .node {
   display: inline-grid;
-  position: initial;
+  position: absolute;
   background: rgb(80, 80, 80);
   border-radius: 5px;
   min-width: 200px;
   min-height: 100px;
   padding: 5px;
-
   grid-template-columns: 50% 50%;
   grid-template-rows: 24px auto;
   grid-template-areas:
     "title title"
     "input output";
+  transition: box-shadow cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.node:active {
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
 }
 
 .title {
+  user-select: none;
+  cursor: move;
+  margin: 0;
   grid-area: title;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -29,7 +37,7 @@
   height: 14px;
 }
 
-.circle{
+.circle {
   width: 14px;
   height: 14px;
   display: inline-block;
@@ -58,28 +66,26 @@
   transform: translateX(7px);
 }
 
-.node-input{
+.node-input {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 }
 
-.node-input .title{
+.node-input .title {
   text-align: right;
 }
 
-.node-input .input{
+.node-input .input {
   display: none;
 }
 
-.node-processor{
+.node-processor {}
 
-}
-
-.node-output{
+.node-output {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
 }
 
-.node-output .output{
+.node-output .output {
   display: none;
 }

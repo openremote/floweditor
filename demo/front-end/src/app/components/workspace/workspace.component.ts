@@ -14,7 +14,7 @@ export class WorkspaceComponent implements OnInit {
   constructor() {
     this.nodes.push(StandardGraphNodes.CreateAddNode());
     this.nodes.push(StandardGraphNodes.CreateNumberNode());
-    this.nodes.push(StandardGraphNodes.CreateTextNode());
+    this.nodes.push(StandardGraphNodes.CreateNumberNode());
   }
 
   ngOnInit() {

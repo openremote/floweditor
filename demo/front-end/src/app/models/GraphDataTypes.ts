@@ -3,5 +3,6 @@ export enum GraphDataTypes {
     String,
     Boolean,
     Trigger,
+    Color,
     Any
 }

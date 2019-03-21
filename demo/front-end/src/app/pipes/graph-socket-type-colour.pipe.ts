@@ -16,6 +16,8 @@ export class GraphSocketTypeColourPipe implements PipeTransform {
         return "#2932b5";
       case GraphDataTypes.Any:
         return "#b815d8";
+      case GraphDataTypes.Color:
+        return "#f4d142";
       case GraphDataTypes.Trigger:
         return "#ff9000";
     }
