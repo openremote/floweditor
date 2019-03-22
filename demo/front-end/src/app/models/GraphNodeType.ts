@@ -1,5 +1,5 @@
 export enum GraphNodeType {
-    Input,
-    Processor,
-    Output
+    Input = "Input",
+    Processor = "Processor",
+    Output = "Output"
 }

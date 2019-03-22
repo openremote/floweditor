@@ -1,0 +1,15 @@
+<div class="node {{node.type | graphNodeTypeClass}}" (click)="project.nodes.push(node)">
+  <div class="title" style="grid-area: title">{{node.name}}</div>
+
+  <div class="sockets" style="grid-area: input">
+    <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">
+      <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
+    </div>
+  </div>
+
+  <div class="sockets" style="grid-area: output">
+    <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
+      <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
+    </div>
+  </div>
+</div>

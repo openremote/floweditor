@@ -1,0 +1,20 @@
+{
+  "name": "Add",
+  "type": "Processor",
+  "inputs": [
+    {
+      "type": "Number",
+      "name": "a"
+    },
+    {
+      "type": "Number",
+      "name": "b"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Number",
+      "name": "output"
+    }
+  ]
+}

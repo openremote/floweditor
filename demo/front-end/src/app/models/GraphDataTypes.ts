@@ -1,8 +1,8 @@
 export enum GraphDataTypes {
-    Number,
-    String,
-    Boolean,
-    Trigger,
-    Color,
-    Any
+    Number = "Number",
+    String = "String",
+    Boolean = "Boolean",
+    Trigger = "Trigger",
+    Color = "Color",
+    Any = "Any"
 }

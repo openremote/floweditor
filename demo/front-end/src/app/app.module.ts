@@ -9,6 +9,8 @@ import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { GraphNodeComponent } from './components/graph-node/graph-node.component';
 import { GraphNodeTypeClassPipe } from './pipes/graph-node-type-class.pipe';
 import { GraphSocketTypeColourPipe } from './pipes/graph-socket-type-colour.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { GraphNodeMenuItemComponent } from './components/graph-node-menu-item/graph-node-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { GraphSocketTypeColourPipe } from './pipes/graph-socket-type-colour.pipe
     GraphNodeComponent,
     GraphNodeTypeClassPipe,
     GraphSocketTypeColourPipe,
+    GraphNodeMenuItemComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

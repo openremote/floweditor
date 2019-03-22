@@ -1,0 +1,40 @@
+{
+  "name": "Comparer",
+  "type": "Processor",
+  "internals": [
+    {
+      "name": "logic",
+      "type": "Text",
+      "picker": {
+        "type": "Dropdown",
+        "options": [
+          {
+            "name": "bigger than"
+          },
+          {
+            "name": "smaller than"
+          },
+          {
+            "name": "equals"
+          }
+        ]
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "Any",
+      "name": "input 1"
+    },
+    {
+      "type": "Any",
+      "name": "input 2"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Boolean",
+      "name": "output"
+    }
+  ]
+}
