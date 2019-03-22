@@ -1,4 +1,4 @@
-import { GraphDataTypes } from './GraphDataTypes';
+import { GraphDataTypes } from './graphdatatypes';
 import { GraphNode } from './graphnode';
 
 export class GraphSocket {

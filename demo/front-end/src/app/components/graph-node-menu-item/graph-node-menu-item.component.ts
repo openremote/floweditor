@@ -9,10 +9,15 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class GraphNodeMenuItemComponent implements OnInit {
   @Input() node: GraphNode;
-  
-  constructor(public project: ProjectService) { }
+
+  constructor(public project: ProjectService) {
+
+   }
 
   ngOnInit() {
   }
 
+  addNodeToProject() {
+    this.project.nodes.push(this.node.getClone());
+  }
 }

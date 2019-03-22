@@ -13,7 +13,7 @@ export class ToolpanelComponent implements OnInit {
   constructor(public restService: RestService) {
     const nodeObservable = this.restService.getAllNodes();
     nodeObservable.subscribe(
-      (data: GraphNode[]) => this.nodes = data
+      (data: GraphNode[]) => this.nodes = data.map(x=>Object.assign(new GraphNode(x.name, x.type), x))
     );
   }
 

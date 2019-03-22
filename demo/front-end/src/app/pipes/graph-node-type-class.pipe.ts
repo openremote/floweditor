@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GraphNodeType } from '../models/GraphNodeType';
+import { GraphNodeType } from '../models/graphnodetype';
 
 @Pipe({
   name: 'graphNodeTypeClass'
@@ -9,11 +9,11 @@ export class GraphNodeTypeClassPipe implements PipeTransform {
   transform(type: GraphNodeType): string {
     switch (type) {
       case GraphNodeType.Input:
-        return "node-input";
+        return 'node-input';
       case GraphNodeType.Output:
-        return "node-output";
+        return 'node-output';
       case GraphNodeType.Processor:
-        return "node-processor";
+        return 'node-processor';
     }
   }
 

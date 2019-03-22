@@ -4,7 +4,7 @@
   display: grid;
   width: 100vw;
   height: 100vh;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 200px auto;
   grid-template-rows: 100%;
   grid-template-areas: "menu workspace";
   justify-items: stretch;
