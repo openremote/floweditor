@@ -1,5 +1,5 @@
   <div class="node {{node.type | graphNodeTypeClass}}" cdkDrag cdkDragBoundary=".workspace" style="z-index: 0">
-    <div class="title" cdkDragHandle>{{node.name}}</div>
+    <div class="title" cdkDragHandle><i class="fas fa-arrows-alt"></i><span>{{node.name}}</span></div>
 
     <div class="sockets" style="grid-area: input">
       <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">

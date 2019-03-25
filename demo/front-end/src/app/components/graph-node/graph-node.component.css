@@ -24,7 +24,8 @@
   top: 0;
   bottom: 0;
   pointer-events: none;
-  clip-path: 50% 0 100% 100%;
+  clip-path: inset(26px 0 0 0);
+  z-index: -1;
 }
 
 .node:active {
@@ -34,6 +35,8 @@
 
 .title {
   cursor: move;
+  display: flex;
+  justify-content: space-between;
   user-select: none;
   margin: 0;
   grid-area: title;

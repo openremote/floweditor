@@ -1,5 +1,11 @@
 <span [ngSwitch]="internal.picker.type">
-  <input matInput placeholder="Favorite food" value="Sushi" *ngSwitchCase="PickerType.Text">
+
+  <mat-form-field class="example-form-field" *ngSwitchCase="PickerType.Text">
+    <input matInput type="text" placeholder="Clearable input" [(ngModel)]="internal.value">
+    <button mat-button *ngIf="internal.value" matSuffix mat-icon-button aria-label="Clear" (click)="internal.value=''">
+      <i class="fas fa-times"></i>
+    </button>
+  </mat-form-field>
 
   <p *ngSwitchCase="PickerType.Number">
     Number
