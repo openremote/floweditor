@@ -8,6 +8,8 @@
       </div>
     </div>
 
+    <app-picker *ngFor="let internal of node.internals" [picker]="internal.picker"></app-picker>
+
     <div class="sockets" style="grid-area: output">
       <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
         <span class="label">{{s.name}}</span>

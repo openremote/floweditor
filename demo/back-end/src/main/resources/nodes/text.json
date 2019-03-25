@@ -1,0 +1,20 @@
+{
+  "name": "Text",
+  "type": "Input",
+  "internals": [
+    {
+      "name": "text",
+      "type": "String",
+      "picker": {
+        "name": "Text",
+        "type": "Text"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "String",
+      "name": "value"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 export enum PickerType {
-    Text,
-    Number,
-    Dropdown,
-    Color
+    Text = 'Text',
+    Number = 'Number',
+    Dropdown = 'Dropdown',
+    Color = 'Color'
 }

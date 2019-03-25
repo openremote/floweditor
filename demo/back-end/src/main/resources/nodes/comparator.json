@@ -1,11 +1,12 @@
 {
-  "name": "Comparer",
+  "name": "Comparator",
   "type": "Processor",
   "internals": [
     {
       "name": "logic",
       "type": "Text",
       "picker": {
+        "name": "Operator",
         "type": "Dropdown",
         "options": [
           {

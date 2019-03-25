@@ -1,0 +1,20 @@
+{
+  "name": "Color",
+  "type": "Input",
+  "internals": [
+    {
+      "name": "color",
+      "type": "Color",
+      "picker": {
+        "name": "Color",
+        "type": "Color"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Color",
+      "name": "value"
+    }
+  ]
+}

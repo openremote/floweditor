@@ -1,0 +1,20 @@
+<span [ngSwitch]="picker.type">
+    <input matInput placeholder="Favorite food" value="Sushi" *ngSwitchCase="PickerType.Text">
+
+  <p *ngSwitchCase="PickerType.Number">
+    Number
+  </p>
+
+  <mat-form-field *ngSwitchCase="PickerType.Dropdown">
+    <mat-label>{{picker.name}}</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let option of picker.options" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="colorpicker" *ngSwitchCase="PickerType.Color">
+    <div class="eyedrop" cdkDrag cdkDragBoundary=".colorpicker"></div>
+  </div>
+</span>

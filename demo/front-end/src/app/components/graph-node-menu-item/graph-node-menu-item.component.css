@@ -15,7 +15,7 @@
   transition: background-color 50ms ease-in-out;
 }
 
-.node:hover{
+.node:hover {
   background: rgb(95, 95, 95);
 }
 
@@ -61,6 +61,7 @@
 }
 
 .node-input {
+  background: rgb(80, 72, 72);
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 }
@@ -73,9 +74,12 @@
   display: none;
 }
 
-.node-processor {}
+.node-processor {
+  background: rgb(72, 80, 72);
+}
 
 .node-output {
+  background: rgb(73, 72, 80);
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
 }
