@@ -3,7 +3,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatSliderModule } from '@angular/material/slider';
 import { AppComponent } from './app.component';
 import { ToolpanelComponent } from './components/toolpanel/toolpanel.component';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
@@ -30,7 +30,8 @@ import { PickerComponent } from './components/picker/picker.component';
     BrowserAnimationsModule,
     DragDropModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,22 +1,24 @@
 {
-  "name": "Comparator",
+  "name": "Operator",
   "type": "Processor",
   "internals": [
     {
-      "name": "operator",
+      "name": "logic",
       "type": "Text",
       "picker": {
-        "name": "Operator",
         "type": "Dropdown",
         "options": [
           {
-            "name": "bigger than"
+            "name": "Add"
           },
           {
-            "name": "smaller than"
+            "name": "Subtract"
           },
           {
-            "name": "equals"
+            "name": "Multiply"
+          },
+          {
+            "name": "Divide"
           }
         ]
       }
@@ -24,17 +26,17 @@
   ],
   "inputs": [
     {
-      "type": "Any",
+      "type": "Number",
       "name": "input 1"
     },
     {
-      "type": "Any",
+      "type": "Number",
       "name": "input 2"
     }
   ],
   "outputs": [
     {
-      "type": "Boolean",
+      "type": "Number",
       "name": "output"
     }
   ]

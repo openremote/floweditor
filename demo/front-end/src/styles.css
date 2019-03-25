@@ -1,4 +1,4 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "assets/dark.css";
 
 * {
   font-family: 'Roboto Mono', monospace;
@@ -13,4 +13,20 @@ body {
 .fill {
   width: 100%;
   height: 100%;
+}
+
+mat-label {
+  color: white;
+}
+
+.node-input {
+  background: rgb(133, 45, 45);
+}
+
+.node-processor {
+  background: rgb(57, 126, 57);
+}
+
+.node-output {
+  background: rgb(82, 74, 134);
 }

@@ -1,7 +1,6 @@
 .node {
   display: inline-grid;
   position: absolute;
-  background: rgb(80, 80, 80);
   border-radius: 5px;
   min-width: max-content;
   min-height: max-content;
@@ -14,7 +13,18 @@
     "input internals output";
   transition: box-shadow cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: move;
+}
+
+.nodeBackground{
+  background: rgb(80, 80, 80);
+  position: absolute;
+  border-radius: inherit;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  clip-path: 50% 0 100% 100%;
 }
 
 .node:active {
@@ -23,6 +33,7 @@
 }
 
 .title {
+  cursor: move;
   user-select: none;
   margin: 0;
   grid-area: title;
@@ -72,7 +83,6 @@
 }
 
 .node-input {
-  background: rgb(80, 72, 72);
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   padding-left: 25px;
@@ -88,11 +98,9 @@
 }
 
 .node-processor {
-  background: rgb(72, 80, 72);
 }
 
 .node-output {
-  background: rgb(73, 72, 80);
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   padding-bottom: 15px;

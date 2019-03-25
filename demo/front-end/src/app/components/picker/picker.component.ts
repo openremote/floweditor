@@ -10,7 +10,7 @@ import { PickerType } from 'src/app/models/PickerType';
 })
 export class PickerComponent implements OnInit {
 
-  @Input() picker: Picker;
+  @Input() internal: GraphInternal;
   PickerType = PickerType;
 
   constructor() {
