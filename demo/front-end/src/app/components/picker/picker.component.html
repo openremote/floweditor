@@ -1,19 +1,16 @@
 <span [ngSwitch]="internal.picker.type">
 
-  <mat-form-field class="example-form-field" *ngSwitchCase="PickerType.Text">
-    <input matInput type="text" placeholder="Clearable input" [(ngModel)]="internal.value">
-    <button mat-button *ngIf="internal.value" matSuffix mat-icon-button aria-label="Clear" (click)="internal.value=''">
-      <i class="fas fa-times"></i>
-    </button>
+  <mat-form-field *ngSwitchCase="PickerType.Text">
+    <textarea matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value"></textarea>
   </mat-form-field>
 
-  <p *ngSwitchCase="PickerType.Number">
-    Number
-  </p>
+  <mat-form-field *ngSwitchCase="PickerType.Number">
+    <input matInput step="0.5" type="number" placeholder="{{internal.name}}" [(ngModel)]="internal.value">
+  </mat-form-field>
 
   <mat-form-field *ngSwitchCase="PickerType.Dropdown">
     <mat-label>{{internal.name}}</mat-label>
-    <mat-select>
+    <mat-select [(value)]="internal.value">
       <mat-option *ngFor="let option of internal.picker.options" [value]="option">
         {{option.name}}
       </mat-option>
@@ -23,15 +20,15 @@
   <span *ngSwitchCase="PickerType.Color">
     <div>
       <mat-label>R</mat-label>
-      <mat-slider min="0" max="5255" step="1" value="128"></mat-slider>
+      <mat-slider thumbLabel min="0" max="255" step="1" value="128" [(ngModel)]="internal.value.r"></mat-slider>
     </div>
     <div>
       <mat-label>G</mat-label>
-      <mat-slider min="0" max="5255" step="1" value="128"></mat-slider>
+      <mat-slider thumbLabel min="0" max="255" step="1" value="128" [(ngModel)]="internal.value.g"></mat-slider>
     </div>
     <div>
       <mat-label>B</mat-label>
-      <mat-slider min="0" max="5255" step="1" value="128"></mat-slider>
+      <mat-slider thumbLabel min="0" max="255" step="1" value="128" [(ngModel)]="internal.value.b"></mat-slider>
     </div>
   </span>
 

@@ -1,3 +1,7 @@
 *{
     color: white;
 }
+
+mat-option, mat-select{
+    text-transform: lowercase;
+}

@@ -1435,7 +1435,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   background-color: #ff8989; }
 
 .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: white; }
+  stroke: rgb(80, 80, 80); }
 
 .mat-progress-spinner.mat-accent circle, .mat-spinner.mat-accent circle {
   stroke: #797979; }

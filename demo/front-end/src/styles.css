@@ -20,7 +20,7 @@ mat-label {
 }
 
 .node-input {
-  background: rgb(133, 45, 45);
+  background: rgb(45, 76, 133);
 }
 
 .node-processor {
@@ -28,5 +28,5 @@ mat-label {
 }
 
 .node-output {
-  background: rgb(82, 74, 134);
+  background: rgb(126, 75, 156);
 }

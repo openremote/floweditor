@@ -12,10 +12,6 @@ export class GraphNode {
     }
 
     getClone(): GraphNode {
-        const node: GraphNode = new GraphNode(this.name, this.type);
-        node.inputs = this.inputs;
-        node.outputs = this.outputs;
-        node.internals = this.internals;
-        return node;
+        return JSON.parse(JSON.stringify(this));
     }
 }

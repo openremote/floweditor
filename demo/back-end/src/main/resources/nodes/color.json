@@ -5,6 +5,11 @@
     {
       "name": "color",
       "type": "Color",
+      "value": {
+        "r": 0,
+        "g": 0,
+        "b": 0
+      },
       "picker": {
         "name": "Color",
         "type": "Color"
