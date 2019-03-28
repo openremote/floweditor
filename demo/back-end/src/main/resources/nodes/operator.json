@@ -9,16 +9,16 @@
         "type": "Dropdown",
         "options": [
           {
-            "name": "Add"
+            "name": "+"
           },
           {
-            "name": "Subtract"
+            "name": "-"
           },
           {
-            "name": "Multiply"
+            "name": "*"
           },
           {
-            "name": "Divide"
+            "name": "/"
           }
         ]
       }
