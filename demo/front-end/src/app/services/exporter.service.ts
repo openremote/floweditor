@@ -4,18 +4,20 @@ import { MatSnackBar } from '@angular/material';
 import { NodeSet } from '../models/translating/NodeSet';
 import { ServerReadyNode } from '../models/translating/ServerReadyNode';
 import { ServerReadyConnection } from '../models/translating/ServerReadyConnection';
+import { RestService } from './rest.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExporterService {
 
-  constructor(private project: ProjectService, private snackBar: MatSnackBar) { }
+  constructor(private project: ProjectService, private snackBar: MatSnackBar, private rest: RestService) { }
 
-  public export() {
-    this.snackBar.open('Translating...', 'Dismiss');
+  public export(callback: any) {
+    this.snackBar.open('Creating nodeset...');
 
-    let nodeSet: NodeSet = new NodeSet();
+    const nodeSet: NodeSet = new NodeSet();
     this.project.nodes.forEach(n => {
       nodeSet.nodes.push(new ServerReadyNode(n));
     });
@@ -24,8 +26,17 @@ export class ExporterService {
       nodeSet.connections.push(new ServerReadyConnection(c));
     });
 
-    console.log(JSON.stringify(nodeSet));
+    this.snackBar.open('Requesting translation...');
 
-    this.snackBar.open('Translated', 'Dismiss');
+    const translationObservable = this.rest.translate(nodeSet);
+    translationObservable.subscribe(
+      (data: string) => callback(data),
+      (e: HttpErrorResponse) => {
+        this.snackBar.open('Something went wrong', 'Dismiss');
+        throw new Error(e.message);
+      },
+      () => this.snackBar.open('Success', 'Dismiss')
+    );
+
   }
 }

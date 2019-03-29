@@ -9,7 +9,9 @@ import {
   MatInputModule,
   MatButtonModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDialogModule,
+  MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material/';
 import { FormsModule } from '@angular/forms';
 
@@ -26,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PickerComponent } from './components/picker/picker.component';
 import { ConnectionComponent } from './components/connection/connection.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ResultDisplayDialogComponent } from './components/result-display-dialog/result-display-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     GraphNodeMenuItemComponent,
     PickerComponent,
     ConnectionComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ResultDisplayDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +56,13 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatDialogModule,
     AngularDraggableModule
   ],
-  providers: [],
+  entryComponents: [ResultDisplayDialogComponent],
+  providers: [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

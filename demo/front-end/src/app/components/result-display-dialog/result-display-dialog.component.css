@@ -1,0 +1,11 @@
+.code {
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.144);
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+h1 {
+  margin: 5px;
+  margin-bottom: 10px;
+}

@@ -6,7 +6,7 @@ export class ServerReadyNode {
     public internals: ServerReadyInternal[] = [];
 
     constructor(node: GraphNode) {
-        this.type = node.type.toString();
+        this.type = node.name;
         this.id = node.id;
         node.internals.forEach(internal => {
             const srInternal: ServerReadyInternal = new ServerReadyInternal();
