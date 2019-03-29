@@ -19,8 +19,9 @@ export class PickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.internal.picker.type == PickerType.Dropdown)
+    if (this.internal.picker.type == PickerType.Dropdown) {
       this.internal.value = this.internal.picker.options[0];
+    }
   }
 
 }
