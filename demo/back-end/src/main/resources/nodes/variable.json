@@ -1,0 +1,27 @@
+{
+    "name": "Variable",
+    "type": "Input",
+    "internals": [
+        {
+            "name": "name",
+            "type": "Text",
+            "picker": {
+                "type": "Text"
+            }
+        },
+        {
+            "name": "defaultValue",
+            "type": "Any",
+            "picker": {
+                "type": "Multiline"
+            }
+        }
+    ],
+    "inputs": [],
+    "outputs": [
+        {
+            "type": "Any",
+            "name": "output"
+        }
+    ]
+}

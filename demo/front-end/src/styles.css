@@ -2,6 +2,7 @@
 
 * {
   font-family: 'Roboto Mono', monospace;
+  user-select: none;
 }
 
 body {
@@ -29,4 +30,27 @@ mat-label {
 
 .node-output {
   background: rgb(126, 75, 156);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #00000075; 
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c9c9c9; 
+  cursor: move;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a7a7a7; 
 }

@@ -5,8 +5,10 @@
   width: 100vw;
   height: 100vh;
   grid-template-columns: 200px auto;
-  grid-template-rows: 100%;
-  grid-template-areas: "menu workspace";
+  grid-template-rows: 32px auto;
+  grid-template-areas:
+    "bar bar"
+    "menu workspace";
   justify-items: stretch;
   align-items: stretch;
 }

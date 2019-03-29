@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { AngularDraggableModule } from 'angular2-draggable';
 import {
   MatSelectModule,
   MatSliderModule,
   MatInputModule,
   MatButtonModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule } from '@angular/material/';
+  MatSnackBarModule
+} from '@angular/material/';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -22,6 +24,8 @@ import { GraphSocketTypeColourPipe } from './pipes/graph-socket-type-colour.pipe
 
 import { HttpClientModule } from '@angular/common/http';
 import { PickerComponent } from './components/picker/picker.component';
+import { ConnectionComponent } from './components/connection/connection.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { PickerComponent } from './components/picker/picker.component';
     GraphNodeTypeClassPipe,
     GraphSocketTypeColourPipe,
     GraphNodeMenuItemComponent,
-    PickerComponent
+    PickerComponent,
+    ConnectionComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,8 @@ import { PickerComponent } from './components/picker/picker.component';
     FormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AngularDraggableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,43 +1,43 @@
-{
-  "name": "Operator",
-  "type": "Processor",
-  "internals": [
     {
-      "name": "logic",
-      "type": "Text",
-      "picker": {
-        "type": "Dropdown",
-        "options": [
-          {
-            "name": "+"
-          },
-          {
-            "name": "-"
-          },
-          {
-            "name": "*"
-          },
-          {
-            "name": "/"
-          }
+        "name": "Operator",
+        "type" : "Processor",
+        "internals": [
+            {
+                "name": "logic",
+                "type": "Text",
+                "picker": {
+                    "type": "Dropdown",
+                    "options": [
+                        {
+                            "name": "Add"
+                        },
+                        {
+                            "name": "Subtract"
+                        },
+                        {
+                            "name": "Multiply"    
+                        },
+                        {
+                            "name": "Divide"    
+                        }
+                    ]
+                }
+            }
+        ],
+        "inputs": [
+            {
+                "type": "Number",
+                "name": "input 1"
+            },
+            {
+                "type": "Number",
+                "name": "input 2"
+            }
+        ],
+        "outputs": [
+            {
+                "type": "Number",
+                "name": "output"
+            }
         ]
-      }
     }
-  ],
-  "inputs": [
-    {
-      "type": "Number",
-      "name": "input 1"
-    },
-    {
-      "type": "Number",
-      "name": "input 2"
-    }
-  ],
-  "outputs": [
-    {
-      "type": "Number",
-      "name": "output"
-    }
-  ]
-}

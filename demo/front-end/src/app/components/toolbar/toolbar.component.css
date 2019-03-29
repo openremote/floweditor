@@ -1,0 +1,16 @@
+.toolbar {
+  background: #d4d4d4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-content: stretch;
+}
+
+*[mat-button]{
+  color: white;
+  background: #a8a8a8;
+  margin: 2px;
+  line-height: 100%;
+  height: calc(100% - 4px);
+}

@@ -16,23 +16,23 @@ export class ToolpanelComponent implements OnInit {
 
   constructor(public restService: RestService, private snackBar: MatSnackBar) {
   }
-  
+
   public loadNodes() {
     this.loadingStatus = 0;
     const nodeObservable = this.restService.getAllNodes();
     nodeObservable.subscribe(
-      (data: GraphNode[]) => this.nodes = data.map(x => Object.assign(new GraphNode(x.name, x.type), x)),
+      (data: GraphNode[]) => this.nodes = data.map(x => Object.assign(new GraphNode(), x)),
       (e: HttpErrorResponse) => {
-        this.snackBar.open('Couldn\'t load nodes from server', 'X');
+        this.snackBar.open('Couldn\'t load nodes from server', 'Dismiss');
         this.loadingStatus = 2;
         this.error = e.statusText;
       },
       () => this.loadingStatus = 1
-      );
-    }
-    
-    ngOnInit() {
-      this.loadNodes();
+    );
+  }
+
+  ngOnInit() {
+    this.loadNodes();
   }
 
 }

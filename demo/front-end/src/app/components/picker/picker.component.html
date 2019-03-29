@@ -1,7 +1,11 @@
-<span [ngSwitch]="internal.picker.type">
+<div [ngSwitch]="internal.picker.type" class="picker" >
+
+  <mat-form-field *ngSwitchCase="PickerType.Multiline">
+    <textarea matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value"></textarea>
+  </mat-form-field>
 
   <mat-form-field *ngSwitchCase="PickerType.Text">
-    <textarea matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value"></textarea>
+    <input matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value">
   </mat-form-field>
 
   <mat-form-field *ngSwitchCase="PickerType.Number">
@@ -32,4 +36,4 @@
     </div>
   </span>
 
-</span>
+</div>

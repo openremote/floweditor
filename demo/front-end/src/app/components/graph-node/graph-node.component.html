@@ -1,17 +1,21 @@
-  <div class="node {{node.type | graphNodeTypeClass}}" cdkDrag cdkDragBoundary=".workspace" style="z-index: 0">
+  <div class="node {{node.type | graphNodeTypeClass}}" cdkDrag cdkDragBoundary=".workspace" style="z-index: 1">
     <div class="title" cdkDragHandle><i class="fas fa-arrows-alt"></i><span>{{node.name}}</span></div>
 
-    <div class="sockets" style="grid-area: input">
-      <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">
+    <div #inputSockets class="sockets" style="grid-area: input">
+      <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}"
+        (mouseup)="project.stopConnectionDrag(s, $event)">
         <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
         <span class="label">{{s.name}}</span>
       </div>
     </div>
 
-    <app-picker *ngFor="let internal of node.internals" [internal]="internal"></app-picker>
+    <div style="grid-area: internals" class="internals">
+      <app-picker *ngFor="let internal of node.internals" [internal]="internal"></app-picker>
+    </div>
 
-    <div class="sockets" style="grid-area: output">
-      <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
+    <div #outputSockets class="sockets" style="grid-area: output">
+      <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}"
+        (mousedown)="project.beginConnectionDrag(s, $event)">
         <span class="label">{{s.name}}</span>
         <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
       </div>

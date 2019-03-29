@@ -6,7 +6,7 @@
   min-height: max-content;
   padding: 5px;
   margin: 10px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: max-content auto max-content;
   grid-template-rows: 24px auto;
   grid-template-areas:
     "title title title"
@@ -31,6 +31,11 @@
 .node:active {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
   z-index: 1;
+}
+
+.internals{
+  display: flex;
+  justify-content: stretch;
 }
 
 .title {
