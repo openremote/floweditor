@@ -14,6 +14,7 @@
   line-height: 100%;
   height: calc(100% - 4px);
   transition: background-color 150ms ease-in-out;
+  font-family: 'Roboto Mono', monospace;
 }
 
 *[mat-button]:not([disabled]):hover {

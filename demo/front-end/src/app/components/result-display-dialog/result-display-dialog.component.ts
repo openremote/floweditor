@@ -12,8 +12,4 @@ export class ResultDisplayDialogComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  copyText(){
-    
-  }
 }

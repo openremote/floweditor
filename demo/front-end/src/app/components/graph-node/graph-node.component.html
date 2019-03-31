@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div *ngIf="node.type === 'Then'" class="title">{{node.name.toUpperCase()}}</div>
+    <div *ngIf="node.type === 'Then'" class="title" cdkDragHandle>{{node.name.toUpperCase()}}</div>
 
     <div style="grid-area: internals" class="internals"  *ngIf="node.type !== 'Then'">
       <app-picker *ngFor="let internal of node.internals" [internal]="internal"></app-picker>

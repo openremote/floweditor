@@ -1,6 +1,6 @@
 <div class="toolbar">
   <div class="logo">OpenRemote Rule Node Editor</div>
-  <button mat-button disabled>Settings</button>
+  <button mat-button (click)="showSettings()">Settings</button>
   <button mat-button disabled>Validate</button>
   <button mat-button class="primary" (click)="exportNodeStructure()">Export</button>
 </div>

@@ -1,7 +1,7 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
 import { AngularDraggableModule } from 'angular2-draggable';
 import {
   MatSelectModule,
@@ -14,6 +14,7 @@ import {
   MatExpansionModule,
   MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material/';
+
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { PickerComponent } from './components/picker/picker.component';
 import { ConnectionComponent } from './components/connection/connection.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ResultDisplayDialogComponent } from './components/result-display-dialog/result-display-dialog.component';
+import { SettingsPanelComponent } from './components/settings-panel/settings-panel.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ResultDisplayDialogComponent } from './components/result-display-dialog
     ConnectionComponent,
     ToolbarComponent,
     ResultDisplayDialogComponent,
-    GraphNodeNamePipe
+    GraphNodeNamePipe,
+    SettingsPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -60,13 +63,13 @@ import { ResultDisplayDialogComponent } from './components/result-display-dialog
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    AngularDraggableModule,
-    MatExpansionModule
+    AngularDraggableModule
   ],
-  entryComponents: [ResultDisplayDialogComponent],
+  entryComponents: [ResultDisplayDialogComponent, SettingsPanelComponent],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

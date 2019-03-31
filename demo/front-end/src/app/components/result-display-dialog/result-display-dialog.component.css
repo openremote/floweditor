@@ -1,8 +1,9 @@
-.code {
-  padding: 5px;
-  background: rgba(0, 0, 0, 0.144);
+snippet-highlight {
   max-height: 350px;
-  overflow-y: auto;
+  margin: 0;
+  margin-bottom: 15px;
+  overflow: auto;
+  display: block;
 }
 
 h1 {

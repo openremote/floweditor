@@ -7,6 +7,6 @@ public class GroovyTextNode implements GroovyConverter {
 
     @Override
     public String toCode(Node node) {
-        return node.getInternalVariable("text").getValue().toString();
+        return "\"" + node.getInternalVariable("text").getValue().toString() + "\"" ;
     }
 }

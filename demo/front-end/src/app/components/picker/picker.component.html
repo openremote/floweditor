@@ -1,11 +1,11 @@
 <div [ngSwitch]="internal.picker.type" class="picker" >
 
   <mat-form-field *ngSwitchCase="PickerType.Multiline">
-    <textarea matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value"></textarea>
+    <textarea matInput placeholder="{{(internal.name | graphNodeName).toLowerCase()}}" [(ngModel)]="internal.value"></textarea>
   </mat-form-field>
 
   <mat-form-field *ngSwitchCase="PickerType.Text">
-    <input matInput placeholder="{{internal.name}}" [(ngModel)]="internal.value">
+    <input matInput placeholder="{{(internal.name | graphNodeName).toLowerCase()}}" [(ngModel)]="internal.value">
   </mat-form-field>
 
   <mat-form-field *ngSwitchCase="PickerType.Number">
