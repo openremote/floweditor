@@ -29,7 +29,7 @@ export class ProjectService {
 
     this.isDragging = false;
 
-    const existing = this.connections.filter((c) => c.from === this.currentFrom || c.to === socket);
+    const existing = this.connections.filter((c) => c.to === socket);
 
     existing.forEach(connection => {
       this.connections.splice(this.connections.indexOf(connection), 1);

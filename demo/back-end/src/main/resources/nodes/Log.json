@@ -10,5 +10,6 @@
                 "type": "Any",
                 "name": "input"
             }
-        ]
+        ],
+        "outputs":[]
     }

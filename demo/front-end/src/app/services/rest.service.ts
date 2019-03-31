@@ -17,6 +17,7 @@ export class RestService {
   }
 
   public translate(nodeset: NodeSet) {
+    console.log(JSON.stringify(nodeset));
     return this.http.get(this.path + 'nodes/translate?nodes=' + encodeURI(JSON.stringify(nodeset)));
   }
 }

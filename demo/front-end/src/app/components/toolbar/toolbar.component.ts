@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
   private exportNodeStructure() {
 
     this.exporter.export((data) => {
-      console.log(data);
+      console.log(data.normalize());
       this.dialog.open(ResultDisplayDialogComponent, {data});
     });
   }

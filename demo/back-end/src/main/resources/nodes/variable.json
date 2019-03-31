@@ -11,9 +11,9 @@
         },
         {
             "name": "defaultValue",
-            "type": "Any",
+            "type": "Text",
             "picker": {
-                "type": "Multiline"
+                "type": "Text"
             }
         }
     ],

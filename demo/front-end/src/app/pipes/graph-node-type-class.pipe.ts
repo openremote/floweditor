@@ -14,6 +14,8 @@ export class GraphNodeTypeClassPipe implements PipeTransform {
         return 'node-output';
       case GraphNodeType.Processor:
         return 'node-processor';
+        case GraphNodeType.Then:
+        return 'node-then';
     }
   }
 

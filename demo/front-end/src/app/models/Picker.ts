@@ -2,6 +2,6 @@ import { PickerType } from './pickertype';
 
 export class Picker {
     public type: PickerType;
-    public options: { name: string }[];
+    public options: { name: string, value: any }[];
 }
 

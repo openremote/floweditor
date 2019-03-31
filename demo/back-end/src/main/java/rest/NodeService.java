@@ -1,6 +1,8 @@
 package rest;
 
 import com.google.gson.*;
+import logic.nodeTypeReader.NodeTypeCollection;
+import translation.Translator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,6 +19,7 @@ import java.util.Objects;
 public class NodeService
 {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private NodeTypeCollection collection;
 
     @GET
     @Path("getAll")
@@ -30,7 +33,6 @@ public class NodeService
         {
             readFiles.add(new String(Files.readAllBytes(Paths.get(file.toURI()))));
         }
-
         return textToResponse("[" + String.join(",", readFiles) + "]");
     }
 
@@ -38,10 +40,7 @@ public class NodeService
     @Path("translate")
     public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
     {
-        //Use the node library here
-
-        String json = gson.toJson(new JsonParser().parse(jsonNodeSet));
-        return objectToResponse(json);
+        return objectToResponse(Translator.translate(jsonNodeSet));
     }
 
     private Response objectToResponse(Object obj)

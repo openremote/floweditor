@@ -14,8 +14,8 @@
 
   <mat-form-field *ngSwitchCase="PickerType.Dropdown">
     <mat-label>{{internal.name}}</mat-label>
-    <mat-select [(value)]="internal.value">
-      <mat-option *ngFor="let option of internal.picker.options" [value]="option">
+    <mat-select [(ngModel)]="internal.value">
+      <mat-option *ngFor="let option of internal.picker.options" [value]="option.value">
         {{option.name}}
       </mat-option>
     </mat-select>

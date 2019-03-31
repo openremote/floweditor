@@ -1,9 +1,9 @@
 {
     "name": "Splitter",
-    "type": "Processor",
+    "type": "Action",
     "inputs": [
         {
-            "type": "Trigger",
+            "type": "Triger",
             "name": "input"
         }
     ],

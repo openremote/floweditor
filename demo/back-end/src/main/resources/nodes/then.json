@@ -1,0 +1,16 @@
+{
+    "name": "Then",
+    "type" : "Then",
+    "inputs": [
+        {
+            "type": "Boolean",
+            "name": "input"
+        }
+    ],
+    "outputs": [
+        {
+            "type": "Trigger",
+            "name": "output"
+        }
+    ]
+}

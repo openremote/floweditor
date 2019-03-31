@@ -46,6 +46,7 @@ export class ToolpanelComponent implements OnInit {
       GraphNodeType.Input,
       GraphNodeType.Processor,
       GraphNodeType.Output,
+      GraphNodeType.Then,
     ];
   }
 }
