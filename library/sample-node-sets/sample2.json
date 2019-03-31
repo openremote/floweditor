@@ -1,0 +1,173 @@
+{
+    "nodes": [
+        {
+            "type": "Variable",
+            "id": 0,
+            "internals": [
+                {
+                    "name": "name",
+                    "value": "counter"
+                },
+                {
+                    "name": "defaultValue",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "type": "Value",
+            "id": 1,
+            "internals": [
+                {
+                    "name": "value",
+                    "value": 10
+                }
+            ]
+        },
+        {
+            "type": "Then",
+            "id": 2,
+            "internals": []
+        },
+        {
+            "type": "Comparer",
+            "id": 3,
+            "internals": [
+                {
+                    "name": "logic",
+                    "value": "bigger than"
+                }
+            ]
+        },
+        {
+            "type": "Log",
+            "id": 4
+        },
+        {
+            "type": "Splitter",
+            "id": 5
+        },
+        {
+            "type": "VariableSaver",
+            "id": 6,
+            "internals": [
+                {
+                    "name": "name",
+                    "value": "counter"
+                }
+            ]
+        },
+        {
+            "type": "Operator",
+            "id": 6,
+            "internals": [
+                {
+                    "name": "name",
+                    "value": "counter"
+                }
+            ]
+        },
+        {
+            "type": "Value",
+            "id": 7,
+            "internals": [
+                {
+                    "name": "value",
+                    "value": 1
+                }
+            ]
+        }
+    ],
+    "connections": [
+        {
+            "from": {
+                "id": 0,
+                "name": "output"
+            },
+            "to": {
+                "id": 3,
+                "name": "input 1"
+            }
+        },
+        {
+            "from": {
+                "id": 1,
+                "name": "output"
+            },
+            "to": {
+                "id": 3,
+                "name": "input 2"
+            }
+        },
+        {
+            "from": {
+                "id": 3,
+                "name": "output"
+            },
+            "to": {
+                "id": 2,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 5,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 5,
+                "name": "output 1"
+            },
+            "to": {
+                "id": 4,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 5,
+                "name": "output 2"
+            },
+            "to": {
+                "id": 6,
+                "name": "value"
+            }
+        },
+        {
+            "from": {
+                "id": 6,
+                "name": "output"
+            },
+            "to": {
+                "id": 5,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 3,
+                "name": "input"
+            },
+            "to": {
+                "id": 5,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 3,
+                "name": "input"
+            },
+            "to": {
+                "id": 5,
+                "name": "input"
+            }
+        },
+    ]
+}

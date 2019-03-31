@@ -7,10 +7,10 @@ import java.lang.reflect.InvocationTargetException;
 public class Groovify {
 
 
-    private static Class getComparerClass(Class nodeClass) {
+    private static Class getComparerClass(Node node) {
         try {
             String packageName = Groovify.class.getPackage().getName() + ".converters.";
-            String fullname = packageName + "Groovy" + nodeClass.getSimpleName();
+            String fullname = packageName + "Groovy" + node.getNodeName() +"Node";
             return Class.forName(fullname);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -21,9 +21,13 @@ public class Groovify {
     public static String pre(Node node) {
 
         try {
-            Class comparerClass = getComparerClass(node.getClass());
+            Class comparerClass = getComparerClass(node);
             GroovyConverter converter = constructConverter(comparerClass);
-            return converter.pre(node);
+            String s = converter.pre(node);
+            if(s == null){
+                return "";
+            }
+            return  s;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -32,9 +36,9 @@ public class Groovify {
 
     public static String toGroovy(Node node) {
 
-        Class comparerClass = getComparerClass(node.getClass());
+        Class comparerClass = getComparerClass(node);
         GroovyConverter converter = constructConverter(comparerClass);
-        return converter.toGroovy(node);
+        return converter.toCode(node);
     }
 
     private static GroovyConverter constructConverter(Class comparerClass) {

@@ -2,13 +2,13 @@ package logic.groovy.converters;
 
 import logic.groovy.Groovify;
 import logic.groovy.GroovyConverter;
-import models.nodes.LogNode;
+import models.Node;
 
-public class GroovyLogNode implements GroovyConverter<LogNode> {
+public class GroovyLogNode implements GroovyConverter {
 
     @Override
-    public String toGroovy(LogNode node) {
-        return "LOG.warning(" + Groovify.toGroovy( node.getInputProperty(1).getConnectedProperty().getNode()) +
-                ".toString())";
+    public String toCode(Node node) {
+        return "LOG.warning(" + Groovify.toGroovy( node.getInputProperty("input").getConnectedProperty().getNode()) +
+                ")";
     }
 }

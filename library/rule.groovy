@@ -1,4 +1,4 @@
-//Rule created on 2019-03-21 14:33 using rule-library
+//Rule created on 2019-03-31 14:23 using rule-library
  
 package demo.rules
 
@@ -25,7 +25,7 @@ facts ->
             } else {
                 counter = Integer.parseInt(facts.matchFirst("counter").get().toString())
             }
-counter<10
+counter<10.0
 })
 .then(
 {
@@ -39,7 +39,7 @@ facts ->
                 counter = Integer.parseInt(facts.matchFirst("counter").get().toString())
             }
 
- LOG.warning(counter.toString())
+ LOG.warning(counter)
  facts.put("counter",counter+1)
 
 })

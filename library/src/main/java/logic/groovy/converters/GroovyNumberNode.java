@@ -3,12 +3,10 @@ package logic.groovy.converters;
 import logic.groovy.GroovyConverter;
 import models.Node;
 
-public class GroovyValueNode implements GroovyConverter {
+public class GroovyNumberNode implements GroovyConverter {
 
     @Override
     public String toCode(Node node) {
-        return node.getInternalVariable("value").getValue().toString();
+        return node.getInternalVariable("number").getValue().toString();
     }
 }
-
-

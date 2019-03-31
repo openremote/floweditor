@@ -1,0 +1,40 @@
+    {
+        "name": "Comparator",
+        "type": "Processor",
+        "internals": [
+            {
+                "name": "operator",
+                "type": "Text",
+                "picker": {
+                    "type": "Dropdown",
+                    "options": [
+                        {
+                            "name": ">"
+                        },
+                        {
+                            "name": "<"
+                        },
+                        {
+                            "name": "=="
+                        }
+                    ]
+                }
+            }
+        ],
+        "inputs": [
+            {
+                "type": "Any",
+                "name": "input 1"
+            },
+            {
+                "type": "Any",
+                "name": "input 2"
+            }
+        ],
+        "outputs": [
+            {
+                "type": "Trigger",
+                "name": "output"
+            }
+        ]
+    }

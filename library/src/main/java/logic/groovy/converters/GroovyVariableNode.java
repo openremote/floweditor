@@ -1,23 +1,25 @@
 package logic.groovy.converters;
 
 import logic.groovy.GroovyConverter;
-import models.nodes.ValueNode;
-import models.nodes.VariableNode;
+import models.Node;
 
-public class GroovyVariableNode implements GroovyConverter<VariableNode> {
+public class GroovyVariableNode implements GroovyConverter {
 
     @Override
-    public String pre(VariableNode node) {
-        return  "            int " +node.getName()+ ";\n" +
-                "            if(!facts.matchFirst(\"" +node.getName()+ "\").isPresent()){\n" +
-                "                facts.put(\"" +node.getName()+ "\",(int)" +node.getDefaultValue().toString()+ ")\n" +
-                "                " +node.getName()+ " = " +node.getDefaultValue().toString()+ "\n" +
+    public String pre(Node node) {
+
+        Object name = node.getInternalVariable("name").getValue();
+        Object defaultValue = node.getInternalVariable("defaultValue").getValue();
+        return  "            int " +name+ ";\n" +
+                "            if(!facts.matchFirst(\"" +name+ "\").isPresent()){\n" +
+                "                facts.put(\"" +name+ "\",(int)" +defaultValue.toString()+ ")\n" +
+                "                " +name+ " = " +defaultValue.toString()+ "\n" +
                 "            } else {\n" +
-                "                " +node.getName()+ " = Integer.parseInt(facts.matchFirst(\"" +node.getName()+ "\").get().toString())\n" +
+                "                " +name+ " = Integer.parseInt(facts.matchFirst(\"" +name+ "\").get().toString())\n" +
                 "            }\n";    }
 
     @Override
-    public String toGroovy(VariableNode node) {
-        return node.getName();
+    public String toCode(Node node) {
+        return node.getInternalVariable("name").getValue().toString();
     }
 }

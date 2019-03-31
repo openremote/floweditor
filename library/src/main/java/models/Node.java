@@ -3,48 +3,85 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Node {
+
+public class Node {
 
     private List<Property> inputs;
     private List<Property> outputs;
+    private List<InternalVariable> internals;
     private NodeType nodeType;
+    private String nodeName;
 
-    protected void init( int inputAmount, int outputAmount){
+    public Node( String nodeName, NodeType nodeType) {
 
         inputs = new ArrayList<>();
-        for (int i = 0; i < inputAmount; i++) {
-            inputs.add(new Property(this));
-        }
         outputs = new ArrayList<>();
-        for (int i = 0; i < outputAmount; i++) {
-            outputs.add(new Property(this));
-        }
+        internals = new ArrayList<>();
+        this.nodeType = nodeType;
+        this.nodeName = nodeName;
     }
-
-    protected void setInputs(List<Property> inputs) {
-        this.inputs = inputs;
-    }
-
-    protected void setOutputs(List<Property> outputs) {
-        this.outputs = outputs;
-    }
-
 
     public void setInputReference(int index, Property value){
         inputs.get(index).setConnectedProperty(value);
     }
 
+    public void addInternal(String name, Object value){
+        internals.add(new InternalVariable(name,value));
+    }
+
+    public void addInputProperty(String name){
+        inputs.add(new Property(this,name));
+    }
+    public void addOutputProperty(String name){
+        outputs.add(new Property(this,name));
+    }
+
+    public void setInternal(String name, Object value){
+        for (InternalVariable internal : internals) {
+            if(internal.getName().equals(name)){
+                internal.setValue(value);
+                break;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 
     public void setOutputReference(int index, Property value){
         outputs.get(index).setConnectedProperty(value);
     }
 
-    public Property getOutputProperty(int index){
-        return outputs.get(index);
-    }
-    public Property getInputProperty(int index){
-        return inputs.get(index);
+    public Property getOutputProperty(String name){
+        for (Property property : outputs) {
+            if(property.getName().equals(name)){
+                return property;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
+    public InternalVariable getInternalVariable(String name){
+        for (InternalVariable internal : internals) {
+            if(internal.getName().equals(name)){
+               return internal;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+    public Property getInputProperty(String name){
+        for (Property property : inputs) {
+            if(property.getName().equals(name)){
+                return property;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public NodeType getNodeType() {
+        return nodeType;
+    }
+
+    public String getNodeName() {
+        return nodeName;
+    }
 }
 

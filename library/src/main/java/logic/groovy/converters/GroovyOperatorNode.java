@@ -3,14 +3,12 @@ package logic.groovy.converters;
 import logic.groovy.Groovify;
 import logic.groovy.GroovyConverter;
 import models.Node;
-import models.nodes.OperatorNode;
-import models.nodes.SplitterNode;
 
-public class GroovyOperatorNode implements GroovyConverter<OperatorNode> {
+public class GroovyOperatorNode implements GroovyConverter {
 
-    public String toGroovy(OperatorNode node){
-        return Groovify.toGroovy( node.getInputProperty(0).getConnectedProperty().getNode())
-                + node.getOperator() +
-                Groovify.toGroovy(node.getInputProperty(1).getConnectedProperty().getNode());
+    public String toCode(Node node){
+        return Groovify.toGroovy( node.getInputProperty("input 1").getConnectedProperty().getNode())
+                + node.getInternalVariable("logic").getValue() +
+                Groovify.toGroovy(node.getInputProperty("input 2").getConnectedProperty().getNode());
     }
 }

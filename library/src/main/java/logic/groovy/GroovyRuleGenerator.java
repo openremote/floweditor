@@ -2,7 +2,7 @@ package logic.groovy;
 
 import logic.RuleGenerator;
 import models.Node;
-import models.nodes.ThenNode;
+import models.NodeType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,15 +12,17 @@ public class GroovyRuleGenerator implements RuleGenerator {
 
     List<Node> nodes;
 
+
+
     @Override
     public void setNodes(List<Node> nodes) {
         this.nodes = nodes;
     }
 
-    private ThenNode getThenNode() {
+    private Node getThenNode() {
         for (Node node : nodes) {
-            if (node.getClass() == ThenNode.class) {
-                return (ThenNode) node;
+            if (node.getNodeType() == NodeType.Then) {
+                return node;
             }
         }
         throw new IllegalArgumentException("No Then nodes");
@@ -54,14 +56,14 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "");
 
 
-        ThenNode thenNode = getThenNode();
+        Node thenNode = getThenNode();
         nodes.remove(thenNode);
         for (Node node : nodes) {
             builder.append(Groovify.pre(node));
         }
 
 
-        builder.append(Groovify.toGroovy(thenNode.getConditionNode()));
+        builder.append(Groovify.toGroovy(thenNode.getInputProperty("input").getConnectedProperty().getNode()));
         builder.append("\n})\n" +
                 ".then(\n" +
                 "{\n" +
@@ -72,7 +74,7 @@ public class GroovyRuleGenerator implements RuleGenerator {
             builder.append(Groovify.pre(node));
         }
 
-        builder.append(Groovify.toGroovy(thenNode.getActionNode()));
+        builder.append(Groovify.toGroovy(thenNode.getOutputProperty("output").getConnectedProperty().getNode()));
         builder.append("\n" +
                 "})");
         return builder.toString();
