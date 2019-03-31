@@ -1,11 +1,10 @@
 import { GraphNodeType } from './graphnodetype';
 import { GraphSocket } from './graphsocket';
 import { GraphInternal } from './graphinternal';
-declare var UUID : any;
 
 export class GraphNode {
 
-    public static count : number = 0;
+    public static count = 0;
 
     public id: number;
     public inputs: GraphSocket[] = [];
@@ -15,7 +14,7 @@ export class GraphNode {
     public type: GraphNodeType;
 
     getClone(): GraphNode {
-        let clone : GraphNode = JSON.parse(JSON.stringify(this));
+        const clone: GraphNode = JSON.parse(JSON.stringify(this));
         clone.id = GraphNode.count;
         GraphNode.count++;
         clone.inputs.forEach(socket => {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GraphInternal } from 'src/app/models/GraphInternal';
-import { Picker } from 'src/app/models/Picker';
-import { PickerType } from 'src/app/models/PickerType';
+import { Picker } from 'src/app/models/picker';
+import { PickerType } from 'src/app/models/pickertype';
 import { GraphDataTypes } from 'src/app/models/graphdatatypes';
 
 @Component({

@@ -7,10 +7,32 @@
   align-content: stretch;
 }
 
-*[mat-button]{
+*[mat-button] {
   color: white;
   background: #a8a8a8;
   margin: 2px;
   line-height: 100%;
   height: calc(100% - 4px);
+  transition: background-color 150ms ease-in-out;
+}
+
+*[mat-button]:not([disabled]):hover {
+  background: #b6b6b6;
+}
+
+*[mat-button].primary {
+  background: #47AA42;
+}
+
+*[mat-button].primary:hover {
+  background: rgb(73, 192, 67);
+}
+
+.logo {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-grow: 10;
+  margin-left: 4px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.712);
 }

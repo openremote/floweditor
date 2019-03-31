@@ -1,22 +1,28 @@
 .toolpanel {
-  background: rgb(212, 212, 212);
+  background: rgb(226, 226, 226);
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+  align-items: stretch;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.category{
   display: inline-flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
+  background-clip: border-box;
+  border: solid 1px rgba(0, 0, 0, 0.212);
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
 }
 
-
-.toolpanel:before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 0;
+.title{
+  color: rgba(0, 0, 0, 0.315);
   width: 100%;
-  height: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.247);
-  z-index: 100;
+  text-align: center;
+  padding: 5px 5px 5px 5px;
 }

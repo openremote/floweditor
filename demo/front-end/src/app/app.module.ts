@@ -11,6 +11,7 @@ import {
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatDialogModule,
+  MatExpansionModule,
   MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material/';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { GraphNodeMenuItemComponent } from './components/graph-node-menu-item/gr
 
 import { GraphNodeTypeClassPipe } from './pipes/graph-node-type-class.pipe';
 import { GraphSocketTypeColourPipe } from './pipes/graph-socket-type-colour.pipe';
+import { GraphNodeNamePipe } from './pipes/graph-node-name.pipe';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PickerComponent } from './components/picker/picker.component';
@@ -42,7 +44,8 @@ import { ResultDisplayDialogComponent } from './components/result-display-dialog
     PickerComponent,
     ConnectionComponent,
     ToolbarComponent,
-    ResultDisplayDialogComponent
+    ResultDisplayDialogComponent,
+    GraphNodeNamePipe
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { ResultDisplayDialogComponent } from './components/result-display-dialog
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    AngularDraggableModule
+    AngularDraggableModule,
+    MatExpansionModule
   ],
   entryComponents: [ResultDisplayDialogComponent],
   providers: [

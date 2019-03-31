@@ -1,4 +1,4 @@
-import { ServerReadyInternal } from './ServerReadyInternal';
+import { ServerReadyInternal } from './serverreadyinternal';
 import { GraphNode } from '../graphnode';
 export class ServerReadyNode {
     public type: string;

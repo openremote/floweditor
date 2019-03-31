@@ -1,4 +1,4 @@
-import { Picker } from './Picker';
+import { Picker } from './picker';
 import { GraphDataTypes } from './graphdatatypes';
 export class GraphInternal {
     public name: string;

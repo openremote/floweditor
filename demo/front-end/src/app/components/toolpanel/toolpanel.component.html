@@ -1,6 +1,13 @@
-<div class="fill toolpanel">
+<div class="toolpanel fill">
   <mat-spinner style="margin: auto;" *ngIf="loadingStatus == 0"></mat-spinner>
-  <app-graph-node-menu-item *ngFor="let n of nodes" [node]="n"></app-graph-node-menu-item>
+
+  <ng-container *ngIf="loadingStatus == 1">
+    <div *ngFor="let i of getAllTypes()" class="category">
+      <div class="title">{{i}}</div>
+      <app-graph-node-menu-item *ngFor="let n of getNodesFor(i)" [node]="n"></app-graph-node-menu-item>
+    </div>
+  </ng-container>
+
   <div style="margin: auto; text-align: center" *ngIf="loadingStatus == 2">
     <i class="fas fa-exclamation-triangle"></i> {{error}}
     <button mat-button (click)="loadNodes()"><i class="fas fa-sync-alt"></i> Retry</button>

@@ -1,7 +1,6 @@
 package rest;
 
-import com.google.gson.Gson;
-import com.thetransactioncompany.json.pretty.PrettyJson;
+import com.google.gson.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,7 +16,7 @@ import java.util.Objects;
 @Path("nodes")
 public class NodeService
 {
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
     @Path("getAll")
@@ -39,9 +38,10 @@ public class NodeService
     @Path("translate")
     public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
     {
-        //Use the library here
-        PrettyJson json = new PrettyJson(PrettyJson.Style.DEFAULT);
-        return objectToResponse(json.parseAndFormat(jsonNodeSet));
+        //Use the node library here
+
+        String json = gson.toJson(new JsonParser().parse(jsonNodeSet));
+        return objectToResponse(json);
     }
 
     private Response objectToResponse(Object obj)

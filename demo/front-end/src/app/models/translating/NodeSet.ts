@@ -1,5 +1,5 @@
-import { ServerReadyNode } from './ServerReadyNode';
-import { ServerReadyConnection } from './ServerReadyConnection';
+import { ServerReadyNode } from './serverreadynode';
+import { ServerReadyConnection } from './serverreadyconnection';
 
 export class NodeSet {
     public nodes: ServerReadyNode[] = [];

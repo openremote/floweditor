@@ -6,7 +6,7 @@
   min-height: max-content;
   padding: 5px;
   margin: 10px;
-  grid-template-columns: max-content auto max-content;
+  grid-template-columns: max-content min-content max-content;
   grid-template-rows: 24px auto;
   grid-template-areas:
     "title title title"
@@ -16,7 +16,7 @@
 }
 
 .nodeBackground{
-  background: rgb(80, 80, 80);
+  background: rgb(110, 110, 110);
   position: absolute;
   border-radius: inherit;
   left: 0;
@@ -28,24 +28,33 @@
   z-index: -1;
 }
 
-.node:active {
+.node.cdk-drag-dragging {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
   z-index: 1;
 }
 
 .internals{
   display: flex;
+  flex-direction: column;
   justify-content: stretch;
 }
 
+
 .title {
   cursor: move;
-  display: flex;
   justify-content: space-between;
   user-select: none;
-  margin: 0;
   grid-area: title;
   color: rgba(255, 255, 255, 0.5);
+  line-height: 24px;
+}
+
+.node-input .title{
+  text-align: right;
+}
+
+.node-output .title{
+  text-align: left;
 }
 
 .sockets {
@@ -67,6 +76,11 @@
   display: inline-block;
   border-radius: 100%;
   background: gray;
+  transition: transform 100ms ease-out;
+}
+
+.circle:hover{
+  transform: scale(1.1);
 }
 
 .label {
@@ -75,7 +89,6 @@
   font-style: italic;
   margin-left: 5px;
   margin-right: 5px;
-  vertical-align: top;
 }
 
 .input {

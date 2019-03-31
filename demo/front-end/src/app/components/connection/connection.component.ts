@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Connection } from 'src/app/models/Connection';
+import { Connection } from 'src/app/models/connection';
 
 @Component({
   selector: 'app-connection',
@@ -13,7 +13,6 @@ export class ConnectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.connection);
   }
 
   private boundingRect1() {

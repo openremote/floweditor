@@ -1,6 +1,5 @@
 .node {
   display: inline-grid;
-  background: rgb(80, 80, 80);
   border-radius: 5px;
   min-width: 150px;
   min-height: 60px;
@@ -12,11 +11,11 @@
     "input title output";
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: background-color 50ms ease-in-out;
+  transition: transform 50ms ease-in-out;
 }
 
 .node:hover {
-  background: rgb(95, 95, 95);
+ transform: translateX(2px);
 }
 
 .title {

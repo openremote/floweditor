@@ -3,6 +3,7 @@ import { GraphNode } from 'src/app/models/graphnode';
 import { RestService } from 'src/app/services/rest.service';
 import { MatSnackBar } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
+import { GraphNodeType } from 'src/app/models/graphnodetype';
 
 @Component({
   selector: 'app-toolpanel',
@@ -13,6 +14,7 @@ export class ToolpanelComponent implements OnInit {
   public nodes: GraphNode[] = [];
   public loadingStatus = 0;
   private error: string;
+  private GraphNodeType = GraphNodeType;
 
   constructor(public restService: RestService, private snackBar: MatSnackBar) {
   }
@@ -35,4 +37,15 @@ export class ToolpanelComponent implements OnInit {
     this.loadNodes();
   }
 
+  private getNodesFor(type: GraphNodeType) {
+    return this.nodes.filter((n) => n.type === type);
+  }
+
+  private getAllTypes(){
+    return [
+      GraphNodeType.Input,
+      GraphNodeType.Processor,
+      GraphNodeType.Output,
+    ];
+  }
 }

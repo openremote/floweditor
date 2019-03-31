@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GraphNode } from '../models/graphnode';
-import { Connection } from '../models/Connection';
+import { Connection } from '../models/connection';
 import { GraphSocket } from '../models/graphsocket';
 
 @Injectable({
@@ -17,22 +17,24 @@ export class ProjectService {
   constructor() { }
 
   public beginConnectionDrag(socket: GraphSocket, event: MouseEvent) {
-    if (this.isDragging) return;
+    if (this.isDragging) { return; }
 
     this.currentFrom = socket;
-    this.currentFromElement = event.toElement;
+    this.currentFromElement = event.target as Element;
     this.isDragging = true;
   }
 
   public stopConnectionDrag(socket: GraphSocket, event: MouseEvent) {
-    if (!this.isDragging) return;
+    if (!this.isDragging) { return; }
 
     this.isDragging = false;
 
-    let existing = this.connections.find(c => c.from == this.currentFrom || c.to == socket);
-    if (existing)
-      this.connections.splice(this.connections.indexOf(existing), 1);
+    const existing = this.connections.filter((c) => c.from === this.currentFrom || c.to === socket);
 
-    this.connections.push(new Connection(this.currentFrom, socket, this.currentFromElement, event.toElement));
+    existing.forEach(connection => {
+      this.connections.splice(this.connections.indexOf(connection), 1);
+    });
+
+    this.connections.push(new Connection(this.currentFrom, socket, this.currentFromElement, event.target as Element));
   }
 }
