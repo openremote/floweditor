@@ -15,6 +15,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.node.node-then{
+  cursor: move;
+  grid-template-columns: max-content auto max-content;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "input title output";
+}
+
 .nodeBackground {
   background: rgb(110, 110, 110);
   position: absolute;
@@ -68,6 +76,10 @@
   height: auto;
   min-height: 28px;
   min-width: max-content;
+}
+
+.node-then .socket {
+  min-height: unset;
 }
 
 .circle {
@@ -136,13 +148,14 @@
   min-width: 96px;
   min-height: 96px;
 
-  grid-template-columns: auto auto auto;
-  grid-template-rows: 24px auto;
-
+  border-radius: 50%;
 }
 
 .node-then .title{
-
+margin: auto;
+color: white;
+font-size: 1.2em;
+font-weight: bold;
 }
 
 .node-then .label {
