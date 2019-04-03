@@ -60,3 +60,13 @@ mat-label {
 ::-webkit-scrollbar-thumb:hover {
   background: #a7a7a7;
 }
+
+snippet-highlight .dark .code-toolbar .toolbar a, snippet-highlight .dark .code-toolbar .toolbar span
+{
+  background: #47AA42;
+}
+
+snippet-highlight .dark .code-toolbar pre
+{
+  border-top-color: #47AA42;
+}
