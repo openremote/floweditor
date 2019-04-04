@@ -23,6 +23,9 @@ export class ProjectService {
     this.isDragging = true;
   }
 
+  public isValidNodeStructure(): boolean {
+    return false;
+  }
 
   public getFromPosition(): { x: number, y: number } {
     if (!this.isDragging) { return { x: 0, y: 0 }; }

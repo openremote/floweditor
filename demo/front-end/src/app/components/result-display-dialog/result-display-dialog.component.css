@@ -1,5 +1,5 @@
 snippet-highlight {
-  max-height: 350px;
+  height: calc(100vh - 200px);
   margin: 0;
   margin-bottom: 15px;
   overflow: auto;
