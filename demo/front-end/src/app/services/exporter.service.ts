@@ -27,7 +27,7 @@ export class ExporterService {
 
     const translationObservable = this.rest.translate(nodeSet);
     translationObservable.subscribe(
-      (data: string) => callback(data),
+      (data: string) => callback(window.atob(data)),
       (e: HttpErrorResponse) => {
         this.snackBar.open('Something went wrong', 'Dismiss');
         throw new Error(e.message);

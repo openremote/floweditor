@@ -1,5 +1,5 @@
   <div class="node {{node.type | graphNodeTypeClass}}" cdkDrag cdkDragBoundary=".workspace" style="z-index: 1">
-    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'">{{node.name | graphNodeName}}</div>
+    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'"><div>{{node.name | graphNodeName}}</div></div>
 
     <div #inputSockets class="sockets" style="grid-area: input">
       <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">

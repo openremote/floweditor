@@ -7,7 +7,7 @@
             "name": "trigger"
         },
         {
-            "type": "Text",
+            "type": "String",
             "name": "name"
         },
         {

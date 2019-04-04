@@ -25,7 +25,6 @@ public final class Translator
                 "Comparator",
                 "Log",
                 "Splitter",
-                "Value",
                 "Variable",
                 "Operator",
                 "VariableSaver",

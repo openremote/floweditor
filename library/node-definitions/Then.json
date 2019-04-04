@@ -3,7 +3,7 @@
     "type" : "Then",
     "inputs": [
         {
-            "type": "Any",
+            "type": "Boolean",
             "name": "input"
         }
     ],

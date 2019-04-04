@@ -37,7 +37,7 @@ public class NodeTests {
 
      */
     }
-
+/*
     private String readFile(String filePath)
     {
         StringBuilder contentBuilder = new StringBuilder();
@@ -60,5 +60,5 @@ public class NodeTests {
         NodeTypeCollection nodeCollection = new NodeTypeCollection();
         nodeCollection.registerNode( readFile("comparer.json"));
         nodeCollection.registerNodeConverter("Comparer", GroovyComparatorNode.class);
-    }
+    }*/
 }

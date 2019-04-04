@@ -1,5 +1,6 @@
 import { ConnectionSide } from './connection.side';
 import { Connection } from '../connection';
+
 export class ServerReadyConnection {
     public from: ConnectionSide;
     public to: ConnectionSide;

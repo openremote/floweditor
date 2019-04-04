@@ -1,5 +1,6 @@
 import { ServerReadyInternal } from './server.ready.internal';
 import { GraphNode } from '../graph.node';
+
 export class ServerReadyNode {
     public type: string;
     public id: number;

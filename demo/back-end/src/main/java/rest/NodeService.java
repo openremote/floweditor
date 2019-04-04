@@ -13,12 +13,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Objects;
 
 @Path("nodes")
 public class NodeService
 {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Base64.Decoder decoder = Base64.getDecoder();
+    private Base64.Encoder encoder = Base64.getEncoder();
     private NodeTypeCollection collection;
 
     @GET
@@ -40,7 +43,8 @@ public class NodeService
     @Path("translate")
     public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
     {
-        return objectToResponse(Translator.translate(jsonNodeSet));
+        jsonNodeSet = new String(decoder.decode(jsonNodeSet));
+        return objectToResponse(encoder.encodeToString(Translator.translate(jsonNodeSet).getBytes()));
     }
 
     private Response objectToResponse(Object obj)

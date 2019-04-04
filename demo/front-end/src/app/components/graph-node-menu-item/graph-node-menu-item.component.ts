@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
+import { CopyMachine } from 'src/app/logic/copy.machine';
 
 @Component({
   selector: 'app-graph-node-menu-item',
@@ -12,12 +13,12 @@ export class GraphNodeMenuItemComponent implements OnInit {
 
   constructor(public project: ProjectService) {
 
-   }
+  }
 
   ngOnInit() {
   }
 
   addNodeToProject() {
-    this.project.nodes.push(this.node.getClone());
+    this.project.nodes.push(CopyMachine.copy(this.node));
   }
 }

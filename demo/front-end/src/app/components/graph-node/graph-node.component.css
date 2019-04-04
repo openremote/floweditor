@@ -24,7 +24,7 @@
 }
 
 .nodeBackground {
-  background: rgb(110, 110, 110);
+  background: rgb(131, 131, 131);
   position: absolute;
   border-radius: inherit;
   left: 0;
@@ -47,7 +47,6 @@
   justify-content: stretch;
 }
 
-
 .title {
   cursor: move;
   justify-content: space-between;
@@ -55,6 +54,10 @@
   grid-area: title;
   color: rgba(255, 255, 255, 0.5);
   line-height: 24px;
+}
+
+.title>div{
+  transform: translateY(-3px);
 }
 
 .node-input .title {
