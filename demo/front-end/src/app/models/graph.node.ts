@@ -1,6 +1,6 @@
-import { GraphNodeType } from './graphnodetype';
-import { GraphSocket } from './graphsocket';
-import { GraphInternal } from './graphinternal';
+import { GraphNodeType } from './graph.node.type';
+import { GraphSocket } from './graph.socket';
+import { GraphInternal } from './graph.internal';
 
 export class GraphNode {
 

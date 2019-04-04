@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GraphNode } from 'src/app/models/graphnode';
+import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({

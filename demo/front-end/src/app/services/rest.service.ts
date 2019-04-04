@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GraphNode } from '../models/graphnode';
-import { NodeSet } from '../models/translating/nodeset';
+import { GraphNode } from '../models/graph.node';
+import { NodeSet } from '../models/translating/node.set';
 import { encode } from 'punycode';
 
 @Injectable({

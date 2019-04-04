@@ -1,4 +1,4 @@
-import { ConnectionSide } from './connectionside';
+import { ConnectionSide } from './connection.side';
 import { Connection } from '../connection';
 export class ServerReadyConnection {
     public from: ConnectionSide;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphNode } from 'src/app/models/graphnode';
+import { GraphNode } from 'src/app/models/graph.node';
 import { RestService } from 'src/app/services/rest.service';
 import { MatSnackBar } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
-import { GraphNodeType } from 'src/app/models/graphnodetype';
+import { GraphNodeType } from 'src/app/models/graph.node.type';
 
 @Component({
   selector: 'app-toolpanel',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphNode } from 'src/app/models/graphnode';
+import { GraphNode } from 'src/app/models/graph.node';
 import { RestService } from 'src/app/services/rest.service';
 import { ProjectService } from 'src/app/services/project.service';
 

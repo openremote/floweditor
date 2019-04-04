@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { GraphNode } from '../models/graphnode';
+import { GraphNode } from '../models/graph.node';
 import { Connection } from '../models/connection';
-import { GraphSocket } from '../models/graphsocket';
+import { GraphSocket } from '../models/graph.socket';
 
 @Injectable({
   providedIn: 'root'

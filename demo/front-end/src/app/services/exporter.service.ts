@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from './project.service';
 import { MatSnackBar } from '@angular/material';
-import { NodeSet } from '../models/translating/nodeset';
-import { ServerReadyNode } from '../models/translating/serverreadynode';
-import { ServerReadyConnection } from '../models/translating/serverreadyconnection';
+import { NodeSet } from '../models/translating/node.set';
+import { ServerReadyNode } from '../models/translating/server.ready.node';
+import { ServerReadyConnection } from '../models/translating/server.ready.connection';
 import { RestService } from './rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
 

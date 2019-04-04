@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GraphDataTypes } from '../models/graphdatatypes';
+import { GraphDataTypes } from '../models/graph.data.types';
 
 @Pipe({
   name: 'graphSocketTypeColour'
