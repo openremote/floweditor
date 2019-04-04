@@ -24,19 +24,23 @@ export class ConnectionComponent implements OnInit {
   }
 
   private x1() {
-    return this.boundingRect1().left;
+    const b = this.boundingRect1();
+    return b.left + b.width / 2;
   }
 
   private y1() {
-    return this.boundingRect1().top;
+    const b = this.boundingRect1();
+    return b.top + b.height / 2;
   }
 
   private x2() {
-    return this.boundingRect2().left;
+    const b = this.boundingRect2();
+    return b.left + b.width / 2;
   }
 
   private y2() {
-    return this.boundingRect2().top;
+    const b = this.boundingRect2();
+    return b.top + b.height / 2;
   }
 
 }

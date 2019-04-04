@@ -53,7 +53,7 @@ public final class Translator
         return generator.generate();
     }
 
-    private  static String readFile(String filePath)
+    private static String readFile(String filePath)
     {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -61,16 +61,16 @@ public final class Translator
         File home = new File(ClassLoader.getSystemResource("nodes").getPath());
         Path path = Paths.get(home + "/" + filePath);
 
-        try (Stream<String> stream = Files.lines( path, StandardCharsets.UTF_8))
+        try (Stream<String> stream = Files.lines(path, StandardCharsets.UTF_8))
         {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
         }
 
-        String result = contentBuilder.toString();;
+        String result = contentBuilder.toString();
+        ;
 
         return result;
     }
