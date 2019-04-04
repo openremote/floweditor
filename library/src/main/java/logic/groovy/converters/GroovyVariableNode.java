@@ -20,6 +20,7 @@ public class GroovyVariableNode implements GroovyConverter {
 
     @Override
     public String toCode(Node node) {
-        return node.getInternalVariable("name").getValue().toString();
+        String obj = node.getInternalVariable("name").getValue().toString();
+        return  obj;
     }
 }
