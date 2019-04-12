@@ -8,6 +8,7 @@ import models.Node;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,8 +59,22 @@ public final class Translator
         StringBuilder contentBuilder = new StringBuilder();
 
 
-        File home = new File(ClassLoader.getSystemResource("nodes").getPath());
-        Path path = Paths.get(home + "/" + filePath);
+        File home = null;
+        try
+        {
+            home = new File(ClassLoader.getSystemResource("nodes").toURI());
+        } catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+        Path path = null;
+        try
+        {
+            path = Paths.get(home.getCanonicalPath() + "/" + filePath);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         try (Stream<String> stream = Files.lines(path, StandardCharsets.UTF_8))
         {

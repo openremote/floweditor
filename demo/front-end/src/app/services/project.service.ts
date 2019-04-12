@@ -24,7 +24,7 @@ export class ProjectService {
   }
 
   public isValidNodeStructure(): boolean {
-    return false;
+    return true;
   }
 
   public getFromPosition(): { x: number, y: number } {

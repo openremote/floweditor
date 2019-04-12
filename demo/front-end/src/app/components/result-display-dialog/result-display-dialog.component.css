@@ -1,5 +1,6 @@
 snippet-highlight {
-  height: calc(100vh - 200px);
+  height: max-content;
+  max-height: 80vh;
   margin: 0;
   margin-bottom: 15px;
   overflow: auto;
@@ -9,4 +10,8 @@ snippet-highlight {
 h1 {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+button{
+  font-family: sans-serif;
 }

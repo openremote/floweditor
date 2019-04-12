@@ -11,9 +11,15 @@
   grid-template-areas:
     "title title title"
     "input internals output";
-  transition: box-shadow cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
+  transition-property: box-shadow, filter;
+  box-shadow: 0;
+  filter: 0;
   user-select: none;
+}
+
+.node.selected {
+  box-shadow: 0 0 0 3px #47AA42;
 }
 
 .node.node-then {
@@ -37,7 +43,7 @@
 }
 
 .node.cdk-drag-dragging {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.2));
   z-index: 1;
 }
 
@@ -56,7 +62,7 @@
   line-height: 24px;
 }
 
-.title>div{
+.title>div {
   transform: translateY(-3px);
 }
 
