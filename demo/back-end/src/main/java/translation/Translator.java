@@ -5,6 +5,7 @@ import logic.groovy.NodeConverter;
 import logic.nodeSetReader.NodeSetReader;
 import logic.nodeTypeReader.NodeTypeCollection;
 import models.Node;
+import models.NodeSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,10 +47,9 @@ public final class Translator
     public static String translate(String input)
     {
         NodeSetReader setReader = new NodeSetReader(collection);
-        List<Node> nodes = setReader.read(input);
+        NodeSet nodes = setReader.read(input);
 
-        GroovyRuleGenerator generator = new GroovyRuleGenerator();
-        generator.setNodes(nodes);
+        GroovyRuleGenerator generator = new GroovyRuleGenerator(nodes);
 
         return generator.generate();
     }
