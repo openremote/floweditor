@@ -1,4 +1,4 @@
-//Rule created on 2019-03-31 14:23 using rule-library
+//Rule created on 2019-04-04 13:35 using rule-library
  
 package demo.rules
 
@@ -15,31 +15,43 @@ Assets assets = binding.assets
 
 rules.add()
 .name("test")
-.when(
-{
-facts -> 
-            int counter;
-            if(!facts.matchFirst("counter").isPresent()){
-                facts.put("counter",(int)0)
-                counter = 0
-            } else {
-                counter = Integer.parseInt(facts.matchFirst("counter").get().toString())
-            }
-counter<10.0
+.when({
+  facts -> 
+  float v1;
+  if(!facts.matchFirst("v1").isPresent()){
+    facts.put("v1",(float)0)
+    v1 = 0
+  } else {
+    v1 = Float.parseFloat(facts.matchFirst("v1").get().toString())
+  }
+  float v2;
+  if(!facts.matchFirst("v2").isPresent()){
+    facts.put("v2",(float)1)
+    v2 = 1
+  } else {
+    v2 = Float.parseFloat(facts.matchFirst("v2").get().toString())
+  }
+  v2<1000.0
 })
 .then(
 {
-facts -> 
-
-            int counter;
-            if(!facts.matchFirst("counter").isPresent()){
-                facts.put("counter",(int)0)
-                counter = 0
-            } else {
-                counter = Integer.parseInt(facts.matchFirst("counter").get().toString())
-            }
-
- LOG.warning(counter)
- facts.put("counter",counter+1)
-
+  facts -> 
+  float v1;
+  if(!facts.matchFirst("v1").isPresent()){
+    facts.put("v1",(float)0)
+    v1 = 0
+  } else {
+    v1 = Float.parseFloat(facts.matchFirst("v1").get().toString())
+  }
+  float v2;
+  if(!facts.matchFirst("v2").isPresent()){
+    facts.put("v2",(float)1)
+    v2 = 1
+  } else {
+    v2 = Float.parseFloat(facts.matchFirst("v2").get().toString())
+  }
+  facts.put("v1",v2)
+  facts.put("v2",v1+v2)
+  
+  LOG.warning((v2).toString())
 })

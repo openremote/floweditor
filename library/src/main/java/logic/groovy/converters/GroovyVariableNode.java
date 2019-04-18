@@ -10,13 +10,13 @@ public class GroovyVariableNode implements GroovyConverter {
 
         Object name = node.getInternalVariable("name").getValue();
         Object defaultValue = node.getInternalVariable("defaultValue").getValue();
-        return  "            float " +name+ ";\n" +
-                "            if(!facts.matchFirst(\"" +name+ "\").isPresent()){\n" +
-                "                facts.put(\"" +name+ "\",(float)" +defaultValue.toString()+ ")\n" +
-                "                " +name+ " = " +defaultValue.toString()+ "\n" +
-                "            } else {\n" +
-                "                " +name+ " = Float.parseFloat(facts.matchFirst(\"" +name+ "\").get().toString())\n" +
-                "            }\n";    }
+        return  "float " +name+ ";\n" +
+                "if(!facts.matchFirst(\"" +name+ "\").isPresent()){\n" +
+                "facts.put(\"" +name+ "\",(float)" +defaultValue.toString()+ ")\n" +
+                name+ " = " +defaultValue.toString()+ "\n" +
+                "} else {\n" +
+                name+ " = Float.parseFloat(facts.matchFirst(\"" +name+ "\").get().toString())\n" +
+                "}\n";    }
 
     @Override
     public String toCode(Node node) {

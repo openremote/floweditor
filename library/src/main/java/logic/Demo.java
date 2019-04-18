@@ -93,7 +93,7 @@ public class Demo {
                 "Comparator",
                 "Log",
                 "Splitter",
-                "Value",
+
                 "Variable",
                 "Operator",
                 "VariableSaver",
@@ -109,7 +109,7 @@ public class Demo {
         }
 
         NodeSetReader setReader = new NodeSetReader(collection);
-        List<Node> nodes = setReader.read(readFile("sample-node-sets/sample1.json"));
+        List<Node> nodes = setReader.read(readFile("sample-node-sets/sample2.json"));
 
         GroovyRuleGenerator generator = new GroovyRuleGenerator();
         generator.setNodes(nodes);

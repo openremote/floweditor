@@ -8,10 +8,71 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+class GroovyFormatter {
+    public String format(String code) {
+        int indend = 0;
+
+        StringBuilder oneLine = new StringBuilder();
+
+        boolean lastWasSpace = false;
+        for (int i = 0; i < code.length(); i++) {
+            char c = code.charAt(i);
+            if (c == '\t') {
+               // oneLine.append(' ');
+                continue;
+            }
+            if (c == '\n') {
+                //oneLine.append(' ');
+               //continue;
+            }
+            if (c == ' ' && lastWasSpace) {
+                continue;
+
+            }
+            if(c == ' '){
+                lastWasSpace = true;
+                oneLine.append(c);
+                continue;
+            }
+            lastWasSpace = false;
+            oneLine.append(c);
+        }
+
+        StringBuilder formatted = new StringBuilder();
+        for (int i = 0; i < oneLine.length(); i++) {
+
+            char c = oneLine.charAt(i);
+            if (c == '{') {
+                indend++;
+                //formatted.append("\n");
+
+            }
+            if (c == '}') {
+                for (int j = 0; j < 2; j++) {
+                    formatted.deleteCharAt(formatted.length()-1);
+                }
+                indend--;
+            }
+            if (c == '\n') {
+                formatted.append(c);
+
+                for (int j = 0; j < indend; j++) {
+                    formatted.append("  ");
+                }
+                continue;
+            }
+            formatted.append(c);
+        }
+
+        return formatted.toString();
+
+    }
+
+}
+
 public class GroovyRuleGenerator implements RuleGenerator {
 
     List<Node> nodes;
-
 
 
     @Override
@@ -50,8 +111,7 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "\n" +
                 "rules.add()\n" +
                 ".name(\"test\")\n" +
-                ".when(\n" +
-                "{\n" +
+                ".when({\n" +
                 "facts -> \n" +
                 "");
 
@@ -67,16 +127,19 @@ public class GroovyRuleGenerator implements RuleGenerator {
         builder.append("\n})\n" +
                 ".then(\n" +
                 "{\n" +
-                "facts -> \n" +
-                "\n");
+                "facts -> \n");
 
         for (Node node : nodes) {
             builder.append(Groovify.pre(node));
         }
 
         builder.append(Groovify.toGroovy(thenNode.getOutputProperty("output").getConnectedProperty().getNode()));
-        builder.append("\n" +
+        builder.append(
                 "})");
-        return builder.toString();
+
+        GroovyFormatter groovyFormatter = new GroovyFormatter();
+        String formattedString =groovyFormatter.format(builder.toString());
+
+        return formattedString;
     }
 }
