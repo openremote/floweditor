@@ -1,4 +1,4 @@
-//Rule created on 2019-04-18 11:32 using rule-library
+//Rule created on 2019-04-18 09:57 using rule-library
  
 package demo.rules
 
@@ -14,7 +14,7 @@ RulesBuilder rules = binding.rules
 Assets assets = binding.assets
 
 rules.add()
-.name("Sample 2 rule")
+.name("null")
 .when({
 	facts -> 
 	float v1;
@@ -24,14 +24,14 @@ rules.add()
 	} else {
 		v1 = Float.parseFloat(facts.matchFirst("v1").get().toString())
 	}
-	float vd2;
-	if(!facts.matchFirst("vd2").isPresent()){
-		facts.put("vd2",(float)1)
-		vd2 = 1
+	float v2;
+	if(!facts.matchFirst("v2").isPresent()){
+		facts.put("v2",(float)1)
+		v2 = 1
 	} else {
-		vd2 = Float.parseFloat(facts.matchFirst("vd2").get().toString())
+		v2 = Float.parseFloat(facts.matchFirst("v2").get().toString())
 	}
-	vd2<1000.0
+	v2<1000.0
 })
 .then(
 {
@@ -43,15 +43,15 @@ rules.add()
 	} else {
 		v1 = Float.parseFloat(facts.matchFirst("v1").get().toString())
 	}
-	float vd2;
-	if(!facts.matchFirst("vd2").isPresent()){
-		facts.put("vd2",(float)1)
-		vd2 = 1
+	float v2;
+	if(!facts.matchFirst("v2").isPresent()){
+		facts.put("v2",(float)1)
+		v2 = 1
 	} else {
-		vd2 = Float.parseFloat(facts.matchFirst("vd2").get().toString())
+		v2 = Float.parseFloat(facts.matchFirst("v2").get().toString())
 	}
-	facts.put("v1",vd2)
-	facts.put("v2",v1+vd2)
+	facts.put("v1",v2)
+	facts.put("v2",v1+v2)
 	
-	LOG.warning((vd2).toString())
+	LOG.warning((v2).toString())
 })

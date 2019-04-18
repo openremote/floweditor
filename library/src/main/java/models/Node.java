@@ -1,5 +1,7 @@
 package models;
 
+import models.exceptions.RuleLibraryException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,30 +51,30 @@ public class Node {
         outputs.get(index).setConnectedProperty(value);
     }
 
-    public Property getOutputProperty(String name){
+    public Property getOutputProperty(String name) throws RuleLibraryException {
         for (Property property : outputs) {
             if(property.getName().equals(name)){
                 return property;
             }
         }
-        throw new IllegalArgumentException();
+        throw new RuleLibraryException("Can't find output property with the name \'"+ name + "\' on node " + this.nodeName,this);
     }
 
-    public InternalVariable getInternalVariable(String name){
+    public InternalVariable getInternalVariable(String name) throws RuleLibraryException {
         for (InternalVariable internal : internals) {
             if(internal.getName().equals(name)){
                return internal;
             }
         }
-        throw new IllegalArgumentException();
+        throw new RuleLibraryException("Can't find internal variable with the name \'"+ name + "\' on node " + this.nodeName,this);
     }
-    public Property getInputProperty(String name){
+    public Property getInputProperty(String name) throws RuleLibraryException {
         for (Property property : inputs) {
             if(property.getName().equals(name)){
                 return property;
-            }
-        }
-        throw new IllegalArgumentException();
+            }        }
+
+        throw new RuleLibraryException("Can't find input property with the name \'"+ name + "\' on node " + this.nodeName,this);
     }
 
     public NodeType getNodeType() {
