@@ -1,6 +1,7 @@
 package logic.groovy;
 
 import models.Node;
+import models.exceptions.RuleLibraryException;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,9 +19,9 @@ public class Groovify {
         }
     }
 
-    public static String pre(Node node) {
+    public static String pre(Node node) throws RuleLibraryException {
 
-        try {
+
             Class comparerClass = getComparerClass(node);
             GroovyConverter converter = constructConverter(comparerClass);
             String s = converter.pre(node);
@@ -28,13 +29,10 @@ public class Groovify {
                 return "";
             }
             return  s;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
     }
 
-    public static String toGroovy(Node node) {
+    public static String toGroovy(Node node) throws RuleLibraryException {
 
         Class comparerClass = getComparerClass(node);
         GroovyConverter converter = constructConverter(comparerClass);

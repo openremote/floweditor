@@ -4,6 +4,7 @@ import logic.RuleGenerator;
 import models.Node;
 import models.NodeSet;
 import models.NodeType;
+import models.exceptions.RuleLibraryException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +27,7 @@ public class GroovyRuleGenerator extends RuleGenerator {
     }
 
     @Override
-    public String generate() {
+    public String generate() throws RuleLibraryException {
         StringBuilder builder = new StringBuilder();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
         String date = LocalDateTime.now().format(formatter);

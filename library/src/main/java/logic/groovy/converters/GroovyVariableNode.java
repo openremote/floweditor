@@ -2,11 +2,12 @@ package logic.groovy.converters;
 
 import logic.groovy.GroovyConverter;
 import models.Node;
+import models.exceptions.RuleLibraryException;
 
 public class GroovyVariableNode implements GroovyConverter {
 
     @Override
-    public String pre(Node node) {
+    public String pre(Node node) throws RuleLibraryException {
 
         Object name = node.getInternalVariable("name").getValue();
         Object defaultValue = node.getInternalVariable("defaultValue").getValue();
@@ -19,7 +20,7 @@ public class GroovyVariableNode implements GroovyConverter {
                 "}\n";    }
 
     @Override
-    public String toCode(Node node) {
+    public String toCode(Node node) throws RuleLibraryException {
         String obj = node.getInternalVariable("name").getValue().toString();
         return  obj;
     }

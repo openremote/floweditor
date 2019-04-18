@@ -1,6 +1,7 @@
 package logic;
 
 import models.NodeSet;
+import models.exceptions.RuleLibraryException;
 
 public abstract class RuleGenerator {
 
@@ -10,7 +11,7 @@ public abstract class RuleGenerator {
         this.nodeSet = nodeSet;
     }
 
-    public abstract String generate();
+    public abstract String generate() throws RuleLibraryException;
 
 
 }
