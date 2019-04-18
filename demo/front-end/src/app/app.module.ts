@@ -33,6 +33,7 @@ import { ConnectionComponent } from './components/connection/connection.componen
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ResultDisplayDialogComponent } from './components/result-display-dialog/result-display-dialog.component';
 import { SettingsPanelComponent } from './components/settings-panel/settings-panel.component';
+import { ExportSettingsDialogComponent } from './components/export-settings-dialog/export-settings-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SettingsPanelComponent } from './components/settings-panel/settings-pan
     ToolbarComponent,
     ResultDisplayDialogComponent,
     GraphNodeNamePipe,
-    SettingsPanelComponent
+    SettingsPanelComponent,
+    ExportSettingsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ import { SettingsPanelComponent } from './components/settings-panel/settings-pan
     MatDialogModule,
     AngularDraggableModule
   ],
-  entryComponents: [ResultDisplayDialogComponent, SettingsPanelComponent],
+  entryComponents: [ResultDisplayDialogComponent, SettingsPanelComponent, ExportSettingsDialogComponent],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],

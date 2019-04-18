@@ -3,6 +3,8 @@ import { ExporterService } from 'src/app/services/exporter.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ResultDisplayDialogComponent } from '../result-display-dialog/result-display-dialog.component';
 import { SettingsPanelComponent } from '../settings-panel/settings-panel.component';
+import { ExportSettingsDialogComponent } from '../export-settings-dialog/export-settings-dialog.component';
+import { SelectionService } from 'src/app/services/selection.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +13,9 @@ import { SettingsPanelComponent } from '../settings-panel/settings-panel.compone
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private exporter: ExporterService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private selection: SelectionService) { }
 
   ngOnInit() {
   }
@@ -21,9 +25,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   private exportNodeStructure() {
-    this.exporter.export((data) => {
-      console.log(data.normalize());
-      this.dialog.open(ResultDisplayDialogComponent, { data });
-    });
+    this.dialog.open(ExportSettingsDialogComponent);
   }
 }

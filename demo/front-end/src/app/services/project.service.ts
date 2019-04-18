@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { GraphNode } from '../models/graph.node';
 import { Connection } from '../models/connection';
 import { GraphSocket } from '../models/graph.socket';
+import { InputService } from './input.service';
+import { SelectionService } from './selection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,32 @@ export class ProjectService {
   private currentFrom: GraphSocket;
   private currentFromElement: Element;
 
-  constructor() { }
+  constructor(private input: InputService, private selection: SelectionService) {
+    input.registerCallback((s) => this.keyDown(s));
+  }
+
+  private keyDown(key: string) {
+    console.log(this.selection.selectedNodes);
+    if (key === 'Delete' || key === 'Backspace') {
+      this.selection.selectedNodes.forEach((n) => {
+        this.removeNode(n);
+      });
+    }
+  }
+
+  public removeNode(node: GraphNode) {
+    this.selection.deselectAll();
+    const id = node.id;
+    const newConnections: Connection[] = [];
+    this.nodes.splice(this.nodes.indexOf(node), 1);
+    this.connections.forEach(c => {
+      if (c.from.node !== node && c.to.node !== node) {
+        newConnections.push(c);
+      }
+    });
+    this.connections = newConnections;
+  }
+
   public beginConnectionDrag(socket: GraphSocket, event: MouseEvent) {
     if (this.isDragging) { return; }
 
