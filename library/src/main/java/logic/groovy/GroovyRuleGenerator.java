@@ -2,86 +2,22 @@ package logic.groovy;
 
 import logic.RuleGenerator;
 import models.Node;
+import models.NodeSet;
 import models.NodeType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
-class GroovyFormatter {
-    public String format(String code) {
-        int indend = 0;
+public class GroovyRuleGenerator extends RuleGenerator {
 
-        StringBuilder oneLine = new StringBuilder();
 
-        boolean lastWasSpace = false;
-        for (int i = 0; i < code.length(); i++) {
-            char c = code.charAt(i);
-            if (c == '\t') {
-               // oneLine.append(' ');
-                continue;
-            }
-            if (c == '\n') {
-                //oneLine.append(' ');
-               //continue;
-            }
-            if (c == ' ' && lastWasSpace) {
-                continue;
-
-            }
-            if(c == ' '){
-                lastWasSpace = true;
-                oneLine.append(c);
-                continue;
-            }
-            lastWasSpace = false;
-            oneLine.append(c);
-        }
-
-        StringBuilder formatted = new StringBuilder();
-        for (int i = 0; i < oneLine.length(); i++) {
-
-            char c = oneLine.charAt(i);
-            if (c == '{') {
-                indend++;
-                //formatted.append("\n");
-
-            }
-            if (c == '}') {
-                for (int j = 0; j < 2; j++) {
-                    formatted.deleteCharAt(formatted.length()-1);
-                }
-                indend--;
-            }
-            if (c == '\n') {
-                formatted.append(c);
-
-                for (int j = 0; j < indend; j++) {
-                    formatted.append("  ");
-                }
-                continue;
-            }
-            formatted.append(c);
-        }
-
-        return formatted.toString();
-
+    public GroovyRuleGenerator(NodeSet nodeSet) {
+        super(nodeSet);
     }
 
-}
-
-public class GroovyRuleGenerator implements RuleGenerator {
-
-    List<Node> nodes;
-
-
-    @Override
-    public void setNodes(List<Node> nodes) {
-        this.nodes = nodes;
-    }
 
     private Node getThenNode() {
-        for (Node node : nodes) {
+        for (Node node : nodeSet.getNodes()) {
             if (node.getNodeType() == NodeType.Then) {
                 return node;
             }
@@ -110,15 +46,15 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "Assets assets = binding.assets\n" +
                 "\n" +
                 "rules.add()\n" +
-                ".name(\"test\")\n" +
+                ".name(\""+nodeSet.getName()+"\")\n" +
                 ".when({\n" +
                 "facts -> \n" +
                 "");
 
 
         Node thenNode = getThenNode();
-        nodes.remove(thenNode);
-        for (Node node : nodes) {
+        nodeSet.getNodes().remove(thenNode);
+        for (Node node : nodeSet.getNodes()) {
             builder.append(Groovify.pre(node));
         }
 
@@ -129,13 +65,12 @@ public class GroovyRuleGenerator implements RuleGenerator {
                 "{\n" +
                 "facts -> \n");
 
-        for (Node node : nodes) {
-            builder.append(Groovify.pre(node));
+        for (Node node : nodeSet.getNodes()) {
+            builder.append  (Groovify.pre(node));
         }
 
         builder.append(Groovify.toGroovy(thenNode.getOutputProperty("output").getConnectedProperty().getNode()));
-        builder.append(
-                "})");
+        builder.append("})");
 
         GroovyFormatter groovyFormatter = new GroovyFormatter();
         String formattedString =groovyFormatter.format(builder.toString());

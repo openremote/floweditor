@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
+
 public class NodeSetReader {
 
     NodeTypeCollection typeCollection;
@@ -17,7 +18,7 @@ public class NodeSetReader {
         this.typeCollection = typeCollection;
     }
 
-    public List<models.Node> read(String json) {
+    public models.NodeSet read(String json) {
         Gson gson = new Gson();
         NodeSet nodeSet = gson.fromJson(json, NodeSet.class);
 
@@ -43,6 +44,7 @@ public class NodeSetReader {
             fromProperty.setConnectedProperty(toProperty);
             toProperty.setConnectedProperty(fromProperty);
         }
-        return new ArrayList<>(nodesById.values());
+        List<models.Node> nodes  = new ArrayList<>(nodesById.values());
+        return new models.NodeSet(nodeSet.name,nodes);
     }
 }

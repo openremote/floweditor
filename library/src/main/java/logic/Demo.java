@@ -4,7 +4,7 @@ import logic.groovy.GroovyRuleGenerator;
 import logic.groovy.NodeConverter;
 import logic.nodeSetReader.NodeSetReader;
 import logic.nodeTypeReader.NodeTypeCollection;
-import models.Node;
+import models.NodeSet;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Demo {
@@ -69,16 +68,12 @@ public class Demo {
         }
      */
 
-    private  static String readFile(String filePath)
-    {
+    private static String readFile(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
 
-        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
-        {
+        try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -100,25 +95,26 @@ public class Demo {
                 "Number",
                 "Text"
         };
-        collection.registerNode( readFile("node-definitions/Then.json"));
+        collection.registerNode(readFile("node-definitions/Then.json"));
 
         for (String name : names) {
-            Class<?> type = Class.forName("logic.groovy.converters.Groovy" + name +"Node");
-            collection.registerNode( readFile("node-definitions/"+name + ".json"));
+            Class<?> type = Class.forName("logic.groovy.converters.Groovy" + name + "Node");
+            collection.registerNode(readFile("node-definitions/" + name + ".json"));
             collection.registerNodeConverter(name, (Class<? extends NodeConverter>) type);
         }
 
         NodeSetReader setReader = new NodeSetReader(collection);
-        List<Node> nodes = setReader.read(readFile("sample-node-sets/sample2.json"));
+        NodeSet nodeSet = setReader.read(readFile("sample-node-sets/sample2.json"));
 
-        GroovyRuleGenerator generator = new GroovyRuleGenerator();
-        generator.setNodes(nodes);
-        writeToFile(generator.generate());
+        GroovyRuleGenerator generator = new GroovyRuleGenerator(nodeSet);
+
+        writeToFile(nodeSet.getName(), generator.generate());
 
 
     }
-        private static void writeToFile(String ruleText) throws IOException {
-        File f = new File("rule.groovy");
+
+    private static void writeToFile(String name, String ruleText) throws IOException {
+        File f = new File(name +".groovy");
         f.createNewFile();
         FileWriter writer = new FileWriter(f);
         writer.write(ruleText);

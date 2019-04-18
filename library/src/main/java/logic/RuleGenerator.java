@@ -1,13 +1,16 @@
 package logic;
 
-import models.Node;
+import models.NodeSet;
 
-import java.util.List;
+public abstract class RuleGenerator {
 
-public interface RuleGenerator {
+    protected NodeSet nodeSet;
 
-    void setNodes(List<Node> nodes);
-    String generate();
+    protected RuleGenerator(NodeSet nodeSet) {
+        this.nodeSet = nodeSet;
+    }
+
+    public abstract String generate();
 
 
 }
