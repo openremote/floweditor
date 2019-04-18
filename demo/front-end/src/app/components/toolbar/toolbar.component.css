@@ -17,6 +17,11 @@
   font-family: 'Roboto Mono', monospace;
 }
 
+.fas{
+  vertical-align: unset !important;
+  margin-right: 5px;
+}
+
 *[mat-button]:not([disabled]):hover {
   background: #b6b6b6;
 }
@@ -37,7 +42,6 @@
   font-weight: bold;
   color: rgba(0, 0, 0, 0.315);
 }
-
 
 .icon{
   margin-left: 10px;

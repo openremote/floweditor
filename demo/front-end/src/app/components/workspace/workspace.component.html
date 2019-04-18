@@ -4,13 +4,6 @@
 </div>
 
 <svg class="connection" *ngIf="project.isDragging">
-    <line 
-    [attr.x1]="project.getFromPosition().x" 
-    [attr.y1]="project.getFromPosition().y" 
-    
-    [attr.x2]="mousePos.x" 
-    [attr.y2]="mousePos.y" 
-    
-    stroke="black" stroke-width="3" />
-  </svg>
-  
+  <line [attr.x1]="project.getFromPosition().x" [attr.y1]="project.getFromPosition().y" [attr.x2]="mousePos.x"
+    [attr.y2]="mousePos.y" stroke="black" stroke-width="3" />
+</svg>

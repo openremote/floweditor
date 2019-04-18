@@ -44,14 +44,16 @@ public final class Translator
 
     }
 
-    public static String translate(String input)
+    public static String translate(String input) throws Exception
     {
         NodeSetReader setReader = new NodeSetReader(collection);
         NodeSet nodes = setReader.read(input);
 
         GroovyRuleGenerator generator = new GroovyRuleGenerator(nodes);
 
-        return generator.generate();
+        String result = generator.generate();
+
+        return result;
     }
 
     private static String readFile(String filePath)

@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.*;
 import logic.nodeTypeReader.NodeTypeCollection;
+import models.ServerResponse;
 import translation.Translator;
 
 import javax.ws.rs.GET;
@@ -44,7 +45,20 @@ public class NodeService
     public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
     {
         jsonNodeSet = new String(decoder.decode(jsonNodeSet));
-        return objectToResponse(encoder.encodeToString(Translator.translate(jsonNodeSet).getBytes()));
+
+        String result = "";
+        boolean success = false;
+
+        try
+        {
+            result = encoder.encodeToString(Translator.translate(jsonNodeSet).getBytes());
+            success = true;
+        } catch (Exception e)
+        {
+            result = e.getMessage();
+        }
+
+        return objectToResponse(new ServerResponse(success, result));
     }
 
     private Response objectToResponse(Object obj)
