@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class InputService {
 
   private keysDown: string[] = [];
+  private callbacks: ((key: string) => void)[] = [];
 
   constructor() {
     window.addEventListener('keydown', (e) => this.registerKeyDown(e), false);
@@ -15,6 +16,10 @@ export class InputService {
   private registerKeyDown(event: KeyboardEvent) {
     this.keysDown.push(event.key);
     console.log('down', event.key);
+
+    this.callbacks.forEach(callback => {
+      callback(event.key);
+    });
   }
 
   private registerKeyUp(event: KeyboardEvent) {
@@ -31,6 +36,14 @@ export class InputService {
     this.keysDown = newKeys;
 
     console.log('up', event.key);
+  }
+
+  public registerCallback(callback: (key: string) => void) {
+    this.callbacks.push(callback);
+  }
+
+  public deregisterCallback(callback: (key: string) => void) {
+    this.callbacks.splice(this.callbacks.indexOf(callback), 1);
   }
 
   public isKeyDown(key: string): boolean {

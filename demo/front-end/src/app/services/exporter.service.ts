@@ -14,9 +14,12 @@ export class ExporterService {
 
   constructor(private project: ProjectService, private snackBar: MatSnackBar, private rest: RestService) { }
 
-  public export(callback: any) {
+  public export(name: string, callback: any) {
 
     const nodeSet: NodeSet = new NodeSet();
+
+    nodeSet.name = name;
+
     this.project.nodes.forEach(n => {
       nodeSet.nodes.push(new ServerReadyNode(n));
     });

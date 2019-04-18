@@ -8,7 +8,9 @@ import { InputService } from './input.service';
 export class SelectionService {
   public selectedNodes: GraphNode[] = [];
 
-  constructor(private input: InputService) { }
+  constructor(private input: InputService) {
+
+   }
 
   public isNodeSelected(node: GraphNode): boolean {
     return this.selectedNodes.includes(node);
@@ -22,6 +24,10 @@ export class SelectionService {
   public deselectNode(node: GraphNode) {
     if (!this.input.isKeyDown('Shift')) { this.selectedNodes = []; return; }
     this.selectedNodes.splice(this.selectedNodes.indexOf(node), 1);
+  }
+
+  public deselectAll(){
+    this.selectedNodes = [];
   }
 
   public toggleSelect(node: GraphNode) {
