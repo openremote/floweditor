@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.*;
 import logic.nodeTypeReader.NodeTypeCollection;
 import models.ServerResponse;
+import models.exceptions.RuleLibraryException;
 import translation.Translator;
 
 import javax.ws.rs.GET;
@@ -56,6 +57,7 @@ public class NodeService
         } catch (Exception e)
         {
             result = e.getMessage();
+            e.printStackTrace();
         }
 
         return objectToResponse(new ServerResponse(success, result));

@@ -5,6 +5,7 @@ import { ResultDisplayDialogComponent } from '../result-display-dialog/result-di
 import { SettingsPanelComponent } from '../settings-panel/settings-panel.component';
 import { ExportSettingsDialogComponent } from '../export-settings-dialog/export-settings-dialog.component';
 import { SelectionService } from 'src/app/services/selection.service';
+import { HelpDialogComponent } from 'src/app/help-dialog/help-dialog.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,6 +23,10 @@ export class ToolbarComponent implements OnInit {
 
   private showSettings() {
     this.dialog.open(SettingsPanelComponent);
+  }
+  
+  private showHelp(){
+    this.dialog.open(HelpDialogComponent);
   }
 
   private exportNodeStructure() {
