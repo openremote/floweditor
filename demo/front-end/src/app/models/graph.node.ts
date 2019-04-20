@@ -9,4 +9,5 @@ export class GraphNode {
     public internals: GraphInternal[] = [];
     public name: string;
     public type: GraphNodeType;
+    public position: {x: number, y: number};
 }

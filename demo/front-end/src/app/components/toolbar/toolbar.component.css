@@ -34,6 +34,14 @@
   background: rgb(73, 192, 67);
 }
 
+*[mat-button].danger {
+  background: rgb(170, 66, 66);
+}
+
+*[mat-button].danger:hover {
+  background: rgb(192, 67, 67);
+}
+
 .logo {
   margin-top: auto;
   margin-bottom: auto;

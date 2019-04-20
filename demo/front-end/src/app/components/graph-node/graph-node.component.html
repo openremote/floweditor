@@ -1,4 +1,4 @@
-  <div class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
+  <div #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
     cdkDragBoundary=".workspace" style="z-index: 1" (mousedown)="selection.toggleSelect(node)">
     <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'">
       <div>{{node.name | graphNodeName}}</div>

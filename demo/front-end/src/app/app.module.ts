@@ -35,7 +35,7 @@ import { ResultDisplayDialogComponent } from './components/result-display-dialog
 import { SettingsPanelComponent } from './components/settings-panel/settings-panel.component';
 import { ExportSettingsDialogComponent } from './components/export-settings-dialog/export-settings-dialog.component';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
-import { HelpDialogComponent } from './help-dialog/help-dialog.component';
+import { HelpDialogComponent } from './components/help-dialog/help-dialog.component';
 
 @NgModule({
   declarations: [

@@ -5,7 +5,8 @@ import { ResultDisplayDialogComponent } from '../result-display-dialog/result-di
 import { SettingsPanelComponent } from '../settings-panel/settings-panel.component';
 import { ExportSettingsDialogComponent } from '../export-settings-dialog/export-settings-dialog.component';
 import { SelectionService } from 'src/app/services/selection.service';
-import { HelpDialogComponent } from 'src/app/help-dialog/help-dialog.component';
+import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,16 +17,21 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private project: ProjectService,
     private selection: SelectionService) { }
 
   ngOnInit() {
   }
 
+  private clear() {
+    this.project.nodes = [];
+  }
+
   private showSettings() {
     this.dialog.open(SettingsPanelComponent);
   }
-  
-  private showHelp(){
+
+  private showHelp() {
     this.dialog.open(HelpDialogComponent);
   }
 

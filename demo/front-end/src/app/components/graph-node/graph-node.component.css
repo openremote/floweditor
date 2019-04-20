@@ -16,6 +16,20 @@
   box-shadow: 0;
   filter: 0;
   user-select: none;
+  animation-name: circleEntrance;
+  animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+  animation-duration: 250ms;
+  transform-origin: 50% 50%;
+}
+
+@keyframes circleEntrance {
+  0% {
+    clip-path: circle(0px);
+  }
+
+  100% {
+    clip-path: circle(100%);
+  }
 }
 
 .node.selected {
