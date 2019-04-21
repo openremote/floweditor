@@ -2,7 +2,7 @@ package models;
 
 public enum NodeType {
     Input,
-    Processing,
+    Processor,
     Output,
     Then
 }

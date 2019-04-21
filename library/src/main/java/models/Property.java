@@ -1,6 +1,8 @@
 package models;
 
 
+import models.exceptions.RuleLibraryException;
+
 public class Property  {
 
     private Property connectedProperty;
@@ -18,7 +20,7 @@ public class Property  {
     }
 
 
-    public Property getConnectedProperty() {
+    public Property getConnectedProperty() throws RuleLibraryException {
         return connectedProperty;
     }
 

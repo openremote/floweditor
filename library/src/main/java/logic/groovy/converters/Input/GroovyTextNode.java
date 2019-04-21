@@ -1,9 +1,11 @@
-package logic.groovy.converters;
+package logic.groovy.converters.Input;
 
 import logic.groovy.GroovyConverter;
+import logic.StandardNode;
 import models.Node;
 import models.exceptions.RuleLibraryException;
 
+@StandardNode
 public class GroovyTextNode implements GroovyConverter {
 
     @Override

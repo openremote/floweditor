@@ -1,13 +1,15 @@
-package logic.groovy.converters;
+package logic.groovy.converters.Input;
 
 import logic.groovy.GroovyConverter;
 import models.Node;
 import models.exceptions.RuleLibraryException;
 
-public class GroovyNumberNode implements GroovyConverter {
+public class GroovyValueNode implements GroovyConverter {
 
     @Override
     public String toCode(Node node) throws RuleLibraryException {
-        return node.getInternalVariable("number").getValue().toString();
+        return node.getInternalVariable("value").getValue().toString();
     }
 }
+
+
