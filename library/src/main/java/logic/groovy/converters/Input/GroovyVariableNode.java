@@ -1,4 +1,4 @@
-package logic.groovy.converters;
+package logic.groovy.converters.Input;
 
 import logic.groovy.GroovyConverter;
 import logic.StandardNode;

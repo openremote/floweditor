@@ -1,7 +1,6 @@
 package logic;
 
 import logic.groovy.NodeConverter;
-import logic.groovy.converters.GroovyComparatorNode;
 import logic.nodeTypeReader.NodeTypeCollection;
 import org.reflections.Reflections;
 
@@ -13,7 +12,7 @@ public class StandardNodeTypeCollection extends NodeTypeCollection {
 
     public StandardNodeTypeCollection() {
 
-        Reflections reflections = new Reflections(GroovyComparatorNode.class.getPackage().getName());
+        Reflections reflections = new Reflections("logic.groovy.converters");
         Set<Class<?>> standardConverters = reflections.getTypesAnnotatedWith(StandardNode.class);
 
         for (Class<?> converter : standardConverters) {

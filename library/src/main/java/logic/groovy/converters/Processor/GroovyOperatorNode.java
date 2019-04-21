@@ -1,4 +1,4 @@
-package logic.groovy.converters;
+package logic.groovy.converters.Processor;
 
 import logic.groovy.Groovify;
 import logic.groovy.GroovyConverter;
