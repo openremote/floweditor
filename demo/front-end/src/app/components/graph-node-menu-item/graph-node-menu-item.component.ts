@@ -28,10 +28,10 @@ export class GraphNodeMenuItemComponent implements OnInit {
     const workspace = document.getElementById('workspace');
     const box2 = workspace.getBoundingClientRect();
 
-    node.position = { x: box.left - box2.left, y: box.top - box2.top };
+    node.position = { x: box.left - box2.left + box.width / 2, y: box.top - box2.top + box.height / 2 };
     event.source._dragRef.reset();
 
-    if (box.left < box2.left || box.top < box2.top) return;
+    if (box.left < box2.left || box.top < box2.top) { return; }
 
     this.project.nodes.push(node);
   }

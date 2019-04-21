@@ -74,6 +74,8 @@ export class ProjectService {
 
     const existing = this.connections.filter((c) => c.to === socket);
 
+    // if (this.currentFrom.type !== socket.type) { return; }
+
     existing.forEach(connection => {
       this.connections.splice(this.connections.indexOf(connection), 1);
     });

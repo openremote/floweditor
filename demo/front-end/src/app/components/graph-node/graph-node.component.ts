@@ -24,7 +24,16 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.node.position != null) {
-      (this.view.nativeElement as HTMLElement).style.transform = `translate3d(${this.node.position.x}px, ${this.node.position.y}px, 0)`;
+      const elem = this.view.nativeElement as HTMLElement;
+      const box = elem.getBoundingClientRect();
+
+      let x = this.node.position.x - box.width / 2;
+      let y = this.node.position.y - box.height / 2;
+
+      x = Math.max(0, x);
+      y = Math.max(0, y);
+
+      elem.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     }
   }
 }

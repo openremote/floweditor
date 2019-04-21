@@ -1,5 +1,5 @@
 .workspace {
-  background: white;
+  background: url('/assets/workspace.png');
   overflow: auto;
 }
 

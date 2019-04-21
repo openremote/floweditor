@@ -19,7 +19,7 @@
   animation-name: circleEntrance;
   animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
   animation-duration: 250ms;
-  transform-origin: 50% 50%;
+  transform-origin: center;
 }
 
 @keyframes circleEntrance {
