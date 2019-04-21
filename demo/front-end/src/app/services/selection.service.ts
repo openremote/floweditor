@@ -6,11 +6,12 @@ import { InputService } from './input.service';
   providedIn: 'root'
 })
 export class SelectionService {
-  public selectedNodes: GraphNode[] = [];
 
   constructor(private input: InputService) {
 
-   }
+  }
+  public topDepthIndex = 0;
+  public selectedNodes: GraphNode[] = [];
 
   public isNodeSelected(node: GraphNode): boolean {
     return this.selectedNodes.includes(node);
@@ -26,7 +27,7 @@ export class SelectionService {
     this.selectedNodes.splice(this.selectedNodes.indexOf(node), 1);
   }
 
-  public deselectAll(){
+  public deselectAll() {
     this.selectedNodes = [];
   }
 

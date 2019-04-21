@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
+import { CdkDrag, CdkDragStart } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-graph-node',
@@ -22,6 +23,12 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
 
   }
 
+  private toTop() {
+    const elem = this.view.nativeElement as HTMLElement;
+    this.selection.topDepthIndex++;
+    elem.style.zIndex = this.selection.topDepthIndex.toString();
+  }
+
   ngAfterViewInit() {
     if (this.node.position != null) {
       const elem = this.view.nativeElement as HTMLElement;
@@ -35,5 +42,6 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
 
       elem.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     }
+    this.toTop();
   }
 }
