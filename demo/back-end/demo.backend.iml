@@ -40,7 +40,7 @@
     <orderEntry type="module-library">
       <library name="Maven: fontys.oi.openremote:rule-library:1.0-SNAPSHOT">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/main/resources/rule-library.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/main/resources/rule-library-1.0-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
