@@ -1,4 +1,4 @@
-package logic.groovy.converters.Output;
+package logic.groovy.converters.Processor;
 
 import logic.StandardNode;
 import logic.groovy.Groovify;

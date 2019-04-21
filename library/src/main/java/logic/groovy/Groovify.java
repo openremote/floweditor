@@ -10,8 +10,8 @@ public class Groovify {
 
     private static Class getComparerClass(Node node) {
         try {
-            String packageName = Groovify.class.getPackage().getName() + ".converters.";
-            String fullname = packageName + "Groovy" + node.getNodeName() +"Node";
+            String packageName = Groovify.class.getPackage().getName() + ".converters." + node.getNodeType().name();
+            String fullname = packageName + ".Groovy" + node.getNodeName() +"Node";
             return Class.forName(fullname);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
