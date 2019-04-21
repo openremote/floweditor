@@ -69,6 +69,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/rule-library-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+
     </dependencies>
 
 </project>

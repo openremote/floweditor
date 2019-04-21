@@ -1,11 +1,14 @@
 package logic.nodeTypeReader;
 
 
+import com.google.gson.Gson;
 import logic.groovy.NodeConverter;
 import models.Node;
+import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public class NodeTypeCollection {
@@ -59,6 +62,18 @@ public class NodeTypeCollection {
         }
         return null;
     }
+
+
+    public String[] getNodeSpecsAsJSON(){
+        Gson gson = new Gson();
+        String[] jsonData = new String[nodeData.size()];
+
+        for (int i = 0; i < nodeData.size(); i++) {
+            jsonData[i] = gson.toJson(nodeData.get(i).specs);
+        }
+        return jsonData;
+    }
+
     public void registerNodeConverter(String nodeName, Class<? extends NodeConverter> converter){
         NodeData node = getNodeData(nodeName);
         node.converters.add(converter);

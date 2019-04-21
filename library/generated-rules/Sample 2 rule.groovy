@@ -1,4 +1,4 @@
-//Rule created on 2019-04-18 09:57 using rule-library
+//Rule created on 2019-04-21 13:02 using rule-library
  
 package demo.rules
 
@@ -14,7 +14,7 @@ RulesBuilder rules = binding.rules
 Assets assets = binding.assets
 
 rules.add()
-.name("null")
+.name("Sample 2 rule")
 .when({
 	facts -> 
 	float v1;

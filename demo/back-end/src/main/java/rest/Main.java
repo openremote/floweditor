@@ -10,7 +10,6 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
-        Translator.initialise();
 
         ServletContextHandler context = new
                 ServletContextHandler(ServletContextHandler.SESSIONS);

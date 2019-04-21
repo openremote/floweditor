@@ -24,7 +24,7 @@ public class NodeService
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private Base64.Decoder decoder = Base64.getDecoder();
     private Base64.Encoder encoder = Base64.getEncoder();
-    private NodeTypeCollection collection;
+    private Translator translator;
 
     @GET
     @Path("getAll")
@@ -32,13 +32,10 @@ public class NodeService
     {
         ArrayList<String> readFiles = new ArrayList<>();
 
-        File nodeDir = new File(ClassLoader.getSystemResource("nodes").getPath());
+        //File nodeDir = new File(ClassLoader.getSystemResource("nodes").getPath());
+        String[] jsonNodeSpecs = Translator.getNodeTypeCollection().getNodeSpecsAsJSON();
 
-        for (File file : Objects.requireNonNull(nodeDir.listFiles()))
-        {
-            readFiles.add(new String(Files.readAllBytes(Paths.get(file.toURI()))));
-        }
-        return textToResponse("[" + String.join(",", readFiles) + "]");
+        return textToResponse("[" + String.join(",", jsonNodeSpecs) + "]");
     }
 
     @GET

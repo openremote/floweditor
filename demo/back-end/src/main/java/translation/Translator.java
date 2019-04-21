@@ -1,10 +1,9 @@
 package translation;
 
+import logic.StandardNodeTypeCollection;
 import logic.groovy.GroovyRuleGenerator;
-import logic.groovy.NodeConverter;
 import logic.nodeSetReader.NodeSetReader;
 import logic.nodeTypeReader.NodeTypeCollection;
-import models.Node;
 import models.NodeSet;
 
 import java.io.File;
@@ -14,39 +13,20 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 public final class Translator
 {
-    private static NodeTypeCollection collection = new NodeTypeCollection();
-
-    public static void initialise() throws ClassNotFoundException
-    {
-        String[] names = new String[]{
-                "Comparator",
-                "Log",
-                "Splitter",
-                "Variable",
-                "Operator",
-                "VariableSaver",
-                "Number",
-                "Text"
-        };
-        collection.registerNode(readFile("Then.json"));
-
-        for (String name : names)
-        {
-            Class<?> type = Class.forName("logic.groovy.converters.Groovy" + name + "Node");
-            collection.registerNode(readFile(name + ".json"));
-            collection.registerNodeConverter(name, (Class<? extends NodeConverter>) type);
-        }
-
+    public static NodeTypeCollection getNodeTypeCollection() {
+        return nodeTypeCollection;
     }
 
+    private static NodeTypeCollection nodeTypeCollection = new StandardNodeTypeCollection();
     public static String translate(String input) throws Exception
     {
-        NodeSetReader setReader = new NodeSetReader(collection);
+
+
+        NodeSetReader setReader = new NodeSetReader(nodeTypeCollection);
         NodeSet nodes = setReader.read(input);
 
         GroovyRuleGenerator generator = new GroovyRuleGenerator(nodes);
