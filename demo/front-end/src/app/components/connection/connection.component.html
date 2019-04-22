@@ -1,10 +1,13 @@
 <svg class="connection">
-  <line 
+  <!-- <line 
   [attr.x1]="x1()" 
   [attr.y1]="y1()" 
   
   [attr.x2]="x2()" 
   [attr.y2]="y2()" 
   
-  stroke="black" stroke-width="3" />
+  stroke="black" stroke-width="3" /> -->
+
+  <polyline [attr.points]="getPointListString()"
+            fill="none" stroke="black" stroke-width="3"  />
 </svg>
