@@ -1,0 +1,12 @@
+{
+    "name": "Only Then",
+    "nodes": [
+        {
+            "internals": [],
+            "type": "Then",
+            "id": 5
+        }
+    ],
+    "connections": [
+    ]
+}

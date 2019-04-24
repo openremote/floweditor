@@ -10,6 +10,7 @@ export class SettingsPanelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

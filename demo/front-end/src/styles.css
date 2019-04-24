@@ -35,7 +35,7 @@ mat-label {
 }
 
 .node-then {
-  background: rgb(110, 110, 110);
+  background: rgb(131, 131, 131);
 }
 
 /* width */
@@ -69,4 +69,8 @@ snippet-highlight .dark .code-toolbar .toolbar a, snippet-highlight .dark .code-
 snippet-highlight .dark .code-toolbar pre
 {
   border-top-color: #47AA42;
+}
+
+mat-dialog-container{
+  max-width: 50vw;
 }

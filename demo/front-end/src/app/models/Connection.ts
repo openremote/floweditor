@@ -1,4 +1,4 @@
-import { GraphSocket } from './graphsocket';
+import { GraphSocket } from './graph.socket';
 import { ElementRef } from '@angular/core';
 
 export class Connection {

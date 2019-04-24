@@ -2,6 +2,8 @@ package rest;
 
 import com.google.gson.*;
 import logic.nodeTypeReader.NodeTypeCollection;
+import models.ServerResponse;
+import models.exceptions.RuleLibraryException;
 import translation.Translator;
 
 import javax.ws.rs.GET;
@@ -13,13 +15,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Objects;
 
 @Path("nodes")
 public class NodeService
 {
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private NodeTypeCollection collection;
+    private Base64.Decoder decoder = Base64.getDecoder();
+    private Base64.Encoder encoder = Base64.getEncoder();
+    private Translator translator;
 
     @GET
     @Path("getAll")
@@ -27,20 +32,32 @@ public class NodeService
     {
         ArrayList<String> readFiles = new ArrayList<>();
 
-        File nodeDir = new File(ClassLoader.getSystemResource("nodes").getPath());
+        //File nodeDir = new File(ClassLoader.getSystemResource("nodes").getPath());
+        String[] jsonNodeSpecs = Translator.getNodeTypeCollection().getNodeSpecsAsJSON();
 
-        for (File file : Objects.requireNonNull(nodeDir.listFiles()))
-        {
-            readFiles.add(new String(Files.readAllBytes(Paths.get(file.toURI()))));
-        }
-        return textToResponse("[" + String.join(",", readFiles) + "]");
+        return textToResponse("[" + String.join(",", jsonNodeSpecs) + "]");
     }
 
     @GET
     @Path("translate")
     public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
     {
-        return objectToResponse(Translator.translate(jsonNodeSet));
+        jsonNodeSet = new String(decoder.decode(jsonNodeSet));
+
+        String result = "";
+        boolean success = false;
+
+        try
+        {
+            result = encoder.encodeToString(Translator.translate(jsonNodeSet).getBytes());
+            success = true;
+        } catch (Exception e)
+        {
+            result = e.getMessage();
+            e.printStackTrace();
+        }
+
+        return objectToResponse(new ServerResponse(success, result));
     }
 
     private Response objectToResponse(Object obj)

@@ -1,4 +1,4 @@
-import { PickerType } from './pickertype';
+import { PickerType } from './picker.type';
 
 export class Picker {
     public type: PickerType;

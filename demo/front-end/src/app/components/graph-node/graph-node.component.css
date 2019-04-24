@@ -11,9 +11,29 @@
   grid-template-areas:
     "title title title"
     "input internals output";
-  transition: box-shadow cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: cubic-bezier(0.645, 0.045, 0.355, 1) 200ms;
+  transition-property: box-shadow, filter;
+  box-shadow: 0;
+  filter: 0;
   user-select: none;
+  animation-name: circleEntrance;
+  animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+  animation-duration: 250ms;
+  transform-origin: center;
+}
+
+@keyframes circleEntrance {
+  0% {
+    clip-path: circle(0px);
+  }
+
+  100% {
+    clip-path: circle(100%);
+  }
+}
+
+.node.selected {
+  box-shadow: 0 0 0 3px #47AA42;
 }
 
 .node.node-then {
@@ -24,7 +44,7 @@
 }
 
 .nodeBackground {
-  background: rgb(110, 110, 110);
+  background: rgb(131, 131, 131);
   position: absolute;
   border-radius: inherit;
   left: 0;
@@ -37,7 +57,7 @@
 }
 
 .node.cdk-drag-dragging {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.2));
   z-index: 1;
 }
 
@@ -47,7 +67,6 @@
   justify-content: stretch;
 }
 
-
 .title {
   cursor: move;
   justify-content: space-between;
@@ -55,6 +74,10 @@
   grid-area: title;
   color: rgba(255, 255, 255, 0.5);
   line-height: 24px;
+}
+
+.title>div {
+  transform: translateY(-3px);
 }
 
 .node-input .title {

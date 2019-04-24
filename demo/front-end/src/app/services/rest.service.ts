@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GraphNode } from '../models/graphnode';
-import { NodeSet } from '../models/translating/nodeset';
+import { GraphNode } from '../models/graph.node';
+import { NodeSet } from '../models/translating/node.set';
 import { encode } from 'punycode';
 
 @Injectable({
@@ -18,6 +18,6 @@ export class RestService {
 
   public translate(nodeset: NodeSet) {
     console.log(JSON.stringify(nodeset));
-    return this.http.get(this.path + 'nodes/translate?nodes=' + encodeURI(JSON.stringify(nodeset)));
+    return this.http.get(this.path + 'nodes/translate?nodes=' + window.btoa(JSON.stringify(nodeset)));
   }
 }

@@ -1,12 +1,4 @@
-import logic.nodeTypeReader.NodeTypeCollection;
-import logic.groovy.converters.GroovyComparatorNode;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 public class NodeTests {
 
@@ -37,7 +29,7 @@ public class NodeTests {
 
      */
     }
-
+/*
     private String readFile(String filePath)
     {
         StringBuilder contentBuilder = new StringBuilder();
@@ -60,5 +52,5 @@ public class NodeTests {
         NodeTypeCollection nodeCollection = new NodeTypeCollection();
         nodeCollection.registerNode( readFile("comparer.json"));
         nodeCollection.registerNodeConverter("Comparer", GroovyComparatorNode.class);
-    }
+    }*/
 }

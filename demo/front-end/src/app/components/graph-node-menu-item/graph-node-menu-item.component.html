@@ -1,15 +1,9 @@
-<div class="node {{node.type | graphNodeTypeClass}}" (click)="addNodeToProject()">
-  <div class="title" style="grid-area: title">{{node.name | graphNodeName}}</div>
-
-  <div class="sockets" style="grid-area: input">
-    <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">
-      <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
-    </div>
-  </div>
-
-  <div class="sockets" style="grid-area: output">
-    <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
-      <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"></span>
-    </div>
+<div class="node {{node.type | graphNodeTypeClass}}" [ngStyle]="{'z-index': 10000}">
+  <div class="title">{{node.name | graphNodeName}}</div>
+  <div #dragElement class="node {{node.type | graphNodeTypeClass}}" cdkDrag (cdkDragEnded)="addNodeToProject($event)">
+    <div class="title">{{node.name | graphNodeName}}</div>
   </div>
 </div>
+
+
+<!-- (click)="addNodeToProject()" -->
