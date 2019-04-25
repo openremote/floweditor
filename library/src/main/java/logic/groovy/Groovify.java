@@ -39,12 +39,11 @@ public class Groovify {
         return converter.toCode(node);
     }
 
-    private static GroovyConverter constructConverter(Class comparerClass) {
+    private static GroovyConverter constructConverter(Class comparerClass) throws RuleLibraryException {
         try {
             return (GroovyConverter) comparerClass.getConstructors()[0].newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e1) {
-            e1.printStackTrace();
+        } catch (Exception e) {
+            throw new RuleLibraryException("Can't create instance of " + comparerClass.getSimpleName(),null);
         }
-        return null;
     }
 }

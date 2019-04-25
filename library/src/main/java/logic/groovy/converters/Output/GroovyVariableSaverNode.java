@@ -6,6 +6,7 @@ import logic.StandardNode;
 import models.Node;
 import models.exceptions.RuleLibraryException;
 
+
 @StandardNode
 public class GroovyVariableSaverNode implements GroovyConverter {
 

@@ -70,3 +70,7 @@ snippet-highlight .dark .code-toolbar pre
 {
   border-top-color: #47AA42;
 }
+
+mat-dialog-container{
+  max-width: 50vw;
+}

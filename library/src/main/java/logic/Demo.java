@@ -22,7 +22,8 @@ public class Demo {
             NodeSetReader setReader = new NodeSetReader(typeCollection);
             NodeSet nodeSet = setReader.read(FileReader.read("sample-node-sets/sample2.json"));
             GroovyRuleGenerator generator = new GroovyRuleGenerator(nodeSet);
-            writeToFile("generated-rules/"+ nodeSet.getName(), generator.generate());
+            String rule = generator.generate();
+           // writeToFile("generated-rules/"+ nodeSet.getName(),rule);
 
         } catch (RuleLibraryException e) {
             e.printStackTrace();
