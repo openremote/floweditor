@@ -1,27 +1,27 @@
 {
-    "name": "Attribute",
-    "type": "Input",
-    "internals": [
-        {
-            "name": "Asset name",
-            "type": "Text",
-            "picker": {
-                "type": "Text"
-            }
-        },
-        {
-            "name": "Attribute name",
-            "type": "Text",
-            "picker": {
-                "type": "Text"
-            }
-        }
-    ],
-    "inputs": [],
-    "outputs": [
-        {
-            "type": "Any",
-            "name": "value"
-        }
-    ]
+  "name": "Attribute",
+  "type": "Input",
+  "internals": [
+    {
+      "name": "Asset name",
+      "type": "Text",
+      "picker": {
+        "type": "Text"
+      }
+    },
+    {
+      "name": "Attribute name",
+      "type": "Text",
+      "picker": {
+        "type": "Text"
+      }
+    }
+  ],
+  "inputs": [],
+  "outputs": [
+    {
+      "type": "Any",
+      "name": "value"
+    }
+  ]
 }

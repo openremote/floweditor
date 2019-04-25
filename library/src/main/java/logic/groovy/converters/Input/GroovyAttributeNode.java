@@ -13,6 +13,6 @@ public class GroovyAttributeNode implements GroovyConverter {
         String assetName = node.getInternalVariable("Asset name").getValue().toString();
         String attributeName = node.getInternalVariable("Attribute name").getValue().toString();
 
-        return "facts.matchFirstAssetState().name(" + assetName + ").attributeName("+attributeName+").get().value.get()";
+        return "facts.matchFirstAssetState().name(\"" + assetName + "\").attributeName(\""+attributeName+"\").get().value.get()";
     }
 }

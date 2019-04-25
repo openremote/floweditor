@@ -10,7 +10,7 @@
         "options": [
           {
             "name": "more than",
-            "value": ">"
+            "value": "<"
           },
           {
             "name": "less than",

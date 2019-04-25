@@ -57,5 +57,6 @@
 
 *[cdkDrag]{
   position: fixed;
+  z-index: 10000;
   margin: 0;
 }

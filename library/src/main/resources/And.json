@@ -1,6 +1,6 @@
 {
   "name": "And",
-  "type" : "Processor",
+  "type": "Processor",
   "inputs": [
     {
       "type": "Boolean",

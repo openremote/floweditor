@@ -15,7 +15,7 @@ public class GroovyFormatter {
             }
             if (c == '}') {
                 for (int j = 0; j < 1; j++) {
-                    formatted.deleteCharAt(formatted.length()-1);
+                    //formatted.deleteCharAt(formatted.length()-1);
                 }
                 indend--;
             }

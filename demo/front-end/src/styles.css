@@ -1,5 +1,9 @@
 @import "assets/dark.css";
 
+*{
+  backface-visibility: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
