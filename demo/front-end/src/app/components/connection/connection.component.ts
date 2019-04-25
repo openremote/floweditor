@@ -16,11 +16,13 @@ export class ConnectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    const time = timer(0, 16);
-    time.subscribe(
+    const time = timer(0, 16).subscribe(
       (n) => {
         this.curviness = Math.pow(Math.min(1, n * .05), 0.4);
+
+        if (n * .05 > 1) {
+          time.unsubscribe();
+        }
       }
     );
   }
