@@ -2,6 +2,11 @@
 
 *{
   backface-visibility: hidden;
+  user-select: none;
+}
+
+input{
+  user-select: text;
 }
 
 body {

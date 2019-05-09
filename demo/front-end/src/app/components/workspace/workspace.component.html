@@ -1,4 +1,4 @@
-<div class="fill workspace" (mousemove)="updateMousePos($event)" (mouseup)="project.cancelDrag()" id="workspace">
+<div class="fill workspace" (mousemove)="updateMousePos($event)" (mouseup)="project.cancelDrag();" (mousedown)="select.startSelection(); select.deselectAll();" id="workspace">
   <app-graph-node *ngFor="let n of project.nodes" [node]="n"></app-graph-node>
   <app-connection *ngFor="let c of project.connections" [connection]="c"></app-connection>
 </div>
@@ -7,3 +7,7 @@
   <line [attr.x1]="project.getFromPosition().x" [attr.y1]="project.getFromPosition().y" [attr.x2]="mousePos.x"
     [attr.y2]="mousePos.y" stroke="black" stroke-width="3" />
 </svg>
+
+<div class="selectionBox" [ngStyle]="{'transition-duration': select.isDragging?'0ms':'', 'filter': select.isDragging?'opacity(100%)':'opacity(0%)','left': select.selectionBox.x + 'px', 'top': select.selectionBox.y + 'px', 'width': select.selectionBox.width + 'px', 'height': select.selectionBox.height + 'px'}">
+
+</div>

@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { GraphNode } from 'src/app/models/graph.node';
-import { RestService } from 'src/app/services/rest.service';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
+import { SelectionService } from 'src/app/services/selection.service';
 
 @Component({
   selector: 'app-workspace',
@@ -12,7 +11,7 @@ export class WorkspaceComponent implements OnInit {
 
   private mousePos: { x: number, y: number } = { x: 0, y: 0 };
 
-  constructor(public project: ProjectService) {
+  constructor(public project: ProjectService, private select: SelectionService) {
 
   }
 

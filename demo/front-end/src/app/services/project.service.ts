@@ -18,6 +18,7 @@ export class ProjectService {
 
   constructor(private input: InputService, private selection: SelectionService) {
     input.registerCallback((s) => this.keyDown(s));
+    selection.nodes = this.nodes;
   }
 
   private keyDown(key: string) {

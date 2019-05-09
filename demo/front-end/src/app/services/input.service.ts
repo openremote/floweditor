@@ -4,13 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class InputService {
-
   private keysDown: string[] = [];
   private callbacks: ((key: string) => void)[] = [];
+
+  public mousePos: { x: number, y: number };
 
   constructor() {
     window.addEventListener('keydown', (e) => this.registerKeyDown(e), false);
     window.addEventListener('keyup', (e) => this.registerKeyUp(e), false);
+    window.addEventListener('mousemove', (e) => this.updateMousePos(e), false);
   }
 
   private registerKeyDown(event: KeyboardEvent) {
@@ -36,6 +38,10 @@ export class InputService {
     this.keysDown = newKeys;
 
     console.log('up', event.key);
+  }
+
+  updateMousePos(e: MouseEvent): any {
+    this.mousePos = { x: e.clientX, y: e.clientY };
   }
 
   public registerCallback(callback: (key: string) => void) {
