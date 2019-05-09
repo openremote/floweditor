@@ -37,7 +37,8 @@ export class SelectionService {
   }
 
   public deselectAll() {
-    this.selectedNodes = [];
+    if (!this.input.isKeyDown('Shift'))
+      this.selectedNodes = [];
   }
 
   public toggleSelect(node: GraphNode) {
@@ -91,11 +92,11 @@ export class SelectionService {
 
     this.deselectAll();
 
-    console.log(this.nodes);
+    // console.log(this.nodes);
 
     // let offset = document.getElementById('workspace').getBoundingClientRect();
     // console.log(offset);
-    console.log(this.selectionBox);
+    // console.log(this.selectionBox);
 
     this.nodes.forEach(node => {
       if (this.isInsideBox(node.position.x, node.position.y, this.selectionBox)) {

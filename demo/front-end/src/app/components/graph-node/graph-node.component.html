@@ -1,6 +1,6 @@
-  <div #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
+  <div (cdkDragMoved)="updatePosition()" #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
     cdkDragBoundary=".workspace" style="z-index: 1" (mousedown)="toTop(); $event.stopPropagation();">
-    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'" (mousedown)="selection.toggleSelect(node)">
+    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'" (mousedown)="selection.toggleSelect(node)" >
       <div>{{node.name | graphNodeName}}</div>
     </div>
 

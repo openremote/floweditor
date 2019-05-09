@@ -22,7 +22,6 @@ export class ProjectService {
   }
 
   private keyDown(key: string) {
-    console.log(this.selection.selectedNodes);
     if (key === 'Delete' || key === 'Backspace') {
       this.selection.selectedNodes.forEach((n) => {
         this.removeNode(n);

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
-import { CdkDrag, CdkDragStart } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-graph-node',
@@ -41,7 +41,23 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
       y = Math.max(0, y);
 
       elem.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+      this.updatePosition();
     }
     this.toTop();
+  }
+
+  updatePosition() {
+    const elem = this.view.nativeElement as HTMLElement;
+    const box = elem.getBoundingClientRect();
+
+    let x = box.left + box.width / 2;
+    let y = box.top + box.height / 2;
+
+    // console.log(x);
+    // console.log(y);
+
+    this.node.position.x = Math.max(0, x);
+    this.node.position.y = Math.max(0, y);
   }
 }

@@ -17,7 +17,6 @@ export class InputService {
 
   private registerKeyDown(event: KeyboardEvent) {
     this.keysDown.push(event.key);
-    console.log('down', event.key);
 
     this.callbacks.forEach(callback => {
       callback(event.key);
@@ -36,8 +35,6 @@ export class InputService {
     });
 
     this.keysDown = newKeys;
-
-    console.log('up', event.key);
   }
 
   updateMousePos(e: MouseEvent): any {
