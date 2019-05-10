@@ -11,10 +11,10 @@ import { ContextMenuService } from 'src/app/services/context-menu.service';
 export class WorkspaceComponent implements OnInit, AfterViewInit {
 
   private mousePos: { x: number, y: number } = { x: 0, y: 0 };
-  private hasFocus = false;
+  private hasFocus = true;
 
-  constructor(private project: ProjectService, private select: SelectionService) {
-    window.oncontextmenu = (e) => { this.hasFocus = false; };
+  constructor(private project: ProjectService, private select: SelectionService, private context: ContextMenuService) {
+    window.oncontextmenu = (e) => { this.hasFocus = e.defaultPrevented; };
   }
 
   ngOnInit() {
@@ -36,5 +36,6 @@ export class WorkspaceComponent implements OnInit, AfterViewInit {
     }
     this.select.startSelection();
     this.select.deselectAll();
+    this.context.open = false;
   }
 }

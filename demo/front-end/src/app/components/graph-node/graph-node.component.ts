@@ -75,8 +75,9 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
     this.selection.toggleSelect(this.node);
   }
 
-  contextMenu() {
-    this.context.open = true;
+  contextMenu(event: MouseEvent) {
+    event.preventDefault();
+    this.selection.selectNode(this.node, true);
     this.context.contextMenu = new ContextMenu();
     this.context.contextMenu.items.push(
       {
@@ -84,6 +85,24 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
         action: () => { this.project.removeSelectedNodes(); }
       }
     );
-    console.log('menu');
+    this.context.contextMenu.items.push(
+      {
+        label: 'Delete',
+        action: () => { this.project.removeSelectedNodes(); }
+      }
+    );
+    this.context.contextMenu.items.push(
+      {
+        label: 'Delete',
+        action: () => { this.project.removeSelectedNodes(); }
+      }
+    );
+    this.context.contextMenu.items.push(
+      {
+        label: 'Delete',
+        action: () => { this.project.removeSelectedNodes(); }
+      }
+    );
+    this.context.openMenu();
   }
 }

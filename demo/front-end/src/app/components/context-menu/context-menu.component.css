@@ -9,11 +9,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  border: solid 1px rgba(255, 255, 255, 0.11);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.context-menu-item{
-    min-width: 100%;
-    min-height: 32px;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.11);
-    line-height: 32px;
+.context-menu-item {
+  overflow: hidden;
+  padding-left: 15px;
+  min-width: 100%;
+  min-height: 32px;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.11);
+  line-height: 32px;
 }
