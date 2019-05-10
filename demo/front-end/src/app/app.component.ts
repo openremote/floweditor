@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { InputService } from './services/input.service';
+import { ContextMenuService } from './services/context-menu.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { InputService } from './services/input.service';
 export class AppComponent {
   title = 'front-end';
 
-  constructor() {
+  constructor(private context: ContextMenuService) {
 
   }
 }

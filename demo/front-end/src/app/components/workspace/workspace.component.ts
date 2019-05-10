@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
+import { ContextMenuService } from 'src/app/services/context-menu.service';
 
 @Component({
   selector: 'app-workspace',
@@ -12,7 +13,7 @@ export class WorkspaceComponent implements OnInit, AfterViewInit {
   private mousePos: { x: number, y: number } = { x: 0, y: 0 };
   private hasFocus = false;
 
-  constructor(public project: ProjectService, private select: SelectionService) {
+  constructor(private project: ProjectService, private select: SelectionService) {
     window.oncontextmenu = (e) => { this.hasFocus = false; };
   }
 
@@ -29,7 +30,7 @@ export class WorkspaceComponent implements OnInit, AfterViewInit {
 
   mouseDown(e: MouseEvent) {
     if (e.button !== 0) { return; }
-    if (!this.hasFocus){
+    if (!this.hasFocus) {
       this.hasFocus = true;
       return;
     }

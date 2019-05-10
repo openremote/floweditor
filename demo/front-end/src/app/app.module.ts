@@ -7,11 +7,13 @@ import {
   MatSelectModule,
   MatSliderModule,
   MatInputModule,
+  MatListModule,
   MatButtonModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatDialogModule,
   MatExpansionModule,
+  MatRippleModule,
   MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material/';
 
@@ -36,6 +38,7 @@ import { SettingsPanelComponent } from './components/settings-panel/settings-pan
 import { ExportSettingsDialogComponent } from './components/export-settings-dialog/export-settings-dialog.component';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { HelpDialogComponent } from './components/help-dialog/help-dialog.component';
+import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { HelpDialogComponent } from './components/help-dialog/help-dialog.compon
     SettingsPanelComponent,
     ExportSettingsDialogComponent,
     ErrorDialogComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,8 @@ import { HelpDialogComponent } from './components/help-dialog/help-dialog.compon
     MatSliderModule,
     MatInputModule,
     FormsModule,
+    MatListModule,
+    MatRippleModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
