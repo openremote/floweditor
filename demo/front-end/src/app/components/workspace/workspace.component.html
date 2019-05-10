@@ -1,4 +1,4 @@
-<div class="fill workspace" (mousemove)="updateMousePos($event)" (mouseup)="project.cancelDrag();" (mousedown)="select.startSelection(); select.deselectAll();" id="workspace">
+<div class="fill workspace" (mousemove)="updateMousePos($event)" (mouseup)="project.cancelDrag();" (mousedown)="mouseDown($event)" id="workspace">
   <app-graph-node *ngFor="let n of project.nodes" [node]="n"></app-graph-node>
   <app-connection *ngFor="let c of project.connections" [connection]="c"></app-connection>
 </div>

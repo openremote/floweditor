@@ -10,7 +10,7 @@ export class SelectionService {
 
   constructor(private input: InputService) {
     window.addEventListener('mousemove', (e) => this.updateSelection(), false);
-    window.addEventListener('mouseup', (e) => this.stopSelection(), false);
+    window.addEventListener('mouseup', (e) => this.stopSelection(e), false);
   }
 
   public topDepthIndex = 0;
@@ -37,8 +37,9 @@ export class SelectionService {
   }
 
   public deselectAll() {
-    if (!this.input.isKeyDown('Shift'))
+    if (!this.input.isKeyDown('Shift')) {
       this.selectedNodes = [];
+    }
   }
 
   public toggleSelect(node: GraphNode) {
@@ -86,7 +87,8 @@ export class SelectionService {
     return (x > box.x) && (x < box.x + box.width) && (y > box.y) && (y < box.y + box.height);
   }
 
-  public stopSelection() {
+  public stopSelection(e: MouseEvent) {
+    if (e.button !== 0) { return; }
     if (!this.isDragging) { return; }
     this.isDragging = false;
 
