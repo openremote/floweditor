@@ -14,6 +14,8 @@ export class PickerComponent implements OnInit {
   @Input() internal: GraphInternal;
   PickerType = PickerType;
 
+  private doubleDropDownChoice: any;
+
   constructor() {
 
   }
@@ -22,6 +24,15 @@ export class PickerComponent implements OnInit {
     if (this.internal.picker.type === PickerType.Dropdown) {
       this.internal.value = this.internal.picker.options[0].value;
     }
+
+    if (this.internal.picker.type === PickerType.DoubleDropdown) {
+      this.doubleDropDownChoice = this.internal.picker.options[0];
+      this.resetDoubleDropDownValue();
+    }
   }
 
+  private resetDoubleDropDownValue() {
+    console.log("tehee");
+    this.internal.value = this.doubleDropDownChoice.options[0].name;
+  }
 }
