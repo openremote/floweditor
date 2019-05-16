@@ -21,6 +21,9 @@ export class GraphNodeMenuItemComponent implements OnInit {
   }
 
   addNodeToProject(event: CdkDragEnd) {
+
+    console.log(this.node);
+
     const elem = (this.dragElement.nativeElement as HTMLElement);
     const node = CopyMachine.copy(this.node);
     const box = elem.getBoundingClientRect();

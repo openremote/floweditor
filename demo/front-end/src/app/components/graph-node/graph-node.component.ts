@@ -6,6 +6,7 @@ import { CdkDrag, CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
+import { CopyMachine } from 'src/app/logic/copy.machine';
 
 @Component({
   selector: 'app-graph-node',
@@ -17,6 +18,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
   @ViewChild('inputSockets') inputSockets: ElementRef;
   @ViewChild('outputSockets') outputSockets: ElementRef;
   @ViewChild('view') view: ElementRef;
+
 
   constructor(
     private project: ProjectService,
@@ -77,7 +79,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
 
   contextMenu(event: MouseEvent) {
     event.preventDefault();
-    this.selection.selectNode(this.node, true);
+    this.selection.selectNode(this.node, this.selection.selectedNodes.length > 1);
     this.context.contextMenu = new ContextMenu();
     this.context.contextMenu.items.push(
       {
@@ -87,20 +89,15 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
     );
     this.context.contextMenu.items.push(
       {
-        label: 'Delete',
-        action: () => { this.project.removeSelectedNodes(); }
-      }
-    );
-    this.context.contextMenu.items.push(
-      {
-        label: 'Delete',
-        action: () => { this.project.removeSelectedNodes(); }
-      }
-    );
-    this.context.contextMenu.items.push(
-      {
-        label: 'Delete',
-        action: () => { this.project.removeSelectedNodes(); }
+        label: 'Duplicate',
+        action: () => {
+          this.selection.selectedNodes.forEach((e) => {
+            const copy = CopyMachine.copy(e);
+            copy.position.x = e.position.x;
+            copy.position.y = e.position.y;
+            this.project.nodes.push(copy);
+          });
+        }
       }
     );
     this.context.openMenu();

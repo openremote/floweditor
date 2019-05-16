@@ -1,5 +1,5 @@
 <div class="context-menu mat-elevation-z5 mat-app-background" *ngIf="open" [ngStyle]="{'left': context.position.x + 'px', 'top': context.position.y + 'px'}">
-  <div *ngFor="let item of contextMenu.items" matRipple class="context-menu-item mat-option" (click)="item.action(); context.open = false;">
+  <div *ngFor="let item of contextMenu.items" matRipple class="context-menu-item" (click)="item.action(); context.open = false;">
     {{item.label}}
   </div>
 </div>
