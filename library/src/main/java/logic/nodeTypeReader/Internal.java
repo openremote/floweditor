@@ -1,7 +1,7 @@
 package logic.nodeTypeReader;
 
- class Internal {
-    String name;
-    String type;
-    Picker picker;
+public class Internal {
+    public String type;
+    public Picker picker;
+    public String name;
 }

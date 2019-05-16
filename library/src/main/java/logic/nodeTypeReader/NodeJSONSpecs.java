@@ -4,10 +4,10 @@ package logic.nodeTypeReader;
 import models.NodeType;
 
 public class NodeJSONSpecs {
-    String name;
-    NodeType type;
-    Property[] inputs;
-    Property[] outputs;
-    Internal[] internals;
+    public String name;
+    public NodeType type;
+    public NodeSpecProperty[] inputs;
+    public NodeSpecProperty[] outputs;
+    public Internal[] internals;
 
 }

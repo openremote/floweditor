@@ -1,0 +1,30 @@
+{
+    "name": "Variable",
+    "type": "Input",
+    "internals": [
+        {
+            "name": "name",
+            "type": "Text",
+            "picker": {
+                "type": "DoubleDropDown",
+                "options": [
+                    {
+                        "name":"AssetName",
+                        "values": [
+                            {
+                                "name":"attributeName"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "inputs": [],
+    "outputs": [
+        {
+            "type": "Any",
+            "name": "output"
+        }
+    ]
+}

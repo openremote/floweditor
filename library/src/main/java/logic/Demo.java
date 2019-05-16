@@ -1,5 +1,6 @@
 package logic;
 
+import logic.apiConnection.AssetModelRetriever;
 import logic.groovy.GroovyRuleGenerator;
 import logic.nodeSetReader.NodeSetReader;
 import models.NodeSet;
@@ -15,7 +16,8 @@ public class Demo {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-
+        AssetModelRetriever assetModelRetriever = new AssetModelRetriever();
+        assetModelRetriever.getModels();
         StandardNodeTypeCollection typeCollection = new StandardNodeTypeCollection();
 
         try {
