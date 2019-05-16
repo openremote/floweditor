@@ -1,4 +1,4 @@
-<div [ngSwitch]="internal.picker.type" class="picker">
+<div #view [ngSwitch]="internal.picker.type" class="picker">
 
   <mat-form-field *ngSwitchCase="PickerType.Multiline">
     <textarea matInput placeholder="{{(internal.name | graphNodeName).toLowerCase()}}"
