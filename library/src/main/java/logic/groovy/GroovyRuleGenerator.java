@@ -60,7 +60,7 @@ public class GroovyRuleGenerator extends RuleGenerator {
         }
 
 
-        builder.append(Groovify.toGroovy(thenNode.getInputProperty("input").getConnectedProperty().getNode()));
+        builder.append(Groovify.toGroovy(thenNode.getInputProperty("input").getConnectedProperty()));
         builder.append("\n})\n" +
                 ".then(\n" +
                 "{\n" +
@@ -70,7 +70,7 @@ public class GroovyRuleGenerator extends RuleGenerator {
             builder.append  (Groovify.pre(node));
         }
 
-        builder.append(Groovify.toGroovy(thenNode.getOutputProperty("output").getConnectedProperty().getNode()));
+        builder.append(Groovify.toGroovy(thenNode.getOutputProperty("output").getConnectedProperty()));
         builder.append("})");
 
         GroovyFormatter groovyFormatter = new GroovyFormatter();

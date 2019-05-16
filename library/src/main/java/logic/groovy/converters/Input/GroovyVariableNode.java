@@ -3,6 +3,7 @@ package logic.groovy.converters.Input;
 import logic.groovy.GroovyConverter;
 import logic.StandardNode;
 import models.Node;
+import models.Property;
 import models.exceptions.RuleLibraryException;
 
 @StandardNode
@@ -11,8 +12,8 @@ public class GroovyVariableNode implements GroovyConverter {
     @Override
     public String pre(Node node) throws RuleLibraryException {
 
-        Object name = node.getInternalVariable("name").getValue();
-        Object defaultValue = node.getInternalVariable("defaultValue").getValue();
+        Object name = node.getInternalValue("name");
+        Object defaultValue = node.getInternalValue("defaultValue");
         return  "float " +name+ ";\n" +
                 "if(!facts.matchFirst(\"" +name+ "\").isPresent()){\n" +
                 "facts.put(\"" +name+ "\",(float)" +defaultValue.toString()+ ")\n" +
@@ -21,9 +22,12 @@ public class GroovyVariableNode implements GroovyConverter {
                 name+ " = Float.parseFloat(facts.matchFirst(\"" +name+ "\").get().toString())\n" +
                 "}\n";    }
 
+
     @Override
-    public String toCode(Node node) throws RuleLibraryException {
-        String obj = node.getInternalVariable("name").getValue().toString();
+    public String toCode(Property property) throws RuleLibraryException {
+
+        Node node = property.getNode();
+        String obj = node.getInternalValue("name").toString();
         return  obj;
     }
 }

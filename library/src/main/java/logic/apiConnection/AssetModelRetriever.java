@@ -29,9 +29,60 @@ class DoubleDropdownOptions {
 }
 
 public class AssetModelRetriever {
-    public string ge() {
+    public String generate() {
 
-
+        return "{\n" +
+                "    \"name\": \"AttributeNode\",\n" +
+                "    \"type\": \"Input\",\n" +
+                "    \"outputs\": [\n" +
+                "        {\n" +
+                "            \"name\": \"value\",\n" +
+                "            \"type\": \"Any\"\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"internals\": [\n" +
+                "        {\n" +
+                "            \"picker\": {\n" +
+                "                \"type\": \"DoubleDropdown\",\n" +
+                "                \"options\": [\n" +
+                "                    {\n" +
+                "                        \"name\": \"BUILDING\",\n" +
+                "                        \"options\": [\n" +
+                "                            {\n" +
+                "                                \"name\": \"surfaceArea\"\n" +
+                "                            },\n" +
+                "                            {\n" +
+                "                                \"name\": \"street\"\n" +
+                "                            },\n" +
+                "                            {\n" +
+                "                                \"name\": \"city\"\n" +
+                "                            },\n" +
+                "                            {\n" +
+                "                                \"name\": \"country\"\n" +
+                "                            },\n" +
+                "                            {\n" +
+                "                                \"name\": \"postalCode\"\n" +
+                "                            }\n" +
+                "                        ]\n" +
+                "                    },\n" +
+                "                    {\n" +
+                "                        \"name\": \"ROOM\",\n" +
+                "                        \"options\": [\n" +
+                "                            {\n" +
+                "                                \"name\": \"temperature\"\n" +
+                "                            },\n" +
+                "                            {\n" +
+                "                                \"name\":\"floor\"\n" +
+                "                            }\n" +
+                "                        ]\n" +
+                "                    }\n" +
+                "                ]\n" +
+                "            },\n" +
+                "            \"name\": \"Attribute\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+/*
         try {
             Asset[] assets;
             if (true) {
@@ -90,7 +141,7 @@ public class AssetModelRetriever {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+*/
     }
 
 }

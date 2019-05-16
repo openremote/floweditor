@@ -1,6 +1,7 @@
 package logic.groovy;
 
 import models.Node;
+import models.Property;
 import models.exceptions.RuleLibraryException;
 
 public interface NodeConverter {
@@ -9,5 +10,5 @@ public interface NodeConverter {
         return null;
     }
 
-    String toCode(Node node) throws RuleLibraryException;
+    String toCode(Property property) throws RuleLibraryException;
 }
