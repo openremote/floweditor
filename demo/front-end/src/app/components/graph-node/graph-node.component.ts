@@ -91,12 +91,20 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
       {
         label: 'Duplicate',
         action: () => {
+
+          let copies: GraphNode[] = [];
+
           this.selection.selectedNodes.forEach((e) => {
             const copy = CopyMachine.copy(e);
             copy.position.x = e.position.x;
             copy.position.y = e.position.y;
-            this.project.nodes.push(copy);
+            copies.push(copy);
           });
+
+          copies.forEach((c) => {
+            this.project.nodes.push(c);
+          });
+
         }
       }
     );

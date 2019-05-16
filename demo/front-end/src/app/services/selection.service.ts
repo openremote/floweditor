@@ -27,11 +27,13 @@ export class SelectionService {
   }
 
   public selectNode(node: GraphNode, multiple: boolean = false) {
+    if (this.selectedNodes.includes(node)) { return; }
     if (!this.input.isKeyDown('Shift') && !multiple) { this.selectedNodes = []; }
     this.selectedNodes.push(node);
   }
 
   public deselectNode(node: GraphNode) {
+    if (!this.selectedNodes.includes(node)) { return; }
     if (!this.input.isKeyDown('Shift')) { this.selectedNodes = []; return; }
     this.selectedNodes.splice(this.selectedNodes.indexOf(node), 1);
   }
@@ -97,7 +99,7 @@ export class SelectionService {
     // console.log(this.nodes);
 
     // let offset = document.getElementById('workspace').getBoundingClientRect();
-   console.log(this.nodes);
+    console.log(this.nodes);
     // console.log(this.selectionBox);
 
     this.nodes.forEach(node => {

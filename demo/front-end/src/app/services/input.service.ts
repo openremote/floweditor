@@ -14,10 +14,12 @@ export class InputService {
     window.addEventListener('keyup', (e) => this.registerKeyUp(e), false);
     window.addEventListener('mousemove', (e) => this.updateMousePos(e), false);
 
-    window.addEventListener('contextmenu', () => this.contextMenuOpened(), false);
+    window.addEventListener('contextmenu', () => this.deregisterEverything(), false);
+    window.onfocus = () => this.deregisterEverything();
+    window.onblur =  () => this.deregisterEverything();
   }
 
-  private contextMenuOpened() {
+  private deregisterEverything() {
     this.keysDown = [];
   }
 
