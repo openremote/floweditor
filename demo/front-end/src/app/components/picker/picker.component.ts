@@ -16,9 +16,7 @@ export class PickerComponent implements OnInit {
 
   private doubleDropDownChoice: any;
 
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit() {
     if (this.internal.picker.type === PickerType.Dropdown && this.internal.value == null) {
