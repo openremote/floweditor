@@ -3,5 +3,6 @@ export enum PickerType {
     Multiline = 'Multiline',
     Number = 'Number',
     Dropdown = 'Dropdown',
+    DoubleDropdown = 'DoubleDropdown',
     Color = 'Color'
 }
