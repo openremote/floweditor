@@ -21,18 +21,17 @@ export class PickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.internal.picker.type === PickerType.Dropdown) {
+    if (this.internal.picker.type === PickerType.Dropdown && this.internal.value == null) {
       this.internal.value = this.internal.picker.options[0].value;
     }
 
-    if (this.internal.picker.type === PickerType.DoubleDropdown) {
+    if (this.internal.picker.type === PickerType.DoubleDropdown && this.internal.value == null) {
       this.doubleDropDownChoice = this.internal.picker.options[0];
       this.resetDoubleDropDownValue();
     }
   }
 
   private resetDoubleDropDownValue() {
-    console.log("tehee");
     this.internal.value = this.doubleDropDownChoice.options[0].name;
   }
 }
