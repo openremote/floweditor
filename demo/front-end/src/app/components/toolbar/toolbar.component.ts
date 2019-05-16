@@ -25,6 +25,9 @@ export class ToolbarComponent implements OnInit {
 
   private clear() {
     this.project.nodes = [];
+    this.project.connections = [];
+    this.selection.nodes = this.project.nodes;
+    this.selection.selectedNodes = [];
   }
 
   private showSettings() {

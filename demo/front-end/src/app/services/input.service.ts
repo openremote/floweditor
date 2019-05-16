@@ -13,6 +13,12 @@ export class InputService {
     window.addEventListener('keydown', (e) => this.registerKeyDown(e), false);
     window.addEventListener('keyup', (e) => this.registerKeyUp(e), false);
     window.addEventListener('mousemove', (e) => this.updateMousePos(e), false);
+
+    window.addEventListener('contextmenu', () => this.contextMenuOpened(), false);
+  }
+
+  private contextMenuOpened() {
+    this.keysDown = [];
   }
 
   private registerKeyDown(event: KeyboardEvent) {

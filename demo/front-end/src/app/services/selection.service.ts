@@ -97,7 +97,7 @@ export class SelectionService {
     // console.log(this.nodes);
 
     // let offset = document.getElementById('workspace').getBoundingClientRect();
-    // console.log(offset);
+   console.log(this.nodes);
     // console.log(this.selectionBox);
 
     this.nodes.forEach(node => {

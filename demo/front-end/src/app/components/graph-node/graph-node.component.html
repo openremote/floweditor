@@ -1,6 +1,6 @@
-  <div (cdkDragMoved)="updatePosition()" #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
-    cdkDragBoundary=".workspace" style="z-index: 1" (mousedown)="toTop(); $event.stopPropagation();">
-    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'" (mousedown)="selection.toggleSelect(node)" >
+  <div (contextmenu)="contextMenu($event)" (cdkDragMoved)="updatePosition()" #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
+    cdkDragBoundary=".workspace" style="z-index: 1" (mousedown)="mousedown($event)">
+    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'"  >
       <div>{{node.name | graphNodeName}}</div>
     </div>
 
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div *ngIf="node.type === 'Then'" class="title" cdkDragHandle (mousedown)="selection.toggleSelect(node)">{{node.name.toUpperCase()}}</div>
+    <div *ngIf="node.type === 'Then'" class="title" cdkDragHandle>{{node.name.toUpperCase()}}</div>
 
     <div style="grid-area: internals" class="internals" *ngIf="node.type !== 'Then'">
       <app-picker *ngFor="let internal of node.internals" [internal]="internal" (mousedown)="selection.deselectNode(node)"></app-picker>

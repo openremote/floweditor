@@ -23,10 +23,14 @@ export class ProjectService {
 
   private keyDown(key: string) {
     if (key === 'Delete' || key === 'Backspace') {
-      this.selection.selectedNodes.forEach((n) => {
-        this.removeNode(n);
-      });
+      this.removeSelectedNodes();
     }
+  }
+
+  public removeSelectedNodes() {
+    this.selection.selectedNodes.forEach((n) => {
+      this.removeNode(n);
+    });
   }
 
   public removeNode(node: GraphNode) {
