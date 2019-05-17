@@ -1,6 +1,6 @@
 package logic;
 
-import logic.apiConnection.AssetModelRetriever;
+import logic.apiConnection.AttributeAssetGenerator;
 import logic.groovy.NodeConverter;
 import logic.groovy.converters.GroovyThenNode;
 import logic.nodeTypeReader.NodeTypeCollection;
@@ -30,7 +30,7 @@ public class StandardNodeTypeCollection extends NodeTypeCollection {
             registerNodeConverter(nodeName, (Class<? extends NodeConverter>) converter);
         }
 
-        AssetModelRetriever assetModelRetriever = new AssetModelRetriever();
+        AttributeAssetGenerator assetModelRetriever = new AttributeAssetGenerator();
         registerNode(assetModelRetriever.generate());
         registerNodeConverter("AttributeNode", GroovyThenNode.class);
     }
