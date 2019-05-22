@@ -24,7 +24,10 @@ export class ProjectService {
   }
 
   private keyDown(key: string) {
-    if (key === 'Delete') {
+    console.log(this.input.focusInputCount);
+    if (this.input.focusInputCount > 0) return;
+
+    if (key === 'Delete' || key === 'Backspace') {
       this.removeSelectedNodes();
     }
   }

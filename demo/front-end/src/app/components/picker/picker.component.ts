@@ -1,22 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { GraphInternal } from 'src/app/models/graph.internal';
-import { Picker } from 'src/app/models/picker';
 import { PickerType } from 'src/app/models/picker.type';
-import { GraphDataTypes } from 'src/app/models/graph.data.types';
+import { ProjectService } from 'src/app/services/project.service';
+import { InputService } from 'src/app/services/input.service';
 
 @Component({
   selector: 'app-picker',
   templateUrl: './picker.component.html',
   styleUrls: ['./picker.component.css']
 })
-export class PickerComponent implements OnInit {
+export class PickerComponent implements OnInit, AfterViewInit {
 
   @Input() internal: GraphInternal;
+  @ViewChild('view') view: ElementRef;
   PickerType = PickerType;
 
   private doubleDropDownChoice: any;
 
-  constructor() { }
+  constructor(private project: ProjectService, private input: InputService) { }
+
+  ngAfterViewInit(): void {
+    const elem = (this.view.nativeElement as HTMLElement);
+
+    const inputs = elem.querySelectorAll('input');
+
+    inputs.forEach((e) => {
+      e.onblur = () => this.input.focusInputCount--;
+      e.onfocus = () => this.input.focusInputCount++;
+    });
+  }
 
   ngOnInit() {
     if (this.internal.picker.type === PickerType.Dropdown && this.internal.value == null) {

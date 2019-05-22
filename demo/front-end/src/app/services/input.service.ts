@@ -8,6 +8,7 @@ export class InputService {
   private callbacks: ((key: string) => void)[] = [];
 
   public mousePos: { x: number, y: number };
+  public focusInputCount = 0;
 
   constructor() {
     window.addEventListener('keydown', (e) => this.registerKeyDown(e), false);
