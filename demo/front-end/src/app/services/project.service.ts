@@ -18,17 +18,16 @@ export class ProjectService {
 
   private reverseConnection = false;
 
-  public isFocusedOnInput = false;
-
   constructor(private input: InputService, private selection: SelectionService) {
     input.registerCallback((s) => this.keyDown(s));
     selection.nodes = this.nodes;
   }
 
   private keyDown(key: string) {
-    if (this.isFocusedOnInput) return;
+    console.log(this.input.focusInputCount);
+    if (this.input.focusInputCount > 0) return;
 
-    if (key === 'Delete') {
+    if (key === 'Delete' || key === 'Backspace') {
       this.removeSelectedNodes();
     }
   }

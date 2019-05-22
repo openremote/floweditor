@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 import { GraphInternal } from 'src/app/models/graph.internal';
 import { PickerType } from 'src/app/models/picker.type';
 import { ProjectService } from 'src/app/services/project.service';
+import { InputService } from 'src/app/services/input.service';
 
 @Component({
   selector: 'app-picker',
@@ -16,12 +17,17 @@ export class PickerComponent implements OnInit, AfterViewInit {
 
   private doubleDropDownChoice: any;
 
-  constructor(private project: ProjectService) { }
+  constructor(private project: ProjectService, private input: InputService) { }
 
   ngAfterViewInit(): void {
     const elem = (this.view.nativeElement as HTMLElement);
-    elem.onblur = () => this.project.isFocusedOnInput = false;
-    elem.onfocus = () => this.project.isFocusedOnInput = true;
+
+    const inputs = elem.querySelectorAll('input');
+
+    inputs.forEach((e) => {
+      e.onblur = () => this.input.focusInputCount--;
+      e.onfocus = () => this.input.focusInputCount++;
+    });
   }
 
   ngOnInit() {
