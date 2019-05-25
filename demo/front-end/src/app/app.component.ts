@@ -15,16 +15,15 @@ enum Status {
 export class AppComponent implements OnInit {
 
   private openremote = openremote;
-
   private Status = Status;
-
   private status = Status.Busy;
 
   constructor() {
-
+    this.initialise();
   }
 
-  ngOnInit(): void {
+  private initialise() {
+    this.status = Status.Busy;
     openremote.init({
       managerUrl: 'http://localhost',
       keycloakUrl: 'http://localhost/auth',
@@ -39,5 +38,13 @@ export class AppComponent implements OnInit {
           this.status = Status.Failure;
         }
       });
+  }
+
+  private reload() {
+    this.initialise();
+  }
+
+  ngOnInit(): void {
+
   }
 }

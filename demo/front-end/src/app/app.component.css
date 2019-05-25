@@ -1,5 +1,11 @@
 .error{
 text-align: center;
-line-height: 100vh;
 color: red;
+}
+
+.center{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,11 +1,18 @@
 <div class="fill">
   <ng-container [ngSwitch]="status">
     <ng-container *ngSwitchCase="Status.Busy">
-      
+      <!-- render nothing -->
     </ng-container>
     <ng-container *ngSwitchCase="Status.Failure">
-      <div class="error">
-        Something went wrong.
+      <div class="center">
+        <div class="error">
+          <div style="margin-bottom: 1em">
+            <i class="fas fa-exclamation-triangle"></i> We couldn't connect to OpenRemote
+          </div>
+          <button mat-button (click)="reload()"><i class="fas fa-sync-alt"></i> Retry</button>
+          <p class="muted">{{openremote.isManagerAvailable}}</p>
+          <p class="muted">{{openremote.error}}</p>
+        </div>
       </div>
     </ng-container>
     <ng-container *ngSwitchCase="Status.Authenticated">
