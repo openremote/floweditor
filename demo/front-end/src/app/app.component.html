@@ -1,6 +1,10 @@
-<div class="layout">
-  <app-toolbar style="grid-area: bar"></app-toolbar>
-  <app-toolpanel style="grid-area: menu"></app-toolpanel>
-  <app-workspace style="grid-area: workspace"></app-workspace>
-</div>
-<app-context-menu [open]="context.open" [contextMenu]="context.contextMenu"></app-context-menu>
+<ng-container *ngIf="editorVisible">
+  <ng-container *ngIf="openremote.authenticated; else elseTemplate">
+    <app-editor></app-editor>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button (click)="openremote.login()">
+      Log in
+    </button>
+  </ng-template>
+</ng-container>

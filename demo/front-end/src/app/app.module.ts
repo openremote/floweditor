@@ -39,6 +39,7 @@ import { ExportSettingsDialogComponent } from './components/export-settings-dial
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { HelpDialogComponent } from './components/help-dialog/help-dialog.component';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
+import { EditorComponent } from './components/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ContextMenuComponent } from './components/context-menu/context-menu.com
     ExportSettingsDialogComponent,
     ErrorDialogComponent,
     HelpDialogComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

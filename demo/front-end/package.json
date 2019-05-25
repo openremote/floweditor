@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@openremote/core": "^1.0.2",
     "@types/prismjs": "^1.9.0",
     "angular2-draggable": "^2.2.2",
     "core-js": "^2.5.4",

@@ -1,16 +1,27 @@
-import { Component } from '@angular/core';
-import { InputService } from './services/input.service';
-import { ContextMenuService } from './services/context-menu.service';
+import { Component, OnInit } from '@angular/core';
+import openremote, { Auth, Manager } from '@openremote/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'front-end';
+export class AppComponent implements OnInit {
 
-  constructor(private context: ContextMenuService) {
+  private editorVisible = false;
+  private openremote = openremote;
 
+  constructor() {
+
+  }
+
+  ngOnInit(): void {
+    openremote.init({
+      managerUrl: 'http://localhost',
+      keycloakUrl: 'http://localhost/auth',
+      auth: Auth.KEYCLOAK,
+      autoLogin: true,
+      realm: 'master'
+    }).then(() => this.editorVisible = true);
   }
 }
