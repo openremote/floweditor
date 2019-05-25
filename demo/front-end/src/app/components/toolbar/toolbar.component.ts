@@ -7,6 +7,7 @@ import { ExportSettingsDialogComponent } from '../export-settings-dialog/export-
 import { SelectionService } from 'src/app/services/selection.service';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
+import { IntegrationService, IntegrationServiceStatus } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +19,8 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private project: ProjectService,
-    private selection: SelectionService) { }
+    private selection: SelectionService,
+    private integration: IntegrationService) { }
 
   ngOnInit() {
   }
@@ -28,6 +30,15 @@ export class ToolbarComponent implements OnInit {
     this.project.connections = [];
     this.selection.nodes = this.project.nodes;
     this.selection.selectedNodes = [];
+  }
+
+  private exit(){
+    if (this.integration.getStatus() === IntegrationServiceStatus.Authenticated)
+    {
+      this.integration.logout();
+    }else{
+      this.integration.initialise();
+    }
   }
 
   private showSettings() {
