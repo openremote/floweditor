@@ -1,10 +1,20 @@
-<ng-container *ngIf="editorVisible">
-  <ng-container *ngIf="openremote.authenticated; else elseTemplate">
-    <app-editor></app-editor>
+<div class="fill">
+  <ng-container [ngSwitch]="status">
+    <ng-container *ngSwitchCase="Status.Busy">
+      
+    </ng-container>
+    <ng-container *ngSwitchCase="Status.Failure">
+      <div class="error">
+        Something went wrong.
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="Status.Authenticated">
+      <app-editor></app-editor>
+    </ng-container>
+    <ng-container *ngSwitchCase="Status.Unauthenticated">
+      <button (click)="openremote.login()">
+        Log in
+      </button>
+    </ng-container>
   </ng-container>
-  <ng-template #elseTemplate>
-    <button (click)="openremote.login()">
-      Log in
-    </button>
-  </ng-template>
-</ng-container>
+</div>
