@@ -4,11 +4,9 @@ package logic.nodeTypeReader;
 import com.google.gson.Gson;
 import logic.groovy.NodeConverter;
 import models.Node;
-import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 public class NodeTypeCollection {
@@ -35,12 +33,12 @@ public class NodeTypeCollection {
 
         Node node = new Node(name,specs.type);
         if(specs.inputs!=null) {
-            for (Property input : specs.inputs) {
+            for (NodeSpecProperty input : specs.inputs) {
                 node.addInputProperty(input.name);
             }
         }
         if(specs.outputs!=null) {
-            for (Property output : specs.outputs) {
+            for (NodeSpecProperty output : specs.outputs) {
                 node.addOutputProperty(output.name);
             }
         }

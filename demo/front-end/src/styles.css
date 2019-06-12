@@ -1,5 +1,14 @@
 @import "assets/dark.css";
 
+*{
+  backface-visibility: hidden;
+  user-select: none;
+}
+
+input{
+  user-select: text;
+}
+
 body {
   margin: 0;
   padding: 0;

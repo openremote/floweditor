@@ -1,6 +1,8 @@
 package logic;
 
+import logic.apiConnection.AttributeAssetGenerator;
 import logic.groovy.NodeConverter;
+import logic.groovy.converters.GroovyThenNode;
 import logic.nodeTypeReader.NodeTypeCollection;
 import org.reflections.Reflections;
 
@@ -27,5 +29,9 @@ public class StandardNodeTypeCollection extends NodeTypeCollection {
             registerNode(FileReader.readResource(jsonFileName));
             registerNodeConverter(nodeName, (Class<? extends NodeConverter>) converter);
         }
+
+        AttributeAssetGenerator assetModelRetriever = new AttributeAssetGenerator();
+        registerNode(assetModelRetriever.generate());
+        registerNodeConverter("AttributeNode", GroovyThenNode.class);
     }
 }

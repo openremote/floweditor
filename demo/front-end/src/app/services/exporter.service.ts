@@ -34,7 +34,7 @@ export class ExporterService {
     translationObservable.subscribe(
       (data: ServerResponse) => {
         if (data.success) {
-          callback(window.atob(data.object as string));
+          callback(data.object as string);
         } else {
           this.dialog.open(ErrorDialogComponent, { data });
         }

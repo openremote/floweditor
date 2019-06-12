@@ -1,6 +1,6 @@
 package logic.nodeTypeReader;
 
- class Picker {
-    String type;
-    Object[] options;
+public class Picker {
+   public String type;
+   public Object[] options;
 }

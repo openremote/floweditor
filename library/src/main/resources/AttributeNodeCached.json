@@ -1,0 +1,51 @@
+{
+    "name": "AttributeNode",
+    "type": "Input",
+    "outputs": [
+        {
+            "name": "value",
+            "type": "Any"
+        }
+    ],
+    "internals": [
+        {
+            "picker": {
+                "type": "DoubleDropdown",
+                "options": [
+                    {
+                        "name": "BUILDING",
+                        "options": [
+                            {
+                                "name": "surfaceArea"
+                            },
+                            {
+                                "name": "street"
+                            },
+                            {
+                                "name": "city"
+                            },
+                            {
+                                "name": "country"
+                            },
+                            {
+                                "name": "postalCode"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "ROOM",
+                        "options": [
+                            {
+                                "name": "temperature"
+                            },
+                            {
+                                "name":"floor"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "Attribute"
+        }
+    ]
+}

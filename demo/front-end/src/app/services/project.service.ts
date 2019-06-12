@@ -16,17 +16,26 @@ export class ProjectService {
   private currentFrom: GraphSocket;
   private currentFromElement: Element;
 
+  private reverseConnection = false;
+
   constructor(private input: InputService, private selection: SelectionService) {
     input.registerCallback((s) => this.keyDown(s));
+    selection.nodes = this.nodes;
   }
 
   private keyDown(key: string) {
-    console.log(this.selection.selectedNodes);
+    console.log(this.input.focusInputCount);
+    if (this.input.focusInputCount > 0) return;
+
     if (key === 'Delete' || key === 'Backspace') {
-      this.selection.selectedNodes.forEach((n) => {
-        this.removeNode(n);
-      });
+      this.removeSelectedNodes();
     }
+  }
+
+  public removeSelectedNodes() {
+    this.selection.selectedNodes.forEach((n) => {
+      this.removeNode(n);
+    });
   }
 
   public removeNode(node: GraphNode) {
@@ -42,8 +51,21 @@ export class ProjectService {
     this.connections = newConnections;
   }
 
-  public beginConnectionDrag(socket: GraphSocket, event: MouseEvent) {
+  public removeConnection(connection: Connection){
+    this.connections.splice(this.connections.indexOf(connection), 1);
+  }
+
+  public connectionDrag(socket: GraphSocket, event: MouseEvent) {
+    if (this.isDragging) {
+      this.stopConnectionDrag(socket, event);
+    } else {
+      this.beginConnectionDrag(socket, event);
+    }
+  }
+
+  public beginConnectionDrag(socket: GraphSocket, event: MouseEvent, reversed: boolean = false) {
     if (this.isDragging) { return; }
+    this.reverseConnection = reversed;
 
     this.currentFrom = socket;
     this.currentFromElement = event.target as Element;
@@ -72,14 +94,21 @@ export class ProjectService {
 
     this.isDragging = false;
 
-    const existing = this.connections.filter((c) => c.to === socket);
+    
+    const source = this.reverseConnection ? socket : this.currentFrom;
+    const destination = this.reverseConnection ? this.currentFrom : socket;
 
-    // if (this.currentFrom.type !== socket.type) { return; }
+    const sourceElement = this.reverseConnection ? this.currentFromElement : event.target as Element;
+    const destinationElement = this.reverseConnection ? event.target as Element : this.currentFromElement;
+
+    const existing = this.connections.filter((c) => c.to === destination);
+
+    if (sourceElement.getAttribute('socket') === destinationElement.getAttribute('socket')) { return; }
 
     existing.forEach(connection => {
       this.connections.splice(this.connections.indexOf(connection), 1);
     });
 
-    this.connections.push(new Connection(this.currentFrom, socket, this.currentFromElement, event.target as Element));
+    this.connections.push(new Connection(source, destination, sourceElement, destinationElement));
   }
 }

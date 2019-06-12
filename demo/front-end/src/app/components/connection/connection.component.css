@@ -7,3 +7,13 @@
   height: 100%;
   pointer-events: none;
 }
+
+.hitbox{
+  pointer-events: visiblePainted;
+  transition: stroke 150ms ease-out;
+}
+
+.hitbox:hover{
+  stroke: rgba(71, 170, 66, 0.445);
+  mix-blend-mode: multiply;
+}

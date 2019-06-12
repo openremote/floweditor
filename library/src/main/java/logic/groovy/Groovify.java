@@ -1,6 +1,7 @@
 package logic.groovy;
 
 import models.Node;
+import models.Property;
 import models.exceptions.RuleLibraryException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,11 +33,11 @@ public class Groovify {
 
     }
 
-    public static String toGroovy(Node node) throws RuleLibraryException {
+        public static String toGroovy(Property property) throws RuleLibraryException {
 
-        Class comparerClass = getComparerClass(node);
+        Class comparerClass = getComparerClass(property.getNode());
         GroovyConverter converter = constructConverter(comparerClass);
-        return converter.toCode(node);
+        return converter.toCode(property);
     }
 
     private static GroovyConverter constructConverter(Class comparerClass) throws RuleLibraryException {

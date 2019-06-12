@@ -18,7 +18,7 @@
   align-self: center;
   justify-self: center;
   text-align: center;
-  font-size: 18px;
+  font-size: 14px;
   margin: 5px;
 }
 
@@ -57,5 +57,6 @@
 
 *[cdkDrag]{
   position: fixed;
+  z-index: 10000;
   margin: 0;
 }

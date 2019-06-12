@@ -1,9 +1,10 @@
 package models;
 
+import models.exceptions.RuleLibraryException;
+
 public class InternalVariable {
     private String name;
     private Object value;
-
     public InternalVariable(String name, Object value) {
         this.name = name;
         this.value = value;

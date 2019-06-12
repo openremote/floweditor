@@ -1,15 +1,15 @@
+{
+  "name": "Log",
+  "type": "Output",
+  "inputs": [
     {
-        "name": "Log",
-        "type" : "Output",
-        "inputs": [
-            {
-                "type": "Trigger",
-                "name": "trigger"
-            },
-            {
-                "type": "Any",
-                "name": "input"
-            }
-        ],
-        "outputs":[]
+      "type": "Trigger",
+      "name": "trigger"
+    },
+    {
+      "type": "Any",
+      "name": "input"
     }
+  ],
+  "outputs": []
+}

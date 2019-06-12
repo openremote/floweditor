@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-items: stretch;
   align-items: stretch;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 

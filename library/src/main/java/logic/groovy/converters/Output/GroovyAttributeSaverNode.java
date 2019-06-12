@@ -3,13 +3,16 @@ package logic.groovy.converters.Output;
 import logic.StandardNode;
 import logic.groovy.GroovyConverter;
 import models.Node;
+import models.Property;
 import models.exceptions.RuleLibraryException;
 
 @StandardNode
 public class GroovyAttributeSaverNode implements GroovyConverter {
 
+
     @Override
-    public String toCode(Node node) throws RuleLibraryException {
+    public String toCode(Property property) throws RuleLibraryException {
+        Node node = property.getNode();
         return "[Not implemented]\n";
     }
 }
