@@ -7,6 +7,7 @@ import models.exceptions.RuleLibraryException;
 import translation.Translator;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -38,18 +39,16 @@ public class NodeService
         return textToResponse("[" + String.join(",", jsonNodeSpecs) + "]");
     }
 
-    @GET
+    @POST
     @Path("translate")
-    public Response translate(@QueryParam("nodes") String jsonNodeSet) throws ParseException
+    public Response translate(String body) throws ParseException
     {
-        jsonNodeSet = new String(decoder.decode(jsonNodeSet));
-
         String result = "";
         boolean success = false;
 
         try
         {
-            result = encoder.encodeToString(Translator.translate(jsonNodeSet).getBytes());
+            result = Translator.translate(body);
             success = true;
         } catch (Exception e)
         {
