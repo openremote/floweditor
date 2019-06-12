@@ -51,6 +51,10 @@ export class ProjectService {
     this.connections = newConnections;
   }
 
+  public removeConnection(connection: Connection){
+    this.connections.splice(this.connections.indexOf(connection), 1);
+  }
+
   public connectionDrag(socket: GraphSocket, event: MouseEvent) {
     if (this.isDragging) {
       this.stopConnectionDrag(socket, event);
@@ -90,6 +94,7 @@ export class ProjectService {
 
     this.isDragging = false;
 
+    
     const source = this.reverseConnection ? socket : this.currentFrom;
     const destination = this.reverseConnection ? this.currentFrom : socket;
 
@@ -98,7 +103,7 @@ export class ProjectService {
 
     const existing = this.connections.filter((c) => c.to === destination);
 
-    // if (this.currentFrom.type !== socket.type) { return; }
+    if (sourceElement.getAttribute('socket') === destinationElement.getAttribute('socket')) { return; }
 
     existing.forEach(connection => {
       this.connections.splice(this.connections.indexOf(connection), 1);

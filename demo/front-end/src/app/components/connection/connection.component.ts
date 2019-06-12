@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Connection } from 'src/app/models/connection';
 import { Point } from 'src/app/models/point';
 import { timer } from 'rxjs';
+import { ProjectService } from 'src/app/services/project.service';
+import { ContextMenuService } from 'src/app/services/context-menu.service';
+import { ContextMenu } from 'src/app/models/context.menu';
 
 @Component({
   selector: 'app-connection',
@@ -13,7 +16,7 @@ export class ConnectionComponent implements OnInit {
   @Input() connection: Connection;
   private curviness = 0;
 
-  constructor() { }
+  constructor(private project: ProjectService, private context: ContextMenuService) { }
 
   ngOnInit() {
     const time = timer(0, 16).subscribe(
@@ -69,7 +72,7 @@ export class ConnectionComponent implements OnInit {
 
   // http://robertpenner.com/scripts/easing_equations.txt
   quadtratic_easing(t, b, c, d) {
-    if ((t /= d / 2) < 1) { return c/2*t*t + b; }
+    if ((t /= d / 2) < 1) { return c / 2 * t * t + b; }
     return -c / 2 * ((--t) * (t - 2) - 1) + b;
   }
 
@@ -99,5 +102,16 @@ export class ConnectionComponent implements OnInit {
     return points.map(p => this.s(p)).join(' ');
   }
 
+  private openContextMenu(e: MouseEvent) {
+    e.preventDefault();
+    this.context.contextMenu = {
+      items: [
+        {
+          label: 'Cut connection',
+          action: () => this.project.removeConnection(this.connection)
+        }
+      ]
+    };
+    this.context.openMenu();
+  }
 }
-

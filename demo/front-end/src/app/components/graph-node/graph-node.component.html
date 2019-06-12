@@ -1,13 +1,15 @@
-  <div (contextmenu)="contextMenu($event)" (cdkDragMoved)="updatePosition()" #view class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
+  <div (contextmenu)="contextMenu($event)" (cdkDragMoved)="updatePosition()" #view
+    class="node {{node.type | graphNodeTypeClass}}" [ngClass]="{'selected': selection.isNodeSelected(node)}" cdkDrag
     cdkDragBoundary=".workspace" style="z-index: 1" (mousedown)="mousedown($event)">
-    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'"  >
+    <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'">
       <div>{{node.name | graphNodeName}}</div>
     </div>
 
     <div #inputSockets class="sockets" style="grid-area: input">
       <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">
-        <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
-          (mouseup)="project.stopConnectionDrag(s, $event)" (mousedown)="project.beginConnectionDrag(s, $event, true)"></span>
+        <span class="circle" socket="input" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
+          (mouseup)="project.stopConnectionDrag(s, $event)"
+          (mousedown)="project.beginConnectionDrag(s, $event, true)"></span>
         <span class="label">{{s.name}}</span>
       </div>
     </div>
@@ -15,14 +17,15 @@
     <div *ngIf="node.type === 'Then'" class="title" cdkDragHandle>{{node.name.toUpperCase()}}</div>
 
     <div style="grid-area: internals" class="internals" *ngIf="node.type !== 'Then'">
-      <app-picker *ngFor="let internal of node.internals" [internal]="internal" (mousedown)="selection.deselectNode(node)"></app-picker>
+      <app-picker *ngFor="let internal of node.internals" [internal]="internal"
+        (mousedown)="selection.deselectNode(node)"></app-picker>
     </div>
 
     <div #outputSockets class="sockets" style="grid-area: output">
       <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
         <span class="label">{{s.name}}</span>
-        <span class="circle" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
-        (mouseup)="project.stopConnectionDrag(s, $event)" (mousedown)="project.beginConnectionDrag(s, $event)"></span>
+        <span class="circle" socket="output" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
+          (mouseup)="project.stopConnectionDrag(s, $event)" (mousedown)="project.beginConnectionDrag(s, $event)"></span>
       </div>
     </div>
 
