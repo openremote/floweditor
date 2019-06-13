@@ -1,10 +1,11 @@
 {
+    "name": "Sample 2 rule",
     "nodes": [
         {
             "internals": [
                 {
                     "name": "name",
-                    "value": "counter"
+                    "value": "v1"
                 },
                 {
                     "name": "defaultValue",
@@ -12,17 +13,21 @@
                 }
             ],
             "type": "Variable",
-            "id": 0
+            "id": 1
         },
         {
             "internals": [
                 {
-                    "name": "number",
-                    "value": 10
+                    "name": "name",
+                    "value": "v2"
+                },
+                {
+                    "name": "defaultValue",
+                    "value": "1"
                 }
             ],
-            "type": "Number",
-            "id": 1
+            "type": "Variable",
+            "id": 2
         },
         {
             "internals": [
@@ -32,16 +37,16 @@
                 }
             ],
             "type": "Comparator",
-            "id": 2
-        },
-        {
-            "internals": [],
-            "type": "Log",
             "id": 3
         },
         {
-            "internals": [],
-            "type": "Splitter",
+            "internals": [
+                {
+                    "name": "number",
+                    "value": 1000
+                }
+            ],
+            "type": "Number",
             "id": 4
         },
         {
@@ -50,19 +55,34 @@
             "id": 5
         },
         {
-            "internals": [],
-            "type": "VariableSaver",
-            "id": 6
-        },
-        {
             "internals": [
                 {
                     "name": "text",
-                    "value": "counter"
+                    "value": "v1"
                 }
             ],
             "type": "Text",
+            "id": 6
+        },
+        {
+            "internals": [],
+            "type": "Log",
             "id": 7
+        },
+        {
+            "internals": [],
+            "type": "VariableSaver",
+            "id": 8
+        },
+        {
+            "internals": [],
+            "type": "Splitter",
+            "id": 9
+        },
+        {
+            "internals": [],
+            "type": "Splitter",
+            "id": 10
         },
         {
             "internals": [
@@ -72,47 +92,82 @@
                 }
             ],
             "type": "Operator",
-            "id": 8
+            "id": 11
         },
         {
             "internals": [
                 {
                     "name": "text",
-                    "value": "1"
+                    "value": "v2"
                 }
             ],
             "type": "Text",
-            "id": 9
+            "id": 12
+        },
+        {
+            "internals": [],
+            "type": "VariableSaver",
+            "id": 13
         }
     ],
     "connections": [
         {
             "from": {
-                "id": 0,
+                "id": 1,
                 "name": "output"
             },
             "to": {
-                "id": 2,
+                "id": 11,
                 "name": "input 1"
             }
         },
         {
             "from": {
-                "id": 1,
-                "name": "value"
+                "id": 2,
+                "name": "output"
             },
             "to": {
-                "id": 2,
+                "id": 11,
                 "name": "input 2"
             }
         },
         {
             "from": {
-                "id": 0,
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 8,
+                "name": "value"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
                 "name": "output"
             },
             "to": {
                 "id": 3,
+                "name": "input 1"
+            }
+        },
+        {
+            "from": {
+                "id": 4,
+                "name": "value"
+            },
+            "to": {
+                "id": 3,
+                "name": "input 2"
+            }
+        },
+        {
+            "from": {
+                "id": 3,
+                "name": "output"
+            },
+            "to": {
+                "id": 5,
                 "name": "input"
             }
         },
@@ -122,68 +177,28 @@
                 "name": "output"
             },
             "to": {
-                "id": 4,
+                "id": 9,
                 "name": "input"
-            }
-        },
-        {
-            "from": {
-                "id": 4,
-                "name": "output 1"
-            },
-            "to": {
-                "id": 3,
-                "name": "trigger"
-            }
-        },
-        {
-            "from": {
-                "id": 4,
-                "name": "output 2"
-            },
-            "to": {
-                "id": 6,
-                "name": "trigger"
-            }
-        },
-        {
-            "from": {
-                "id": 7,
-                "name": "value"
-            },
-            "to": {
-                "id": 6,
-                "name": "name"
             }
         },
         {
             "from": {
                 "id": 9,
-                "name": "value"
+                "name": "output 1"
             },
             "to": {
-                "id": 8,
-                "name": "input 2"
+                "id": 10,
+                "name": "input"
             }
         },
         {
             "from": {
-                "id": 0,
-                "name": "output"
+                "id": 9,
+                "name": "output 2"
             },
             "to": {
-                "id": 8,
-                "name": "input 1"
-            }
-        },
-        {
-            "from": {
-                "id": 8,
-                "name": "output"
-            },
-            "to": {
-                "id": 6,
-                "name": "value"
+                "id": 7,
+                "name": "trigger"
             }
         },
         {
@@ -192,8 +207,58 @@
                 "name": "output"
             },
             "to": {
-                "id": 5,
+                "id": 7,
                 "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 10,
+                "name": "output 1"
+            },
+            "to": {
+                "id": 8,
+                "name": "trigger"
+            }
+        },
+        {
+            "from": {
+                "id": 6,
+                "name": "value"
+            },
+            "to": {
+                "id": 8,
+                "name": "name"
+            }
+        },
+        {
+            "from": {
+                "id": 11,
+                "name": "output"
+            },
+            "to": {
+                "id": 13,
+                "name": "value"
+            }
+        },
+        {
+            "from": {
+                "id": 12,
+                "name": "value"
+            },
+            "to": {
+                "id": 13,
+                "name": "name"
+            }
+        },
+        {
+            "from": {
+                "id": 10,
+                "name": "output 2"
+            },
+            "to": {
+                "id": 13,
+                "name": "trigger"
             }
         }
     ]

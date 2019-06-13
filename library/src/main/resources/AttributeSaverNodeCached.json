@@ -1,7 +1,11 @@
 {
-    "name": "Attribute",
-    "type": "Input",
-    "outputs": [
+    "name": "Attribute saver",
+    "type": "Output",
+    "inputs": [
+        {
+            "type": "Trigger",
+            "name": "trigger"
+        },
         {
             "name": "value",
             "type": "Any"
@@ -9,8 +13,8 @@
     ],
     "internals": [
         {
+            "name": "Asset|Attribute",
             "picker": {
-                "name": "Asset|Attribute",
                 "type": "DoubleDropdown",
                 "options": [
                     {

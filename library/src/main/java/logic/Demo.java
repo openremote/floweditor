@@ -1,6 +1,10 @@
 package logic;
 
 import logic.apiConnection.AttributeAssetGenerator;
+import logic.groovy.GroovyRuleGenerator;
+import logic.nodeSetReader.NodeSetReader;
+import models.NodeSet;
+import models.exceptions.RuleLibraryException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,10 +19,10 @@ public class Demo {
         AttributeAssetGenerator assetModelRetriever = new AttributeAssetGenerator();
         assetModelRetriever.generate();
         StandardNodeTypeCollection typeCollection = new StandardNodeTypeCollection();
-/*
+
         try {
             NodeSetReader setReader = new NodeSetReader(typeCollection);
-            NodeSet nodeSet = setReader.read(FileReader.read("sample-node-sets/sample2.json"));
+            NodeSet nodeSet = setReader.read(FileReader.readResource("sample2.json"));
             GroovyRuleGenerator generator = new GroovyRuleGenerator(nodeSet);
             String rule = generator.generate();
            // writeToFile("generated-rules/"+ nodeSet.getName(),rule);
@@ -28,7 +32,7 @@ public class Demo {
             e.printNeatly();
         }
 
-*/
+
 
 
     }

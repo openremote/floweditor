@@ -6,7 +6,7 @@ import models.Node;
 import models.Property;
 import models.exceptions.RuleLibraryException;
 
-@StandardNode
+
 public class GroovyAttributeSaverNode implements GroovyConverter {
 
 
