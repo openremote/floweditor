@@ -36,7 +36,7 @@ public class StandardNodeTypeCollection extends NodeTypeCollection {
         AttributeAssetGenerator assetModelRetriever = new AttributeAssetGenerator();
         registerNode(assetModelRetriever.generate());
 
-        registerNodeConverter("Attribute", GroovyThenNode.class);
+        registerNodeConverter("Attribute", GroovyAttributeNode.class);
 
         registerNode(FileReader.readResource("AttributeSaverNodeCached.json"));
         registerNodeConverter("AttributeSaver", GroovyAttributeSaverNode.class);

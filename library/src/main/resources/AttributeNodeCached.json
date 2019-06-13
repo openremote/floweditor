@@ -9,8 +9,8 @@
     ],
     "internals": [
         {
+            "name": "Asset|Attribute",
             "picker": {
-                "name": "Asset|Attribute",
                 "type": "DoubleDropdown",
                 "options": [
                     {
