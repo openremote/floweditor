@@ -1,0 +1,3 @@
+{
+  "extends": "../openremote/ui/tslint.json"
+}

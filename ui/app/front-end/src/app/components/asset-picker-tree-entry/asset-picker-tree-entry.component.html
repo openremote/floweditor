@@ -1,0 +1,11 @@
+<i *ngIf="!isLoaded" class="fas fa-spinner"></i>
+<i *ngIf="!hasChildren && isLoaded" class="fas fa-circle"></i>
+<i *ngIf="hasChildren && isLoaded" class="far expand-toggle" (click)="expandCollapse()"
+  [ngClass]="{'fa-caret-square-down': !isExpanded, 'fa-minus-square': isExpanded}"></i>
+
+<span class="title" (click)="choose()">{{asset.name}}</span>
+
+<div *ngIf="hasChildren && isExpanded" style="padding-left: 5%">
+  <app-asset-picker-tree-entry *ngFor="let child of children" [dialogRef]="dialogRef" [asset]="child">
+  </app-asset-picker-tree-entry>
+</div>

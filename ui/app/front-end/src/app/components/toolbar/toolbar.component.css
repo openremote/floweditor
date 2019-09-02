@@ -1,0 +1,69 @@
+.toolbar {
+  background: #e4e4e4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-content: stretch;
+}
+
+*[mat-button] {
+  color: white;
+  background: #a8a8a8;
+  margin: 2px;
+  line-height: 100%;
+  height: calc(100% - 4px);
+  transition: background-color 150ms ease-in-out;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.information{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.315);
+}
+
+.fas{
+  vertical-align: unset !important;
+  margin-right: 5px;
+}
+
+*[mat-button]:not([disabled]):hover {
+  background: #b6b6b6;
+}
+
+*[mat-button].primary {
+  background: #47AA42;
+}
+
+*[mat-button].primary:hover {
+  background: rgb(73, 192, 67);
+}
+
+*[mat-button].danger {
+  background: rgb(170, 66, 66);
+}
+
+*[mat-button].danger:hover {
+  background: rgb(192, 67, 67);
+}
+
+.logo {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-grow: 10;
+  margin-left: 4px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.315);
+}
+
+.icon{
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}

@@ -1,0 +1,10 @@
+<div class="toolbar" (mousedown)="selection.deselectAll()">
+  <img class="icon" src="assets/favicon.png" alt="">
+  <div class="logo">OpenRemote Rule Node Editor</div>
+  <div class="information">{{integration.getRealm()}}</div>
+  <button mat-button (click)="showSettings()"><i class="fas fa-cog"></i>Settings</button>
+  <button mat-button (click)="showHelp()"><i class="fas fa-question"></i>Help</button>
+  <button mat-button (click)="exit()"><i class="fas fa-sign-out-alt"></i>Logout</button>
+  <button mat-button class="danger" (click)="clear()"><i class="fas fa-trash"></i>Clear</button>
+  <button mat-button class="primary" (click)="exportNodeStructure()"><i class="fas fa-file-export"></i>Export</button>
+</div>

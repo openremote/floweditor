@@ -1,0 +1,24 @@
+*{
+    color: white;
+}
+
+mat-option, mat-select{
+    text-transform: lowercase;
+    
+}
+
+textarea{
+    resize: both !important;
+}
+
+*[mat-button] {
+    color: white;
+    background: #a8a8a8;
+    margin: 2px;
+    line-height: 100%;
+    padding: 5px;
+    height: calc(100% - 4px);
+    font-size: 16px;
+    transition: background-color 150ms ease-in-out;
+    font-family: 'Roboto Mono', monospace;
+  }

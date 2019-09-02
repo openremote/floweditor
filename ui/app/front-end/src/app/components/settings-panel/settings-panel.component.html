@@ -1,0 +1,12 @@
+<div>
+    <mat-form-field>
+        <mat-label>Chosen realm</mat-label>
+        <mat-select [(ngModel)]="chosenRealm">
+            <mat-option *ngFor="let tentant of integration.realms" [value]="tentant.realm">
+                {{tentant.displayName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<button mat-button (click)="save()" mat-dialog-close>Save and exit</button>
+<button mat-button mat-dialog-close>Cancel</button>
