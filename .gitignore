@@ -128,3 +128,34 @@ workspace.xml
 
 # End of https://www.gitignore.io/api/java,gradle,intellij
 library/.idea/compiler.xml
+
+.DS_*
+.gradle
+.vagrant
+.classpath
+.project
+.settings
+
+build/
+bin/
+out/
+
+*.iml
+*.ipr
+*.iws
+.idea/
+.local/
+*~
+*.sh
+
+node_modules/
+yarn-error.log
+deployment/proxy/
+deployment/postgresql/
+deployment/manager/extensions/
+deployment/manager/openremote.log*
+deployment/manager/app/
+deployment/manager/shared/
+deployment/keycloak/
+# If you have a large map, don't commit it but store it only locally
+# deployment/map/*.mbtiles

@@ -1,0 +1,7 @@
+.tree-container {
+  overflow: auto;
+  background: rgba(0,0,0,0.1);
+  width: 30vw;
+  height: 40vh;
+}
+

@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "workspaces": [
+    "openremote/ui/app/*",
+    "openremote/ui/component/*",
+    "openremote/ui/demo/*",
+    "openremote/client/src/main/webapp",
+    "ui/app/*",
+    "ui/component/*",
+    "ui/demo/*"
+  ]
+}

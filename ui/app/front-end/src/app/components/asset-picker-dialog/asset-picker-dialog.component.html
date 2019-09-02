@@ -1,0 +1,6 @@
+<div class="tree-container">
+    <app-asset-picker-tree-entry *ngFor="let asset of topLevel" [dialogRef]="dialogRef" [asset]="asset">
+    </app-asset-picker-tree-entry>
+</div>
+
+<button mat-button mat-dialog-close>Cancel</button>

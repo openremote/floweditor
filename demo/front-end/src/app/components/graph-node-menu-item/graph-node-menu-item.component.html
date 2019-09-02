@@ -1,9 +1,0 @@
-<div class="node {{node.type | graphNodeTypeClass}}" [ngStyle]="{'z-index': 10000}">
-  <div class="title">{{node.name | graphNodeName}}</div>
-  <div #dragElement class="node {{node.type | graphNodeTypeClass}}" cdkDrag (cdkDragEnded)="addNodeToProject($event)">
-    <div class="title">{{node.name | graphNodeName}}</div>
-  </div>
-</div>
-
-
-<!-- (click)="addNodeToProject()" -->
