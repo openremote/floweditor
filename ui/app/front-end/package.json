@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "clean": "rmdir dist /S /Q",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "serve": "ng serve",
