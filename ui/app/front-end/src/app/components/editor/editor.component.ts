@@ -8,7 +8,7 @@ import { ContextMenuService } from 'src/app/services/context-menu.service';
 })
 export class EditorComponent implements OnInit {
 
-  constructor(private context: ContextMenuService) { }
+  constructor(public context: ContextMenuService) { }
 
   ngOnInit() {
   }

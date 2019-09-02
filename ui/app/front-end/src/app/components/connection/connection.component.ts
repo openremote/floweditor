@@ -72,7 +72,8 @@ export class ConnectionComponent implements OnInit {
 
   // http://robertpenner.com/scripts/easing_equations.txt
   quadtratic_easing(t, b, c, d) {
-    if ((t /= d / 2) < 1) { return c / 2 * t * t + b; }
+    const p = t /= d / 2;
+    if ((p) < 1) { return c / 2 * t * t + b; }
     return -c / 2 * ((--t) * (t - 2) - 1) + b;
   }
 

@@ -10,13 +10,13 @@ import { ResultDisplayDialogComponent } from '../result-display-dialog/result-di
 })
 export class ExportSettingsDialogComponent implements OnInit {
 
-  private inputName = 'Rule';
+  public inputName = 'Rule';
   constructor(private exporter: ExporterService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
-  private translateAndShow() {
+  public translateAndShow() {
     console.log(this.inputName);
     this.exporter.export(this.inputName, (data: string) => {
       console.log(data.normalize());

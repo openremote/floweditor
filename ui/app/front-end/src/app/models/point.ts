@@ -20,8 +20,8 @@ export class Point {
     }
 
     public static lerp(a: Point, b: Point, t: number): Point {
-        let x = Point.lerpNumber(a.x, b.x, t);
-        let y = Point.lerpNumber(a.y, b.y, t);
+        const x = Point.lerpNumber(a.x, b.x, t);
+        const y = Point.lerpNumber(a.y, b.y, t);
 
         return new Point(x, y);
     }

@@ -50,7 +50,7 @@ export class ProjectService {
     this.connections = newConnections;
   }
 
-  public removeConnection(connection: Connection){
+  public removeConnection(connection: Connection) {
     this.connections.splice(this.connections.indexOf(connection), 1);
   }
 
@@ -93,7 +93,7 @@ export class ProjectService {
 
     this.isDragging = false;
 
-    
+
     const source = this.reverseConnection ? socket : this.currentFrom;
     const destination = this.reverseConnection ? this.currentFrom : socket;
 

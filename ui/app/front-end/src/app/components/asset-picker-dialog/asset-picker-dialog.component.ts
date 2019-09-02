@@ -9,7 +9,7 @@ import { IntegrationService } from 'src/app/services/integration.service';
   styleUrls: ['./asset-picker-dialog.component.css']
 })
 export class AssetPickerDialogComponent implements OnInit {
-  private topLevel: Asset[] = [];
+  public topLevel: Asset[] = [];
   constructor(public dialogRef: MatDialogRef<AssetPickerDialogComponent>, private integration: IntegrationService) { }
 
   ngOnInit() {

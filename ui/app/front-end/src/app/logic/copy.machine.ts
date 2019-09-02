@@ -4,7 +4,7 @@ import { GraphSocket } from '../models/graph.socket';
 
 export class CopyMachine {
     public static copy(node: GraphNode): GraphNode {
-        let minimalNode = new GraphNode();
+        const minimalNode = new GraphNode();
 
         minimalNode.inputs = node.inputs.map(i => new GraphSocket(i.name, i.type));
         minimalNode.internals = node.internals;

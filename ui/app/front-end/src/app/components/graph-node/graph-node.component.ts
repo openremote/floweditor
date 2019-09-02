@@ -21,8 +21,8 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private project: ProjectService,
-    private selection: SelectionService,
+    public project: ProjectService,
+    public selection: SelectionService,
     private input: InputService,
     private context: ContextMenuService
   ) {
@@ -92,7 +92,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
         label: 'Duplicate',
         action: () => {
 
-          let copies: GraphNode[] = [];
+          const copies: GraphNode[] = [];
 
           this.selection.selectedNodes.forEach((e) => {
             const copy = CopyMachine.copy(e);

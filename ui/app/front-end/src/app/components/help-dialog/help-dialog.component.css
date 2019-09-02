@@ -2,6 +2,13 @@ mat-dialog-container {
   max-width: 200px;
 }
 
+.node{
+  padding: 5px;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 2px;
+}
+
 .circle {
   width: 16px;
   height: 16px;
