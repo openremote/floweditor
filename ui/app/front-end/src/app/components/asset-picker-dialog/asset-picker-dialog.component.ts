@@ -10,11 +10,12 @@ import { IntegrationService } from 'src/app/services/integration.service';
 })
 export class AssetPickerDialogComponent implements OnInit {
   public topLevel: Asset[] = [];
-  constructor(public dialogRef: MatDialogRef<AssetPickerDialogComponent>, private integration: IntegrationService) { }
-
-  ngOnInit() {
+  constructor(public dialogRef: MatDialogRef<AssetPickerDialogComponent>, private integration: IntegrationService) {
     this.integration.refreshAssets();
     this.integration.refreshAssetDescriptors();
+  }
+
+  ngOnInit() {
     this.topLevel = this.integration.assets.filter((p) => p.parentId == null);
     this.topLevel.forEach(element => {
       console.log(element);

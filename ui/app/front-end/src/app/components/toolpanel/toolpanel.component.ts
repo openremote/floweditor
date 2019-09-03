@@ -15,7 +15,7 @@ import { CopyMachine } from 'src/app/logic/copy.machine';
 export class ToolpanelComponent implements OnInit {
   public nodes: GraphNode[] = [];
   public loadingStatus = 0;
-  private error: string;
+  public error: string;
   private GraphNodeType = GraphNodeType;
 
   constructor(public restService: RestService, private snackBar: MatSnackBar, private project: ProjectService) {
@@ -27,9 +27,8 @@ export class ToolpanelComponent implements OnInit {
     nodeObservable.subscribe(
       (data: GraphNode[]) => this.nodes = data.map(x => Object.assign(new GraphNode(), x)),
       (e: HttpErrorResponse) => {
-        this.snackBar.open('Couldn\'t load nodes from server', 'Dismiss');
         this.loadingStatus = 2;
-        this.error = e.statusText;
+        this.error = 'Failure';
       },
       () => {
         this.loadingStatus = 1;

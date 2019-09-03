@@ -53,6 +53,7 @@ export class IntegrationService {
     const query: AssetQuery = {
       select: {
         excludeAttributes: false,
+        excludeParentInfo: false,
       }
     };
 
