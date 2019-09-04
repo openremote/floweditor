@@ -19,8 +19,11 @@ export class ExportSettingsDialogComponent implements OnInit {
   public translateAndShow() {
     console.log(this.inputName);
     this.exporter.export(this.inputName, (data: string) => {
-      console.log(data.normalize());
-      this.dialog.open(ResultDisplayDialogComponent, { data });
+
+      const ruleset = { data, name: this.inputName };
+      console.log(ruleset);
+
+      this.dialog.open(ResultDisplayDialogComponent, { data: ruleset });
     });
   }
 

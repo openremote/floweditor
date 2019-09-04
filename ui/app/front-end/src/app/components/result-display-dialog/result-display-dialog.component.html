@@ -1,3 +1,4 @@
-<h1>Generated Groovy Rule</h1>
-<snippet-highlight theme="dark" language="groovy" [attr.content]="data"></snippet-highlight>
+<h1>{{ruleset.name}}</h1>
+<snippet-highlight theme="dark" language="groovy" [attr.content]="ruleset.data"></snippet-highlight>
+<button mat-button (click)="upload()" >Add as global ruleset</button>
 <button mat-button mat-dialog-close>Close</button>

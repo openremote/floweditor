@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import openremote, { Auth } from '@openremote/core';
 import rest from '@openremote/rest';
-import { Asset, AssetQuery, AssetQuerySelect, AssetDescriptor, Tenant, MetaItemType } from '@openremote/model';
+import { Asset, AssetQuery, AssetQuerySelect, AssetDescriptor, Tenant, MetaItemType, RulesetLang } from '@openremote/model';
 import { isNullOrUndefined } from 'util';
 
 export enum IntegrationServiceStatus {
@@ -99,6 +99,20 @@ export class IntegrationService {
           successCallback(response.data);
         }
       });
+  }
+
+  public addRule(name: string, groovyCode: string, callback?: (status: number) => void) {
+    rest.api.RulesResource.createGlobalRuleset({
+      lang: RulesetLang.GROOVY,
+      name,
+      type: 'global',
+      rules: groovyCode
+    }).then((e) => {
+      console.log(e);
+      if (callback) {
+        callback(e.data);
+      }
+    }).catch(console.error);
   }
 
   public initialise() {

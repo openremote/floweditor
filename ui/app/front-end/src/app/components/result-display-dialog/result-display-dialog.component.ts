@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { IntegrationService } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-result-display-dialog',
@@ -8,8 +9,15 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class ResultDisplayDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public ruleset: { data: string, name: string }, private integration: IntegrationService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
+  }
+
+  public upload() {
+    console.log(this.ruleset);
+    this.integration.addRule(this.ruleset.name, this.ruleset.data, (e) => {
+      this.snackbar.open(e.toString());
+    });
   }
 }
