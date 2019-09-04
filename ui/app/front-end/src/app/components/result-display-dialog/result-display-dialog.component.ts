@@ -17,7 +17,12 @@ export class ResultDisplayDialogComponent implements OnInit {
   public upload() {
     console.log(this.ruleset);
     this.integration.addRule(this.ruleset.name, this.ruleset.data, (e) => {
-      this.snackbar.open(e.toString());
+      if (e.status === 200) {
+        this.snackbar.open('Successfully added rule');
+      }
+      else {
+        this.snackbar.open('Something went wrong');
+      }
     });
   }
 }

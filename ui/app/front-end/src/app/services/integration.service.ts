@@ -101,7 +101,7 @@ export class IntegrationService {
       });
   }
 
-  public addRule(name: string, groovyCode: string, callback?: (status: number) => void) {
+  public addRule(name: string, groovyCode: string, callback?: (status: any) => void) {
     rest.api.RulesResource.createGlobalRuleset({
       lang: RulesetLang.GROOVY,
       name,
@@ -110,7 +110,7 @@ export class IntegrationService {
     }).then((e) => {
       console.log(e);
       if (callback) {
-        callback(e.data);
+        callback(e);
       }
     }).catch(console.error);
   }
