@@ -1,0 +1,22 @@
+{
+  "name": "AttributeSaver",
+  "type": "Output",
+  "inputs": [
+    {
+      "name": "trigger",
+      "type": "Trigger"
+    },
+    {
+      "name": "value",
+      "type": "Any"
+    }
+  ],
+  "internals": [
+    {
+      "picker": {
+        "type": "AssetAttribute"
+      },
+      "name": "Attribute"
+    }
+  ]
+}

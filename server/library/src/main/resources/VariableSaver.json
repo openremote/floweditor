@@ -1,0 +1,23 @@
+{
+  "name": "VariableSaver",
+  "type": "Output",
+  "internals": [
+    {
+      "name": "name",
+      "type": "Text",
+      "picker": {
+        "type": "Text"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "Trigger",
+      "name": "trigger"
+    },
+    {
+      "type": "Any",
+      "name": "value"
+    }
+  ]
+}

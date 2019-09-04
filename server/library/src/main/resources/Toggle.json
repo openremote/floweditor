@@ -1,0 +1,29 @@
+{
+  "name": "Toggle",
+  "type": "Input",
+  "internals": [
+    {
+      "name": "value",
+      "type": "Boolean",
+      "picker": {
+        "type": "Dropdown",
+        "options": [
+          {
+            "name": "On",
+            "value": "true"
+          },
+          {
+            "name": "Off",
+            "value": "false"
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Boolean",
+      "name": "value"
+    }
+  ]
+}

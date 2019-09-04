@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Asset } from '@openremote/model';
 import { IntegrationService } from 'src/app/services/integration.service';
@@ -8,17 +8,19 @@ import { IntegrationService } from 'src/app/services/integration.service';
   templateUrl: './asset-picker-dialog.component.html',
   styleUrls: ['./asset-picker-dialog.component.css']
 })
-export class AssetPickerDialogComponent implements OnInit {
+export class AssetPickerDialogComponent implements OnInit, AfterViewInit {
   public topLevel: Asset[] = [];
   constructor(public dialogRef: MatDialogRef<AssetPickerDialogComponent>, private integration: IntegrationService) {
-    this.integration.refreshAssets();
-    this.integration.refreshAssetDescriptors();
+
   }
 
   ngOnInit() {
-    this.topLevel = this.integration.assets.filter((p) => p.parentId == null);
-    this.topLevel.forEach(element => {
-      console.log(element);
+
+  }
+
+  ngAfterViewInit() {
+    this.integration.refreshAssets((e) => {
+      this.topLevel = e.filter((p) => p.parentId == null);
     });
   }
 

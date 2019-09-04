@@ -60,7 +60,7 @@
   <ng-container *ngSwitchCase="PickerType.AssetAttribute">
 
     <div>
-      <a style="margin: 8px; margin-left: 0" mat-button (click)="openAssetPickerDialog()">{{chosenAssetDescriptor ? chosenAssetDescriptor.name : "Select an asset"}}</a>
+      <a style="margin: 8px; margin-left: 0" mat-button (click)="openAssetPickerDialog()">{{chosenAsset ? chosenAsset.name : "Select an asset"}}</a>
       <!-- <i (click)="openAssetPickerDialog()"class="fas fa-ellipsis-v"></i> -->
       <!-- <mat-form-field>
         <mat-label>Asset</mat-label>
@@ -81,6 +81,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field> 
+
+    <div *ngIf="attributeNames.length === 0 && chosenAsset" style="width: 200px">This asset has no rule state attributes</div>
 
     
   </ng-container>

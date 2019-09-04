@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import openremote, { Auth } from '@openremote/core';
 import rest from '@openremote/rest';
-import { Asset, AssetQuery, AssetQuerySelect, AssetDescriptor, Tenant } from '@openremote/model';
+import { Asset, AssetQuery, AssetQuerySelect, AssetDescriptor, Tenant, MetaItemType } from '@openremote/model';
 import { isNullOrUndefined } from 'util';
 
 export enum IntegrationServiceStatus {
@@ -54,6 +54,7 @@ export class IntegrationService {
       select: {
         excludeAttributes: false,
         excludeParentInfo: false,
+        excludeAttributeMeta: false,
       }
     };
 
@@ -79,7 +80,7 @@ export class IntegrationService {
     });
   }
 
-  public refreshAssetDescriptors(successCallback?: (assets: Asset[]) => void) {
+  public refreshAssetDescriptors(successCallback?: (assets: AssetDescriptor[]) => void) {
     rest.api.AssetModelResource.getAssetDescriptors()
       .then((response) => {
         console.log(response.data);

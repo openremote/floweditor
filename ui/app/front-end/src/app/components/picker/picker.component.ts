@@ -4,7 +4,7 @@ import { PickerType } from 'src/app/models/picker.type';
 import { ProjectService } from 'src/app/services/project.service';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
-import { Asset } from '@openremote/model';
+import { Asset, AssetState, MetaItemType } from '@openremote/model';
 import { MatDialog } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { isNullOrUndefined } from 'util';
@@ -20,11 +20,11 @@ export class PickerComponent implements OnInit, AfterViewInit {
   @ViewChild('view') view: ElementRef;
   PickerType = PickerType;
 
-  private doubleDropDownChoice: any;
-  private chosenAssetDescriptor: Asset;
-  private chosenAttributeName = '';
+  public doubleDropDownChoice: any;
+  public chosenAsset: Asset;
+  public chosenAttributeName = '';
 
-  private attributeNames: string[] = [];
+  public attributeNames: string[] = [];
 
   constructor(
     private project: ProjectService,
@@ -59,8 +59,15 @@ export class PickerComponent implements OnInit, AfterViewInit {
   }
 
   private resetAssetAttributeDropDownValue() {
-    if (this.chosenAssetDescriptor.attributes != null) {
-      this.attributeNames = Object.keys(this.chosenAssetDescriptor.attributes);
+    if (this.chosenAsset.attributes != null) {
+      this.attributeNames = [];
+      for (const att of Object.keys(this.chosenAsset.attributes)) {
+        const meta = (this.chosenAsset.attributes[att] as AssetState).meta;
+        console.log(meta);
+        if (meta.find(m => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
+          this.attributeNames.push(att);
+        }
+      }
       this.chosenAttributeName = this.attributeNames[0];
     } else {
       this.attributeNames = [];
@@ -69,7 +76,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
 
   private setAssetPair() {
     this.internal.value = {
-      assetId: this.chosenAssetDescriptor.id,
+      assetId: this.chosenAsset.id,
       attributeName: this.chosenAttributeName
     };
   }
@@ -78,7 +85,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
     const d = this.dialog.open(AssetPickerDialogComponent);
     d.afterClosed().subscribe((response: Asset) => {
       if (response) {
-        this.chosenAssetDescriptor = response;
+        this.chosenAsset = response;
         console.log(JSON.stringify(response, null, 2));
         this.resetAssetAttributeDropDownValue();
         this.setAssetPair();

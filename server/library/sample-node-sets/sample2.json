@@ -1,0 +1,265 @@
+{
+    "name": "Sample 2 rule",
+    "nodes": [
+        {
+            "internals": [
+                {
+                    "name": "name",
+                    "value": "v1"
+                },
+                {
+                    "name": "defaultValue",
+                    "value": "0"
+                }
+            ],
+            "type": "Variable",
+            "id": 1
+        },
+        {
+            "internals": [
+                {
+                    "name": "name",
+                    "value": "v2"
+                },
+                {
+                    "name": "defaultValue",
+                    "value": "1"
+                }
+            ],
+            "type": "Variable",
+            "id": 2
+        },
+        {
+            "internals": [
+                {
+                    "name": "operator",
+                    "value": "<"
+                }
+            ],
+            "type": "Comparator",
+            "id": 3
+        },
+        {
+            "internals": [
+                {
+                    "name": "number",
+                    "value": 1000
+                }
+            ],
+            "type": "Number",
+            "id": 4
+        },
+        {
+            "internals": [],
+            "type": "Then",
+            "id": 5
+        },
+        {
+            "internals": [
+                {
+                    "name": "text",
+                    "value": "v1"
+                }
+            ],
+            "type": "Text",
+            "id": 6
+        },
+        {
+            "internals": [],
+            "type": "Log",
+            "id": 7
+        },
+        {
+            "internals": [],
+            "type": "VariableSaver",
+            "id": 8
+        },
+        {
+            "internals": [],
+            "type": "Splitter",
+            "id": 9
+        },
+        {
+            "internals": [],
+            "type": "Splitter",
+            "id": 10
+        },
+        {
+            "internals": [
+                {
+                    "name": "operator",
+                    "value": "+"
+                }
+            ],
+            "type": "Operator",
+            "id": 11
+        },
+        {
+            "internals": [
+                {
+                    "name": "text",
+                    "value": "v2"
+                }
+            ],
+            "type": "Text",
+            "id": 12
+        },
+        {
+            "internals": [],
+            "type": "VariableSaver",
+            "id": 13
+        }
+    ],
+    "connections": [
+        {
+            "from": {
+                "id": 1,
+                "name": "output"
+            },
+            "to": {
+                "id": 11,
+                "name": "input 1"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 11,
+                "name": "input 2"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 8,
+                "name": "value"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 3,
+                "name": "input 1"
+            }
+        },
+        {
+            "from": {
+                "id": 4,
+                "name": "value"
+            },
+            "to": {
+                "id": 3,
+                "name": "input 2"
+            }
+        },
+        {
+            "from": {
+                "id": 3,
+                "name": "output"
+            },
+            "to": {
+                "id": 5,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 5,
+                "name": "output"
+            },
+            "to": {
+                "id": 9,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 9,
+                "name": "output 1"
+            },
+            "to": {
+                "id": 10,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 9,
+                "name": "output 2"
+            },
+            "to": {
+                "id": 7,
+                "name": "trigger"
+            }
+        },
+        {
+            "from": {
+                "id": 2,
+                "name": "output"
+            },
+            "to": {
+                "id": 7,
+                "name": "input"
+            }
+        },
+        {
+            "from": {
+                "id": 10,
+                "name": "output 1"
+            },
+            "to": {
+                "id": 8,
+                "name": "trigger"
+            }
+        },
+        {
+            "from": {
+                "id": 6,
+                "name": "value"
+            },
+            "to": {
+                "id": 8,
+                "name": "name"
+            }
+        },
+        {
+            "from": {
+                "id": 11,
+                "name": "output"
+            },
+            "to": {
+                "id": 13,
+                "name": "value"
+            }
+        },
+        {
+            "from": {
+                "id": 12,
+                "name": "value"
+            },
+            "to": {
+                "id": 13,
+                "name": "name"
+            }
+        },
+        {
+            "from": {
+                "id": 10,
+                "name": "output 2"
+            },
+            "to": {
+                "id": 13,
+                "name": "trigger"
+            }
+        }
+    ]
+}

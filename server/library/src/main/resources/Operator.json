@@ -1,0 +1,47 @@
+{
+  "name": "Operator",
+  "type": "Processor",
+  "internals": [
+    {
+      "name": "operator",
+      "type": "Text",
+      "picker": {
+        "type": "Dropdown",
+        "options": [
+          {
+            "name": "Add",
+            "value": "+"
+          },
+          {
+            "name": "Subtract",
+            "value": "-"
+          },
+          {
+            "name": "Multiply",
+            "value": "*"
+          },
+          {
+            "name": "Divide",
+            "value": "/"
+          }
+        ]
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "Number",
+      "name": "input 1"
+    },
+    {
+      "type": "Number",
+      "name": "input 2"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Number",
+      "name": "output"
+    }
+  ]
+}

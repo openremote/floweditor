@@ -1,0 +1,20 @@
+{
+  "name": "And",
+  "type": "Processor",
+  "inputs": [
+    {
+      "type": "Boolean",
+      "name": "input 1"
+    },
+    {
+      "type": "Boolean",
+      "name": "input 2"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Boolean",
+      "name": "output"
+    }
+  ]
+}

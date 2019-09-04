@@ -29,7 +29,8 @@ export class AssetPickerTreeEntryComponent implements OnInit {
     this.integration.queryAssets({
       select: {
         excludeParentInfo: false,
-        excludeAttributes: false
+        excludeAttributes: false,
+        excludeAttributeMeta: false
       },
       parents: [
         {
