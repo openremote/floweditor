@@ -1,11 +1,11 @@
 @import "assets/dark.css";
 
-*{
+* {
   backface-visibility: hidden;
   user-select: none;
 }
 
-input{
+input {
   user-select: text;
 }
 
@@ -70,26 +70,29 @@ mat-label {
   background: #a7a7a7;
 }
 
-snippet-highlight .dark .code-toolbar .toolbar a, snippet-highlight .dark .code-toolbar .toolbar span
-{
+snippet-highlight .dark .code-toolbar .toolbar a,
+snippet-highlight .dark .code-toolbar .toolbar span {
   background: #47AA42;
 }
 
-snippet-highlight .dark .code-toolbar pre
-{
+snippet-highlight .dark .code-toolbar pre {
   border-top-color: #47AA42;
 }
 
-.muted {
-  color: rgba(0,0,0,0.2);
+.mat-form-field-infix {
+  width: unset !important;
+  min-width: 180px !important;
 }
 
-mat-dialog-container{
+.muted {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+mat-dialog-container {
   max-width: 50vw;
 }
 
-app-asset-picker-tree-entry
-{
+app-asset-picker-tree-entry {
   margin: 8px;
   display: block;
 }

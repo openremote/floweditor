@@ -7,7 +7,7 @@
       "type": "String",
       "picker": {
         "name": "Text",
-        "type": "Text"
+        "type": "Multiline"
       }
     }
   ],
