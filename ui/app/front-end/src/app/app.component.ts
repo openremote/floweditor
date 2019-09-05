@@ -16,10 +16,10 @@ enum Status {
 })
 export class AppComponent implements OnInit {
 
-  private openremote = openremote;
-  private IntegrationServiceStatus = IntegrationServiceStatus;
+  public openremote = openremote;
+  public IntegrationServiceStatus = IntegrationServiceStatus;
 
-  constructor(private integration: IntegrationService) {
+  constructor(public integration: IntegrationService) {
     integration.initialise();
   }
 

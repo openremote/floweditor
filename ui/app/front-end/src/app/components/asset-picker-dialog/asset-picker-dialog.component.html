@@ -1,6 +1,13 @@
-<div class="tree-container">
-    <app-asset-picker-tree-entry *ngFor="let asset of topLevel" [dialogRef]="dialogRef" [asset]="asset">
-    </app-asset-picker-tree-entry>
-</div>
+{{status}}
+
+<span [ngSwitch]="status">
+    <div class="tree-container" [ngSwitch]="status" [attr.pulse]="status == 0">
+        <div *ngSwitchCase="-1" class="error" style="margin: 10px">
+                <i class="fas fa-exclamation-triangle"></i> We couldn't connect to OpenRemote
+        </div>
+        <app-asset-picker-tree-entry *ngFor="let asset of topLevel" [dialogRef]="dialogRef" [asset]="asset">
+        </app-asset-picker-tree-entry>
+    </div>
+</span>
 
 <button mat-button mat-dialog-close>Cancel</button>

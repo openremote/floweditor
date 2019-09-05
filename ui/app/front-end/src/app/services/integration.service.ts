@@ -49,7 +49,7 @@ export class IntegrationService {
     return openremote.getRealm();
   }
 
-  public refreshAssets(successCallback?: (assets: Asset[]) => void) {
+  public refreshAssets(successCallback?: (assets: Asset[]) => void, errorCallback?: (error: any) => void) {
     const query: AssetQuery = {
       select: {
         excludeAttributes: false,
@@ -64,6 +64,10 @@ export class IntegrationService {
         console.log(this.assets);
         if (successCallback) {
           successCallback(this.assets);
+        }
+      }).catch((error) => {
+        if (errorCallback) {
+          errorCallback(error);
         }
       });
 

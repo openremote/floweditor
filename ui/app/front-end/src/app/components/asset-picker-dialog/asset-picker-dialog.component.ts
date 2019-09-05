@@ -10,6 +10,7 @@ import { IntegrationService } from 'src/app/services/integration.service';
 })
 export class AssetPickerDialogComponent implements OnInit, AfterViewInit {
   public topLevel: Asset[] = [];
+  public status = 0;
   constructor(public dialogRef: MatDialogRef<AssetPickerDialogComponent>, private integration: IntegrationService) {
 
   }
@@ -19,8 +20,12 @@ export class AssetPickerDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.status = 0;
     this.integration.refreshAssets((e) => {
       this.topLevel = e.filter((p) => p.parentId == null);
+      this.status = 1;
+    }, () => {
+      this.status = -1;
     });
   }
 

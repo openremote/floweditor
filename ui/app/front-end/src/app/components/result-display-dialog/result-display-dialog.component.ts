@@ -18,10 +18,9 @@ export class ResultDisplayDialogComponent implements OnInit {
     console.log(this.ruleset);
     this.integration.addRule(this.ruleset.name, this.ruleset.data, (e) => {
       if (e.status === 200) {
-        this.snackbar.open('Successfully added rule');
-      }
-      else {
-        this.snackbar.open('Something went wrong');
+        this.snackbar.open('Successfully added rule', 'Dismiss');
+      } else {
+        this.snackbar.open('Something went wrong', 'Dismiss');
       }
     });
   }

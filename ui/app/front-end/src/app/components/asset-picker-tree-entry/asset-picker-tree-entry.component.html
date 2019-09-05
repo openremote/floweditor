@@ -1,6 +1,6 @@
-<i *ngIf="!isLoaded" class="fas fa-spinner"></i>
-<i *ngIf="!hasChildren && isLoaded" class="fas fa-circle"></i>
-<i *ngIf="hasChildren && isLoaded" class="far expand-toggle" (click)="expandCollapse()"
+<i *ngIf="!isLoaded" class="far fa-circle spinner"></i>
+<i *ngIf="!hasChildren && isLoaded" class="fas fa-circle empty"></i>
+<i *ngIf="hasChildren && isLoaded" class="far expand-toggle pressable" (click)="expandCollapse()"
   [ngClass]="{'fa-caret-square-down': !isExpanded, 'fa-minus-square': isExpanded}"></i>
 
 <span class="title" (click)="choose()">{{asset.name}}</span>

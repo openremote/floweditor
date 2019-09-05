@@ -1,16 +1,12 @@
-.far {
+.far, .fas {
   border-radius: 2px;
   padding: 5px;
-  cursor: pointer;
   width: 14px;
   height: 16px;
 }
 
-.fas {
-  border-radius: 2px;
-  padding: 5px;
-  width: 14px;
-  height: 16px;
+.pressable {
+  cursor: pointer;
 }
 
 .title {
@@ -19,7 +15,7 @@
   border-radius: 2px;
 }
 
-.fa-circle {
+.empty {
   transform: scale(0.2);
 }
 
@@ -31,16 +27,19 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.fa-spinner {
-  animation: spinning 1s infinite linear;
+.spinner {
+  transform-origin: 50% 50%;
+  animation: spinning 200ms infinite linear;
 }
 
 @keyframes spinning {
   0% {
-    transform: rotateZ(0deg);
+    transform: scale(.2);
+    filter: opacity(100%);
   }
 
   100% {
-    transform: rotateZ(360deg);
+    transform: scale(1);
+    filter: opacity(0%);
   }
 }
