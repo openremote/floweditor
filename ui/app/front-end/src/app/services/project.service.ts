@@ -4,6 +4,7 @@ import { Connection } from '../models/connection';
 import { GraphSocket } from '../models/graph.socket';
 import { InputService } from './input.service';
 import { SelectionService } from './selection.service';
+import { SocketTypeMatcher } from '../logic/socket.type.matcher';
 
 @Injectable({
   providedIn: 'root'
@@ -103,6 +104,8 @@ export class ProjectService {
     const existing = this.connections.filter((c) => c.to === destination);
 
     if (sourceElement.getAttribute('socket') === destinationElement.getAttribute('socket')) { return; }
+
+    if (!SocketTypeMatcher.match(source.type, destination.type)) { return; }
 
     existing.forEach(connection => {
       this.connections.splice(this.connections.indexOf(connection), 1);
