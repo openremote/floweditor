@@ -1,5 +1,5 @@
 import { IdentityAssigner } from './identity.assigner';
-import { Connection, GraphNode, GraphSocket } from 'node-structure';
+import { GraphNode, GraphSocket } from 'node-structure';
 
 export class CopyMachine {
     public static copy(node: GraphNode): GraphNode {
