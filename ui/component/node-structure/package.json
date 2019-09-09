@@ -1,0 +1,17 @@
+{
+  "name": "node-structure",
+  "version": "1.0.0",
+  "description": "Node structure package for the flow editor",
+  "author": "Mestiez",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc -b"
+  },
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "tslint": "^5.11.0",
+    "typescript": "^3.4.5"
+  }
+}
