@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ProjectService } from 'src/app/services/project.service';
 import { CopyMachine } from 'src/app/logic/copy.machine';
 import { GraphNode, GraphNodeType } from 'node-structure';
+import { NodeManagerService } from 'src/app/services/node-manager.service';
 
 @Component({
   selector: 'app-toolpanel',
@@ -17,11 +18,20 @@ export class ToolpanelComponent implements OnInit {
   public error: string;
   private GraphNodeType = GraphNodeType;
 
-  constructor(public restService: RestService, private snackBar: MatSnackBar, private project: ProjectService) {
+  constructor(
+    public restService: RestService,
+    private snackBar: MatSnackBar,
+    private project: ProjectService,
+    private nodeService: NodeManagerService) {
   }
 
   public loadNodes() {
     this.loadingStatus = 0;
+
+    this.nodes = this.nodeService.translator.getAllNodes();
+    console.log(this.nodes);
+    this.loadingStatus = 1;
+    /*
     const nodeObservable = this.restService.getAllNodes();
     nodeObservable.subscribe(
       (data: GraphNode[]) => this.nodes = data.map(x => Object.assign(new GraphNode(), x)),
@@ -44,7 +54,7 @@ export class ToolpanelComponent implements OnInit {
           this.project.nodes.push(node);
         });
       }
-    );
+    );*/
   }
 
   ngOnInit() {

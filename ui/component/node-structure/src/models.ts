@@ -35,23 +35,22 @@ export class Connection {
 
 export class GraphInternal {
     public name: string;
-    public type: GraphDataTypes;
     public picker: Picker;
-    public value: any;
+    public value?: any;
 }
 
 export class GraphNode {
-    public id: number;
+    public id?: number;
     public inputs: GraphSocket[] = [];
     public outputs: GraphSocket[] = [];
     public internals: GraphInternal[] = [];
     public name: string;
     public type: GraphNodeType;
-    public position: { x: number, y: number } = { x: 0, y: 0 };
+    public position?: { x: number, y: number } = { x: 0, y: 0 };
 }
 
 export class GraphSocket {
-    public node: GraphNode;
+    public node?: GraphNode;
 
     constructor(public name: string, public type: GraphDataTypes) {
     }
@@ -72,6 +71,7 @@ export class GraphNodeCollection {
 }
 
 export class Picker {
+    public name?: string;
     public type: PickerType;
     public options: { name: string, value: any }[];
 }

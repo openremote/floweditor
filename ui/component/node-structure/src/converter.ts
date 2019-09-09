@@ -11,6 +11,7 @@ export class NodeGraphTranslator {
         }
         this.nodes.push(node);
         this.implementations[node.name] = implementation;
+        console.log('node registered: ' + JSON.stringify(node, null, 2));
     }
 
     public deregisterNode(node: GraphNode) {
@@ -34,7 +35,7 @@ export class NodeGraphTranslator {
     }
 
     public getAllNodes() {
-        return this.nodes.slice();
+        return this.nodes.slice(0);
     }
 
     public translate(name: string, collection: GraphNodeCollection): string {
