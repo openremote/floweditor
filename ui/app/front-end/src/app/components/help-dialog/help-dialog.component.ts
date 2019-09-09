@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphDataTypes } from 'src/app/models/graph.data.types';
+import { GraphDataTypes } from 'node-structure';
 
 @Component({
   selector: 'app-help-dialog',

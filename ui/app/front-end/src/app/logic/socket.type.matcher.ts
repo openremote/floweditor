@@ -1,4 +1,4 @@
-import { GraphDataTypes } from '../models/graph.data.types';
+import { GraphDataTypes } from 'node-structure';
 
 export class SocketTypeMatcher {
     private static readonly matches: { type: GraphDataTypes, matches: GraphDataTypes[] }[] = [

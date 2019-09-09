@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphNode } from 'src/app/models/graph.node';
 import { RestService } from 'src/app/services/rest.service';
 import { MatSnackBar } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
-import { GraphNodeType } from 'src/app/models/graph.node.type';
 import { ProjectService } from 'src/app/services/project.service';
 import { CopyMachine } from 'src/app/logic/copy.machine';
+import { GraphNode, GraphNodeType } from 'node-structure';
 
 @Component({
   selector: 'app-toolpanel',

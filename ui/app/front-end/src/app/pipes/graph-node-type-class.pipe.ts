@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GraphNodeType } from '../models/graph.node.type';
+import { GraphNodeType } from 'node-structure';
 
 @Pipe({
   name: 'graphNodeTypeClass'

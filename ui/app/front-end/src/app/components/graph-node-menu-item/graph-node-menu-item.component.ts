@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
 import { CopyMachine } from 'src/app/logic/copy.machine';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { GraphNode } from 'node-structure';
 
 @Component({
   selector: 'app-graph-node-menu-item',

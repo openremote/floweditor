@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';

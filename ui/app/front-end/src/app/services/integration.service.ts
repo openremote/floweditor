@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import openremote, { Auth } from '@openremote/core';
 import rest from '@openremote/rest';
-import { Asset, AssetQuery, AssetQuerySelect, AssetDescriptor, Tenant, MetaItemType, RulesetLang } from '@openremote/model';
-import { isNullOrUndefined } from 'util';
+import { Asset, AssetQuery, AssetDescriptor, Tenant, RulesetLang } from '@openremote/model';
 
 export enum IntegrationServiceStatus {
   Busy,

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GraphNode } from '../models/graph.node';
 import { InputService } from './input.service';
-import { Point } from '../models/point';
+import { GraphNode, Point } from 'node-structure';
 
 @Injectable({
   providedIn: 'root'

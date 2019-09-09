@@ -1,5 +1,5 @@
 import { ServerReadyInternal } from './server.ready.internal';
-import { GraphNode } from '../graph.node';
+import { GraphNode } from 'node-structure';
 
 export class ServerReadyNode {
     public type: string;

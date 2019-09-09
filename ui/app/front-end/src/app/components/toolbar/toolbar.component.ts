@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExporterService } from 'src/app/services/exporter.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { ResultDisplayDialogComponent } from '../result-display-dialog/result-display-dialog.component';
+import { MatDialog } from '@angular/material';
 import { SettingsPanelComponent } from '../settings-panel/settings-panel.component';
 import { ExportSettingsDialogComponent } from '../export-settings-dialog/export-settings-dialog.component';
 import { SelectionService } from 'src/app/services/selection.service';

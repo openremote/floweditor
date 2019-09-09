@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { GraphNode } from 'src/app/models/graph.node';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
 import { CdkDrag, CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
@@ -7,6 +6,7 @@ import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
 import { CopyMachine } from 'src/app/logic/copy.machine';
+import { GraphNode } from 'node-structure';
 
 @Component({
   selector: 'app-graph-node',

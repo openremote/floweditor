@@ -9,7 +9,10 @@ import { IntegrationService } from 'src/app/services/integration.service';
 })
 export class ResultDisplayDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public ruleset: { data: string, name: string }, private integration: IntegrationService, private snackbar: MatSnackBar) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public ruleset: { data: string, name: string },
+    private integration: IntegrationService,
+    private snackbar: MatSnackBar) { }
 
   ngOnInit() {
   }

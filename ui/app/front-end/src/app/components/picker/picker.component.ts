@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { GraphInternal } from 'src/app/models/graph.internal';
-import { PickerType } from 'src/app/models/picker.type';
 import { ProjectService } from 'src/app/services/project.service';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
@@ -8,6 +6,7 @@ import { Asset, AssetState, MetaItemType } from '@openremote/model';
 import { MatDialog } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { isNullOrUndefined } from 'util';
+import { GraphInternal, PickerType } from 'node-structure';
 
 @Component({
   selector: 'app-picker',

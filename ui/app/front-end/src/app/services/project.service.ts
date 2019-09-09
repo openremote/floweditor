@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { GraphNode } from '../models/graph.node';
-import { Connection } from '../models/connection';
-import { GraphSocket } from '../models/graph.socket';
 import { InputService } from './input.service';
 import { SelectionService } from './selection.service';
 import { SocketTypeMatcher } from '../logic/socket.type.matcher';
+import { Connection, GraphNode, GraphSocket } from 'node-structure';
 
 @Injectable({
   providedIn: 'root'

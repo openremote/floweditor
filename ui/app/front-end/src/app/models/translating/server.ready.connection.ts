@@ -1,5 +1,5 @@
 import { ConnectionSide } from './connection.side';
-import { Connection } from '../connection';
+import { Connection } from 'node-structure';
 
 export class ServerReadyConnection {
     public from: ConnectionSide;

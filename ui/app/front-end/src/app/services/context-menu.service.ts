@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ContextMenu } from '../models/context.menu';
-import { Point } from '../models/point';
 import { InputService } from './input.service';
+import { Point } from 'node-structure';
 
 @Injectable({
   providedIn: 'root'

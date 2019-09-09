@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import openremote from '@openremote/core';
 import { IntegrationService, IntegrationServiceStatus } from './services/integration.service';
-enum Status {
-  Busy,
-  Failure,
-  Authenticated,
-  Unauthenticated,
-  Skipped
-}
 
 @Component({
   selector: 'app-root',

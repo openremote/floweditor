@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Connection } from 'src/app/models/connection';
-import { Point } from 'src/app/models/point';
 import { timer } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
+import { Connection, Point } from 'node-structure';
 
 @Component({
   selector: 'app-connection',
