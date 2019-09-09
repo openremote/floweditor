@@ -57,8 +57,18 @@ export class GraphSocket {
     }
 }
 
+export interface GraphNodeImplementation {
+    /**
+     * Not sure what this has to do or what it needs to be called yet
+     */
+    toJson(inputs: GraphNode[], outputs: GraphNode[], internals: any): string;
+}
+
 export class GraphNodeCollection {
-    public nodes: GraphNode[];
+    constructor(
+        public nodes: GraphNode[],
+        public connections: Connection[]
+    ) { }
 }
 
 export class Picker {

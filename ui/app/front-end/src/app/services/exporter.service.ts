@@ -6,6 +6,7 @@ import { ServerReadyNode } from '../models/translating/server.ready.node';
 import { ServerReadyConnection } from '../models/translating/server.ready.connection';
 import { RestService } from './rest.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NodeGraphTranslator, GraphNodeCollection } from 'node-structure';
 import { ServerResponse } from '../models/server.response';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
 
@@ -16,8 +17,12 @@ export class ExporterService {
 
   constructor(private project: ProjectService, private snackBar: MatSnackBar, private dialog: MatDialog, private rest: RestService) { }
 
-  public export(name: string, callback: any) {
-
+  public export(name: string, callback: (data: string) => void) {
+    const translator = new NodeGraphTranslator();
+    const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
+    const result = translator.translate(name, collection);
+    callback(result);
+    return;
     const nodeSet: NodeSet = new NodeSet();
 
     nodeSet.name = name;
@@ -34,7 +39,7 @@ export class ExporterService {
     translationObservable.subscribe(
       (data: ServerResponse) => {
         if (data.success) {
-          callback(data.object as string);
+          callback(data.object);
         } else {
           this.dialog.open(ErrorDialogComponent, { data });
         }
