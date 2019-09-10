@@ -62,7 +62,7 @@ export interface GraphNodeImplementation {
     /**
      * Not sure what this has to do or what it needs to be called yet
      */
-    toJson(inputs: GraphSocket[], outputs: GraphSocket[], internals: any): RuleCondition | RuleAction;
+    toJson(inputs: GraphSocket[], outputs: GraphSocket[][], internals: GraphInternal[]): RuleCondition | RuleAction | string;
 }
 
 export class GraphNodeCollection {

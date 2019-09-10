@@ -116,6 +116,60 @@ export class NodeManagerService {
       }
     );
 
+    translator.registerNode(
+      {
+        name: 'Then',
+        type: 'Then' as GraphNodeType,
+        internals: [],
+        inputs: [
+          {
+            type: 'Boolean' as GraphDataTypes,
+            name: 'condition'
+          }
+        ],
+        outputs: [
+          {
+            type: 'Trigger' as GraphDataTypes,
+            name: 'action'
+          }
+        ]
+      },
+      {
+        toJson() {
+          const c: RuleCondition = {
+            assets: {
+
+            }
+          };
+          return c;
+        }
+      }
+    );
+
+    translator.registerNode(
+      {
+        name: 'Write attribute',
+        type: 'Output' as GraphNodeType,
+        internals: [],
+        inputs: [
+          {
+            type: 'Trigger' as GraphDataTypes,
+            name: 'trigger'
+          },
+          {
+            type: 'Any' as GraphDataTypes,
+            name: 'value'
+          }
+        ],
+        outputs: []
+      },
+      {
+        toJson(inputs, outputs, internals) {
+          return inputs[1].name;
+        }
+      }
+    );
+
     this.translator = translator;
   }
 }

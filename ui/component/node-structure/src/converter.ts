@@ -64,19 +64,13 @@ export class NodeGraphTranslator {
         };
 
         let r = "";
-        // console.log(this.implementations);
         for (const i of collection.nodes) {
-            console.log("START " + i.name);
-            console.log("input connections");
-            for (const connection of getInputConnections(i)) {
-                console.log(connection);
-            }
-            console.log("output connections");
-            for (const connection of getOutputConnections(i)) {
-                console.log(connection);
-            }
-            console.log("END " + i.name);
-            // r += JSON.stringify(impl.toJson(null, null, null)) + "\n";
+            const impl = this.implementations[i.name];
+            r += JSON.stringify(impl.toJson(
+                getInputConnections(i),
+                getOutputConnections(i),
+                i.internals
+            ));
         }
 
         return r;
