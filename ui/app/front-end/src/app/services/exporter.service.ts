@@ -9,16 +9,22 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NodeGraphTranslator, GraphNodeCollection } from 'node-structure';
 import { ServerResponse } from '../models/server.response';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
+import { NodeManagerService } from './node-manager.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExporterService {
 
-  constructor(private project: ProjectService, private snackBar: MatSnackBar, private dialog: MatDialog, private rest: RestService) { }
+  constructor(
+    private project: ProjectService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private rest: RestService,
+    private nodeService: NodeManagerService) { }
 
   public export(name: string, callback: (data: string) => void) {
-    const translator = new NodeGraphTranslator();
+    const translator = this.nodeService.translator;
     const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
     const result = translator.translate(name, collection);
     callback(result);

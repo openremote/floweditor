@@ -3,9 +3,8 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "src",
-    "watch": true
   },
   "include": [
     "./src"
-  ],
+  ]
 }

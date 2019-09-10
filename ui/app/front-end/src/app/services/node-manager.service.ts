@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NodeGraphTranslator, GraphNode, GraphSocket, GraphDataTypes, GraphNodeType, PickerType } from 'node-structure';
+import { RuleCondition } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,12 @@ export class NodeManagerService {
       },
       {
         toJson() {
-          return '';
+          const c: RuleCondition = {
+            assets: {
+
+            }
+          };
+          return c;
         }
       }
     );
@@ -62,61 +68,50 @@ export class NodeManagerService {
       },
       {
         toJson() {
-          return '';
+          const c: RuleCondition = {
+            assets: {
+
+            }
+          };
+          return c;
         }
       }
     );
 
-    // Raw json
     translator.registerNode(
-      JSON.parse(`
       {
-        "name": "Comparator",
-        "type": "Processor",
-        "internals": [
+        name: 'Just a processor',
+        type: 'Processor' as GraphNodeType,
+        internals: [],
+        inputs: [
           {
-            "name": "operator",
-            "type": "Text",
-            "picker": {
-              "type": "Dropdown",
-              "options": [
-                {
-                  "name": "more than",
-                  "value": ">"
-                },
-                {
-                  "name": "less than",
-                  "value": "<"
-                },
-                {
-                  "name": "equals",
-                  "value": "=="
-                }
-              ]
-            }
-          }
-        ],
-        "inputs": [
-          {
-            "type": "Number",
-            "name": "input 1"
+            type: 'Any' as GraphDataTypes,
+            name: 'test'
           },
           {
-            "type": "Number",
-            "name": "input 2"
+            type: 'Number' as GraphDataTypes,
+            name: 'test2'
           }
         ],
-        "outputs": [
+        outputs: [
           {
-            "type": "Boolean",
-            "name": "output"
+            type: 'Any' as GraphDataTypes,
+            name: 'questionable'
+          },
+          {
+            type: 'Any' as GraphDataTypes,
+            name: 'certain'
           }
         ]
-      }
-      `),
+      },
       {
         toJson() {
-          return '';
+          const c: RuleCondition = {
+            assets: {
+
+            }
+          };
+          return c;
         }
       }
     );

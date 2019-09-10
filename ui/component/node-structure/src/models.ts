@@ -1,3 +1,5 @@
+import { RuleCondition, RuleAction } from "@openremote/model";
+
 export enum PickerType {
     Text = "Text",
     Multiline = "Multiline",
@@ -60,7 +62,7 @@ export interface GraphNodeImplementation {
     /**
      * Not sure what this has to do or what it needs to be called yet
      */
-    toJson(inputs: GraphNode[], outputs: GraphNode[], internals: any): string;
+    toJson(inputs: GraphSocket[], outputs: GraphSocket[], internals: any): RuleCondition | RuleAction;
 }
 
 export class GraphNodeCollection {
