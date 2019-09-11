@@ -41,7 +41,10 @@ export const readAttribute: GraphNodeDefinition = {
                     attributes: {
                         items: [
                             {
-                                name: internals[0].value.attributeName,
+                                name: {
+                                    predicateType: "string",
+                                    value: internals[0].value.attributeName
+                                },
                                 exists: true
                             }
                         ]

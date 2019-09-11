@@ -23,11 +23,11 @@ export class ExporterService {
     private rest: RestService,
     private nodeService: NodeManagerService) { }
 
-  public export(name: string, callback: (data: string) => void) {
+  public export(name: string, desc: string, callback: (data: string) => void) {
     const translator = this.nodeService.translator;
     const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
     try {
-      const result = translator.translate(name, '', collection);
+      const result = translator.translate(name, desc, collection);
       callback(result);
     } catch (error) {
       console.error(error);

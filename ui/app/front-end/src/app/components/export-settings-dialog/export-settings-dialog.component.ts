@@ -11,6 +11,7 @@ import { ResultDisplayDialogComponent } from '../result-display-dialog/result-di
 export class ExportSettingsDialogComponent implements OnInit {
 
   public inputName = 'Rule';
+  public inputDescription = 'Does things';
   constructor(private exporter: ExporterService, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -18,9 +19,9 @@ export class ExportSettingsDialogComponent implements OnInit {
 
   public translateAndShow() {
     console.log(this.inputName);
-    this.exporter.export(this.inputName, (data: string) => {
+    this.exporter.export(this.inputName, this.inputDescription, (data: string) => {
 
-      const ruleset = { data, name: this.inputName };
+      const ruleset = { data, name: this.inputName, description: this.inputDescription };
       console.log(ruleset);
 
       this.dialog.open(ResultDisplayDialogComponent, { data: ruleset });

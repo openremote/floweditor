@@ -123,6 +123,6 @@ export class NodeGraphTranslator {
 
         rule.then = rhs.map((s) => getImplementationResult(s));
 
-        return JSON.stringify(rule, null, 2);
+        return JSON.stringify({ rules: [rule] }, null, 2);
     }
 }
