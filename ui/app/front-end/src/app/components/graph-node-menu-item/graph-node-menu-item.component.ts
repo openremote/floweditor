@@ -3,6 +3,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { CopyMachine } from 'src/app/logic/copy.machine';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { GraphNode } from 'node-structure';
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-graph-node-menu-item',
@@ -13,7 +15,7 @@ export class GraphNodeMenuItemComponent implements OnInit {
   @Input() node: GraphNode;
   @ViewChild('dragElement') dragElement: ElementRef;
 
-  constructor(public project: ProjectService) {
+  constructor(public project: ProjectService, private dialog: MatDialog) {
 
   }
 
@@ -36,6 +38,10 @@ export class GraphNodeMenuItemComponent implements OnInit {
 
     if (box.left < box2.left || box.top < box2.top) { return; }
 
-    this.project.nodes.push(node);
+    try {
+      this.project.addNode(node);
+    } catch (error) {
+      this.dialog.open(ErrorDialogComponent, { data: (error as Error).message });
+    }
   }
 }

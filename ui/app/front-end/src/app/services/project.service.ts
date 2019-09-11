@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { InputService } from './input.service';
 import { SelectionService } from './selection.service';
 import { SocketTypeMatcher } from '../logic/socket.type.matcher';
-import { Connection, GraphNode, GraphSocket } from 'node-structure';
+import { Connection, GraphNode, GraphSocket, GraphNodeType } from 'node-structure';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,15 @@ export class ProjectService {
     this.selection.selectedNodes.forEach((n) => {
       this.removeNode(n);
     });
+  }
+
+  public addNode(node: GraphNode) {
+    if (node.type === GraphNodeType.Then) {
+      if (this.nodes.find((n) => n.type === GraphNodeType.Then) != null) {
+        throw new Error('A project can only have one THEN node');
+      }
+    }
+    this.nodes.push(node);
   }
 
   public removeNode(node: GraphNode) {
