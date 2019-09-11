@@ -1,0 +1,17 @@
+{
+  "name": "standard-collection",
+  "version": "1.0.0",
+  "description": "The standard node collection",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc -b"
+  },
+  "author": "Mestiez",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "tslint": "^5.11.0",
+    "typescript": "^3.4.5"
+  }
+}

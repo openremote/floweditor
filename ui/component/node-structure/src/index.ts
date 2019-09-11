@@ -8,6 +8,8 @@ export {
     Picker,
     PickerType,
     GraphNodeCollection,
+    GraphNodeImplementation,
+    GraphNodeDefinition,
     Point
 } from "./models";
 

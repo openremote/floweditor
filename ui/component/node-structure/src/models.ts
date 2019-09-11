@@ -1,4 +1,5 @@
 import { RuleCondition, RuleAction } from "@openremote/model";
+import { NodeGraphTranslator } from "./converter";
 
 export enum PickerType {
     Text = "Text",
@@ -65,6 +66,11 @@ export interface GraphNodeImplementation {
     toJson(inputs: GraphSocket[], outputs: GraphSocket[][], internals: GraphInternal[]): RuleCondition | RuleAction | string;
 }
 
+export interface GraphNodeDefinition {
+    definition: GraphNode;
+    implementation: GraphNodeImplementation;
+}
+
 export class GraphNodeCollection {
     constructor(
         public nodes: GraphNode[],
@@ -75,7 +81,7 @@ export class GraphNodeCollection {
 export class Picker {
     public name?: string;
     public type: PickerType;
-    public options: { name: string, value: any }[];
+    public options?: { name: string, value: any }[];
 }
 
 export class Point {
