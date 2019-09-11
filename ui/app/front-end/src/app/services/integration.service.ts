@@ -106,7 +106,7 @@ export class IntegrationService {
 
   public addRule(name: string, groovyCode: string, callback?: (status: any) => void) {
     rest.api.RulesResource.createGlobalRuleset({
-      lang: RulesetLang.GROOVY,
+      lang: RulesetLang.JSON,
       name,
       type: 'global',
       rules: groovyCode

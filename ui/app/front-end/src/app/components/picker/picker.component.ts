@@ -80,7 +80,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private openAssetPickerDialog() {
+  public openAssetPickerDialog() {
     const d = this.dialog.open(AssetPickerDialogComponent);
     d.afterClosed().subscribe((response: Asset) => {
       if (response) {
@@ -88,6 +88,11 @@ export class PickerComponent implements OnInit, AfterViewInit {
         console.log(JSON.stringify(response, null, 2));
         this.resetAssetAttributeDropDownValue();
         this.setAssetPair();
+      } else {
+        this.internal.value = {
+          assetId: this.chosenAsset.id,
+          attributeName: ''
+        };
       }
     });
   }

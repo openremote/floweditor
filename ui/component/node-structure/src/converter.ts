@@ -112,12 +112,17 @@ export class NodeGraphTranslator {
         const lhs = getInputConnections(thenNode)[0];
         const rhs = getOutputConnections(thenNode)[0];
 
+        if (lhs == null) { throw new Error("Empty rule condition"); }
+        if (rhs.length === 0) { throw new Error("Empty rule action"); }
+
         rule.when = {
             items: [
                 getImplementationResult(lhs)
             ]
         };
 
-        return JSON.stringify(rule);
+        rule.then = rhs.map((s) => getImplementationResult(s));
+
+        return JSON.stringify(rule, null, 2);
     }
 }

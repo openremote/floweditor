@@ -1,4 +1,5 @@
 import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
+import { RuleCondition } from "@openremote/model";
 
 export const readAttribute: GraphNodeDefinition = {
 
@@ -24,7 +25,31 @@ export const readAttribute: GraphNodeDefinition = {
 
     implementation: {
         getForOutput(index, inputs, outputs, internals) {
-            return "unimplemented";
+
+            if (internals[0].value == null) {
+                throw new Error("Empty asset attribute");
+            } else if ((internals[0].value.attributeName as string).trim().length === 0) {
+                throw new Error("Invalid attribute");
+            }
+
+            const condition: RuleCondition = {
+                assets:
+                {
+                    ids: [
+                        internals[0].value.assetId
+                    ],
+                    attributes: {
+                        items: [
+                            {
+                                name: internals[0].value.attributeName,
+                                exists: true
+                            }
+                        ]
+                    }
+                }
+            };
+
+            return condition;
         }
     }
 };

@@ -1,4 +1,4 @@
-import { RuleCondition, RuleAction } from "@openremote/model";
+import { RuleCondition, RuleAction, RuleActionUnion } from "@openremote/model";
 import { NodeGraphTranslator } from "./converter";
 
 export enum PickerType {
@@ -68,7 +68,7 @@ export interface GraphNodeImplementation {
         inputs: GraphSocket[],
         outputs: GraphSocket[][],
         internals: GraphInternal[]
-    ): RuleCondition | RuleAction | string | boolean | number;
+    ): RuleCondition | RuleActionUnion | string | boolean | number;
 }
 
 export interface GraphNodeDefinition {

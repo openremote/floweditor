@@ -6,7 +6,7 @@ import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
 import { CopyMachine } from 'src/app/logic/copy.machine';
-import { GraphNode } from 'node-structure';
+import { GraphNode, GraphNodeType } from 'node-structure';
 
 @Component({
   selector: 'app-graph-node',
@@ -102,7 +102,9 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
           });
 
           copies.forEach((c) => {
-            this.project.nodes.push(c);
+            if (c.type !== GraphNodeType.Then) {
+              this.project.addNode(c);
+            }
           });
 
         }
