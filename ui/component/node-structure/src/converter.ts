@@ -1,9 +1,35 @@
-import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket } from "./models";
+import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket, GraphNodeType, GraphDataTypes } from "./models";
 import { JsonRule } from "@openremote/model";
 export class NodeGraphTranslator {
 
     private implementations: { [name: string]: GraphNodeImplementation; } = {};
     private nodes: GraphNode[] = [];
+
+    constructor(createWithTHENnode = true) {
+        if (createWithTHENnode) {
+            this.registerNode({
+                name: "Then",
+                type: GraphNodeType.Then,
+                inputs: [
+                    {
+                        name: "Condition",
+                        type: GraphDataTypes.Boolean,
+                    }
+                ],
+                outputs: [
+                    {
+                        name: "Action",
+                        type: GraphDataTypes.Trigger
+                    }
+                ],
+                internals: []
+            }, {
+                getForOutput() {
+                    return "THEN node is implemented by the converter";
+                }
+            });
+        }
+    }
 
     public registerNode(node: GraphNode, implementation: GraphNodeImplementation) {
         if (this.hasNode(node.name)) {
@@ -39,7 +65,7 @@ export class NodeGraphTranslator {
         return this.nodes.slice(0);
     }
 
-    public translate(name: string, collection: GraphNodeCollection): string {
+    public translate(name: string, description: string, collection: GraphNodeCollection): string {
 
         const getInputConnections = (node: GraphNode): GraphSocket[] => {
             const result: GraphSocket[] = [];
@@ -63,16 +89,35 @@ export class NodeGraphTranslator {
             return result;
         };
 
-        let r = "";
-        for (const i of collection.nodes) {
-            const impl = this.implementations[i.name];
-            r += JSON.stringify(impl.toJson(
-                getInputConnections(i),
-                getOutputConnections(i),
-                i.internals
-            ));
-        }
+        const getImplementationResult = (socket: GraphSocket): any => {
+            const impl = this.getImplementation(socket.node.name);
+            const index = socket.node.outputs.indexOf(socket);
 
-        return r;
+            return impl.getForOutput(
+                index,
+                getInputConnections(socket.node),
+                getOutputConnections(socket.node),
+                socket.node.internals
+            );
+        };
+
+        const rule: JsonRule = {
+            name,
+            description
+        };
+
+        const thenNode = collection.nodes.filter((n) => n.type === GraphNodeType.Then)[0];
+        if (!thenNode) { throw new Error("Missing THEN node"); }
+
+        const lhs = getInputConnections(thenNode)[0];
+        const rhs = getOutputConnections(thenNode)[0];
+
+        rule.when = {
+            items: [
+                getImplementationResult(lhs)
+            ]
+        };
+
+        return JSON.stringify(rule);
     }
 }

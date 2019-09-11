@@ -26,8 +26,15 @@ export class ExporterService {
   public export(name: string, callback: (data: string) => void) {
     const translator = this.nodeService.translator;
     const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
-    const result = translator.translate(name, collection);
-    callback(result);
+    try {
+      const result = translator.translate(name, '', collection);
+      callback(result);
+    } catch (error) {
+      console.error(error);
+      this.dialog.open(ErrorDialogComponent, { data: (error as Error).message });
+    }
+
+
     return;
     const nodeSet: NodeSet = new NodeSet();
 

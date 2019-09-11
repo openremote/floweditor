@@ -63,7 +63,12 @@ export interface GraphNodeImplementation {
     /**
      * Not sure what this has to do or what it needs to be called yet
      */
-    toJson(inputs: GraphSocket[], outputs: GraphSocket[][], internals: GraphInternal[]): RuleCondition | RuleAction | string;
+    getForOutput(
+        outputIndex: number,
+        inputs: GraphSocket[],
+        outputs: GraphSocket[][],
+        internals: GraphInternal[]
+    ): RuleCondition | RuleAction | string | boolean | number;
 }
 
 export interface GraphNodeDefinition {

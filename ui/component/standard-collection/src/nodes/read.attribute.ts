@@ -1,21 +1,17 @@
 import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
 
-export const writeAttribute: GraphNodeDefinition = {
+export const readAttribute: GraphNodeDefinition = {
 
     definition: {
-        name: "Write attribute",
-        type: GraphNodeType.Output,
-        inputs: [
-            {
-                name: "trigger",
-                type: GraphDataTypes.Trigger,
-            },
+        name: "Read attribute",
+        type: GraphNodeType.Input,
+        outputs: [
             {
                 name: "value",
                 type: GraphDataTypes.Any,
             },
         ],
-        outputs: [],
+        inputs: [],
         internals: [
             {
                 name: "attribute",
