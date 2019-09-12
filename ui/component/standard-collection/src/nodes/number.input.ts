@@ -1,4 +1,4 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
+import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType, ExecutionRequestInfo } from "node-structure";
 
 export const numberInput: GraphNodeDefinition = {
 
@@ -23,8 +23,8 @@ export const numberInput: GraphNodeDefinition = {
     },
 
     implementation: {
-        getForOutput(index, inputs, outputs, internals) {
-            return internals[0].value;
+        execute(info) {
+            return info.internals[0].value;
         }
     }
 };

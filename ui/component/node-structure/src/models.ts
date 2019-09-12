@@ -59,16 +59,21 @@ export class GraphSocket {
     }
 }
 
+export interface ExecutionRequestInfo {
+    collection: GraphNodeCollection;
+    outputSocketIndex: number;
+    outputSocket: GraphSocket;
+    node: GraphNode;
+    inputs: GraphSocket[];
+    outputs: GraphSocket[][];
+    internals: GraphInternal[];
+}
+
 export interface GraphNodeImplementation {
     /**
      * Not sure what this has to do or what it needs to be called yet
      */
-    getForOutput(
-        outputIndex: number,
-        inputs: GraphSocket[],
-        outputs: GraphSocket[][],
-        internals: GraphInternal[]
-    ): RuleCondition | RuleActionUnion | string | boolean | number;
+    execute(info: ExecutionRequestInfo): RuleCondition | RuleActionUnion | string | boolean | number;
 }
 
 export interface GraphNodeDefinition {

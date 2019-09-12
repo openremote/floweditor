@@ -1,4 +1,4 @@
-import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
+import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType, ExecutionRequestInfo } from "node-structure";
 import { RuleAction, RuleCondition, RuleActionWriteAttribute } from "@openremote/model";
 
 export const writeAttribute: GraphNodeDefinition = {
@@ -28,10 +28,10 @@ export const writeAttribute: GraphNodeDefinition = {
     },
 
     implementation: {
-        getForOutput(index, inputs, outputs, internals) {
-            if (internals[0].value == null) {
+        execute(info) {
+            if (info.internals[0].value == null) {
                 throw new Error("Empty asset attribute");
-            } else if ((internals[0].value.attributeName as string).trim().length === 0) {
+            } else if ((info.internals[0].value.attributeName as string).trim().length === 0) {
                 throw new Error("Invalid attribute");
             }
 
@@ -39,12 +39,12 @@ export const writeAttribute: GraphNodeDefinition = {
 
             const action: RuleActionWriteAttribute = {
                 action: "write-attribute",
-                attributeName: internals[0].value.attributeName,
-                value: inputs[0].name, // TODO get implementation from connected socket
+                attributeName: info.internals[0].value.attributeName,
+                value: info.inputs[0].name, // TODO get implementation from connected socket
                 target: {
                     assets: {
                         ids: [
-                            internals[0].value.assetId
+                            info.internals[0].value.assetId
                         ]
                     }
                 }

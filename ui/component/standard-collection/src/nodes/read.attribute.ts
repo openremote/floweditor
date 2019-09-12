@@ -24,11 +24,11 @@ export const readAttribute: GraphNodeDefinition = {
     },
 
     implementation: {
-        getForOutput(index, inputs, outputs, internals) {
+        execute(info) {
 
-            if (internals[0].value == null) {
+            if (info.internals[0].value == null) {
                 throw new Error("Empty asset attribute");
-            } else if ((internals[0].value.attributeName as string).trim().length === 0) {
+            } else if ((info.internals[0].value.attributeName as string).trim().length === 0) {
                 throw new Error("Invalid attribute");
             }
 
@@ -36,14 +36,14 @@ export const readAttribute: GraphNodeDefinition = {
                 assets:
                 {
                     ids: [
-                        internals[0].value.assetId
+                        info.internals[0].value.assetId
                     ],
                     attributes: {
                         items: [
                             {
                                 name: {
                                     predicateType: "string",
-                                    value: internals[0].value.attributeName
+                                    value: info.internals[0].value.attributeName
                                 },
                                 exists: true
                             }

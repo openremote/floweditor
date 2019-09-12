@@ -1,5 +1,5 @@
 import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket, GraphNodeType, GraphDataTypes } from "./models";
-import { JsonRule } from "@openremote/model";
+import { JsonRule, RuleCondition, RuleActionUnion } from "@openremote/model";
 export class NodeGraphTranslator {
 
     private implementations: { [name: string]: GraphNodeImplementation; } = {};
@@ -24,8 +24,8 @@ export class NodeGraphTranslator {
                 ],
                 internals: []
             }, {
-                getForOutput() {
-                    return "THEN node is implemented by the converter";
+                execute(info) {
+                    return "THEN node is implemented by the translator";
                 }
             });
         }
@@ -65,41 +65,46 @@ export class NodeGraphTranslator {
         return this.nodes.slice(0);
     }
 
+    public getInputConnections(node: GraphNode, collection: GraphNodeCollection): GraphSocket[] {
+        const result: GraphSocket[] = [];
+
+        for (const socket of node.inputs) {
+            const connected = collection.connections.filter((c) => c.to === socket)[0];
+            result.push(connected ? connected.from : null);
+        }
+
+        return result;
+    }
+
+    public getOutputConnections(node: GraphNode, collection: GraphNodeCollection): GraphSocket[][] {
+        const result: GraphSocket[][] = [];
+
+        for (const socket of node.outputs) {
+            const connected = collection.connections.filter((c) => c.from === socket).map((c) => c.to);
+            result.push(connected);
+        }
+
+        return result;
+    }
+
+    public executeNode(socket: GraphSocket, collection: GraphNodeCollection) {
+        const impl = this.getImplementation(socket.node.name);
+        const index = socket.node.outputs.indexOf(socket);
+
+        return impl.execute(
+            {
+                outputSocketIndex: index,
+                outputSocket: socket,
+                inputs: this.getInputConnections(socket.node, collection),
+                outputs: this.getOutputConnections(socket.node, collection),
+                internals: socket.node.internals,
+                node: socket.node,
+                collection: collection
+            }
+        );
+    }
+
     public translate(name: string, description: string, collection: GraphNodeCollection): string {
-
-        const getInputConnections = (node: GraphNode): GraphSocket[] => {
-            const result: GraphSocket[] = [];
-
-            for (const socket of node.inputs) {
-                const connected = collection.connections.filter((c) => c.to === socket)[0];
-                result.push(connected ? connected.from : null);
-            }
-
-            return result;
-        };
-
-        const getOutputConnections = (node: GraphNode): GraphSocket[][] => {
-            const result: GraphSocket[][] = [];
-
-            for (const socket of node.outputs) {
-                const connected = collection.connections.filter((c) => c.from === socket).map((c) => c.to);
-                result.push(connected);
-            }
-
-            return result;
-        };
-
-        const getImplementationResult = (socket: GraphSocket): any => {
-            const impl = this.getImplementation(socket.node.name);
-            const index = socket.node.outputs.indexOf(socket);
-
-            return impl.getForOutput(
-                index,
-                getInputConnections(socket.node),
-                getOutputConnections(socket.node),
-                socket.node.internals
-            );
-        };
 
         const rule: JsonRule = {
             name,
@@ -109,19 +114,19 @@ export class NodeGraphTranslator {
         const thenNode = collection.nodes.filter((n) => n.type === GraphNodeType.Then)[0];
         if (!thenNode) { throw new Error("Missing THEN node"); }
 
-        const lhs = getInputConnections(thenNode)[0];
-        const rhs = getOutputConnections(thenNode)[0];
+        const lhs = this.getInputConnections(thenNode, collection)[0];
+        const rhs = this.getOutputConnections(thenNode, collection)[0];
 
         if (lhs == null) { throw new Error("Empty rule condition"); }
         if (rhs.length === 0) { throw new Error("Empty rule action"); }
 
         rule.when = {
             items: [
-                getImplementationResult(lhs)
+                this.executeNode(lhs, collection) as RuleCondition
             ]
         };
 
-        rule.then = rhs.map((s) => getImplementationResult(s));
+        rule.then = rhs.map((s) => this.executeNode(s, collection) as RuleActionUnion);
 
         return JSON.stringify({ rules: [rule] }, null, 2);
     }

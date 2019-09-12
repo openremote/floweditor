@@ -10,6 +10,7 @@ export {
     GraphNodeCollection,
     GraphNodeImplementation,
     GraphNodeDefinition,
+    ExecutionRequestInfo,
     Point
 } from "./models";
 

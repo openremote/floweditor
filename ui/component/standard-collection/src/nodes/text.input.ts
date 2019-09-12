@@ -20,7 +20,7 @@ export const textInput: GraphNodeDefinition = {
         ]
     },
     implementation: {
-        getForOutput(index, inputs, outputs, internals) {
+        execute(info) {
             return "unimplemented";
         }
     }
