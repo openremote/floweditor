@@ -7,10 +7,10 @@ export const writeAttribute: GraphNodeDefinition = {
         name: "Write attribute",
         type: GraphNodeType.Output,
         inputs: [
-            {
-                name: "trigger",
-                type: GraphDataTypes.Trigger,
-            },
+            // {
+            //     name: "trigger",
+            //     type: GraphDataTypes.Trigger,
+            // },
             {
                 name: "value",
                 type: GraphDataTypes.Any,

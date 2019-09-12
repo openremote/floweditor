@@ -15,6 +15,9 @@ export enum GraphNodeType {
     Input = "Input",
     Processor = "Processor",
     Output = "Output",
+    /**
+     * @deprecated This node type is deprecated because the NodeGraphTranslator decides when the rule is executed
+     */
     Then = "Then"
 }
 
@@ -22,6 +25,9 @@ export enum GraphDataTypes {
     Number = "Number",
     String = "String",
     Boolean = "Boolean",
+    /**
+     * @deprecated This data type is deprecated because the NodeGraphTranslator decides when the rule is executed
+     */
     Trigger = "Trigger",
     Color = "Color",
     Any = "Any"

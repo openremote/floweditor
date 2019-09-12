@@ -1,35 +1,9 @@
 import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket, GraphNodeType, GraphDataTypes } from "./models";
-import { JsonRule, RuleCondition, RuleActionUnion } from "@openremote/model";
+import { JsonRule, RuleCondition, RuleActionUnion, Ruleset, JsonRulesetDefinition } from "@openremote/model";
 export class NodeGraphTranslator {
 
     private implementations: { [name: string]: GraphNodeImplementation; } = {};
     private nodes: GraphNode[] = [];
-
-    constructor(createWithTHENnode = true) {
-        if (createWithTHENnode) {
-            this.registerNode({
-                name: "Then",
-                type: GraphNodeType.Then,
-                inputs: [
-                    {
-                        name: "Condition",
-                        type: GraphDataTypes.Boolean,
-                    }
-                ],
-                outputs: [
-                    {
-                        name: "Action",
-                        type: GraphDataTypes.Trigger
-                    }
-                ],
-                internals: []
-            }, {
-                execute(info) {
-                    return "THEN node is implemented by the translator";
-                }
-            });
-        }
-    }
 
     public registerNode(node: GraphNode, implementation: GraphNodeImplementation) {
         if (this.hasNode(node.name)) {
@@ -105,29 +79,24 @@ export class NodeGraphTranslator {
     }
 
     public translate(name: string, description: string, collection: GraphNodeCollection): string {
+        if (collection.nodes.filter((n) => n.type === GraphNodeType.Then).length !== 0) {
+            throw new Error("THEN nodes are no longer allowed");
+        }
 
-        const rule: JsonRule = {
-            name,
-            description
-        };
+        const outputs = collection.nodes.filter((n) => n.type === GraphNodeType.Output);
+        const ruleset: JsonRulesetDefinition = { rules: [] };
 
-        const thenNode = collection.nodes.filter((n) => n.type === GraphNodeType.Then)[0];
-        if (!thenNode) { throw new Error("Missing THEN node"); }
+        for (const output of outputs) {
+            const rule: JsonRule = {
+                name,
+                description
+            };
 
-        const lhs = this.getInputConnections(thenNode, collection)[0];
-        const rhs = this.getOutputConnections(thenNode, collection)[0];
+            // somehow seperate the condtion and action parts from the resulting array of nodes
 
-        if (lhs == null) { throw new Error("Empty rule condition"); }
-        if (rhs.length === 0) { throw new Error("Empty rule action"); }
+            ruleset.rules.push(rule);
+        }
 
-        rule.when = {
-            items: [
-                this.executeNode(lhs, collection) as RuleCondition
-            ]
-        };
-
-        rule.then = rhs.map((s) => this.executeNode(s, collection) as RuleActionUnion);
-
-        return JSON.stringify({ rules: [rule] }, null, 2);
+        return JSON.stringify(ruleset, null, 2);
     }
 }

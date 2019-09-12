@@ -3,6 +3,8 @@
 * {
   backface-visibility: hidden;
   user-select: none;
+  font-family: 'Roboto Mono', sans-serif;
+  letter-spacing: normal;
 }
 
 input {
@@ -13,7 +15,8 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: 'Roboto Mono', monospace;
+  /* font-family: 'Roboto Mono', monospace; */
+  /* --default-font: 'Roboto Mono', monospace; */
 }
 
 .fill {
