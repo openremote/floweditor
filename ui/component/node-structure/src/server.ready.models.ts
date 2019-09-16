@@ -1,3 +1,5 @@
+import { GraphInternal } from "./models";
+
 export interface ServerReadyNodeCollection {
     name: string;
     description: string;
@@ -15,7 +17,7 @@ export interface ServerReadyNode {
     type: string;
     name: string;
     position: { x: number, y: number };
-    internals: ServerReadyInternal[];
+    internals: GraphInternal[];
     inputs: ServerReadySocket[];
     outputs: ServerReadySocket[];
 }
@@ -25,9 +27,4 @@ export interface ServerReadySocket {
     type: string;
     nodeId: number;
     index: number;
-}
-
-export interface ServerReadyInternal {
-    name: string;
-    value: any;
 }

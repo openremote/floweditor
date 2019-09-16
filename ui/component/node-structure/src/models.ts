@@ -2,7 +2,7 @@ import { RuleCondition, RuleAction, RuleActionUnion } from "@openremote/model";
 import { NodeGraphTranslator } from "./converter";
 
 export {
-    ServerReadyConnection, ServerReadyNode, ServerReadyInternal, ServerReadyNodeCollection
+    ServerReadyConnection, ServerReadyNode, ServerReadyNodeCollection
 } from "./server.ready.models";
 
 export enum PickerType {

@@ -2,6 +2,8 @@
   <img class="icon" src="assets/favicon.png" alt="">
   <div class="logo">OpenRemote Rule Node Editor</div>
   <div class="information">{{integration.getRealm()}}</div>
+  <button mat-button class="warn" (click)="debugSave()"><i class="fas fa-save"></i>debug save</button>
+  <button mat-button class="warn" (click)="debugLoad()"><i class="fas fa-folder-open"></i>debug load</button>
   <button mat-button (click)="showSettings()"><i class="fas fa-cog"></i>Settings</button>
   <button mat-button (click)="showHelp()"><i class="fas fa-question"></i>Help</button>
   <button mat-button (click)="exit()"><i class="fas fa-sign-out-alt"></i>Logout</button>

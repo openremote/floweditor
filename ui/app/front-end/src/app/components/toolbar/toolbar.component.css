@@ -49,6 +49,14 @@
   background: rgb(192, 67, 67);
 }
 
+*[mat-button].warn {
+  background: rgb(223, 188, 72);
+}
+
+*[mat-button].warn:hover {
+  background: rgb(255, 215, 84);
+}
+
 .logo {
   margin-top: auto;
   margin-bottom: auto;

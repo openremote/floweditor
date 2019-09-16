@@ -1,4 +1,4 @@
-import { GraphNode, GraphNodeCollection, GraphSocket, ServerReadyInternal, Picker } from "./models";
+import { GraphNode, GraphNodeCollection, GraphSocket, Connection, GraphNodeType, GraphDataTypes } from "./models";
 import { ServerReadyNodeCollection, ServerReadyConnection, ServerReadyNode, ServerReadySocket } from "./server.ready.models";
 
 export class NodeUtilities {
@@ -24,8 +24,44 @@ export class NodeUtilities {
         return result;
     }
 
-    public static getNodeFromID(id: number, collection: GraphNodeCollection) {
-        return collection.nodes.filter((n) => n.id === id)[0];
+    public static getNodeFromID(id: number, nodes: GraphNode[]) {
+        return nodes.filter((n) => n.id === id)[0];
+    }
+
+    public static convertToNormal(collection: ServerReadyNodeCollection) {
+        const nodes: GraphNode[] = [];
+        const connections: Connection[] = [];
+
+        collection.nodes.forEach((node) => {
+            nodes.push({
+                id: node.id,
+                name: node.name,
+                position: node.position,
+                type: node.type as GraphNodeType,
+                internals: node.internals,
+                inputs: [], // These will be assigned after all nodes have been converted
+                outputs: []
+            });
+        });
+
+        collection.connections.forEach((connection) => {
+           connections.push({
+               from: {
+                   name: connection.from.name,
+                   node: this.getNodeFromID(connection.from.nodeId, nodes),
+                   type: connection.from.type as GraphDataTypes,
+               },
+               to: {
+                name: connection.to.name,
+                node: this.getNodeFromID(connection.to.nodeId, nodes),
+                type: connection.to.type as GraphDataTypes,
+               },
+               fromElement: null,
+               toElement: null
+           });
+        });
+
+        return new GraphNodeCollection(nodes, connections);
     }
 
     public static convertToServerReady(name: string, description: string, collection: GraphNodeCollection) {
@@ -53,21 +89,12 @@ export class NodeUtilities {
 
         collection.nodes.forEach((c) => {
 
-            const convertedInternals: ServerReadyInternal[] = [];
-
-            c.internals.forEach((i) => {
-                convertedInternals.push({
-                    name: i.name,
-                    value: i.value
-                });
-            });
-
             const converted: ServerReadyNode = {
                 id: c.id,
                 name: c.name,
                 type: c.type,
-                internals: convertedInternals,
-                
+                internals: c.internals,
+
                 position: c.position,
 
                 inputs: c.inputs.map((ii) => {
