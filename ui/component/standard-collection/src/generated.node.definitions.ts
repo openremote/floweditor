@@ -2,6 +2,7 @@ import { booleanInput } from "./nodes/input/boolean.input";
 import { numberInput } from "./nodes/input/number.input";
 import { readAttribute } from "./nodes/input/read.attribute";
 import { textInput } from "./nodes/input/text.input";
+import { abs } from "./nodes/processor/abs";
 import { add } from "./nodes/processor/add";
 import { concat } from "./nodes/processor/concat";
 import { divide } from "./nodes/processor/divide";
@@ -16,6 +17,7 @@ export const nodeDefinitions = [
     numberInput,
     readAttribute,
     textInput,
+    abs,
     add,
     concat,
     divide,

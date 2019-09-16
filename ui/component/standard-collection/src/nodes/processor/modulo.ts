@@ -26,7 +26,7 @@ export const modulo: GraphNodeDefinition = {
 
     implementation: {
         execute(info) {
-            return info.internals[0].value;
+            return "Unimplemented";
         }
     }
 };

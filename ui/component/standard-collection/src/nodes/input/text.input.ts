@@ -21,7 +21,7 @@ export const textInput: GraphNodeDefinition = {
     },
     implementation: {
         execute(info) {
-            return "unimplemented";
+            return info.internals[0].value;
         }
     }
 };

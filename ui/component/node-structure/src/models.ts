@@ -73,6 +73,7 @@ export interface ExecutionRequestInfo {
     inputs: GraphSocket[];
     outputs: GraphSocket[][];
     internals: GraphInternal[];
+    translator: NodeGraphTranslator;
 }
 
 export interface GraphNodeImplementation {

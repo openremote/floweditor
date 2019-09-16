@@ -1,23 +1,19 @@
 import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType, ExecutionRequestInfo } from "node-structure";
 
-export const multiply: GraphNodeDefinition = {
+export const abs: GraphNodeDefinition = {
 
     definition: {
-        name: "Multiply",
+        name: "Absolute",
         type: GraphNodeType.Processor,
         inputs: [
             {
-                name: "a",
-                type: GraphDataTypes.Number
-            },
-            {
-                name: "b",
+                name: "v",
                 type: GraphDataTypes.Number
             }
         ],
         outputs: [
             {
-                name: "c",
+                name: "x",
                 type: GraphDataTypes.Number
             }
         ],

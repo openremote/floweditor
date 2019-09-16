@@ -1,5 +1,5 @@
 import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket, GraphNodeType, GraphDataTypes } from "./models";
-import { JsonRule, RuleCondition, RuleActionUnion, Ruleset, JsonRulesetDefinition } from "@openremote/model";
+import { JsonRule, RuleCondition, RuleActionUnion, Ruleset, JsonRulesetDefinition, RuleAction } from "@openremote/model";
 export class NodeGraphTranslator {
 
     private implementations: { [name: string]: GraphNodeImplementation; } = {};
@@ -73,7 +73,25 @@ export class NodeGraphTranslator {
                 outputs: this.getOutputConnections(socket.node, collection),
                 internals: socket.node.internals,
                 node: socket.node,
-                collection: collection
+                collection: collection,
+                translator: this
+            }
+        );
+    }
+
+    public executeOutputNode(node: GraphNode, collection: GraphNodeCollection) {
+        const impl = this.getImplementation(node.name);
+
+        return impl.execute(
+            {
+                outputSocketIndex: -1,
+                outputSocket: null,
+                inputs: this.getInputConnections(node, collection),
+                outputs: this.getOutputConnections(node, collection),
+                internals: node.internals,
+                node: node,
+                collection: collection,
+                translator: this
             }
         );
     }
@@ -89,10 +107,13 @@ export class NodeGraphTranslator {
         for (const output of outputs) {
             const rule: JsonRule = {
                 name,
-                description
+                description,
+                then: [],
             };
 
             // somehow seperate the condtion and action parts from the resulting array of nodes
+            const translated: any = this.executeOutputNode(output, collection);
+            rule.then.push(translated);
 
             ruleset.rules.push(rule);
         }

@@ -35,12 +35,12 @@ export const writeAttribute: GraphNodeDefinition = {
                 throw new Error("Invalid attribute");
             }
 
-
+            const inputValue = info.translator.executeNode(info.inputs[0], info.collection);
 
             const action: RuleActionWriteAttribute = {
                 action: "write-attribute",
                 attributeName: info.internals[0].value.attributeName,
-                value: info.inputs[0].name, // TODO get implementation from connected socket
+                value: inputValue, // TODO get implementation from connected socket
                 target: {
                     assets: {
                         ids: [
