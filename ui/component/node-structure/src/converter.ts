@@ -1,5 +1,6 @@
 import { GraphNodeCollection, GraphNode, GraphNodeImplementation, GraphSocket, GraphNodeType, GraphDataTypes } from "./models";
 import { JsonRule, RuleCondition, RuleActionUnion, Ruleset, JsonRulesetDefinition, RuleAction } from "@openremote/model";
+import { NodeUtilities } from "./utils";
 export class NodeGraphTranslator {
 
     private implementations: { [name: string]: GraphNodeImplementation; } = {};
@@ -39,28 +40,6 @@ export class NodeGraphTranslator {
         return this.nodes.slice(0);
     }
 
-    public getInputConnections(node: GraphNode, collection: GraphNodeCollection): GraphSocket[] {
-        const result: GraphSocket[] = [];
-
-        for (const socket of node.inputs) {
-            const connected = collection.connections.filter((c) => c.to === socket)[0];
-            result.push(connected ? connected.from : null);
-        }
-
-        return result;
-    }
-
-    public getOutputConnections(node: GraphNode, collection: GraphNodeCollection): GraphSocket[][] {
-        const result: GraphSocket[][] = [];
-
-        for (const socket of node.outputs) {
-            const connected = collection.connections.filter((c) => c.from === socket).map((c) => c.to);
-            result.push(connected);
-        }
-
-        return result;
-    }
-
     public executeNode(socket: GraphSocket, collection: GraphNodeCollection) {
         const impl = this.getImplementation(socket.node.name);
         const index = socket.node.outputs.indexOf(socket);
@@ -69,8 +48,8 @@ export class NodeGraphTranslator {
             {
                 outputSocketIndex: index,
                 outputSocket: socket,
-                inputs: this.getInputConnections(socket.node, collection),
-                outputs: this.getOutputConnections(socket.node, collection),
+                inputs: NodeUtilities.getInputConnections(socket.node, collection),
+                outputs: NodeUtilities.getOutputConnections(socket.node, collection),
                 internals: socket.node.internals,
                 node: socket.node,
                 collection: collection,
@@ -86,8 +65,8 @@ export class NodeGraphTranslator {
             {
                 outputSocketIndex: -1,
                 outputSocket: null,
-                inputs: this.getInputConnections(node, collection),
-                outputs: this.getOutputConnections(node, collection),
+                inputs: NodeUtilities.getInputConnections(node, collection),
+                outputs: NodeUtilities.getOutputConnections(node, collection),
                 internals: node.internals,
                 node: node,
                 collection: collection,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NodeSet } from '../models/translating/node.set';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,8 @@ export class RestService {
     return this.http.get(this.path + 'nodes/getAll');
   }
 
-  public translate(nodeset: NodeSet) {
-    console.log(JSON.stringify(nodeset));
-    return this.http.post(this.path + 'nodes/translate', JSON.stringify(nodeset));
-  }
+  // public translate(nodeset: NodeSet) {
+  //   console.log(JSON.stringify(nodeset));
+  //   return this.http.post(this.path + 'nodes/translate', JSON.stringify(nodeset));
+  // }
 }

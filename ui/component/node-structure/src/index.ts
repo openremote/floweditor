@@ -15,3 +15,4 @@ export {
 } from "./models";
 
 export { NodeGraphTranslator } from "./converter";
+export { NodeUtilities } from "./utils";
