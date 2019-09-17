@@ -6,7 +6,8 @@ import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
 import { CopyMachine } from 'src/app/logic/copy.machine';
-import { GraphNode, GraphNodeType } from 'node-structure';
+import { GraphNode, GraphNodeType, GraphSocket } from 'node-structure';
+import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 
 @Component({
   selector: 'app-graph-node',
@@ -38,6 +39,8 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
     this.selection.topDepthIndex++;
     elem.style.zIndex = this.selection.topDepthIndex.toString();
   }
+
+  public getSocketIdentity = (socket: GraphSocket) => IdentityAssigner.getSocketIdentity(socket);
 
   ngAfterViewInit() {
     if (this.node.position != null) {

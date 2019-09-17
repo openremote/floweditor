@@ -4,6 +4,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
 import { Connection, Point } from 'node-structure';
+import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 
 @Component({
   selector: 'app-connection',
@@ -14,6 +15,9 @@ export class ConnectionComponent implements OnInit {
 
   @Input() connection: Connection;
   private curviness = 0;
+
+  private fromElement: HTMLElement;
+  private toElement: HTMLElement;
 
   constructor(private project: ProjectService, private context: ContextMenuService) { }
 
@@ -30,11 +34,19 @@ export class ConnectionComponent implements OnInit {
   }
 
   private boundingRect1() {
-    return this.connection.fromElement.getBoundingClientRect();
+    if (!this.fromElement) {
+      this.fromElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.from));
+      return new DOMRect();
+    }
+    return this.fromElement.getBoundingClientRect();
   }
 
   private boundingRect2() {
-    return this.connection.toElement.getBoundingClientRect();
+    if (!this.toElement) {
+      this.toElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.to));
+      return new DOMRect();
+    }
+    return this.toElement.getBoundingClientRect();
   }
 
   private x1() {

@@ -55,9 +55,7 @@ export class NodeUtilities {
                     name: connection.to.name,
                     node: this.getNodeFromID(connection.to.nodeId, nodes),
                     type: connection.to.type as GraphDataTypes,
-                },
-                fromElement: null,
-                toElement: null
+                }
             });
         });
 

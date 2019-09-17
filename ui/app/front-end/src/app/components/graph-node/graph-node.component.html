@@ -4,10 +4,9 @@
     <div class="title" cdkDragHandle *ngIf="node.type !== 'Then'">
       <div>{{node.name | graphNodeName}}</div>
     </div>
-
     <div #inputSockets class="sockets" style="grid-area: input">
       <div class="input socket" *ngFor="let s of node.inputs" title="{{s.type}}">
-        <span class="circle" socket="input" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
+        <span [id]="getSocketIdentity(s)" class="circle" socket="input" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
           (mouseup)="project.stopConnectionDrag(s, $event)"
           (mousedown)="project.beginConnectionDrag(s, $event, true)"></span>
         <span class="label">{{s.name}}</span>
@@ -24,7 +23,7 @@
     <div #outputSockets class="sockets" style="grid-area: output">
       <div class="output socket" *ngFor="let s of node.outputs" title="{{s.type}}">
         <span class="label">{{s.name}}</span>
-        <span class="circle" socket="output" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
+        <span [id]="getSocketIdentity(s)" class="circle" socket="output" [ngStyle]="{'background': s.type | graphSocketTypeColour}"
           (mouseup)="project.stopConnectionDrag(s, $event)" (mousedown)="project.beginConnectionDrag(s, $event)"></span>
       </div>
     </div>

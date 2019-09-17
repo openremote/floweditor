@@ -118,6 +118,6 @@ export class ProjectService {
       this.connections.splice(this.connections.indexOf(connection), 1);
     });
 
-    this.connections.push(new Connection(source, destination, sourceElement, destinationElement));
+    this.connections.push(new Connection(source, destination));
   }
 }

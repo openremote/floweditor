@@ -40,9 +40,7 @@ export enum GraphDataTypes {
 export class Connection {
     constructor(
         public from: GraphSocket,
-        public to: GraphSocket,
-        public fromElement: Element,
-        public toElement: Element) {
+        public to: GraphSocket) {
     }
 }
 
