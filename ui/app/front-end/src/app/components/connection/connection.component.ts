@@ -14,10 +14,10 @@ import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 export class ConnectionComponent implements OnInit {
 
   @Input() connection: Connection;
-  private curviness = 0;
+  public curviness = 0;
 
-  private fromElement: HTMLElement;
-  private toElement: HTMLElement;
+  public fromElement: HTMLElement;
+  public toElement: HTMLElement;
 
   constructor(private project: ProjectService, private context: ContextMenuService) { }
 
@@ -33,7 +33,7 @@ export class ConnectionComponent implements OnInit {
     );
   }
 
-  private boundingRect1() {
+  public boundingRect1() {
     if (!this.fromElement) {
       this.fromElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.from));
       return new DOMRect();
@@ -41,7 +41,7 @@ export class ConnectionComponent implements OnInit {
     return this.fromElement.getBoundingClientRect();
   }
 
-  private boundingRect2() {
+  public boundingRect2() {
     if (!this.toElement) {
       this.toElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.to));
       return new DOMRect();
@@ -49,39 +49,39 @@ export class ConnectionComponent implements OnInit {
     return this.toElement.getBoundingClientRect();
   }
 
-  private x1() {
+  public x1() {
     const b = this.boundingRect1();
     return b.left + b.width / 2;
   }
 
-  private y1() {
+  public y1() {
     const b = this.boundingRect1();
     return b.top + b.height / 2;
   }
 
-  private x2() {
+  public x2() {
     const b = this.boundingRect2();
     return b.left + b.width / 2;
   }
 
-  private y2() {
+  public y2() {
     const b = this.boundingRect2();
     return b.top + b.height / 2;
   }
 
-  private start() {
+  public start() {
     return new Point(this.x1(), this.y1());
   }
 
-  private end() {
+  public end() {
     return new Point(this.x2(), this.y2());
   }
 
-  private s(p: Point): string {
+  public s(p: Point): string {
     return p.x.toString() + ',' + p.y.toString();
   }
 
-  private curve(x: number): number {
+  public curve(x: number): number {
     // http://robertpenner.com/scripts/easing_equations.txt
     const quadraticEasing = (t: number, b: number, c: number, d: number) => {
       const p = t /= d / 2;
@@ -92,7 +92,7 @@ export class ConnectionComponent implements OnInit {
     return quadraticEasing(x, 0, 1, 1); // Math.cos(t * Math.PI) / -2 + 0.5;
   }
 
-  private getPointListString(): string {
+  public getPointListString(): string {
     const points: Point[] = [];
 
     const start = this.start();
@@ -114,7 +114,7 @@ export class ConnectionComponent implements OnInit {
     return points.map(p => this.s(p)).join(' ');
   }
 
-  private openContextMenu(e: MouseEvent) {
+  public openContextMenu(e: MouseEvent) {
     e.preventDefault();
     this.context.contextMenu = {
       items: [
