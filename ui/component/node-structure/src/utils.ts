@@ -45,21 +45,44 @@ export class NodeUtilities {
         });
 
         collection.connections.forEach((connection) => {
-           connections.push({
-               from: {
-                   name: connection.from.name,
-                   node: this.getNodeFromID(connection.from.nodeId, nodes),
-                   type: connection.from.type as GraphDataTypes,
-               },
-               to: {
-                name: connection.to.name,
-                node: this.getNodeFromID(connection.to.nodeId, nodes),
-                type: connection.to.type as GraphDataTypes,
-               },
-               fromElement: null,
-               toElement: null
-           });
+            connections.push({
+                from: {
+                    name: connection.from.name,
+                    node: this.getNodeFromID(connection.from.nodeId, nodes),
+                    type: connection.from.type as GraphDataTypes,
+                },
+                to: {
+                    name: connection.to.name,
+                    node: this.getNodeFromID(connection.to.nodeId, nodes),
+                    type: connection.to.type as GraphDataTypes,
+                },
+                fromElement: null,
+                toElement: null
+            });
         });
+
+        for (let i = 0; i < collection.nodes.length; i++) {
+            const serverNode = collection.nodes[i];
+            const localNode = nodes[i];
+
+            localNode.inputs = serverNode.inputs.map((original) => {
+                const newSocket: GraphSocket = {
+                    name: original.name,
+                    node: this.getNodeFromID(original.nodeId, nodes),
+                    type: original.type as GraphDataTypes
+                };
+                return newSocket;
+            });
+        
+            localNode.outputs = serverNode.outputs.map((original) => {
+                const newSocket: GraphSocket = {
+                    name: original.name,
+                    node: this.getNodeFromID(original.nodeId, nodes),
+                    type: original.type as GraphDataTypes
+                };
+                return newSocket;
+            });
+        }
 
         return new GraphNodeCollection(nodes, connections);
     }

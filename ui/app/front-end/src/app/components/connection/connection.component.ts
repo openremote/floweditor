@@ -69,15 +69,15 @@ export class ConnectionComponent implements OnInit {
     return p.x.toString() + ',' + p.y.toString();
   }
 
-  // http://robertpenner.com/scripts/easing_equations.txt
-  quadtratic_easing(t, b, c, d) {
-    const p = t /= d / 2;
-    if ((p) < 1) { return c / 2 * t * t + b; }
-    return -c / 2 * ((--t) * (t - 2) - 1) + b;
-  }
+  private curve(x: number): number {
+    // http://robertpenner.com/scripts/easing_equations.txt
+    const quadraticEasing = (t: number, b: number, c: number, d: number) => {
+      const p = t /= d / 2;
+      if ((p) < 1) { return c / 2 * t * t + b; }
+      return -c / 2 * ((--t) * (t - 2) - 1) + b;
+    };
 
-  private curve(t: number): number {
-    return this.quadtratic_easing(t, 0, 1, 1); // Math.cos(t * Math.PI) / -2 + 0.5;
+    return quadraticEasing(x, 0, 1, 1); // Math.cos(t * Math.PI) / -2 + 0.5;
   }
 
   private getPointListString(): string {

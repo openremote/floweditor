@@ -6,6 +6,7 @@ import { SelectionService } from 'src/app/services/selection.service';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
 import { IntegrationService, IntegrationServiceStatus } from 'src/app/services/integration.service';
+import { NodeUtilities, GraphNodeCollection } from 'node-structure';
 
 @Component({
   selector: 'app-toolbar',
@@ -23,14 +24,14 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  private clear() {
+  public clear() {
     this.project.nodes = [];
     this.project.connections = [];
     this.selection.nodes = this.project.nodes;
     this.selection.selectedNodes = [];
   }
 
-  private exit() {
+  public exit() {
     if (this.integration.getStatus() === IntegrationServiceStatus.Authenticated) {
       this.integration.logout();
     } else {
@@ -38,15 +39,35 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  private showSettings() {
+  public showSettings() {
     this.dialog.open(SettingsPanelComponent);
   }
 
-  private showHelp() {
+  public showHelp() {
     this.dialog.open(HelpDialogComponent);
   }
 
-  private exportNodeStructure() {
+  public exportNodeStructure() {
     this.dialog.open(ExportSettingsDialogComponent);
+  }
+
+  public debugSave() {
+    const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
+    const stored = NodeUtilities.convertToServerReady('a', 'b', collection);
+    localStorage.debugStorage = JSON.stringify(stored);
+  }
+
+  public debugLoad() {
+    const collection = JSON.parse(localStorage.debugStorage);
+    const converted = NodeUtilities.convertToNormal(collection);
+    console.log(collection);
+    console.log(converted);
+
+    this.clear();
+    this.project.nodes = converted.nodes;
+    this.project.connections = converted.connections;
+    // TODO somehow get the elements of the connections before I create them
+    // I could also completely get rid of these members, which is what im probably going to do.
+    // Then i have to somehow find a replacement in the system so that everything still works
   }
 }
