@@ -24,7 +24,7 @@ export class NodeUtilities {
         return result;
     }
 
-    public static getNodeFromID(id: number, nodes: GraphNode[]) {
+    public static getNodeFromID(id: string, nodes: GraphNode[]) {
         const nodeIndex = nodes.findIndex((n) => n.id === id);
         if (nodeIndex === -1) { console.warn(`Node wiht ID ${id} not found`); }
         return nodes[nodeIndex];
@@ -42,13 +42,10 @@ export class NodeUtilities {
                 position: node.position,
                 type: node.type as GraphNodeType,
                 internals: node.internals,
-                inputs: [], // These will be assigned after all nodes have been converted
+                inputs: [], // These will be populated after all nodes have been converted
                 outputs: []
             });
         });
-
-        console.log(collection.nodes);
-        console.log(nodes);
 
         for (let i = 0; i < collection.nodes.length; i++) {
             const serverNode = collection.nodes[i];

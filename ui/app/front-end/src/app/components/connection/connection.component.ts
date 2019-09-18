@@ -31,10 +31,6 @@ export class ConnectionComponent implements OnInit {
         }
       }
     );
-
-    console.log(IdentityAssigner.getSocketElementIdentity(this.connection.from));
-    console.log(IdentityAssigner.getSocketElementIdentity(this.connection.to));
-    console.log(this.connection.to.node.inputs.includes(this.connection.to));
   }
 
   public boundingRect1() {

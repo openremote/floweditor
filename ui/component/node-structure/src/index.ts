@@ -11,7 +11,11 @@ export {
     GraphNodeImplementation,
     GraphNodeDefinition,
     ExecutionRequestInfo,
-    Point
+    Point,
+    ServerReadyConnection,
+    ServerReadyNode,
+    ServerReadyNodeCollection,
+    ServerReadySocket
 } from "./models";
 
 export { NodeGraphTranslator } from "./converter";

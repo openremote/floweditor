@@ -17,7 +17,7 @@ export class CopyMachine {
         clone.id = IdentityAssigner.generateIdentity();
         clone.inputs.forEach(socket => {
             socket.node = clone;
-            socket.id = IdentityAssigner.generateIdentity()
+            socket.id = IdentityAssigner.generateIdentity();
         });
 
         clone.outputs.forEach(socket => {

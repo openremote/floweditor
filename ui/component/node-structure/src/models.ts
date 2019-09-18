@@ -2,7 +2,7 @@ import { RuleCondition, RuleAction, RuleActionUnion } from "@openremote/model";
 import { NodeGraphTranslator } from "./converter";
 
 export {
-    ServerReadyConnection, ServerReadyNode, ServerReadyNodeCollection
+    ServerReadyConnection, ServerReadyNode, ServerReadyNodeCollection, ServerReadySocket
 } from "./server.ready.models";
 
 export enum PickerType {
@@ -51,7 +51,7 @@ export class GraphInternal {
 }
 
 export class GraphNode {
-    public id?: number;
+    public id?: string;
     public inputs: GraphSocket[] = [];
     public outputs: GraphSocket[] = [];
     public internals: GraphInternal[] = [];
@@ -62,7 +62,7 @@ export class GraphNode {
 
 export class GraphSocket {
     public node?: GraphNode;
-    public id?: number;
+    public id?: string;
     constructor(public name: string, public type: GraphDataTypes, ) {
     }
 }

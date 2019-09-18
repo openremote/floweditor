@@ -13,7 +13,7 @@ export interface ServerReadyConnection {
 }
 
 export interface ServerReadyNode {
-    id: number;
+    id: string;
     type: string;
     name: string;
     position: { x: number, y: number };
@@ -23,9 +23,9 @@ export interface ServerReadyNode {
 }
 
 export interface ServerReadySocket {
-    id: number;
+    id: string;
     name: string;
     type: string;
-    nodeId: number;
+    nodeId: string;
     index: number;
 }
