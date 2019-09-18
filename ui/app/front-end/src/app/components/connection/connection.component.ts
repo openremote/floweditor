@@ -31,11 +31,15 @@ export class ConnectionComponent implements OnInit {
         }
       }
     );
+
+    console.log(IdentityAssigner.getSocketElementIdentity(this.connection.from));
+    console.log(IdentityAssigner.getSocketElementIdentity(this.connection.to));
+    console.log(this.connection.to.node.inputs.includes(this.connection.to));
   }
 
   public boundingRect1() {
     if (!this.fromElement) {
-      this.fromElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.from));
+      this.fromElement = document.getElementById(IdentityAssigner.getSocketElementIdentity(this.connection.from));
       return new DOMRect();
     }
     return this.fromElement.getBoundingClientRect();
@@ -43,7 +47,7 @@ export class ConnectionComponent implements OnInit {
 
   public boundingRect2() {
     if (!this.toElement) {
-      this.toElement = document.getElementById(IdentityAssigner.getSocketIdentity(this.connection.to));
+      this.toElement = document.getElementById(IdentityAssigner.getSocketElementIdentity(this.connection.to));
       return new DOMRect();
     }
     return this.toElement.getBoundingClientRect();

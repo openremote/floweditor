@@ -40,7 +40,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
     elem.style.zIndex = this.selection.topDepthIndex.toString();
   }
 
-  public getSocketIdentity = (socket: GraphSocket) => IdentityAssigner.getSocketIdentity(socket);
+  public getSocketIdentity = (socket: GraphSocket) => IdentityAssigner.getSocketElementIdentity(socket);
 
   ngAfterViewInit() {
     if (this.node.position != null) {

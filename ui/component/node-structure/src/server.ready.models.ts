@@ -23,6 +23,7 @@ export interface ServerReadyNode {
 }
 
 export interface ServerReadySocket {
+    id: number;
     name: string;
     type: string;
     nodeId: number;

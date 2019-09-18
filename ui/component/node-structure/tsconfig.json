@@ -3,6 +3,10 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "src",
+    "lib": [
+      "dom",
+      "es7"
+   ]
   },
   "include": [
     "./src"

@@ -25,11 +25,14 @@ export class NodeUtilities {
     }
 
     public static getNodeFromID(id: number, nodes: GraphNode[]) {
-        return nodes.filter((n) => n.id === id)[0];
+        const nodeIndex = nodes.findIndex((n) => n.id === id);
+        if (nodeIndex === -1) { console.warn(`Node wiht ID ${id} not found`); }
+        return nodes[nodeIndex];
     }
 
     public static convertToNormal(collection: ServerReadyNodeCollection) {
         const nodes: GraphNode[] = [];
+        const sockets: GraphSocket[] = [];
         const connections: Connection[] = [];
 
         collection.nodes.forEach((node) => {
@@ -44,43 +47,50 @@ export class NodeUtilities {
             });
         });
 
-        collection.connections.forEach((connection) => {
-            connections.push({
-                from: {
-                    name: connection.from.name,
-                    node: this.getNodeFromID(connection.from.nodeId, nodes),
-                    type: connection.from.type as GraphDataTypes,
-                },
-                to: {
-                    name: connection.to.name,
-                    node: this.getNodeFromID(connection.to.nodeId, nodes),
-                    type: connection.to.type as GraphDataTypes,
-                }
-            });
-        });
+        console.log(collection.nodes);
+        console.log(nodes);
 
         for (let i = 0; i < collection.nodes.length; i++) {
             const serverNode = collection.nodes[i];
-            const localNode = nodes[i];
 
-            localNode.inputs = serverNode.inputs.map((original) => {
+            nodes[i].inputs = serverNode.inputs.map((original) => {
                 const newSocket: GraphSocket = {
                     name: original.name,
-                    node: this.getNodeFromID(original.nodeId, nodes),
-                    type: original.type as GraphDataTypes
+                    node: nodes[i],
+                    type: original.type as GraphDataTypes,
+                    id: original.id,
                 };
+                sockets.push(newSocket);
                 return newSocket;
             });
-        
-            localNode.outputs = serverNode.outputs.map((original) => {
+
+            nodes[i].outputs = serverNode.outputs.map((original) => {
                 const newSocket: GraphSocket = {
                     name: original.name,
-                    node: this.getNodeFromID(original.nodeId, nodes),
-                    type: original.type as GraphDataTypes
+                    node: nodes[i],
+                    type: original.type as GraphDataTypes,
+                    id: original.id,
                 };
+                sockets.push(newSocket);
                 return newSocket;
             });
         }
+
+        collection.connections.forEach((connection) => {
+            connections.push({
+                from: sockets.find((s) => s.id === connection.from.id),
+                to: sockets.find((s) => s.id === connection.to.id)
+            });
+        });
+
+        connections.forEach((conn) => {
+            if (!conn.to.node.inputs.includes(conn.to)) {
+                console.warn(`Incorrect inputs node refernces`);
+            }
+            if (!conn.from.node.outputs.includes(conn.from)) {
+                console.warn(`Incorrect output node refernces`);
+            }
+        });
 
         return new GraphNodeCollection(nodes, connections);
     }
@@ -96,13 +106,15 @@ export class NodeUtilities {
                     index: c.from.node.outputs.indexOf(c.from),
                     name: c.from.name,
                     nodeId: c.from.node.id,
-                    type: c.from.type
+                    type: c.from.type,
+                    id: c.from.id,
                 },
                 to: {
                     index: c.to.node.inputs.indexOf(c.to),
                     name: c.to.name,
                     nodeId: c.to.node.id,
-                    type: c.to.type
+                    type: c.to.type,
+                    id: c.to.id,
                 },
             };
             connections.push(converted);
@@ -120,20 +132,22 @@ export class NodeUtilities {
 
                 inputs: c.inputs.map((ii) => {
                     const ci: ServerReadySocket = {
-                        nodeId: ii.node.id,
-                        index: ii.node.inputs.indexOf(ii),
+                        nodeId: c.id,
+                        index: c.inputs.indexOf(ii),
                         name: ii.name,
-                        type: ii.type
+                        type: ii.type,
+                        id: ii.id,
                     };
                     return ci;
                 }),
 
                 outputs: c.outputs.map((oo) => {
                     const co: ServerReadySocket = {
-                        nodeId: oo.node.id,
-                        index: oo.node.outputs.indexOf(oo),
+                        nodeId: c.id,
+                        index: c.outputs.indexOf(oo),
                         name: oo.name,
-                        type: oo.type
+                        type: oo.type,
+                        id: oo.id,
                     };
                     return co;
                 })
