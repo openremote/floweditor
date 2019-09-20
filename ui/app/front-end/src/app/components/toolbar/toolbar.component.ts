@@ -64,10 +64,11 @@ export class ToolbarComponent implements OnInit {
     console.log(converted);
 
     this.clear();
-    this.project.nodes = converted.nodes;
+    this.project.nodes = converted.nodes.map((n) => {
+      n.position.x -= 200;
+      n.position.y -= 32;
+      return n;
+    });
     this.project.connections = converted.connections;
-    // TODO somehow get the elements of the connections before I create them
-    // I could also completely get rid of these members, which is what im probably going to do.
-    // Then i have to somehow find a replacement in the system so that everything still works
   }
 }

@@ -124,8 +124,8 @@ export class IntegrationService {
 
     this.status = IntegrationServiceStatus.Busy;
     openremote.init({
-      managerUrl: 'https://localhost',
-      keycloakUrl: 'https://localhost/auth',
+      managerUrl: 'http://localhost:8080',
+      keycloakUrl: 'http://localhost:8080/auth',
       auth: Auth.KEYCLOAK,
       autoLogin: true,
       realm: this.requestedRealm
