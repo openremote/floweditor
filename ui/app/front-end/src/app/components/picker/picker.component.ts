@@ -3,7 +3,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
 import { Asset, AssetState, MetaItemType } from '@openremote/model';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { isNullOrUndefined } from 'util';
 import { GraphInternal, PickerType } from 'node-structure';
@@ -26,7 +26,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
   public attributeNames: string[] = [];
 
   constructor(
-    private project: ProjectService,
+    private snack: MatSnackBar,
     private input: InputService,
     private integration: IntegrationService,
     private dialog: MatDialog) { }
@@ -54,6 +54,26 @@ export class PickerComponent implements OnInit, AfterViewInit {
 
     if (this.internal.picker.type === PickerType.AssetAttribute) {
       this.integration.refreshAssets();
+      if (this.internal.value != null) {
+        this.integration.queryAssets({
+          ids: [this.internal.value.assetId],
+          select: {
+            excludeAttributes: false,
+            excludeAttributeMeta: false
+          }
+        }, (assets) => {
+          if (assets.length === 0) {
+            this.snack.open('Missing asset in node setup', 'Dismiss');
+            return;
+          }
+          this.chosenAsset = assets[0];
+          console.log(this.chosenAsset);
+          this.resetAssetAttributeDropDownValue();
+          this.chosenAttributeName = this.internal.value.attributeName;
+
+          console.log(this.internal.value);
+        });
+      }
     }
   }
 
