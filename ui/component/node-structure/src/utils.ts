@@ -1,5 +1,5 @@
 import { GraphNode, GraphNodeCollection, GraphSocket, Connection, GraphNodeType, GraphDataTypes } from "./models";
-import { ServerReadyNodeCollection, ServerReadyConnection, ServerReadyNode, ServerReadySocket } from "./server.ready.models";
+import { ServerReadyNodeCollection, ServerReadyConnection, ServerReadyNode, ServerReadySocket } from "@openremote/model";
 
 export class NodeUtilities {
     public static getInputConnections(node: GraphNode, collection: GraphNodeCollection): GraphSocket[] {

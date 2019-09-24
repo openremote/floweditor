@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ContextMenu } from '../models/context.menu';
 import { InputService } from './input.service';
-import { Point } from 'node-structure';
+import { NodePosition } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Point } from 'node-structure';
 export class ContextMenuService {
   public open: boolean;
   public contextMenu: ContextMenu;
-  public position: Point = new Point(0, 0);
+  public position: NodePosition = { x: 0, y: 0 };
 
   constructor(private input: InputService) {
     // window.onmouseup = () => { if (this.open) this.open = false; };

@@ -1,5 +1,5 @@
-import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType, ExecutionRequestInfo } from "node-structure";
-import { RuleAction, RuleCondition, RuleActionWriteAttribute } from "@openremote/model";
+import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
+import { RuleAction, RuleCondition, RuleActionWriteAttribute, PickerType } from "@openremote/model";
 
 export const writeAttribute: GraphNodeDefinition = {
 

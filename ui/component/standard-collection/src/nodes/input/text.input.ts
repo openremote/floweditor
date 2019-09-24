@@ -1,4 +1,6 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
+import { GraphNodeType, GraphDataTypes, GraphNodeDefinition } from "node-structure";
+import { PickerType } from "@openremote/model";
+
 export const textInput: GraphNodeDefinition = {
     definition: {
         name: "Text",

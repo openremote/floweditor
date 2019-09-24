@@ -2,11 +2,10 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 import { ProjectService } from 'src/app/services/project.service';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
-import { Asset, AssetState, MetaItemType } from '@openremote/model';
+import { Asset, AssetState, MetaItemType, PickerType, ServerReadyInternal } from '@openremote/model';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { isNullOrUndefined } from 'util';
-import { GraphInternal, PickerType } from 'node-structure';
 
 @Component({
   selector: 'app-picker',
@@ -15,9 +14,8 @@ import { GraphInternal, PickerType } from 'node-structure';
 })
 export class PickerComponent implements OnInit, AfterViewInit {
 
-  @Input() internal: GraphInternal;
+  @Input() internal: ServerReadyInternal;
   @ViewChild('view') view: ElementRef;
-  PickerType = PickerType;
 
   public doubleDropDownChoice: any;
   public chosenAsset: Asset;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NodeGraphTranslator, GraphDataTypes, GraphNodeType, PickerType } from 'node-structure';
+import { NodeGraphTranslator } from 'node-structure';
 import { StandardCollection } from 'standard-collection';
-import { RuleCondition } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'

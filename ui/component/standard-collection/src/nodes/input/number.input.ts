@@ -1,4 +1,5 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType, ExecutionRequestInfo } from "node-structure";
+import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
+import { PickerType } from "@openremote/model";
 
 export const numberInput: GraphNodeDefinition = {
 

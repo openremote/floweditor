@@ -104,12 +104,12 @@ export class IntegrationService {
       });
   }
 
-  public addRule(name: string, groovyCode: string, callback?: (status: any) => void) {
+  public addRule(name: string, data: string, callback?: (status: any) => void) {
     rest.api.RulesResource.createGlobalRuleset({
-      lang: RulesetLang.JSON,
+      lang: RulesetLang.FLOW,
       name,
       type: 'global',
-      rules: groovyCode
+      rules: data
     }).then((e) => {
       console.log(e);
       if (callback) {

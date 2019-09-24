@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { timer } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
-import { ContextMenu } from 'src/app/models/context.menu';
-import { Connection, Point } from 'node-structure';
+import { Connection } from 'node-structure';
 import { IdentityAssigner } from 'src/app/logic/identity.assigner';
+import { NodePosition } from '@openremote/model';
+import { Utils } from 'src/app/logic/utils';
 
 @Component({
   selector: 'app-connection',
@@ -70,14 +71,14 @@ export class ConnectionComponent implements OnInit {
   }
 
   public start() {
-    return new Point(this.x1(), this.y1());
+    return {x: this.x1(), y: this.y1()};
   }
 
   public end() {
-    return new Point(this.x2(), this.y2());
+    return {x: this.x2(), y: this.y2()};
   }
 
-  public s(p: Point): string {
+  public s(p: NodePosition): string {
     return p.x.toString() + ',' + p.y.toString();
   }
 
@@ -93,7 +94,7 @@ export class ConnectionComponent implements OnInit {
   }
 
   public getPointListString(): string {
-    const points: Point[] = [];
+    const points: NodePosition[] = [];
 
     const start = this.start();
     const end = this.end();
@@ -104,8 +105,8 @@ export class ConnectionComponent implements OnInit {
     for (let i = 0; i < c; i++) {
       const t = i / c;
 
-      const p = Point.lerp(start, end, t);
-      p.y = Point.lerpNumber(p.y, Point.lerpNumber(start.y, end.y, this.curve(t)), this.curviness);
+      const p = Utils.lerp(start, end, t);
+      p.y = Utils.lerpNumber(p.y, Utils.lerpNumber(start.y, end.y, this.curve(t)), this.curviness);
       points.push(p);
     }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InputService } from './input.service';
-import { GraphNode, Point } from 'node-structure';
+import { GraphNode } from 'node-structure';
+import { NodePosition } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SelectionService {
   public nodes: GraphNode[] = [];
 
   public isDragging = false;
-  private startSelectionPos: Point;
+  private startSelectionPos: NodePosition;
 
   public selectionBox: { x: number, y: number, width: number, height: number } = { x: 0, y: 0, width: 500, height: 500 };
 
@@ -54,7 +55,7 @@ export class SelectionService {
   public startSelection() {
     if (this.isDragging) { return; }
     this.isDragging = true;
-    this.startSelectionPos = new Point(this.input.mousePos.x, this.input.mousePos.y);
+    this.startSelectionPos = { x: this.input.mousePos.x, y: this.input.mousePos.y };
     this.selectionBox.x = this.input.mousePos.x;
     this.selectionBox.y = this.input.mousePos.y;
     this.selectionBox.width = 0;

@@ -1,5 +1,5 @@
-import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, PickerType } from "node-structure";
-import { RuleCondition } from "@openremote/model";
+import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition } from "node-structure";
+import { RuleCondition, PickerType } from "@openremote/model";
 
 export const readAttribute: GraphNodeDefinition = {
 
