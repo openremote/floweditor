@@ -26,7 +26,7 @@ export class NodeUtilities {
 
     public static getNodeFromID(id: string, nodes: GraphNode[]) {
         const nodeIndex = nodes.findIndex((n) => n.id === id);
-        if (nodeIndex === -1) { console.warn(`Node wiht ID ${id} not found`); }
+        if (nodeIndex === -1) { console.warn(`Node with ID ${id} not found`); }
         return nodes[nodeIndex];
     }
 
