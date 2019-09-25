@@ -3,7 +3,10 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "src",
-    "resolveJsonModule": true
+    "lib": [
+      "dom",
+      "es7"
+   ]
   },
   "exclude": [
     "generate-collection.ts"
