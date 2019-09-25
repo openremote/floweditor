@@ -3,6 +3,7 @@ import { Asset } from '@openremote/model';
 import { IntegrationService } from 'src/app/services/integration.service';
 import { MatDialogRef } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-asset-picker-tree-entry',
@@ -18,7 +19,7 @@ export class AssetPickerTreeEntryComponent implements OnInit {
   public hasChildren = false;
   public isExpanded = false;
 
-  constructor(private integration: IntegrationService) { }
+  constructor(private rest: RestService) { }
 
   ngOnInit() {
     this.load();
@@ -26,21 +27,23 @@ export class AssetPickerTreeEntryComponent implements OnInit {
 
   public load() {
 
-    this.integration.queryAssets({
-      select: {
-        excludeParentInfo: false,
-        excludeAttributes: false,
-        excludeAttributeMeta: false
-      },
-      parents: [
-        {
-          id: this.asset.id
-        }
-      ]
-    }, (assets) => {
-      this.hasChildren = assets.length > 0;
-      this.children = assets;
-      this.isLoaded = true;
+    this.rest.getAssetResource().then(a => {
+      a.queryAssets({
+        select: {
+          excludeParentInfo: false,
+          excludeAttributes: false,
+          excludeAttributeMeta: false
+        },
+        parents: [
+          {
+            id: this.asset.id
+          }
+        ]
+      }).then((assets) => {
+        this.hasChildren = assets.data.length > 0;
+        this.children = assets.data;
+        this.isLoaded = true;
+      });
     });
   }
 

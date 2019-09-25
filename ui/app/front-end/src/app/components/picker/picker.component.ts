@@ -4,6 +4,7 @@ import { IntegrationService } from 'src/app/services/integration.service';
 import { Asset, AssetState, MetaItemType, PickerType, NodeInternal } from '@openremote/model';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-picker',
@@ -24,7 +25,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
   constructor(
     private snack: MatSnackBar,
     private input: InputService,
-    private integration: IntegrationService,
+    private rest: RestService,
     private dialog: MatDialog) { }
 
   ngAfterViewInit(): void {
@@ -49,25 +50,27 @@ export class PickerComponent implements OnInit, AfterViewInit {
     }
 
     if (this.internal.picker.type === PickerType.ASSET_ATTRIBUTE) {
-      this.integration.refreshAssets();
       if (this.internal.value != null) {
-        this.integration.queryAssets({
-          ids: [this.internal.value.assetId],
-          select: {
-            excludeAttributes: false,
-            excludeAttributeMeta: false
-          }
-        }, (assets) => {
-          if (assets.length === 0) {
-            this.snack.open('Missing asset in node setup', 'Dismiss');
-            return;
-          }
-          this.chosenAsset = assets[0];
-          console.log(this.chosenAsset);
-          this.resetAssetAttributeDropDownValue();
-          this.chosenAttributeName = this.internal.value.attributeName;
 
-          console.log(this.internal.value);
+        this.rest.getAssetResource().then(a => {
+          a.queryAssets({
+            ids: [this.internal.value.assetId],
+            select: {
+              excludeAttributes: false,
+              excludeAttributeMeta: false
+            }
+          }).then((assets) => {
+            if (assets.data.length === 0) {
+              this.snack.open('Missing asset in node setup', 'Dismiss');
+              return;
+            }
+            this.chosenAsset = assets.data[0];
+            console.log(this.chosenAsset);
+            this.resetAssetAttributeDropDownValue();
+            this.chosenAttributeName = this.internal.value.attributeName;
+
+            console.log(this.internal.value);
+          });
         });
       }
     }
