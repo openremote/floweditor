@@ -14,7 +14,10 @@ export class ContextMenuComponent implements OnInit {
   @Input() contextMenu: ContextMenu;
   @Input() open: boolean;
 
-  constructor(private project: ProjectService, private select: SelectionService, private context: ContextMenuService ) {
+  constructor(
+    public project: ProjectService,
+    public select: SelectionService,
+    public context: ContextMenuService) {
     this.contextMenu = new ContextMenu();
 
     this.contextMenu.items.push(

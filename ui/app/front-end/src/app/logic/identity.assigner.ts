@@ -1,5 +1,5 @@
-import { GraphSocket } from 'node-structure';
 import * as ShortID from 'shortid';
+import { NodeSocket } from '@openremote/model';
 
 export class IdentityAssigner {
 
@@ -7,7 +7,7 @@ export class IdentityAssigner {
         return ShortID.generate();
     }
 
-    public static getSocketElementIdentity(socket: GraphSocket) {
+    public static getSocketElementIdentity(socket: NodeSocket) {
         return socket.id;
     }
 }

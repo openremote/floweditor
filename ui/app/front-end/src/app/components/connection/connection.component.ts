@@ -2,9 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { timer } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
-import { Connection } from 'node-structure';
 import { IdentityAssigner } from 'src/app/logic/identity.assigner';
-import { NodePosition } from '@openremote/model';
+import { NodePosition, NodeConnection } from '@openremote/model';
 import { Utils } from 'src/app/logic/utils';
 
 @Component({
@@ -14,7 +13,7 @@ import { Utils } from 'src/app/logic/utils';
 })
 export class ConnectionComponent implements OnInit {
 
-  @Input() connection: Connection;
+  @Input() connection: NodeConnection;
   public curviness = 0;
 
   public fromElement: HTMLElement;

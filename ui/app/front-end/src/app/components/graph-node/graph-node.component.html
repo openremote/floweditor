@@ -13,9 +13,9 @@
       </div>
     </div>
 
-    <div *ngIf="node.type === 'Then'" class="title" cdkDragHandle>{{node.name.toUpperCase()}}</div>
+    <div *ngIf="node.type === 'THEN'" class="title" cdkDragHandle>{{node.name.toUpperCase()}}</div>
 
-    <div style="grid-area: internals" class="internals" *ngIf="node.type !== 'Then'">
+    <div style="grid-area: internals" class="internals" *ngIf="node.type !== 'THEN'">
       <app-picker *ngFor="let internal of node.internals" [internal]="internal"
         (mousedown)="selection.deselectNode(node)"></app-picker>
     </div>

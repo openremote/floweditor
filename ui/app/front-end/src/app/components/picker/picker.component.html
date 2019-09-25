@@ -1,19 +1,19 @@
 <div #view [ngSwitch]="internal.picker.type" class="picker">
 
-  <mat-form-field *ngSwitchCase="'Multiline'">
+  <mat-form-field *ngSwitchCase="'MULTILINE'">
     <textarea matInput cdkTextareaAutosize placeholder="{{(internal.name | graphNodeName).toLowerCase()}}"
       [(ngModel)]="internal.value"></textarea>
   </mat-form-field>
 
-  <mat-form-field *ngSwitchCase="'Text'">
+  <mat-form-field *ngSwitchCase="'TEXT'">
     <input matInput placeholder="{{(internal.name | graphNodeName).toLowerCase()}}" [(ngModel)]="internal.value">
   </mat-form-field>
 
-  <mat-form-field *ngSwitchCase="'Number'">
+  <mat-form-field *ngSwitchCase="'NUMBER'">
     <input matInput step="0.5" type="number" placeholder="{{internal.name}}" [(ngModel)]="internal.value">
   </mat-form-field>
 
-  <mat-form-field *ngSwitchCase="'Dropdown'">
+  <mat-form-field *ngSwitchCase="'DROPDOWN'">
     <mat-label>{{internal.name}}</mat-label>
     <mat-select [(ngModel)]="internal.value">
       <mat-option *ngFor="let option of internal.picker.options" [value]="option.value">
@@ -22,7 +22,7 @@
     </mat-select>
   </mat-form-field>
 
-  <ng-container *ngSwitchCase="'DoubleDropdown'">
+  <ng-container *ngSwitchCase="'DOUBLE_DROPDOWN'">
     <mat-form-field>
       <mat-label>{{internal.name}}</mat-label>
       <mat-select [(ngModel)]="doubleDropDownChoice" (selectionChange)="resetDoubleDropDownValue()">
@@ -42,7 +42,7 @@
   </ng-container>
 
 
-  <span *ngSwitchCase="'Color'">
+  <span *ngSwitchCase="'COLOR'">
     <div>
       <mat-label>R</mat-label>
       <mat-slider thumbLabel min="0" max="255" step="1" value="128" [(ngModel)]="internal.value.r"></mat-slider>
@@ -57,7 +57,7 @@
     </div>
   </span>
 
-  <ng-container *ngSwitchCase="'AssetAttribute'">
+  <ng-container *ngSwitchCase="'ASSET_ATTRIBUTE'">
 
     <div>
       <a style="margin: 8px; margin-left: 0" mat-button

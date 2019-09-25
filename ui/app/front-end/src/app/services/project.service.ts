@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { InputService } from './input.service';
 import { SelectionService } from './selection.service';
 import { SocketTypeMatcher } from '../logic/socket.type.matcher';
-import { Connection, GraphNode, GraphSocket, GraphNodeType } from 'node-structure';
+import { Node, NodeSocket, NodeConnection, NodeType } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  public nodes: GraphNode[] = [];
-  public connections: Connection[] = [];
+  public nodes: Node[] = [];
+  public connections: NodeConnection[] = [];
 
   public isDragging: boolean;
-  private currentFrom: GraphSocket;
+  private currentFrom: NodeSocket;
   private currentFromElement: Element;
 
   private reverseConnection = false;
@@ -36,33 +36,33 @@ export class ProjectService {
     });
   }
 
-  public addNode(node: GraphNode) {
-    if (node.type === GraphNodeType.Then) {
-      if (this.nodes.find((n) => n.type === GraphNodeType.Then) != null) {
+  public addNode(node: Node) {
+    if (node.type === NodeType.THEN) {
+      if (this.nodes.find((n) => n.type === NodeType.THEN) != null) {
         throw new Error('A project can only have one THEN node');
       }
     }
     this.nodes.push(node);
   }
 
-  public removeNode(node: GraphNode) {
+  public removeNode(node: Node) {
     this.selection.deselectAll();
     const id = node.id;
-    const newConnections: Connection[] = [];
+    const newConnections: NodeConnection[] = [];
     this.nodes.splice(this.nodes.indexOf(node), 1);
     this.connections.forEach(c => {
-      if (c.from.node !== node && c.to.node !== node) {
+      if (c.from.nodeId !== node.id && c.to.nodeId !== node.id) {
         newConnections.push(c);
       }
     });
     this.connections = newConnections;
   }
 
-  public removeConnection(connection: Connection) {
+  public removeConnection(connection: NodeConnection) {
     this.connections.splice(this.connections.indexOf(connection), 1);
   }
 
-  public connectionDrag(socket: GraphSocket, event: MouseEvent) {
+  public connectionDrag(socket: NodeSocket, event: MouseEvent) {
     if (this.isDragging) {
       this.stopConnectionDrag(socket, event);
     } else {
@@ -70,7 +70,7 @@ export class ProjectService {
     }
   }
 
-  public beginConnectionDrag(socket: GraphSocket, event: MouseEvent, reversed: boolean = false) {
+  public beginConnectionDrag(socket: NodeSocket, event: MouseEvent, reversed: boolean = false) {
     if (this.isDragging) { return; }
     this.reverseConnection = reversed;
 
@@ -96,7 +96,7 @@ export class ProjectService {
     this.isDragging = false;
   }
 
-  public stopConnectionDrag(socket: GraphSocket, event: MouseEvent) {
+  public stopConnectionDrag(socket: NodeSocket, event: MouseEvent) {
     if (!this.isDragging) { return; }
 
     this.isDragging = false;
@@ -118,6 +118,9 @@ export class ProjectService {
       this.connections.splice(this.connections.indexOf(connection), 1);
     });
 
-    this.connections.push(new Connection(source, destination));
+    this.connections.push({
+      from: source,
+      to: destination
+    });
   }
 }

@@ -1,38 +1,30 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
-import { CdkDrag, CdkDragStart, CdkDragMove } from '@angular/cdk/drag-drop';
 import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
 import { CopyMachine } from 'src/app/logic/copy.machine';
-import { GraphNode, GraphNodeType, GraphSocket } from 'node-structure';
 import { IdentityAssigner } from 'src/app/logic/identity.assigner';
+import { Node, NodeSocket, NodeType } from '@openremote/model';
 
 @Component({
   selector: 'app-graph-node',
   templateUrl: './graph-node.component.html',
   styleUrls: ['./graph-node.component.css']
 })
-export class GraphNodeComponent implements OnInit, AfterViewInit {
-  @Input() node: GraphNode;
+export class GraphNodeComponent implements AfterViewInit {
+  @Input() node: Node;
   @ViewChild('inputSockets') inputSockets: ElementRef;
   @ViewChild('outputSockets') outputSockets: ElementRef;
   @ViewChild('view') view: ElementRef;
 
-
   constructor(
     public project: ProjectService,
     public selection: SelectionService,
-    private input: InputService,
+    public input: InputService,
     private context: ContextMenuService
-  ) {
-
-  }
-
-  ngOnInit() {
-
-  }
+  ) {}
 
   private toTop() {
     const elem = this.view.nativeElement as HTMLElement;
@@ -40,7 +32,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
     elem.style.zIndex = this.selection.topDepthIndex.toString();
   }
 
-  public getSocketIdentity = (socket: GraphSocket) => IdentityAssigner.getSocketElementIdentity(socket);
+  public getSocketIdentity = (socket: NodeSocket) => IdentityAssigner.getSocketElementIdentity(socket);
 
   ngAfterViewInit() {
     if (this.node.position != null) {
@@ -95,7 +87,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
         label: 'Duplicate',
         action: () => {
 
-          const copies: GraphNode[] = [];
+          const copies: Node[] = [];
 
           this.selection.selectedNodes.forEach((e) => {
             const copy = CopyMachine.copy(e);
@@ -105,7 +97,7 @@ export class GraphNodeComponent implements OnInit, AfterViewInit {
           });
 
           copies.forEach((c) => {
-            if (c.type !== GraphNodeType.Then) {
+            if (c.type !== NodeType.THEN) {
               this.project.addNode(c);
             }
           });

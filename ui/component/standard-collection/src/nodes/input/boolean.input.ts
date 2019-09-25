@@ -1,22 +1,21 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
-import { PickerType } from "@openremote/model";
+import { PickerType, NodePair, NodeType, NodeDataType } from "@openremote/model";
 
-export const booleanInput: GraphNodeDefinition = {
+export const booleanInput: NodePair = {
     definition: {
         name: "Boolean",
-        type: GraphNodeType.Input,
+        type: NodeType.INPUT,
         inputs: [],
         outputs: [
             {
                 name: "value",
-                type: GraphDataTypes.Boolean
+                type: NodeDataType.BOOLEAN
             }
         ],
         internals: [
             {
                 name: "value",
                 picker: {
-                    type: PickerType.Dropdown,
+                    type: PickerType.DROPDOWN,
                     options: [
                         {
                             name: "true",

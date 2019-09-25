@@ -2,9 +2,9 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { CopyMachine } from 'src/app/logic/copy.machine';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { GraphNode } from 'node-structure';
 import { MatDialog } from '@angular/material';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { Node } from '@openremote/model';
 
 @Component({
   selector: 'app-graph-node-menu-item',
@@ -12,7 +12,7 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
   styleUrls: ['./graph-node-menu-item.component.css']
 })
 export class GraphNodeMenuItemComponent implements OnInit {
-  @Input() node: GraphNode;
+  @Input() node: Node;
   @ViewChild('dragElement') dragElement: ElementRef;
 
   constructor(public project: ProjectService, private dialog: MatDialog) {

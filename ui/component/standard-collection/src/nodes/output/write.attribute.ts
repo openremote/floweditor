@@ -1,11 +1,10 @@
-import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
-import { RuleAction, RuleCondition, RuleActionWriteAttribute, PickerType } from "@openremote/model";
+import { RuleActionWriteAttribute, PickerType, NodePair, NodeType, NodeDataType } from "@openremote/model";
 
-export const writeAttribute: GraphNodeDefinition = {
+export const writeAttribute: NodePair = {
 
     definition: {
         name: "Write attribute",
-        type: GraphNodeType.Output,
+        type: NodeType.OUTPUT,
         inputs: [
             // {
             //     name: "trigger",
@@ -13,7 +12,7 @@ export const writeAttribute: GraphNodeDefinition = {
             // },
             {
                 name: "value",
-                type: GraphDataTypes.Any,
+                type: NodeDataType.ANY,
             },
         ],
         outputs: [],
@@ -21,7 +20,7 @@ export const writeAttribute: GraphNodeDefinition = {
             {
                 name: "attribute",
                 picker: {
-                    type: PickerType.AssetAttribute
+                    type: PickerType.ASSET_ATTRIBUTE
                 }
             }
         ]

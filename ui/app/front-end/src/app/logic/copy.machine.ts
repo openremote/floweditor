@@ -1,27 +1,38 @@
 import { IdentityAssigner } from './identity.assigner';
-import { GraphNode, GraphSocket } from 'node-structure';
+import { Node, NodeSocket } from '@openremote/model';
 
 export class CopyMachine {
-    public static copy(node: GraphNode): GraphNode {
-        const minimalNode = new GraphNode();
+    public static copy(node: Node): Node {
+        const minimalNode: Node = {};
 
-        minimalNode.inputs = node.inputs.map(i => new GraphSocket(i.name, i.type));
+        minimalNode.inputs = node.inputs.map((i: NodeSocket) => {
+            return {
+                name: i.name, type: i.type
+            };
+        });
+
         minimalNode.internals = node.internals;
         minimalNode.name = node.name;
-        minimalNode.outputs = node.outputs.map(i => new GraphSocket(i.name, i.type));
+
+        minimalNode.outputs = node.outputs.map(i => {
+            return {
+                name: i.name, type: i.type
+            };
+        });
+
         minimalNode.type = node.type;
 
         console.log(minimalNode);
 
-        const clone: GraphNode = JSON.parse(JSON.stringify(minimalNode));
+        const clone: Node = JSON.parse(JSON.stringify(minimalNode));
         clone.id = IdentityAssigner.generateIdentity();
         clone.inputs.forEach(socket => {
-            socket.node = clone;
+            socket.nodeId = clone.id;
             socket.id = IdentityAssigner.generateIdentity();
         });
 
         clone.outputs.forEach(socket => {
-            socket.node = clone;
+            socket.nodeId = clone.id;
             socket.id = IdentityAssigner.generateIdentity();
         });
 

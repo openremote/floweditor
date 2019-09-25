@@ -1,36 +1,38 @@
-import { GraphDataTypes } from 'node-structure';
+import { NodeDataType } from '@openremote/model';
+
+// TODO this should be defined in the back end
 
 export class SocketTypeMatcher {
-    private static readonly matches: { type: GraphDataTypes, matches: GraphDataTypes[] }[] = [
+    private static readonly matches: { type: NodeDataType, matches: NodeDataType[] }[] = [
         {
-            type: GraphDataTypes.Number,
+            type: NodeDataType.NUMBER,
             matches: [
-                GraphDataTypes.Number,
+                NodeDataType.NUMBER,
             ]
         },
         {
-            type: GraphDataTypes.String,
+            type: NodeDataType.STRING,
             matches: [
-                GraphDataTypes.String,
+                NodeDataType.STRING,
             ]
         },
         {
-            type: GraphDataTypes.Trigger,
+            type: NodeDataType.TRIGGER,
             matches: [
-                GraphDataTypes.Trigger,
+                NodeDataType.TRIGGER,
             ]
         },
         {
-            type: GraphDataTypes.Boolean,
+            type: NodeDataType.BOOLEAN,
             matches: [
-                GraphDataTypes.Boolean,
+                NodeDataType.BOOLEAN,
             ]
         },
     ];
 
-    public static match(a: GraphDataTypes, b: GraphDataTypes) {
-        return a === GraphDataTypes.Any ||
-            b === GraphDataTypes.Any ||
+    public static match(a: NodeDataType, b: NodeDataType) {
+        return a === NodeDataType.ANY ||
+            b === NodeDataType.ANY ||
             SocketTypeMatcher.matches.find(t => t.type === a).matches.includes(b);
     }
 }

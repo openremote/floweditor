@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Asset, AssetQuerySelect, AssetType } from '@openremote/model';
+import { Asset } from '@openremote/model';
 import { IntegrationService } from 'src/app/services/integration.service';
 import { MatDialogRef } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';

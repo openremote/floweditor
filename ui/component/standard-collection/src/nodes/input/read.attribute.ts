@@ -1,15 +1,14 @@
-import { GraphNode, GraphNodeImplementation, GraphNodeType, GraphDataTypes, GraphNodeDefinition } from "node-structure";
-import { RuleCondition, PickerType } from "@openremote/model";
+import { RuleCondition, PickerType, NodePair, NodeType, NodeDataType } from "@openremote/model";
 
-export const readAttribute: GraphNodeDefinition = {
+export const readAttribute: NodePair = {
 
     definition: {
         name: "Read attribute",
-        type: GraphNodeType.Input,
+        type: NodeType.INPUT,
         outputs: [
             {
                 name: "value",
-                type: GraphDataTypes.Any,
+                type: NodeDataType.ANY,
             },
         ],
         inputs: [],
@@ -17,7 +16,7 @@ export const readAttribute: GraphNodeDefinition = {
             {
                 name: "attribute",
                 picker: {
-                    type: PickerType.AssetAttribute
+                    type: PickerType.ASSET_ATTRIBUTE
                 }
             }
         ]

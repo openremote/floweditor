@@ -1,20 +1,20 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
+import { NodePair, NodeType, NodeDataType } from "@openremote/model";
 
-export const abs: GraphNodeDefinition = {
+export const abs: NodePair = {
 
     definition: {
         name: "Absolute",
-        type: GraphNodeType.Processor,
+        type: NodeType.PROCESSOR,
         inputs: [
             {
                 name: "v",
-                type: GraphDataTypes.Number
+                type: NodeDataType.NUMBER
             }
         ],
         outputs: [
             {
                 name: "x",
-                type: GraphDataTypes.Number
+                type: NodeDataType.NUMBER
             }
         ],
         internals: []

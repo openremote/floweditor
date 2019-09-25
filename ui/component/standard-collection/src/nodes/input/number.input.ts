@@ -1,23 +1,22 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
-import { PickerType } from "@openremote/model";
+import { PickerType, NodeDataType, NodePair, NodeType } from "@openremote/model";
 
-export const numberInput: GraphNodeDefinition = {
+export const numberInput: NodePair = {
 
     definition: {
         name: "Number",
-        type: GraphNodeType.Input,
+        type: NodeType.INPUT,
         inputs: [],
         outputs: [
             {
                 name: "value",
-                type: GraphDataTypes.Number
+                type: NodeDataType.NUMBER
             }
         ],
         internals: [
             {
                 name: "value",
                 picker: {
-                    type: PickerType.Number
+                    type: PickerType.NUMBER
                 }
             }
         ]

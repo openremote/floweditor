@@ -1,24 +1,24 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GraphDataTypes } from 'node-structure';
+import { NodeDataType } from '@openremote/model';
 
 @Pipe({
   name: 'graphSocketTypeColour'
 })
 export class GraphSocketTypeColourPipe implements PipeTransform {
 
-  transform(type: GraphDataTypes): string {
+  transform(type: NodeDataType): string {
     switch (type) {
-      case GraphDataTypes.Number:
+      case NodeDataType.NUMBER:
         return '#87db2e';
-      case GraphDataTypes.String:
+      case NodeDataType.STRING:
         return '#42b6f4';
-      case GraphDataTypes.Boolean:
+      case NodeDataType.BOOLEAN:
         return '#2932b5';
-      case GraphDataTypes.Any:
+      case NodeDataType.ANY:
         return '#b815d8';
-      case GraphDataTypes.Color:
+      case NodeDataType.COLOR:
         return '#f4d142';
-      case GraphDataTypes.Trigger:
+      case NodeDataType.TRIGGER:
         return '#ff9000';
     }
   }

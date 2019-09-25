@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphDataTypes } from 'node-structure';
+import { NodeDataType } from '@openremote/model';
 
 @Component({
   selector: 'app-help-dialog',
@@ -13,14 +13,14 @@ export class HelpDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getAllTypes(): GraphDataTypes[] {
+  public getAllTypes(): NodeDataType[] {
     return [
-      GraphDataTypes.Any,
-      GraphDataTypes.Boolean,
-      GraphDataTypes.Color,
-      GraphDataTypes.Number,
-      GraphDataTypes.String,
-      GraphDataTypes.Trigger,
+      NodeDataType.ANY,
+      NodeDataType.BOOLEAN,
+      NodeDataType.COLOR,
+      NodeDataType.NUMBER,
+      NodeDataType.STRING,
+      NodeDataType.TRIGGER,
     ];
   }
 }

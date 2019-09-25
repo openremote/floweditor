@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ProjectService } from 'src/app/services/project.service';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
-import { Asset, AssetState, MetaItemType, PickerType, ServerReadyInternal } from '@openremote/model';
+import { Asset, AssetState, MetaItemType, PickerType, NodeInternal } from '@openremote/model';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-picker',
@@ -14,7 +12,7 @@ import { isNullOrUndefined } from 'util';
 })
 export class PickerComponent implements OnInit, AfterViewInit {
 
-  @Input() internal: ServerReadyInternal;
+  @Input() internal: NodeInternal;
   @ViewChild('view') view: ElementRef;
 
   public doubleDropDownChoice: any;
@@ -41,16 +39,16 @@ export class PickerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (this.internal.picker.type === PickerType.Dropdown && this.internal.value == null) {
+    if (this.internal.picker.type === PickerType.DROPDOWN && this.internal.value == null) {
       this.internal.value = this.internal.picker.options[0].value;
     }
 
-    if (this.internal.picker.type === PickerType.DoubleDropdown && this.internal.value == null) {
+    if (this.internal.picker.type === PickerType.DOUBLE_DROPDOWN && this.internal.value == null) {
       this.doubleDropDownChoice = this.internal.picker.options[0];
       this.resetDoubleDropDownValue();
     }
 
-    if (this.internal.picker.type === PickerType.AssetAttribute) {
+    if (this.internal.picker.type === PickerType.ASSET_ATTRIBUTE) {
       this.integration.refreshAssets();
       if (this.internal.value != null) {
         this.integration.queryAssets({

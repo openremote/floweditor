@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InputService } from './input.service';
-import { GraphNode } from 'node-structure';
-import { NodePosition } from '@openremote/model';
+import { NodePosition, Node } from '@openremote/model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +13,25 @@ export class SelectionService {
   }
 
   public topDepthIndex = 0;
-  public selectedNodes: GraphNode[] = [];
-  public nodes: GraphNode[] = [];
+  public selectedNodes: Node[] = [];
+  public nodes: Node[] = [];
 
   public isDragging = false;
   private startSelectionPos: NodePosition;
 
   public selectionBox: { x: number, y: number, width: number, height: number } = { x: 0, y: 0, width: 500, height: 500 };
 
-  public isNodeSelected(node: GraphNode): boolean {
+  public isNodeSelected(node: Node): boolean {
     return this.selectedNodes.includes(node);
   }
 
-  public selectNode(node: GraphNode, multiple: boolean = false) {
+  public selectNode(node: Node, multiple: boolean = false) {
     if (this.selectedNodes.includes(node)) { return; }
     if (!this.input.isKeyDown('Shift') && !multiple) { this.selectedNodes = []; }
     this.selectedNodes.push(node);
   }
 
-  public deselectNode(node: GraphNode) {
+  public deselectNode(node: Node) {
     if (!this.selectedNodes.includes(node)) { return; }
     if (!this.input.isKeyDown('Shift')) { this.selectedNodes = []; return; }
     this.selectedNodes.splice(this.selectedNodes.indexOf(node), 1);
@@ -44,7 +43,7 @@ export class SelectionService {
     }
   }
 
-  public toggleSelect(node: GraphNode) {
+  public toggleSelect(node: Node) {
     if (this.isNodeSelected(node)) {
       this.deselectNode(node);
     } else {

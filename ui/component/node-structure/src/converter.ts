@@ -1,11 +1,11 @@
-import { JsonRule, RuleCondition, RuleActionUnion, Ruleset, JsonRulesetDefinition, RuleAction } from "@openremote/model";
 import { NodeUtilities } from "./utils";
+import { NodeImplementation, Node, NodeSocket, NodeCollection, NodeType } from "@openremote/model";
 export class NodeGraphTranslator {
 
-    private implementations: { [name: string]: GraphNodeImplementation; } = {};
-    private nodes: GraphNode[] = [];
+    private implementations: { [name: string]: NodeImplementation; } = {};
+    private nodes: Node[] = [];
 
-    public registerNode(node: GraphNode, implementation: GraphNodeImplementation) {
+    public registerNode(node: Node, implementation: NodeImplementation) {
         if (this.hasNode(node.name)) {
             throw new Error(`Attempt to register registered node ${node.name}`);
         }
@@ -14,7 +14,7 @@ export class NodeGraphTranslator {
         console.log("node registered: " + JSON.stringify(node, null, 2));
     }
 
-    public deregisterNode(node: GraphNode) {
+    public deregisterNode(node: Node) {
         if (!this.hasNode(node.name)) {
             throw new Error(`Attempt to deregister unregistered node: ${node.name}`);
         }
@@ -39,27 +39,30 @@ export class NodeGraphTranslator {
         return this.nodes.slice(0);
     }
 
-    public executeNode(socket: GraphSocket, collection: GraphNodeCollection) {
-        const impl = this.getImplementation(socket.node.name);
-        const index = socket.node.outputs.indexOf(socket);
-
+    public executeNode(socket: NodeSocket, collection: NodeCollection) {
+        const node = NodeUtilities.getNodeFromID(socket.nodeId, collection.nodes);
+        const impl = this.getImplementation(node.name);
+        const index = node.outputs.indexOf(socket);
+        // TODO: implement
+        /*
         return impl.execute(
             {
                 outputSocketIndex: index,
                 outputSocket: socket,
-                inputs: NodeUtilities.getInputConnections(socket.node, collection),
-                outputs: NodeUtilities.getOutputConnections(socket.node, collection),
-                internals: socket.node.internals,
-                node: socket.node,
+                inputs: NodeUtilities.getInputConnections(node, collection),
+                outputs: NodeUtilities.getOutputConnections(node, collection),
+                internals: node.internals,
+                node: node,
                 collection: collection,
                 translator: this
             }
-        );
+        );*/
     }
 
-    public executeOutputNode(node: GraphNode, collection: GraphNodeCollection) {
+    public executeOutputNode(node: Node, collection: NodeCollection) {
         const impl = this.getImplementation(node.name);
-
+        // TODO: implement
+        /*
         return impl.execute(
             {
                 outputSocketIndex: -1,
@@ -71,31 +74,32 @@ export class NodeGraphTranslator {
                 collection: collection,
                 translator: this
             }
-        );
+        );*/
     }
 
-    public translate(name: string, description: string, collection: GraphNodeCollection): string {
-        if (collection.nodes.filter((n) => n.type === GraphNodeType.Then).length !== 0) {
-            throw new Error("THEN nodes are no longer allowed");
-        }
+    public translate(name: string, description: string, collection: NodeCollection): string {
+        return "Deprecated";
+        // if (collection.nodes.filter((n) => n.type === NodeType.THEN).length !== 0) {
+        //     throw new Error("THEN nodes are no longer allowed");
+        // }
 
-        const outputs = collection.nodes.filter((n) => n.type === GraphNodeType.Output);
-        const ruleset: JsonRulesetDefinition = { rules: [] };
+        // const outputs = collection.nodes.filter((n) => n.type === GraphNodeType.Output);
+        // const ruleset: JsonRulesetDefinition = { rules: [] };
 
-        for (const output of outputs) {
-            const rule: JsonRule = {
-                name,
-                description,
-                then: [],
-            };
+        // for (const output of outputs) {
+        //     const rule: JsonRule = {
+        //         name,
+        //         description,
+        //         then: [],
+        //     };
 
-            // somehow seperate the condtion and action parts from the resulting array of nodes
-            const translated: any = this.executeOutputNode(output, collection);
-            rule.then.push(translated);
+        //     // somehow seperate the condtion and action parts from the resulting array of nodes
+        //     const translated: any = this.executeOutputNode(output, collection);
+        //     rule.then.push(translated);
 
-            ruleset.rules.push(rule);
-        }
+        //     ruleset.rules.push(rule);
+        // }
 
-        return JSON.stringify(ruleset, null, 2);
+        // return JSON.stringify(ruleset, null, 2);
     }
 }

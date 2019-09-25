@@ -1,24 +1,24 @@
-import { GraphNodeType, GraphDataTypes, GraphNodeDefinition, ExecutionRequestInfo } from "node-structure";
+import { NodePair, NodeType, NodeDataType } from "@openremote/model";
 
-export const concat: GraphNodeDefinition = {
+export const concat: NodePair = {
 
     definition: {
         name: "Concatenation",
-        type: GraphNodeType.Processor,
+        type: NodeType.PROCESSOR,
         inputs: [
             {
                 name: "a",
-                type: GraphDataTypes.String
+                type: NodeDataType.STRING
             },
             {
                 name: "b",
-                type: GraphDataTypes.String
+                type: NodeDataType.STRING
             }
         ],
         outputs: [
             {
                 name: "c",
-                type: GraphDataTypes.String
+                type: NodeDataType.STRING
             }
         ],
         internals: []

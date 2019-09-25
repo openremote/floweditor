@@ -12,9 +12,4 @@ export class RestService {
   public getAllNodes() {
     return this.http.get(this.path + 'nodes/getAll');
   }
-
-  // public translate(nodeset: NodeSet) {
-  //   console.log(JSON.stringify(nodeset));
-  //   return this.http.post(this.path + 'nodes/translate', JSON.stringify(nodeset));
-  // }
 }

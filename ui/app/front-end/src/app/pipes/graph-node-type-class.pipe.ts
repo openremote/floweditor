@@ -1,20 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GraphNodeType } from 'node-structure';
+import { NodeType } from '@openremote/model';
 
 @Pipe({
   name: 'graphNodeTypeClass'
 })
 export class GraphNodeTypeClassPipe implements PipeTransform {
 
-  transform(type: GraphNodeType): string {
+  transform(type: NodeType): string {
     switch (type) {
-      case GraphNodeType.Input:
+      case NodeType.INPUT:
         return 'node-input';
-      case GraphNodeType.Output:
+      case NodeType.OUTPUT:
         return 'node-output';
-      case GraphNodeType.Processor:
+      case NodeType.PROCESSOR:
         return 'node-processor';
-        case GraphNodeType.Then:
+        case NodeType.THEN:
         return 'node-then';
     }
   }

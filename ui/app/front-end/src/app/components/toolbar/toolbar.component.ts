@@ -6,7 +6,7 @@ import { SelectionService } from 'src/app/services/selection.service';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
 import { IntegrationService, IntegrationServiceStatus } from 'src/app/services/integration.service';
-import { NodeUtilities, GraphNodeCollection } from 'node-structure';
+import { NodeCollection, NodePosition, Node } from '@openremote/model';
 
 @Component({
   selector: 'app-toolbar',
@@ -52,23 +52,20 @@ export class ToolbarComponent implements OnInit {
   }
 
   public debugSave() {
-    const collection = new GraphNodeCollection(this.project.nodes, this.project.connections);
-    const stored = NodeUtilities.convertToServerReady('a', 'b', collection);
-    localStorage.debugStorage = JSON.stringify(stored);
+    const collection: NodeCollection = {nodes: this.project.nodes, connections: this.project.connections};
+    localStorage.debugStorage = JSON.stringify(collection);
   }
 
   public debugLoad() {
     const collection = JSON.parse(localStorage.debugStorage);
-    const converted = NodeUtilities.convertToNormal(collection);
     console.log(collection);
-    console.log(converted);
 
     this.clear();
-    this.project.nodes = converted.nodes.map((n) => {
+    this.project.nodes = collection.nodes.map((n: Node) => {
       n.position.x -= 200;
       n.position.y -= 32;
       return n;
     });
-    this.project.connections = converted.connections;
+    this.project.connections = collection.connections;
   }
 }

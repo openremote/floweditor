@@ -14,7 +14,7 @@ export class WorkspaceComponent {
   public hasFocus = true;
 
   constructor(public project: ProjectService, public select: SelectionService, public context: ContextMenuService) {
-    window.oncontextmenu = (e) => { this.hasFocus = e.defaultPrevented; };
+    window.oncontextmenu = (e: Event) => { this.hasFocus = e.defaultPrevented; };
   }
 
   public updateMousePos(event: MouseEvent) {

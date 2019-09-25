@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ExporterService } from 'src/app/services/exporter.service';
 import { ResultDisplayDialogComponent } from '../result-display-dialog/result-display-dialog.component';
 
