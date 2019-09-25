@@ -5,13 +5,13 @@ export class CopyMachine {
     public static copy(node: Node): Node {
         const minimalNode: Node = {};
 
-        minimalNode.inputs = node.inputs.map((i: NodeSocket) => {
+        minimalNode.inputs = (node.inputs || []).map((i: NodeSocket) => {
             return {
                 name: i.name, type: i.type
             };
         });
 
-        minimalNode.internals = node.internals;
+        minimalNode.internals = node.internals || [];
         minimalNode.name = node.name;
 
         minimalNode.outputs = node.outputs.map(i => {
@@ -21,6 +21,7 @@ export class CopyMachine {
         });
 
         minimalNode.type = node.type;
+        minimalNode.position = { x: 0, y: 0 };
 
         console.log(minimalNode);
 

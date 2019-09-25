@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from 'src/app/services/project.service';
 import { NodeManagerService } from 'src/app/services/node-manager.service';
 import { NodeType, Node } from '@openremote/model';
+import { IntegrationService } from 'src/app/services/integration.service';
 
 @Component({
   selector: 'app-toolpanel',
@@ -19,19 +20,19 @@ export class ToolpanelComponent implements OnInit {
     public restService: RestService,
     public snackBar: MatSnackBar,
     public project: ProjectService,
+    private integration: IntegrationService,
     private nodeService: NodeManagerService) {
   }
 
   public loadNodes() {
-    this.loadingStatus = 0;
-
     this.nodes = this.nodeService.translator.getAllNodes();
     console.log(this.nodes);
     this.loadingStatus = 1;
   }
 
   ngOnInit() {
-    this.loadNodes();
+    this.loadingStatus = 0;
+    this.nodeService.downloadNodeDefinitions(() => { this.loadNodes(); });
   }
 
   public getNodesFor(type: NodeType) {
@@ -43,7 +44,6 @@ export class ToolpanelComponent implements OnInit {
       NodeType.INPUT,
       NodeType.PROCESSOR,
       NodeType.OUTPUT,
-      // GraphNodeType.Then,
     ];
   }
 }

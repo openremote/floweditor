@@ -21,12 +21,11 @@ export class IntegrationService {
   public requestedRealm = 'master';
 
   private status = IntegrationServiceStatus.Busy;
+  private initCallbacks: (() => void)[] = [];
 
   public assets: Asset[] = [];
   public descriptors: AssetDescriptor[] = [];
   public realms: Tenant[] = [];
-
-  constructor() { }
 
   public getStatus() {
     return this.status;
@@ -118,6 +117,18 @@ export class IntegrationService {
     }).catch(console.error);
   }
 
+  public getInitialisationCallback(callback: () => void) {
+    if (this.status === IntegrationServiceStatus.Authenticated) {
+      callback();
+    } else {
+      this.initCallbacks.push(callback);
+    }
+  }
+
+  public getFlowResource() {
+    return rest.api.FlowResource;
+  }
+
   public initialise() {
 
     this.requestedRealm = localStorage.realm || 'master';
@@ -133,6 +144,9 @@ export class IntegrationService {
       (result) => {
         if (result) {
           this.status = openremote.authenticated ? IntegrationServiceStatus.Authenticated : IntegrationServiceStatus.Unauthenticated;
+          this.initCallbacks.forEach(callback => {
+            callback();
+          });
         } else {
           this.status = IntegrationServiceStatus.Failure;
         }
