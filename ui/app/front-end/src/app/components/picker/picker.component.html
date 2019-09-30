@@ -1,12 +1,12 @@
 <div #view [ngSwitch]="internal.picker.type" class="picker">
 
   <mat-form-field *ngSwitchCase="'MULTILINE'">
-    <textarea matInput cdkTextareaAutosize placeholder="{{(internal.name | graphNodeName).toLowerCase()}}"
+    <textarea matInput cdkTextareaAutosize placeholder="{{(internal.name | graphNodeName)}}"
       [(ngModel)]="internal.value"></textarea>
   </mat-form-field>
 
   <mat-form-field *ngSwitchCase="'TEXT'">
-    <input matInput placeholder="{{(internal.name | graphNodeName).toLowerCase()}}" [(ngModel)]="internal.value">
+    <input matInput placeholder="{{(internal.name | graphNodeName)}}" [(ngModel)]="internal.value">
   </mat-form-field>
 
   <mat-form-field *ngSwitchCase="'NUMBER'">

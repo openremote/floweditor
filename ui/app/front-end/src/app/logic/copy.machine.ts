@@ -14,7 +14,7 @@ export class CopyMachine {
         minimalNode.internals = node.internals || [];
         minimalNode.name = node.name;
 
-        minimalNode.outputs = node.outputs.map(i => {
+        minimalNode.outputs = (node.outputs || []).map(i => {
             return {
                 name: i.name, type: i.type
             };

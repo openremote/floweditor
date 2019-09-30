@@ -11,8 +11,8 @@ export class NodeManagerService {
   public translator: NodeGraphTranslator;
   constructor(private rest: RestService) {
     this.translator = new NodeGraphTranslator();
-    // Remove asap
-    this.translator = StandardCollection.create();
+    // Legacy node structure:
+    // this.translator = StandardCollection.create();
   }
 
   public downloadNodeDefinitions(callback: (nodes: Node[]) => void) {
