@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
-import { Asset, AssetState, MetaItemType, PickerType, NodeInternal } from '@openremote/model';
+import { Asset, AssetState, MetaItemType, PickerType, NodeInternal, AssetAttributeInternalValue } from '@openremote/model';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { RestService } from 'src/app/services/rest.service';
@@ -93,10 +93,11 @@ export class PickerComponent implements OnInit, AfterViewInit {
   }
 
   private setAssetPair() {
-    this.internal.value = {
+    const value: AssetAttributeInternalValue = {
       assetId: this.chosenAsset.id,
       attributeName: this.chosenAttributeName
     };
+    this.internal.value = value;
   }
 
   public openAssetPickerDialog() {
@@ -108,10 +109,11 @@ export class PickerComponent implements OnInit, AfterViewInit {
         this.resetAssetAttributeDropDownValue();
         this.setAssetPair();
       } else {
-        this.internal.value = {
+        const v: AssetAttributeInternalValue = {
           assetId: this.chosenAsset.id,
           attributeName: ''
         };
+        this.internal.value = v;
       }
     });
   }
