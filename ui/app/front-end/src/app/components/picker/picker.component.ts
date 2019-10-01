@@ -32,8 +32,13 @@ export class PickerComponent implements OnInit, AfterViewInit {
     const elem = (this.view.nativeElement as HTMLElement);
 
     const inputs = elem.querySelectorAll('input');
-
     inputs.forEach((e) => {
+      e.onblur = () => this.input.focusInputCount--;
+      e.onfocus = () => this.input.focusInputCount++;
+    });
+
+    const textareas = elem.querySelectorAll('textarea');
+    textareas.forEach((e) => {
       e.onblur = () => this.input.focusInputCount--;
       e.onfocus = () => this.input.focusInputCount++;
     });
