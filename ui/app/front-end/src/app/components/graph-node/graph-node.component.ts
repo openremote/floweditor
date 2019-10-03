@@ -19,12 +19,14 @@ export class GraphNodeComponent implements AfterViewInit {
   @ViewChild('outputSockets') outputSockets: ElementRef;
   @ViewChild('view') view: ElementRef;
 
+  public hasDisplayCharacter = false;
+
   constructor(
     public project: ProjectService,
     public selection: SelectionService,
     public input: InputService,
     private context: ContextMenuService
-  ) {}
+  ) { }
 
   private toTop() {
     const elem = this.view.nativeElement as HTMLElement;
@@ -35,6 +37,7 @@ export class GraphNodeComponent implements AfterViewInit {
   public getSocketIdentity = (socket: NodeSocket) => IdentityAssigner.getSocketElementIdentity(socket);
 
   ngAfterViewInit() {
+    this.hasDisplayCharacter = (this.node.displayCharacter != null);
     if (this.node.position != null) {
       const elem = this.view.nativeElement as HTMLElement;
       const box = elem.getBoundingClientRect();

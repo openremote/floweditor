@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NodeGraphTranslator } from 'node-structure';
 import { Node } from '@openremote/model';
 import { RestService } from './rest.service';
 
@@ -7,18 +6,18 @@ import { RestService } from './rest.service';
   providedIn: 'root'
 })
 export class NodeManagerService {
-  public translator: NodeGraphTranslator;
+  public nodes: Node[] = [];
   constructor(private rest: RestService) {
-    this.translator = new NodeGraphTranslator();
+
   }
 
   public downloadNodeDefinitions(callback: (nodes: Node[]) => void) {
     this.rest.getFlowResource().then(flow => {
       flow.getAllNodeDefinitions().then(n => {
         n.data.forEach(node => {
-          this.translator.registerNode(node, {});
+          this.nodes.push(node);
         });
-        callback(this.translator.getAllNodes());
+        callback(this.nodes);
       });
     });
   }

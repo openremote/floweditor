@@ -36,7 +36,7 @@
   box-shadow: 0 0 0 3px #47AA42;
 }
 
-.node.node-then {
+.node.node-simple {
   grid-template-columns: max-content auto max-content;
   grid-template-rows: auto;
   grid-template-areas:
@@ -101,7 +101,7 @@
   min-width: max-content;
 }
 
-.node-then .socket {
+.node-simple .socket {
   min-height: unset;
 }
 
@@ -145,7 +145,6 @@
   padding-bottom: 15px;
 }
 
-
 .node-input .title {
   text-align: right;
 }
@@ -165,23 +164,21 @@
   display: none;
 }
 
-.node-then {
-  max-width: 96px;
-  max-height: 96px;
-  min-width: 96px;
-  min-height: 96px;
-
-  border-radius: 50%;
+.node-simple {
+  min-width: 64px;
+  min-height: 64px;
 }
 
-.node-then .title {
-  margin: auto;
-  color: white;
-  font-size: 1.2em;
+.node-simple .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.4em;
   font-weight: bold;
   cursor: move;
 }
 
-.node-then .label {
+.node-simple .label {
   display: none;
 }

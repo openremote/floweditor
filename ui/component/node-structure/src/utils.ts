@@ -24,8 +24,8 @@ export class NodeUtilities {
     }
 
     public static getNodeFromID(id: string, nodes: Node[]) {
-        const nodeIndex = nodes.findIndex((n) => n.id === id);
-        if (nodeIndex === -1) { console.warn(`Node with ID ${id} not found`); }
-        return nodes[nodeIndex];
+        const node = nodes.find((n) => n.id === id);
+        if (!node) { console.warn(`Node with ID ${id} not found`); }
+        return node;
     }
 }

@@ -25,7 +25,7 @@ export class ToolpanelComponent implements OnInit {
   }
 
   public loadNodes() {
-    this.nodes = this.nodeService.translator.getAllNodes();
+    this.nodes = this.nodeService.nodes;
     console.log(this.nodes);
     this.loadingStatus = 1;
   }

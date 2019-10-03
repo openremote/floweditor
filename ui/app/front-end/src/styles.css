@@ -1,7 +1,7 @@
 @import "assets/dark.css";
 
 * {
-  backface-visibility: hidden;
+  backface-visibility: hidden !important;
   user-select: none;
   font-family: 'Roboto Mono', sans-serif;
   letter-spacing: normal;

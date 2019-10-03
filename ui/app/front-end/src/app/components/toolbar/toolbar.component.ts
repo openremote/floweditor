@@ -66,6 +66,7 @@ export class ToolbarComponent implements OnInit {
       n.position.y -= 32;
       return n;
     });
+    this.selection.nodes = this.project.nodes;
     this.project.connections = collection.connections;
   }
 }

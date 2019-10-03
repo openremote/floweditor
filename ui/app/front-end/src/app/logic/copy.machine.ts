@@ -13,6 +13,7 @@ export class CopyMachine {
 
         minimalNode.internals = node.internals || [];
         minimalNode.name = node.name;
+        minimalNode.displayCharacter = node.displayCharacter;
 
         minimalNode.outputs = (node.outputs || []).map(i => {
             return {
