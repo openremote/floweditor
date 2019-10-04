@@ -22,7 +22,6 @@ export class ExporterService {
       nodes: this.project.nodes,
       connections: this.project.connections
     };
-    
-    callback(JSON.stringify(collection));
+    callback(JSON.stringify(collection, null, 2));
   }
 }
