@@ -7,10 +7,10 @@
       <div class="center">
         <div class="error">
           <div style="margin-bottom: 1em">
-            <i class="fas fa-exclamation-triangle"></i> We couldn't connect to OpenRemote
+            <i class="fas fa-exclamation-triangle"></i> We couldn't connect to the Manager
           </div>
           <button color="accent" mat-flat-button (click)="integration.initialise()"><i class="fas fa-sync-alt"></i> Retry</button>
-          <button color="accent" mat-button (click)="integration.skip()"><i class="fas fa-share"></i> Continue without logging in</button>
+          <!-- <button color="accent" mat-button (click)="integration.skip()"><i class="fas fa-share"></i> Continue without logging in</button> -->
           <p class="muted">{{openremote.error}}</p>
         </div>
       </div>
@@ -25,7 +25,7 @@
                 <i class="fas fa-exclamation-triangle"></i> Unauthenticated
               </div>
               <button color="accent" mat-flat-button (click)="integration.login()"><i class="fas fa-sign-in-alt"></i> Login</button>
-              <button color="accent" mat-button (click)="integration.skip()"><i class="fas fa-share"></i> Continue without logging in</button>
+              <!-- <button color="accent" mat-button (click)="integration.skip()"><i class="fas fa-share"></i> Continue without logging in</button> -->
             </div>
           </div>
     </ng-container>
