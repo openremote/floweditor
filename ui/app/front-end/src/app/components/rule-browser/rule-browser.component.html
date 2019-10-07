@@ -1,0 +1,11 @@
+<span>
+  <div class="list-container" [ngSwitch]="status" [attr.pulse]="status == 0">
+    <div *ngSwitchCase="-1" class="error" style="margin: 10px">
+      <i class="fas fa-exclamation-triangle"></i> We couldn't connect to OpenRemote
+    </div>
+    <div *ngFor="let rule of rules" class="title pressable" (click)="close(rule)">
+      {{rule.name}}
+    </div>
+  </div>
+</span>
+<button mat-button mat-dialog-close>Cancel</button>

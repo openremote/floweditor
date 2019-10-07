@@ -43,6 +43,7 @@ import { ContextMenuComponent } from './components/context-menu/context-menu.com
 import { EditorComponent } from './components/editor/editor.component';
 import { AssetPickerDialogComponent } from './components/asset-picker-dialog/asset-picker-dialog.component';
 import { AssetPickerTreeEntryComponent } from './components/asset-picker-tree-entry/asset-picker-tree-entry.component';
+import { RuleBrowserComponent } from './components/rule-browser/rule-browser.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AssetPickerTreeEntryComponent } from './components/asset-picker-tree-en
     ContextMenuComponent,
     EditorComponent,
     AssetPickerDialogComponent,
-    AssetPickerTreeEntryComponent
+    AssetPickerTreeEntryComponent,
+    RuleBrowserComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +93,7 @@ import { AssetPickerTreeEntryComponent } from './components/asset-picker-tree-en
     ExportSettingsDialogComponent,
     ErrorDialogComponent,
     HelpDialogComponent,
+    RuleBrowserComponent,
     AssetPickerDialogComponent
   ],
   providers: [

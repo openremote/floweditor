@@ -24,6 +24,14 @@
   color: rgba(0, 0, 0, 0.315);
 }
 
+.separator{
+  border: none;
+  border-left: 1px solid #a8a8a8;
+  width: 1px;
+  margin: 5px;
+  margin-right: 4px;
+}
+
 .fas{
   vertical-align: unset !important;
   margin-right: 5px;
@@ -74,4 +82,16 @@
   width: 24px;
   height: 24px;
   display: inline-block;
+}
+
+@media only screen and (max-width:1080px)
+{
+  .logo {
+    display: none;
+  }
+
+  .icon{
+    /* flex-grow: 10; */
+    margin-right: auto;
+  }
 }

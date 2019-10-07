@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Asset } from '@openremote/model';
 import { RestService } from 'src/app/services/rest.service';

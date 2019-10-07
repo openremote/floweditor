@@ -1,12 +1,25 @@
 <div class="toolbar" (mousedown)="selection.deselectAll()">
   <img class="icon" src="assets/favicon.png" alt="">
   <div class="logo">OpenRemote Rule Node Editor</div>
-  <div class="information">{{integration.getRealm()}}</div>
-  <button mat-button class="warn" (click)="debugSave()">save</button>
-  <button mat-button class="warn" (click)="debugLoad()">load</button>
-  <button mat-button (click)="showSettings()"><i class="fas fa-cog"></i>Settings</button>
+  <!-- <div class="information">{{integration.getRealm()}}</div> -->
+  <div class="information" *ngIf="project.existingFlowRuleId != -1">{{project.existingFlowRuleName}}</div>
+  <div class="separator" *ngIf="project.existingFlowRuleId != -1"></div>
+  <!-- <button mat-button class="warn" (click)="debugLoad()">load</button> -->
+  <button mat-button class="primary" (click)="newRule()">New</button>
+  <button mat-button class="primary" (click)="open()">Open</button>
+  <button mat-button class="primary" *ngIf="project.existingFlowRuleId != -1" (click)="save()">Save</button>
+  <button mat-button [ngClass]="{'primary': project.existingFlowRuleId == -1}" (click)="saveAs()">Save as</button>
+  <div class="separator"></div>
+
+  <ng-container *ngIf="project.existingFlowRuleId != -1">
+      <button mat-button class="danger" (click)="delete()">Delete from manager</button>
+    <div class="separator"></div>
+  </ng-container>
+
+  <!-- <button mat-button (click)="showSettings()"><i class="fas fa-cog"></i>Settings</button> -->
   <button mat-button (click)="showHelp()"><i class="fas fa-question"></i>Help</button>
   <button mat-button (click)="exit()"><i class="fas fa-sign-out-alt"></i>Logout</button>
-  <button mat-button class="danger" (click)="clear()"><i class="fas fa-trash"></i>Clear</button>
-  <button mat-button class="primary" (click)="exportNodeStructure()"><i class="fas fa-file-export"></i>Export</button>
+  <!-- <div class="separator"></div> -->
+  <!-- <button mat-button class="danger" (click)="clear()"><i class="fas fa-trash"></i>Clear</button> -->
+  <!-- <button mat-button class="primary" (click)="exportNodeStructure()"><i class="fas fa-file-export"></i>Export</button> -->
 </div>

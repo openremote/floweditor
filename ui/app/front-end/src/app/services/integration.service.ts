@@ -15,7 +15,7 @@ export enum IntegrationServiceStatus {
   providedIn: 'root'
 })
 export class IntegrationService {
-  private openremote = openremote;
+  public openremote = openremote;
   private Status = IntegrationServiceStatus;
 
   public requestedRealm = 'master';

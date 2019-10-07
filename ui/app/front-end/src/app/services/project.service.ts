@@ -10,6 +10,9 @@ import { Node, NodeSocket, NodeConnection, NodeType } from '@openremote/model';
 export class ProjectService {
   public nodes: Node[] = [];
   public connections: NodeConnection[] = [];
+  public existingFlowRuleId = -1;
+  public existingFlowRuleName: string = null;
+  public existingFlowRuleDesc: string = null;
 
   public isDragging: boolean;
   private currentFrom: NodeSocket;
@@ -20,6 +23,12 @@ export class ProjectService {
   constructor(private input: InputService, private selection: SelectionService) {
     input.registerCallback((s) => this.keyDown(s));
     selection.nodes = this.nodes;
+  }
+
+  public setCurrentProject(id: number, name: string, desc: string) {
+    this.existingFlowRuleId = id;
+    this.existingFlowRuleName = name;
+    this.existingFlowRuleDesc = desc;
   }
 
   private keyDown(key: string) {
