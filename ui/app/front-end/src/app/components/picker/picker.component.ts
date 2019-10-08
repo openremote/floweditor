@@ -5,6 +5,7 @@ import { Asset, AssetState, MetaItemType, PickerType, NodeInternal, AssetAttribu
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { RestService } from 'src/app/services/rest.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-picker',
@@ -24,6 +25,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
 
   constructor(
     private snack: MatSnackBar,
+    private project: ProjectService,
     private input: InputService,
     private rest: RestService,
     private dialog: MatDialog) { }
@@ -34,13 +36,19 @@ export class PickerComponent implements OnInit, AfterViewInit {
     const inputs = elem.querySelectorAll('input');
     inputs.forEach((e) => {
       e.onblur = () => this.input.focusInputCount--;
-      e.onfocus = () => this.input.focusInputCount++;
+      e.onfocus = () => {
+        this.project.isInUnsavedState = true;
+        return this.input.focusInputCount++;
+      };
     });
 
     const textareas = elem.querySelectorAll('textarea');
     textareas.forEach((e) => {
       e.onblur = () => this.input.focusInputCount--;
-      e.onfocus = () => this.input.focusInputCount++;
+      e.onfocus = () => {
+        this.project.isInUnsavedState = true;
+        return this.input.focusInputCount++;
+      };
     });
   }
 

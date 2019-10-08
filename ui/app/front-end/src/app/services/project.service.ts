@@ -13,6 +13,7 @@ export class ProjectService {
   public existingFlowRuleId = -1;
   public existingFlowRuleName: string = null;
   public existingFlowRuleDesc: string = null;
+  public isInUnsavedState = false;
 
   public isDragging: boolean;
   private currentFrom: NodeSocket;
@@ -26,12 +27,14 @@ export class ProjectService {
   }
 
   public setCurrentProject(id: number, name: string, desc: string) {
+    this.isInUnsavedState = false;
     this.existingFlowRuleId = id;
     this.existingFlowRuleName = name;
     this.existingFlowRuleDesc = desc;
   }
 
   private keyDown(key: string) {
+    this.isInUnsavedState = true;
     if (this.input.focusInputCount > 0) { return; }
 
     if (key === 'Delete' || key === 'Backspace') {
@@ -40,12 +43,14 @@ export class ProjectService {
   }
 
   public removeSelectedNodes() {
+    this.isInUnsavedState = true;
     this.selection.selectedNodes.forEach((n) => {
       this.removeNode(n);
     });
   }
 
   public addNode(node: Node) {
+    this.isInUnsavedState = true;
     if (node.type === NodeType.THEN) {
       if (this.nodes.find((n) => n.type === NodeType.THEN) != null) {
         throw new Error('A project can only have one THEN node');
@@ -55,6 +60,7 @@ export class ProjectService {
   }
 
   public removeNode(node: Node) {
+    this.isInUnsavedState = true;
     this.selection.deselectAll();
     const id = node.id;
     const newConnections: NodeConnection[] = [];
@@ -68,6 +74,7 @@ export class ProjectService {
   }
 
   public removeConnection(connection: NodeConnection) {
+    this.isInUnsavedState = true;
     this.connections.splice(this.connections.indexOf(connection), 1);
   }
 
@@ -109,7 +116,7 @@ export class ProjectService {
     if (!this.isDragging) { return; }
 
     this.isDragging = false;
-
+    this.isInUnsavedState = true;
 
     const source = this.reverseConnection ? socket : this.currentFrom;
     const destination = this.reverseConnection ? this.currentFrom : socket;

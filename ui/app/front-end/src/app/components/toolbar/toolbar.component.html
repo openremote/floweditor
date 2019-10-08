@@ -2,7 +2,7 @@
   <img class="icon" src="assets/favicon.png" alt="">
   <div class="logo">OpenRemote Rule Node Editor</div>
   <!-- <div class="information">{{integration.getRealm()}}</div> -->
-  <div class="information" *ngIf="project.existingFlowRuleId != -1">{{project.existingFlowRuleName}}</div>
+  <div class="information" *ngIf="project.existingFlowRuleId != -1">{{project.existingFlowRuleName}}<span *ngIf="project.isInUnsavedState">*</span></div>
   <div class="separator" *ngIf="project.existingFlowRuleId != -1"></div>
   <!-- <button mat-button class="warn" (click)="debugLoad()">load</button> -->
   <button mat-button class="primary" (click)="newRule()">New</button>

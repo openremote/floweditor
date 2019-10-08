@@ -68,7 +68,7 @@ export class GraphNodeComponent implements AfterViewInit {
 
   mousedown(e: MouseEvent) {
     e.stopPropagation();
-
+    this.project.isInUnsavedState = true;
     if (e.button !== 0) { return; }
 
     this.toTop();
