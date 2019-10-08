@@ -68,6 +68,7 @@ export class ToolbarComponent implements OnInit {
             r.updateGlobalRuleset(existing.id, existing).then((e) => {
               if (e.status === 204) {
                 this.snackbar.open('Successfully updated rule', 'Dismiss', { duration: 2000 });
+                this.project.isInUnsavedState = false;
               } else {
                 this.snackbar.open('Something went wrong', 'Dismiss', { duration: 4000 });
               }
