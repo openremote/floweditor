@@ -107,6 +107,7 @@ export class ToolbarComponent implements OnInit {
           const collection: NodeCollection = JSON.parse(rule.rules);
 
           this.clear();
+          this.project.connections = [];
           this.project.nodes = collection.nodes.map((n: Node) => {
             n.position.x -= 200;
             n.position.y -= 32;

@@ -124,7 +124,7 @@ export class ProjectService {
     const sourceElement = this.reverseConnection ? this.currentFromElement : event.target as Element;
     const destinationElement = this.reverseConnection ? event.target as Element : this.currentFromElement;
 
-    const existing = this.connections.filter((c) => c.to === destination);
+    const existing = this.connections.filter((c) => c.to.id === destination.id);
 
     if (sourceElement.getAttribute('socket') === destinationElement.getAttribute('socket')) { return; }
 
