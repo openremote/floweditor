@@ -78,11 +78,8 @@ export class PickerComponent implements OnInit, AfterViewInit {
               return;
             }
             this.chosenAsset = assets.data[0];
-            console.log(this.chosenAsset);
             this.resetAssetAttributeDropDownValue();
             this.chosenAttributeName = this.internal.value.attributeName;
-
-            console.log(this.internal.value);
           });
         });
       }
@@ -94,7 +91,6 @@ export class PickerComponent implements OnInit, AfterViewInit {
       this.attributeNames = [];
       for (const att of Object.keys(this.chosenAsset.attributes)) {
         const meta = (this.chosenAsset.attributes[att] as AssetState).meta;
-        console.log(meta);
         if (meta.find(m => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
           this.attributeNames.push(att);
         }
@@ -118,7 +114,6 @@ export class PickerComponent implements OnInit, AfterViewInit {
     d.afterClosed().subscribe((response: Asset) => {
       if (response) {
         this.chosenAsset = response;
-        console.log(JSON.stringify(response, null, 2));
         this.resetAssetAttributeDropDownValue();
         this.setAssetPair();
       } else {

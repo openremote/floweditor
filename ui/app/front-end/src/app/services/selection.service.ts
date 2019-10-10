@@ -95,12 +95,6 @@ export class SelectionService {
 
     this.deselectAll();
 
-    // console.log(this.nodes);
-
-    // let offset = document.getElementById('workspace').getBoundingClientRect();
-    console.log(this.nodes);
-    // console.log(this.selectionBox);
-
     this.nodes.forEach(node => {
       if (this.isInsideBox(node.position.x, node.position.y, this.selectionBox)) {
         this.selectNode(node, true);

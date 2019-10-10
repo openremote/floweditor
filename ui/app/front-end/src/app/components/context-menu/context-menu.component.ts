@@ -19,29 +19,6 @@ export class ContextMenuComponent implements OnInit {
     public select: SelectionService,
     public context: ContextMenuService) {
     this.contextMenu = new ContextMenu();
-
-    this.contextMenu.items.push(
-      {
-        label: 'Print hello world',
-        action: () => console.log('hello world')
-      }
-    );
-    this.contextMenu.items.push(
-      {
-        label: 'Print something else',
-        action: () => console.log('something else')
-      }
-    );
-    this.contextMenu.items.push(
-      {
-        label: 'Delete',
-        action: () => {
-          select.selectedNodes.forEach((n) => {
-            project.removeNode(n);
-          });
-        }
-      }
-    );
   }
 
   ngOnInit() {

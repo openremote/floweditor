@@ -1,9 +1,7 @@
-<div class="node {{node.type | graphNodeTypeClass}}" [ngStyle]="{'z-index': 500}">
+<div class="node {{node.type | graphNodeTypeClass}}" [ngStyle]="{'z-index': 500}" (mousedown)="startDrag($event)">
   <div class="title">{{node.name | graphNodeName}}</div>
-  <div #dragElement class="node {{node.type | graphNodeTypeClass}}" cdkDrag (cdkDragEnded)="addNodeToProject($event)">
-    <div class="title">{{node.name | graphNodeName}}</div>
-  </div>
 </div>
 
-
-<!-- (click)="addNodeToProject()" -->
+<div #dragElement class="floating node {{node.type | graphNodeTypeClass}}" *ngIf="isDragging" [ngStyle]="{'top': fY + 'px', 'left': fX + 'px'}">
+  <div class="title">{{node.name | graphNodeName}}</div>
+</div>

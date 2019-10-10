@@ -126,24 +126,4 @@ export class ToolbarComponent implements OnInit {
       }
     });
   }
-  /*
-    public debugSave() {
-      const collection: NodeCollection = { nodes: this.project.nodes, connections: this.project.connections };
-      localStorage.debugStorage = JSON.stringify(collection);
-    }
-
-    public debugLoad() {
-      const collection = JSON.parse(localStorage.debugStorage);
-      console.log(collection);
-
-      this.clear();
-      this.project.nodes = collection.nodes.map((n: Node) => {
-        n.position.x -= 200;
-        n.position.y -= 32;
-        return n;
-      });
-      this.selection.nodes = this.project.nodes;
-      this.project.connections = collection.connections;
-    }
-    */
 }

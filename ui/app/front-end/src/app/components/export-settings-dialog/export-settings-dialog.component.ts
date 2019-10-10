@@ -26,7 +26,6 @@ export class ExportSettingsDialogComponent implements OnInit {
   }
 
   public translateAndShow() {
-    console.log(this.inputName);
     this.exporter.export(this.inputName, this.inputDescription, (data: string) => {
 
       const ruleset = { data, name: this.inputName, description: this.inputDescription };

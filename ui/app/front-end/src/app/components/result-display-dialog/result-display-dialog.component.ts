@@ -20,7 +20,6 @@ export class ResultDisplayDialogComponent implements OnInit {
   }
 
   public upload() {
-    console.log(this.ruleset);
     this.rest.getRuleResource().then(r => {
       const rs: GlobalRuleset = {
         lang: RulesetLang.FLOW,

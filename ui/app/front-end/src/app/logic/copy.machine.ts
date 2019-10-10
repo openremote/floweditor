@@ -24,8 +24,6 @@ export class CopyMachine {
         minimalNode.type = node.type;
         minimalNode.position = { x: 0, y: 0 };
 
-        console.log(minimalNode);
-
         const clone: Node = JSON.parse(JSON.stringify(minimalNode));
         clone.id = IdentityAssigner.generateIdentity();
         clone.inputs.forEach(socket => {
