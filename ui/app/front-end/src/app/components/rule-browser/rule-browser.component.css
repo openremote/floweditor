@@ -16,7 +16,17 @@
 .title {
   cursor: pointer;
   padding: 5px;
+  width: calc(100% - 10px);
   border-radius: 2px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-flex;
+
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title:hover {
@@ -52,8 +62,10 @@
   color: red;
 }
 
-.muted{
-  text-align: center;
-  margin:10px;
+.muted {
   color: rgba(255, 255, 255, 0.384);
+}
+
+button {
+  margin-top: 10px;
 }

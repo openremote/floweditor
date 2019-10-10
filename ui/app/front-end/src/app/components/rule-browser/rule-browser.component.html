@@ -3,9 +3,11 @@
     <div *ngIf="status == -1" class="error" style="margin: 10px">
       <i class="fas fa-exclamation-triangle"></i> We couldn't connect to OpenRemote
     </div>
-    <div class="muted" *ngIf="rules.length == 0 && status == 1">There are no global flow rulesets</div>
+    <div class="muted" *ngIf="rules.length == 0 && status == 1" style="margin: 10px">There are no global flow rulesets</div>
     <div *ngFor="let rule of rules" class="title pressable" (click)="close(rule)">
-      {{rule.name}}
+      <span>{{rule.name}}</span>
+      <span class="muted" *ngIf="rule.error" title="{{rule.error}}">Error</span>
+      <span class="muted" *ngIf="!rule.enabled">Disabled</span>
     </div>
   </div>
 </span>
