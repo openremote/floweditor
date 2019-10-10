@@ -67,10 +67,10 @@ export class ToolbarComponent implements OnInit {
 
             r.updateGlobalRuleset(existing.id, existing).then((e) => {
               if (e.status === 204) {
-                this.snackbar.open('Successfully updated rule', 'Dismiss', { duration: 2000 });
+                this.snackbar.open('Successfully updated rule', null, { duration: 2000 });
                 this.project.isInUnsavedState = false;
               } else {
-                this.snackbar.open('Something went wrong', 'Dismiss', { duration: 4000 });
+                this.snackbar.open('Something went wrong', null, { duration: 4000 });
               }
             });
           });
@@ -86,10 +86,10 @@ export class ToolbarComponent implements OnInit {
       r.deleteGlobalRuleset(this.project.existingFlowRuleId).then((e) => {
 
         if (e.status === 204) {
-          this.snackbar.open('Successfully deleted rule', 'Dismiss', { duration: 2000 });
+          this.snackbar.open('Successfully deleted rule', null, { duration: 2000 });
           this.newRule();
         } else {
-          this.snackbar.open('Something went wrong', 'Dismiss', { duration: 4000 });
+          this.snackbar.open('Something went wrong', null, { duration: 4000 });
         }
       });
     });
@@ -120,7 +120,7 @@ export class ToolbarComponent implements OnInit {
           this.project.setCurrentProject(rule.id, rule.name, collection.description);
         } catch (e) {
           console.error(e);
-          this.snackbar.open('Invalid rule', 'Dismiss', { duration: 4000 });
+          this.snackbar.open('Invalid rule', null, { duration: 4000 });
           return;
         }
       }

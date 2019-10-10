@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { InputService } from 'src/app/services/input.service';
 import { IntegrationService } from 'src/app/services/integration.service';
-import { Asset, AssetState, MetaItemType, PickerType, NodeInternal, AssetAttributeInternalValue } from '@openremote/model';
+import { Asset, AssetState, MetaItemType, PickerType, NodeInternal, AssetAttributeInternalValue, Attribute, Node, AttributeValueType, NodeDataType } from '@openremote/model';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AssetPickerDialogComponent } from '../asset-picker-dialog/asset-picker-dialog.component';
 import { RestService } from 'src/app/services/rest.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { NodeUtilities } from 'node-structure';
 
 @Component({
   selector: 'app-picker',
@@ -15,6 +16,7 @@ import { ProjectService } from 'src/app/services/project.service';
 export class PickerComponent implements OnInit, AfterViewInit {
 
   @Input() internal: NodeInternal;
+  @Input() node: Node;
   @ViewChild('view') view: ElementRef;
 
   public doubleDropDownChoice: any;
@@ -26,6 +28,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
   constructor(
     private snack: MatSnackBar,
     private project: ProjectService,
+    private integration: IntegrationService,
     private input: InputService,
     private rest: RestService,
     private dialog: MatDialog) { }
@@ -74,7 +77,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
             }
           }).then((assets) => {
             if (assets.data.length === 0) {
-              this.snack.open('Missing asset in node setup', 'Dismiss');
+              this.snack.open('Missing asset in node setup', null, { duration: 4000 });
               return;
             }
             this.chosenAsset = assets.data[0];
@@ -107,6 +110,43 @@ export class PickerComponent implements OnInit, AfterViewInit {
       attributeName: this.chosenAttributeName
     };
     this.internal.value = value;
+    this.setSocketTypeDynamically();
+  }
+
+  private async setSocketTypeDynamically() {
+    if (this.internal.value != null && this.chosenAttributeName != null) {
+      const assets = await this.rest.getAssetResource();
+      const models = await this.rest.getAssetModelResource();
+      const results = (await assets.queryAssets({
+        ids: [this.chosenAsset.id],
+        select: {
+          excludeAttributeTimestamp: false,
+          excludeAttributeValue: false,
+          excludeAttributeType: false,
+          excludeAttributes: false,
+          attributes: [
+            this.chosenAttributeName
+          ]
+        }
+      })).data;
+
+      const socket = this.node.outputs[0] || this.node.inputs[0] ;
+      socket.type = NodeDataType.ANY;
+
+      if (results == null) { return; }
+      if (results[0] == null) { return; }
+      if (results[0].attributes == null) { return; }
+
+      try {
+        const relevantAttribute = results[0].attributes[this.chosenAttributeName];
+        const descriptors = (await models.getAttributeValueDescriptors()).data;
+        const relevantDescriptor = descriptors.find(c => c.name === relevantAttribute.type);
+        socket.type = NodeUtilities.convertValueTypeToSocketType(relevantDescriptor.valueType);
+      } catch (e) {
+        this.snack.open('Something went wrong while reading attribute value type', null, { duration: 4000 });
+        console.error(e);
+      }
+    }
   }
 
   public openAssetPickerDialog() {

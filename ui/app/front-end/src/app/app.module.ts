@@ -67,7 +67,7 @@ import { RuleBrowserComponent } from './components/rule-browser/rule-browser.com
     EditorComponent,
     AssetPickerDialogComponent,
     AssetPickerTreeEntryComponent,
-    RuleBrowserComponent
+    RuleBrowserComponent,
   ],
   imports: [
     BrowserModule,

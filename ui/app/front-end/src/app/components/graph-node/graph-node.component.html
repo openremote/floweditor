@@ -17,7 +17,7 @@
   <div *ngIf="hasDisplayCharacter" class="title" cdkDragHandle>{{node.displayCharacter}}</div>
 
   <div style="grid-area: internals" class="internals" *ngIf="!hasDisplayCharacter">
-    <app-picker *ngFor="let internal of node.internals" [internal]="internal"
+    <app-picker *ngFor="let internal of node.internals" [node]="node" [internal]="internal"
       (mousedown)="selection.deselectNode(node)"></app-picker>
   </div>
 

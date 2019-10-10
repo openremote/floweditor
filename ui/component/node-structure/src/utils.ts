@@ -1,4 +1,4 @@
-import { NodeCollection, NodeSocket, NodeType, Node, NodeConnection } from "@openremote/model";
+import { NodeCollection, NodeSocket, NodeType, Node, NodeConnection, ValueType, NodeDataType, AttributeValueType } from "@openremote/model";
 
 export class NodeUtilities {
     public static getInputNodeConnections(node: Node, collection: NodeCollection): NodeSocket[] {
@@ -27,5 +27,14 @@ export class NodeUtilities {
         const node = nodes.find((n) => n.id === id);
         if (!node) { console.warn(`Node with ID ${id} not found`); }
         return node;
+    }
+
+    public static convertValueTypeToSocketType(value: ValueType): NodeDataType {
+        switch (value) {
+            case ValueType.BOOLEAN: return NodeDataType.BOOLEAN;
+            case ValueType.NUMBER: return NodeDataType.NUMBER;
+            case ValueType.STRING: return NodeDataType.STRING;
+            default: return NodeDataType.ANY;
+        }
     }
 }

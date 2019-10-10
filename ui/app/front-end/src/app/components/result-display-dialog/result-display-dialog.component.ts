@@ -30,9 +30,9 @@ export class ResultDisplayDialogComponent implements OnInit {
 
       r.createGlobalRuleset(rs).then((e) => {
         if (e.status === 200) {
-          this.snackbar.open('Successfully added rule', 'Dismiss', {duration: 1000});
+          this.snackbar.open('Successfully added rule', null, {duration: 2000});
         } else {
-          this.snackbar.open('Something went wrong', 'Dismiss', {duration: 2000});
+          this.snackbar.open('Something went wrong',  null, {duration: 4000});
         }
       });
     });

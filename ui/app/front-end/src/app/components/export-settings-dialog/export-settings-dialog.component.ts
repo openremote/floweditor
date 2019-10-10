@@ -41,9 +41,9 @@ export class ExportSettingsDialogComponent implements OnInit {
         r.createGlobalRuleset(rs).then((e) => {
           if (e.status === 200) {
             this.project.setCurrentProject(e.data, ruleset.name, ruleset.description);
-            this.snackbar.open('Successfully added rule', 'Dismiss', { duration: 2000 });
+            this.snackbar.open('Successfully added rule', null, { duration: 2000 });
           } else {
-            this.snackbar.open('Something went wrong', 'Dismiss', { duration: 4000 });
+            this.snackbar.open('Something went wrong', null, { duration: 4000 });
           }
         });
       });
