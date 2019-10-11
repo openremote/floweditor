@@ -1,4 +1,4 @@
-import { NodeCollection, NodeSocket, NodeType, Node, NodeConnection, ValueType, NodeDataType, AttributeValueType } from "@openremote/model";
+import { NodeCollection, NodeSocket, NodeType, Node, NodeConnection, ValueType, NodeDataType, AttributeValueType, NodePosition } from "@openremote/model";
 
 export class NodeUtilities {
     public static getInputNodeConnections(node: Node, collection: NodeCollection): NodeSocket[] {
@@ -36,5 +36,28 @@ export class NodeUtilities {
             case ValueType.STRING: return NodeDataType.STRING;
             default: return NodeDataType.ANY;
         }
+    }
+
+    public static add(a: NodePosition, b: NodePosition): NodePosition {
+        return { x: a.x + b.x, y: a.y + b.y };
+    }
+
+    public static subtract(a: NodePosition, b: NodePosition): NodePosition {
+        return { x: a.x - b.x, y: a.y - b.y };
+    }
+
+    public static multiply(a: NodePosition, b: number): NodePosition {
+        return { x: a.x * b, y: a.y * b };
+    }
+
+    public static lerpNumber(x: number, y: number, t: number) {
+        return x * (1 - t) + y * t;
+    }
+
+    public static lerp(a: NodePosition, b: NodePosition, t: number): NodePosition {
+        const x = this.lerpNumber(a.x, b.x, t);
+        const y = this.lerpNumber(a.y, b.y, t);
+
+        return { x, y };
     }
 }

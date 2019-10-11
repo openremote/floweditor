@@ -4,10 +4,8 @@ import { SelectionService } from 'src/app/services/selection.service';
 import { InputService } from 'src/app/services/input.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { ContextMenu } from 'src/app/models/context.menu';
-import { CopyMachine } from 'src/app/logic/copy.machine';
-import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 import { Node, NodeSocket, NodeType } from '@openremote/model';
-import { IdentityDomLink } from 'src/app/logic/identity.dom.link';
+import { IdentityAssigner, IdentityDomLink, CopyMachine } from 'node-structure';
 
 @Component({
   selector: 'app-graph-node',

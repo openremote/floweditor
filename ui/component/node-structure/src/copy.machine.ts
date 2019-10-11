@@ -1,5 +1,5 @@
-import { IdentityAssigner } from './identity.assigner';
-import { Node, NodeSocket } from '@openremote/model';
+import { IdentityAssigner } from "./identity.assigner";
+import { Node, NodeSocket } from "@openremote/model";
 
 export class CopyMachine {
     public static copy(node: Node): Node {
@@ -15,7 +15,7 @@ export class CopyMachine {
         minimalNode.name = node.name;
         minimalNode.displayCharacter = node.displayCharacter;
 
-        minimalNode.outputs = (node.outputs || []).map(i => {
+        minimalNode.outputs = (node.outputs || []).map((i) => {
             return {
                 name: i.name, type: i.type
             };
@@ -26,12 +26,12 @@ export class CopyMachine {
 
         const clone: Node = JSON.parse(JSON.stringify(minimalNode));
         clone.id = IdentityAssigner.generateIdentity();
-        clone.inputs.forEach(socket => {
+        clone.inputs.forEach((socket) => {
             socket.nodeId = clone.id;
             socket.id = IdentityAssigner.generateIdentity();
         });
 
-        clone.outputs.forEach(socket => {
+        clone.outputs.forEach((socket) => {
             socket.nodeId = clone.id;
             socket.id = IdentityAssigner.generateIdentity();
         });

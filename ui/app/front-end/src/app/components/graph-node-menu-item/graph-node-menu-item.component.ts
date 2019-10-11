@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
-import { CopyMachine } from 'src/app/logic/copy.machine';
-import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { Node } from '@openremote/model';
-import { InputService } from 'src/app/services/input.service';
+import { CopyMachine } from 'node-structure';
 
 @Component({
   selector: 'app-graph-node-menu-item',

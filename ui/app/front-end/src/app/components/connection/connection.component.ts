@@ -2,12 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { timer } from 'rxjs';
 import { ProjectService } from 'src/app/services/project.service';
 import { ContextMenuService } from 'src/app/services/context-menu.service';
-import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 import { NodePosition, NodeConnection } from '@openremote/model';
-import { Utils } from 'src/app/logic/utils';
-import { IdentityDomLink } from 'src/app/logic/identity.dom.link';
 import { GraphNodeComponent } from '../graph-node/graph-node.component';
-import { CdkDragMove } from '@angular/cdk/drag-drop';
+import { IdentityDomLink, IdentityAssigner, NodeUtilities } from 'node-structure';
 
 @Component({
   selector: 'app-connection',
@@ -122,8 +119,8 @@ export class ConnectionComponent implements OnInit {
     for (let i = 0; i < c; i++) {
       const t = i / c;
 
-      const p = Utils.lerp(start, end, t);
-      p.y = Utils.lerpNumber(p.y, Utils.lerpNumber(start.y, end.y, this.curve(t)), this.curviness);
+      const p = NodeUtilities.lerp(start, end, t);
+      p.y = NodeUtilities.lerpNumber(p.y, NodeUtilities.lerpNumber(start.y, end.y, this.curve(t)), this.curviness);
       points.push(p);
     }
 

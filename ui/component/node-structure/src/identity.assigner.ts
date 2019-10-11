@@ -1,5 +1,5 @@
-import * as ShortID from 'shortid';
-import { NodeSocket } from '@openremote/model';
+import * as ShortID from "shortid";
+import { NodeSocket } from "@openremote/model";
 
 export class IdentityAssigner {
 

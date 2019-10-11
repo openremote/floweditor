@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { InputService } from './input.service';
 import { SelectionService } from './selection.service';
-import { SocketTypeMatcher } from '../logic/socket.type.matcher';
 import { Node, NodeSocket, NodeConnection, NodeType } from '@openremote/model';
+import { SocketTypeMatcher } from 'node-structure';
 
 @Injectable({
   providedIn: 'root'
