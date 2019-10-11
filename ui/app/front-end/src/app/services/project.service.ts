@@ -112,6 +112,27 @@ export class ProjectService {
     this.isDragging = false;
   }
 
+  public forceRemoveInvalidConnections() {
+    const copy = this.connections;
+    for (const c of copy) {
+      if (!this.isValidConnection(c)) {
+        this.connections.splice(this.connections.indexOf(c), 1);
+      }
+    }
+  }
+
+  public isValidConnection(c: NodeConnection) {
+    // if (!this.connections.includes(c)) { return false; }
+    if (c.from.id === c.to.id) { return false; }
+    if (c.from.nodeId === c.to.nodeId) { return false; }
+    if (!SocketTypeMatcher.match(c.from.type, c.to.type)) { return false; }
+
+    const existing = this.connections.filter((cc) => cc.to.id === c.to.id);
+    if (existing.length > 1) { return false; }
+
+    return true;
+  }
+
   public stopConnectionDrag(socket: NodeSocket, event: MouseEvent) {
     if (!this.isDragging) { return; }
 

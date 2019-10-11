@@ -142,6 +142,7 @@ export class PickerComponent implements OnInit, AfterViewInit {
         const descriptors = (await models.getAttributeValueDescriptors()).data;
         const relevantDescriptor = descriptors.find(c => c.name === relevantAttribute.type);
         socket.type = NodeUtilities.convertValueTypeToSocketType(relevantDescriptor.valueType);
+        this.project.forceRemoveInvalidConnections();
       } catch (e) {
         this.snack.open('Something went wrong while reading attribute value type', null, { duration: 4000 });
         console.error(e);

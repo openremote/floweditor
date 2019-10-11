@@ -8,9 +8,9 @@
   
   stroke="black" stroke-width="3" /> -->
 
-  <polyline [attr.points]="getPointListString()"
+  <polyline [attr.points]="points"
             fill="none" stroke="black" stroke-width="3"  />
 
-  <polyline class="hitbox" [attr.points]="getPointListString()"
+  <polyline class="hitbox" [attr.points]="points"
             fill="none" stroke="transparent" stroke-width="16" (contextmenu)="openContextMenu($event);" />
 </svg>

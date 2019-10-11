@@ -5,6 +5,9 @@ import { ContextMenuService } from 'src/app/services/context-menu.service';
 import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 import { NodePosition, NodeConnection } from '@openremote/model';
 import { Utils } from 'src/app/logic/utils';
+import { IdentityDomLink } from 'src/app/logic/identity.dom.link';
+import { GraphNodeComponent } from '../graph-node/graph-node.component';
+import { CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-connection',
@@ -18,19 +21,34 @@ export class ConnectionComponent implements OnInit {
 
   public fromElement: HTMLElement;
   public toElement: HTMLElement;
+  public points: string;
+
+  private fromNodeComponent: GraphNodeComponent;
+  private toNodeComponent: GraphNodeComponent;
 
   constructor(private project: ProjectService, private context: ContextMenuService) { }
 
   ngOnInit() {
     const time = timer(0, 16).subscribe(
       (n) => {
-        this.curviness = Math.pow(Math.min(1, n * .05), 0.4);
-
         if (n * .05 > 1) {
           time.unsubscribe();
-        }
+         }
+        this.curviness = Math.pow(Math.min(1, n * .05), 0.4);
+        this.points = this.getPointListString();
       }
     );
+
+    this.fromNodeComponent = IdentityDomLink.map[this.connection.from.nodeId];
+    this.toNodeComponent = IdentityDomLink.map[this.connection.to.nodeId];
+    this.points = this.getPointListString();
+    (this.fromNodeComponent.view.nativeElement as HTMLElement).addEventListener('nodeMoved', (e: any) => {
+      this.points = this.getPointListString();
+    });
+
+    (this.toNodeComponent.view.nativeElement as HTMLElement).addEventListener('nodeMoved', (e: any) => {
+      this.points = this.getPointListString();
+    });
   }
 
   public boundingRect1() {
@@ -70,11 +88,11 @@ export class ConnectionComponent implements OnInit {
   }
 
   public start() {
-    return {x: this.x1(), y: this.y1()};
+    return { x: this.x1(), y: this.y1() };
   }
 
   public end() {
-    return {x: this.x2(), y: this.y2()};
+    return { x: this.x2(), y: this.y2() };
   }
 
   public s(p: NodePosition): string {
@@ -110,7 +128,6 @@ export class ConnectionComponent implements OnInit {
     }
 
     points.push(end);
-
     return points.map(p => this.s(p)).join(' ');
   }
 

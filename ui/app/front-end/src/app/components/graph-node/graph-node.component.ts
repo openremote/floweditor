@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { SelectionService } from 'src/app/services/selection.service';
 import { InputService } from 'src/app/services/input.service';
@@ -7,13 +7,14 @@ import { ContextMenu } from 'src/app/models/context.menu';
 import { CopyMachine } from 'src/app/logic/copy.machine';
 import { IdentityAssigner } from 'src/app/logic/identity.assigner';
 import { Node, NodeSocket, NodeType } from '@openremote/model';
+import { IdentityDomLink } from 'src/app/logic/identity.dom.link';
 
 @Component({
   selector: 'app-graph-node',
   templateUrl: './graph-node.component.html',
   styleUrls: ['./graph-node.component.css']
 })
-export class GraphNodeComponent implements AfterViewInit {
+export class GraphNodeComponent implements AfterViewInit, OnInit {
   @Input() node: Node;
   @ViewChild('inputSockets') inputSockets: ElementRef;
   @ViewChild('outputSockets') outputSockets: ElementRef;
@@ -36,8 +37,12 @@ export class GraphNodeComponent implements AfterViewInit {
 
   public getSocketIdentity = (socket: NodeSocket) => IdentityAssigner.getSocketElementIdentity(socket);
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.hasDisplayCharacter = (this.node.displayCharacter != null);
+  }
+
+  ngAfterViewInit() {
+    IdentityDomLink.map[this.node.id] = this;
     if (this.node.position != null) {
       const elem = this.view.nativeElement as HTMLElement;
       const box = elem.getBoundingClientRect();
@@ -64,6 +69,8 @@ export class GraphNodeComponent implements AfterViewInit {
 
     this.node.position.x = Math.max(0, x);
     this.node.position.y = Math.max(0, y);
+
+    elem.dispatchEvent(new Event('nodeMoved'));
   }
 
   mousedown(e: MouseEvent) {
