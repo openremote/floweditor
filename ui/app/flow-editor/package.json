@@ -18,8 +18,11 @@
     "lit-element": "^2.2.0"
   },
   "devDependencies": {
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
     "html-webpack-harddisk-plugin": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.1",

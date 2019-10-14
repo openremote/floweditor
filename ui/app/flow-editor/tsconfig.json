@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "esNext",
     "target": "es6",
     "sourceMap": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "lib": [
       "dom",

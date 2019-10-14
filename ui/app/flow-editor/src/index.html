@@ -4,15 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+    <link rel="shortcut icon" href="src/favicon.png" type="image/png">
+
     <title>Flow Editor</title>
 </head>
 
 <body>
     <div id="editor">
-        <node-panel></node-panel>
+        <editor-workspace style="grid-area: workspace"></editor-workspace>
+        <node-panel style="grid-area: node-panel"></node-panel>
+        <top-bar style="grid-area: topbar"></top-bar>
     </div>
 </body>
-
 </html>

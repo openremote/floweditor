@@ -16,7 +16,15 @@ module.exports = {
         options: {
           configFile: "tsconfig.json"
         }
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader',],
+      },
     ]
   },
   resolve: {

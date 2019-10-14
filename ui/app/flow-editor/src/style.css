@@ -3,8 +3,25 @@ body {
     padding: 0;
     margin: 0;
     border: 0;
+    color: rgb(25,25,25);
+
+    font-family: "Segoe UI", Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+
+    --topbar-height: 50px;
+    --node-panel-width: 300px;
+
+    --input-color: rgb(45, 76, 133);
+    --processor-color: rgb(57, 126, 57);
+    --output-color: rgb(126, 75, 156);
 }
 
-.editor {
+#editor {
+    width: 100vw;
+    height: 100vh;
     display: grid;
+    grid-template-columns: var(--node-panel-width) 1fr;
+    grid-template-rows: var(--topbar-height) 1fr;
+    grid-template-areas: 
+        "topbar topbar"
+        "node-panel workspace";
 }
