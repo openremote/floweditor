@@ -1,12 +1,12 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
+import { Camera } from "../models/camera";
 
 @customElement("flow-node")
 export class FlowNode extends LitElement {
     @property({ attribute: false }) public node: Node;
 
-    @property({ type: Number }) public panX: number;
-    @property({ type: Number }) public panY: number;
+    @property({ attribute: false, reflect: true }) public camera: Camera;
 
     static get styles() {
         return css`
@@ -17,6 +17,7 @@ export class FlowNode extends LitElement {
             display: block;
             position: absolute;
             border-radius: var(--roundness);
+            transform-origin: 0 0;
         }
         `;
     }
@@ -26,8 +27,9 @@ export class FlowNode extends LitElement {
             this.node = {};
         }
 
-        this.style.left = this.panX + "px";
-        this.style.top = this.panY + "px";
+        this.style.left = (this.node.position.x + this.camera.x) * this.camera.zoom  + "px";
+        this.style.top = (this.node.position.y + this.camera.y) * this.camera.zoom  + "px";
+        this.style.transform = `scale(${this.camera.zoom})`;
 
         return html`
         ${this.node.name || "invalid"}

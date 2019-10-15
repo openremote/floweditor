@@ -7,3 +7,4 @@ export { FlowNode } from "./components/flow-node";
 export { Project } from "./services/project";
 
 export { OrIcon } from "@openremote/or-icon";
+export * from "@webcomponents/webcomponentsjs";

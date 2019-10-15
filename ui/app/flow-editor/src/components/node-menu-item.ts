@@ -1,6 +1,8 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
+import { Project } from "../services/project";
+import { CopyMachine } from "node-structure";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -92,6 +94,12 @@ export class NodeMenuItem extends LitElement {
 
         if (document.elementFromPoint(e.clientX, e.clientY) instanceof EditorWorkspace) {
             // TODO Valid dropping point: place node
+            const copy = CopyMachine.copy(this.node);
+            copy.position = {
+                x: e.offsetX,
+                y: e.offsetY,
+            };
+            Project.addNode(copy);
         }
     }
 }
