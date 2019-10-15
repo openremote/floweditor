@@ -10,6 +10,7 @@ export class TopBar extends LitElement {
             justify-content: flex-start;
             align-items: center;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -5px;
+            line-height: var(--topbar-height);
         }
         
         .button{

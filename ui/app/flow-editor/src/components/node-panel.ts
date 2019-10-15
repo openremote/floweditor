@@ -18,7 +18,7 @@ export class NodePanel extends LitElement {
             display: flex;
             width: 80%;
             flex-direction: column;
-            align-items: stretch;
+            align-items: center;
             text-align: center;
             padding: 15px 15px 0 15px;
         }
@@ -29,17 +29,13 @@ export class NodePanel extends LitElement {
             padding: 0 0 15px 0 ;
         }
 
-        .input-node{
-            background-color: var(--input-color);
-        }
+        .input-node{ background-color: var(--input-color); }
+        .processor-node{ background-color: var(--processor-color); }
+        .output-node{ background-color: var(--output-color); }
 
-        .processor-node{
-            background-color: var(--processor-color);
-        }
-
-        .output-node{
-            background-color: var(--output-color);
-        }
+        .input-node:hover{ background-color: var(--input-color-h); }
+        .processor-node:hover{ background-color: var(--processor-color-h); }
+        .output-node:hover{ background-color: var(--output-color-h); }
         `;
     }
 
@@ -51,15 +47,15 @@ export class NodePanel extends LitElement {
         const outputs = [];
 
         for (let i = 0; i < 4; i++) {
-            inputs.push(html`<node-menu-item .node="${{name: "input node " + i, type: NodeType.INPUT}}">${i}</node-menu-item>`);
+            inputs.push(html`<node-menu-item class="node-item" .node="${{name: "input node " + i, type: NodeType.INPUT}}">${i}</node-menu-item>`);
         }
 
         for (let i = 0; i < 8; i++) {
-            processors.push(html`<node-menu-item .node="${{name: "processor node " + i, type: NodeType.PROCESSOR}}">${i}</node-menu-item>`);
+            processors.push(html`<node-menu-item class="node-item" .node="${{name: "processor node " + i, type: NodeType.PROCESSOR}}">${i}</node-menu-item>`);
         }
 
         for (let i = 0; i < 2; i++) {
-            outputs.push(html`<node-menu-item .node="${{name: "output node " + i, type: NodeType.OUTPUT}}">${i}</node-menu-item>`);
+            outputs.push(html`<node-menu-item class="node-item" .node="${{name: "output node " + i, type: NodeType.OUTPUT}}">${i}</node-menu-item>`);
         }
 
         return html`

@@ -6,12 +6,15 @@ export class EditorWorkspace extends LitElement {
         return css`
         :host{
             background-color: whitesmoke;
+            position: relative;
+            overflow: hidden;
         }
         `;
     }
 
     public render() {
         return html`
+        <flow-node panX="0" panY="0"></flow-node>
         `;
     }
 }
