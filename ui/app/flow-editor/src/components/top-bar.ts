@@ -14,8 +14,16 @@ export class TopBar extends LitElement {
         }
         
         .button{
-            margin: 0 15px 0 15px;
+            padding: 0 25px 0 25px;
             cursor: pointer;
+        }
+
+        .button:hover{
+            background: #fafafa;
+        }
+
+        .button:active{
+            background: whitesmoke;
         }
 
         .title{

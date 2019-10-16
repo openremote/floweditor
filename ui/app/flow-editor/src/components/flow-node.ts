@@ -1,12 +1,21 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
 import { Camera } from "../models/camera";
+import { EditorWorkspace } from "./editor-workspace";
 
 @customElement("flow-node")
 export class FlowNode extends LitElement {
     @property({ attribute: false }) public node: Node;
+    @property({ attribute: false }) public workspace: EditorWorkspace;
 
-    @property({ attribute: false, reflect: true }) public camera: Camera;
+    public firstUpdated() {
+        this.workspace.addEventListener("pan", () => {
+            this.requestUpdate();
+        });
+        this.workspace.addEventListener("zoom", () => {
+            this.requestUpdate();
+        });
+    }
 
     static get styles() {
         return css`
@@ -26,10 +35,10 @@ export class FlowNode extends LitElement {
         if (!this.node) {
             this.node = {};
         }
-
-        this.style.left = (this.node.position.x + this.camera.x) * this.camera.zoom  + "px";
-        this.style.top = (this.node.position.y + this.camera.y) * this.camera.zoom  + "px";
-        this.style.transform = `scale(${this.camera.zoom})`;
+        const pos = this.workspace.worldToScreen(this.node.position);
+        this.style.left = pos.x + "px";
+        this.style.top = pos.y + "px";
+        this.style.transform = `scale(${this.workspace.camera.zoom})`;
 
         return html`
         ${this.node.name || "invalid"}

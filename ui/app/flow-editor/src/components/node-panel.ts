@@ -6,7 +6,6 @@ export class NodePanel extends LitElement {
     static get styles() {
         return css`
         :host{
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px 0px;
             overflow-x: hidden;
             overflow-y: auto;
             display: flex;

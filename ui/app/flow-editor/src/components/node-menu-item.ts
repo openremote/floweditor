@@ -91,14 +91,13 @@ export class NodeMenuItem extends LitElement {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onMove);
         this.isDragging = false;
-
-        if (document.elementFromPoint(e.clientX, e.clientY) instanceof EditorWorkspace) {
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        if (target instanceof EditorWorkspace) {
             // TODO Valid dropping point: place node
             const copy = CopyMachine.copy(this.node);
-            copy.position = {
-                x: e.offsetX,
-                y: e.offsetY,
-            };
+            const workspace = target as EditorWorkspace;
+            const halfSize = workspace.halfSize;
+            copy.position = workspace.screenToWorld({ x: e.offsetX, y: e.offsetY });
             Project.addNode(copy);
         }
     }
