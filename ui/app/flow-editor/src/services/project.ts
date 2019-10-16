@@ -1,8 +1,5 @@
 import { Node, NodeConnection } from "@openremote/model";
-import { CopyMachine } from "node-structure";
 import { List } from "linqts";
-import { LitElement, property } from "lit-element";
-import { EventEmitter } from "events";
 
 export class Project {
     public static nodes = new List<Node>();

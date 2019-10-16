@@ -28,13 +28,19 @@ export class FlowNode extends LitElement {
             border-radius: var(--roundness);
             transform-origin: 0 0;
         }
+
+        .socket{
+
+        }
         `;
     }
 
     public render() {
         if (!this.node) {
             this.node = {};
+            console.warn("Node component has null node");
         }
+
         const pos = this.workspace.worldToScreen(this.node.position);
         this.style.left = pos.x + "px";
         this.style.top = pos.y + "px";

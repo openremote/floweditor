@@ -45,7 +45,7 @@ export class NodePanel extends LitElement {
         const processors = [];
         const outputs = [];
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
             inputs.push(html`<node-menu-item class="node-item" .node="${{name: "input node " + i, type: NodeType.INPUT}}">${i}</node-menu-item>`);
         }
 

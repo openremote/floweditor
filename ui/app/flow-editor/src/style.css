@@ -9,27 +9,17 @@ body {
 
     overflow: hidden;
     user-select: none;
+    -ms-user-select: none;
 
     --topbar-height: 50px;
     --node-panel-width: 250px;
     --roundness: 4px;
 
-    --input-color: rgb(45, 76, 133);
-    --processor-color: rgb(57, 126, 57);
-    --output-color: rgb(126, 75, 156);
+    --input-color: hsl(222, 59%, 39%);
+    --processor-color: hsl(102, 58%, 39%);
+    --output-color: hsl(282, 58%, 39%);
 
-    --input-color-h: rgb(59, 91, 151);
-    --processor-color-h: rgb(73, 145, 73);
-    --output-color-h: rgb(146, 94, 177);
-}
-
-#editor {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: var(--node-panel-width) 1fr;
-    grid-template-rows: var(--topbar-height) 1fr;
-    grid-template-areas: 
-        "topbar topbar"
-        "node-panel workspace";
+    --input-color-h: hsl(222, 49%, 49%);
+    --processor-color-h: hsl(102, 48%, 49%);
+    --output-color-h: hsl(282, 48%, 49%);
 }

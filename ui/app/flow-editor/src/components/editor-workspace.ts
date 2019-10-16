@@ -92,6 +92,7 @@ export class EditorWorkspace extends LitElement {
         this.camera = { x: 0, y: 0, zoom: 1 };
         this.dispatchEvent(new CustomEvent("pan"));
         this.dispatchEvent(new CustomEvent("zoom"));
+        this.updateBackground();
     }
 
     public fitCamera() {
@@ -122,6 +123,7 @@ export class EditorWorkspace extends LitElement {
         };
         this.dispatchEvent(new CustomEvent("pan"));
         this.dispatchEvent(new CustomEvent("zoom"));
+        this.updateBackground();
     }
 
     public screenToWorld(point: { x?: number, y?: number }) {

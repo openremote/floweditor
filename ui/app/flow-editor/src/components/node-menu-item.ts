@@ -3,6 +3,7 @@ import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { Project } from "../services/project";
 import { CopyMachine } from "node-structure";
+import { List } from "linqts";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -33,10 +34,10 @@ export class NodeMenuItem extends LitElement {
             width: calc(var(--node-panel-width) * 0.7);
             height: 22px;
             line-height: 22px;
-
+            cursor:grab;
             transition: box-shadow 150ms;
         }
-
+        
         .node-drag-item{
             z-index: 5000;
             position: absolute;
@@ -90,14 +91,13 @@ export class NodeMenuItem extends LitElement {
     private stopDrag = (e: MouseEvent) => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onMove);
+        const target = this.shadowRoot.elementFromPoint(e.clientX, e.clientY);
         this.isDragging = false;
-        const target = document.elementFromPoint(e.clientX, e.clientY);
+
         if (target instanceof EditorWorkspace) {
-            // TODO Valid dropping point: place node
             const copy = CopyMachine.copy(this.node);
             const workspace = target as EditorWorkspace;
-            const halfSize = workspace.halfSize;
-            copy.position = workspace.screenToWorld({ x: e.offsetX, y: e.offsetY });
+            copy.position = workspace.screenToWorld({ x: e.clientX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
             Project.addNode(copy);
         }
     }
