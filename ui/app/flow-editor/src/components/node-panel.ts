@@ -1,8 +1,12 @@
 import { LitElement, html, customElement, css } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
+import { List } from "linqts";
+import { integration } from "..";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {
+    private nodes: List<Node> = new List();
+
     static get styles() {
         return css`
         :host{
@@ -38,23 +42,32 @@ export class NodePanel extends LitElement {
         `;
     }
 
-    public node: Node;
+    firstUpdated() {
+        this.refreshNodes();
+    }
+
+    public async refreshNodes() {
+        this.nodes = new List();
+        const allNodes = (await integration.rest.api.FlowResource.getAllNodeDefinitions()).data;
+        this.nodes.AddRange(allNodes);
+        this.requestUpdate();
+    }
 
     public render() {
         const inputs = [];
         const processors = [];
         const outputs = [];
 
-        for (let i = 0; i < 3; i++) {
-            inputs.push(html`<node-menu-item class="node-item" .node="${{name: "input node " + i, type: NodeType.INPUT}}">${i}</node-menu-item>`);
+        for (const node of this.nodes.Where((n) => n.type === NodeType.INPUT).ToArray()) {
+            inputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (let i = 0; i < 8; i++) {
-            processors.push(html`<node-menu-item class="node-item" .node="${{name: "processor node " + i, type: NodeType.PROCESSOR}}">${i}</node-menu-item>`);
+        for (const node of this.nodes.Where((n) => n.type === NodeType.PROCESSOR).ToArray()) {
+            processors.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (let i = 0; i < 2; i++) {
-            outputs.push(html`<node-menu-item class="node-item" .node="${{name: "output node " + i, type: NodeType.OUTPUT}}">${i}</node-menu-item>`);
+        for (const node of this.nodes.Where((n) => n.type === NodeType.OUTPUT).ToArray()) {
+            outputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
         return html`
