@@ -16,7 +16,7 @@ export class EditorWorkspace extends LitElement {
     private readonly scrollSensitivity = 1.25;
     private readonly zoomLowerBound = .2;
     private readonly zoomUpperBound = 10;
-    private readonly renderBackground = false;
+    private readonly renderBackground = true;
 
     constructor() {
         super();

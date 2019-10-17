@@ -9,6 +9,8 @@ export class FlowNode extends LitElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
+    private isDragging = false;
+
     public firstUpdated() {
         this.workspace.addEventListener("pan", () => {
             this.requestUpdate();
@@ -37,6 +39,7 @@ export class FlowNode extends LitElement {
             transform-origin: 0 0;
 
             box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+            z-index: 0;
 
             --socket-size: 24px;
             --socket-display-size: 14px;
@@ -100,6 +103,7 @@ export class FlowNode extends LitElement {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
             color: white;
+            cursor: grab;
         }
         
         .title.input{
@@ -143,7 +147,7 @@ export class FlowNode extends LitElement {
         }
 
         return html`
-        <div class="title ${this.node.type.toLowerCase()}" style="background: ${""}">${this.node.name || "invalid"}</div>
+        <div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}" style="background: ${""}">${this.node.name || "invalid"}</div>
         <div class="socket-side inputs">${inputs}</div>
         <div class="socket-side outputs">${outputs}</div>
         `;
@@ -161,5 +165,27 @@ export class FlowNode extends LitElement {
         }
 
         return html`<div class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+    }
+
+    private startDrag = (e: MouseEvent) => {
+        if (e.buttons !== 1) { return; }
+
+        this.isDragging = true;
+        window.addEventListener("mouseup", this.stopDrag);
+        window.addEventListener("mousemove", this.onDrag);
+    }
+
+    private onDrag = (e: MouseEvent) => {
+        this.node.position = {
+            x: this.node.position.x + e.movementX / this.workspace.camera.zoom,
+            y: this.node.position.y + e.movementY / this.workspace.camera.zoom
+        };
+        this.requestUpdate();
+    }
+
+    private stopDrag = (e: MouseEvent) => {
+        window.removeEventListener("mouseup", this.stopDrag);
+        window.removeEventListener("mousemove", this.onDrag);
+        this.isDragging = false;
     }
 }
