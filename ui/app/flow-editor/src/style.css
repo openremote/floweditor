@@ -17,6 +17,12 @@ body {
 
     --highlight: hsla(102, 100%, 31%, 0.466);
 
+    --any: rgb(162, 0, 255);
+    --number: rgb(165, 228, 50);
+    --boolean: rgb(0, 102, 255);
+    --string: rgb(45, 180, 221);
+    --color: rgb(255, 228, 78);
+
     --input-color: hsl(222, 59%, 39%);
     --processor-color: hsl(102, 58%, 39%);
     --output-color: hsl(282, 58%, 39%);

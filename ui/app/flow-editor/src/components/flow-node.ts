@@ -1,5 +1,5 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { Node, NodeType, NodeSocket } from "@openremote/model";
+import { Node, NodeType, NodeSocket, NodeDataType } from "@openremote/model";
 import { Camera } from "../models/camera";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink } from "node-structure";
@@ -36,6 +36,8 @@ export class FlowNode extends LitElement {
             border-radius: var(--roundness);
             transform-origin: 0 0;
 
+            box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+
             --socket-size: 24px;
             --socket-display-size: 14px;
         }
@@ -53,6 +55,8 @@ export class FlowNode extends LitElement {
             height: var(--socket-display-size);
             border-radius: 100%;
             pointer-events: none;
+
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
         }
         
         .inputs{
@@ -95,8 +99,22 @@ export class FlowNode extends LitElement {
             border-radius: inherit;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
+            color: white;
+        }
+        
+        .title.input{
+            background: var(--input-color);
+            text-align: right;
+        }
+        
+        .title.processor{
+            background: var(--processor-color);
             text-align: center;
-            color: rgba(255,255,255,0.8);
+        }
+        
+        .title.output{
+            background: var(--output-color);
+            text-align: left;
         }
         `;
     }
@@ -125,13 +143,23 @@ export class FlowNode extends LitElement {
         }
 
         return html`
-        <div class="title" style="background: ${""}">${this.node.name || "invalid"}</div>
+        <div class="title ${this.node.type.toLowerCase()}" style="background: ${""}">${this.node.name || "invalid"}</div>
         <div class="socket-side inputs">${inputs}</div>
         <div class="socket-side outputs">${outputs}</div>
         `;
     }
 
     private socketTemplate(socket: NodeSocket) {
-        return html`<div class="socket"><div class="circle"></div></div>`;
+        let color = "null";
+
+        switch (socket.type) {
+            case NodeDataType.ANY: color = "var(--any)"; break;
+            case NodeDataType.NUMBER: color = "var(--number)"; break;
+            case NodeDataType.BOOLEAN: color = "var(--boolean)"; break;
+            case NodeDataType.STRING: color = "var(--string)"; break;
+            case NodeDataType.COLOR: color = "var(--color)"; break;
+        }
+
+        return html`<div class="socket"><div class="circle" style="background: ${color}"></div></div>`;
     }
 }
