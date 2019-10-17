@@ -1,4 +1,5 @@
 import { Integration } from "./services/integration";
+import { Project } from "./services/project";
 
 export { NodePanel } from "./components/node-panel";
 export { EditorWorkspace } from "./components/editor-workspace";
@@ -14,6 +15,7 @@ export { OrIcon } from "@openremote/or-icon";
 export * from "@webcomponents/webcomponentsjs";
 
 export const integration: Integration = new Integration();
+export const project: Project = new Project();
 
 window.addEventListener("load", () => {
     integration.initialise();

@@ -13,7 +13,9 @@ body {
 
     --topbar-height: 50px;
     --node-panel-width: 250px;
-    --roundness: 4px;
+    --roundness: 3px;
+
+    --highlight: hsla(102, 100%, 31%, 0.466);
 
     --input-color: hsl(222, 59%, 39%);
     --processor-color: hsl(102, 58%, 39%);

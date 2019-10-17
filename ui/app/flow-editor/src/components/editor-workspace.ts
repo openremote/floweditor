@@ -1,6 +1,9 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { Project } from "../services/project";
 import { Camera } from "../models/camera";
+import { project } from "..";
+import { Node } from "@openremote/model";
+import { IdentityDomLink } from "node-structure";
+import { FlowNode } from "./flow-node";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -17,15 +20,15 @@ export class EditorWorkspace extends LitElement {
 
     constructor() {
         super();
-        Project.subscribe("nodeadded", () => {
+        project.addListener("nodeadded", () => {
             this.requestUpdate();
         });
 
-        Project.subscribe("noderemoved", () => {
+        project.addListener("noderemoved", () => {
             this.requestUpdate();
         });
 
-        Project.subscribe("cleared", () => {
+        project.addListener("cleared", () => {
             this.requestUpdate();
         });
 
@@ -73,18 +76,19 @@ export class EditorWorkspace extends LitElement {
 
     public render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
-        const nodeElements = Project.nodes.Select((n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`).ToArray();
+        const nodeElements = project.nodes.Select((n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`).ToArray();
         return html`
         ${nodeElements}
         <div class="view-options">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
-            ${Project.nodes.Any() ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
+            ${project.nodes.Any() ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
         </div>
-        <!-- <div style="z-index: 500; padding: 5px; position: absolute">
+        <!-- debug stuff -->
+        <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
             y: ${this.camera.y} <br>
             zoom: ${this.camera.zoom} <br>
-        </div>  -->
+        </div>
         `;
     }
 
@@ -97,11 +101,17 @@ export class EditorWorkspace extends LitElement {
 
     public fitCamera() {
         const padding = 25;
+        
+        const XoutermostNode = project.nodes.OrderByDescending((n) => n.position.x).ToArray()[0] as Node;
+        const XoutermostWidth = (IdentityDomLink.map[XoutermostNode.id] as FlowNode).scrollWidth;
+        const YoutermostNode = project.nodes.OrderByDescending((n) => n.position.y).ToArray()[0] as Node;
+        const YoutermostHeight = (IdentityDomLink.map[YoutermostNode.id] as FlowNode).scrollHeight;
+
         const fitBounds = {
-            left: Project.nodes.Min((n) => n.position.x) - padding,
-            right: Project.nodes.Max((n) => n.position.x) + padding + 256,
-            top: Project.nodes.Max((n) => n.position.y) + padding + 128,
-            bottom: Project.nodes.Min((n) => n.position.y) - padding,
+            left: project.nodes.Min((n) => n.position.x) - padding,
+            right: XoutermostNode.position.x + padding + XoutermostWidth,
+            top: project.nodes.Max((n) => n.position.y) + padding + YoutermostHeight,
+            bottom: project.nodes.Min((n) => n.position.y) - padding,
         };
         const fitWidth = fitBounds.right - fitBounds.left;
         const fitHeight = fitBounds.top - fitBounds.bottom;

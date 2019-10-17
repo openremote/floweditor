@@ -1,5 +1,6 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { integration } from "..";
+import { Status } from "../models/status";
 
 @customElement("main-application")
 export class MainApplication extends LitElement {
@@ -25,11 +26,16 @@ export class MainApplication extends LitElement {
     }
 
     public render() {
-        if (!integration.isAuthenticated) { return; }
-        return html`
+        if (integration.status === Status.Idle || integration.status === Status.Loading) { return; }
+
+        if (integration.status === Status.Success) {
+            return html`
             <editor-workspace style="grid-area: workspace"></editor-workspace>
             <node-panel style="grid-area: node-panel"></node-panel>
             <top-bar style="grid-area: topbar"></top-bar>
         `;
+        } else {
+            return html`${integration.openremote.error}`;
+        }
     }
 }

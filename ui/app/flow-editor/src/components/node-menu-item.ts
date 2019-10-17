@@ -1,9 +1,8 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
-import { Project } from "../services/project";
 import { CopyMachine } from "node-structure";
-import { List } from "linqts";
+import { project } from "..";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -23,7 +22,7 @@ export class NodeMenuItem extends LitElement {
     static get styles() {
         return css`
         :host, .node-drag-item{
-            padding: 8px;
+            padding: 4px;
             margin: 0 0 15px 0;
             display: inline-block;
             text-align: center;
@@ -91,14 +90,20 @@ export class NodeMenuItem extends LitElement {
     private stopDrag = (e: MouseEvent) => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onMove);
-        const target = this.shadowRoot.elementFromPoint(e.clientX, e.clientY);
         this.isDragging = false;
+
+        let target: Element;
+        try {
+            target = this.shadowRoot.elementFromPoint(e.clientX, e.clientY);
+        } catch (error) {
+            target = this.shadowRoot.ownerDocument.elementFromPoint(e.clientX, e.clientY);
+        }
 
         if (target instanceof EditorWorkspace) {
             const copy = CopyMachine.copy(this.node);
             const workspace = target as EditorWorkspace;
             copy.position = workspace.screenToWorld({ x: e.clientX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
-            Project.addNode(copy);
+            project.addNode(copy);
         }
     }
 }
