@@ -8,6 +8,9 @@ export { NodeMenuItem } from "./components/node-menu-item";
 export { FlowNode } from "./components/flow-node";
 export { MainApplication as Application } from "./components/main-application";
 
+export { Camera } from "./models/camera";
+export { Status } from "./models/status";
+
 export { Project } from "./services/project";
 export { Integration } from "./services/integration";
 

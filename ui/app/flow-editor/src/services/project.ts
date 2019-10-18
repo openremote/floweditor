@@ -1,10 +1,12 @@
-import { Node, NodeConnection } from "@openremote/model";
+import { Node, NodeConnection, NodeSocket } from "@openremote/model";
 import { List } from "linqts";
 import { EventEmitter } from "events";
 
 export class Project extends EventEmitter {
     public nodes = new List<Node>();
     public connections = new List<NodeConnection>();
+
+    private isConnecting = false;
 
     public clear() {
         this.nodes = new List<Node>();
@@ -23,5 +25,19 @@ export class Project extends EventEmitter {
     public removeNode(node: Node) {
         this.emit("noderemoved", this.nodes.Where((n) => n.id === node.id).ToArray());
         this.nodes = this.nodes.RemoveAll((n) => n.id === node.id);
+    }
+
+    public startConnectionDrag = (e: MouseEvent, socket: NodeSocket) => {
+        this.isConnecting = true;
+        this.emit("connectionstart");
+    }
+
+    public connectionDragging = (e: MouseEvent) => {
+        this.emit("connecting", {x: e.x, y: e.y});
+    }
+
+    public endConnectionDrag = (e: MouseEvent, socket: NodeSocket) => {
+        this.isConnecting = false;
+        this.emit("connectionend");
     }
 }

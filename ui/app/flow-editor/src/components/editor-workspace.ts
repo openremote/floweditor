@@ -11,12 +11,14 @@ export class EditorWorkspace extends LitElement {
         x: 0, y: 0, zoom: 1
     };
 
+    @property({ attribute: false }) public topNodeZindex = 1;
+
     private isPanning = false;
 
     private readonly scrollSensitivity = 1.25;
     private readonly zoomLowerBound = .2;
     private readonly zoomUpperBound = 10;
-    private readonly renderBackground = true;
+    private readonly renderBackground = false;
 
     constructor() {
         super();
@@ -79,16 +81,18 @@ export class EditorWorkspace extends LitElement {
         const nodeElements = project.nodes.Select((n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`).ToArray();
         return html`
         ${nodeElements}
-        <div class="view-options">
+        <svg>
+            <line></line>
+        </svg>
+        <div class="view-options" style="${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
             ${project.nodes.Any() ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
         </div>
-        <!-- debug stuff -->
-        <div style="z-index: 500; padding: 5px; position: absolute">
+        <!-- <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
             y: ${this.camera.y} <br>
             zoom: ${this.camera.zoom} <br>
-        </div>
+        </div> -->
         `;
     }
 
@@ -101,7 +105,7 @@ export class EditorWorkspace extends LitElement {
 
     public fitCamera() {
         const padding = 25;
-        
+
         const XoutermostNode = project.nodes.OrderByDescending((n) => n.position.x).ToArray()[0] as Node;
         const XoutermostWidth = (IdentityDomLink.map[XoutermostNode.id] as FlowNode).scrollWidth;
         const YoutermostNode = project.nodes.OrderByDescending((n) => n.position.y).ToArray()[0] as Node;
@@ -200,7 +204,7 @@ export class EditorWorkspace extends LitElement {
     private updateBackground() {
         if (!this.renderBackground) { return; }
         const halfSize = this.halfSize;
-        this.style.backgroundSize = `${this.camera.zoom * 128}px`;
+        this.style.backgroundSize = `${this.camera.zoom * 256}px`;
         this.style.backgroundPosition = `${this.camera.x * this.camera.zoom + halfSize.x}px ${this.camera.y * this.camera.zoom + halfSize.y}px`;
     }
 }

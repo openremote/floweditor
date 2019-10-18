@@ -3,11 +3,17 @@ import { Node, NodeType, NodeSocket, NodeDataType } from "@openremote/model";
 import { Camera } from "../models/camera";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink } from "node-structure";
+import { project } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends LitElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
+
+    constructor(){
+        super();
+        console.log("yep... new one made");
+    }
 
     private isDragging = false;
 
@@ -18,11 +24,13 @@ export class FlowNode extends LitElement {
         this.workspace.addEventListener("zoom", () => {
             this.requestUpdate();
         });
+        this.bringToFront();
     }
 
     static get styles() {
         return css`
         :host{
+            white-space: nowrap;
             min-width: 80px;
             min-height: 80px;
             background: rgb(200,200,200);
@@ -153,6 +161,10 @@ export class FlowNode extends LitElement {
         `;
     }
 
+    public bringToFront() {
+        this.style.zIndex = `${this.workspace.topNodeZindex++}`;
+    }
+
     private socketTemplate(socket: NodeSocket) {
         let color = "null";
 
@@ -164,13 +176,22 @@ export class FlowNode extends LitElement {
             case NodeDataType.COLOR: color = "var(--color)"; break;
         }
 
-        return html`<div class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        const md = (e: MouseEvent) => {
+            project.startConnectionDrag(e, socket);
+        };
+
+        const mu = (e: MouseEvent) => {
+            project.endConnectionDrag(e, socket);
+        };
+
+        return html`<div @mousedown="${md}" @mouseup="${mu}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
     }
 
     private startDrag = (e: MouseEvent) => {
         if (e.buttons !== 1) { return; }
 
         this.isDragging = true;
+        this.bringToFront();
         window.addEventListener("mouseup", this.stopDrag);
         window.addEventListener("mousemove", this.onDrag);
     }
