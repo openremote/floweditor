@@ -1,9 +1,10 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Camera } from "../models/camera";
 import { project } from "..";
-import { Node } from "@openremote/model";
+import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { FlowNode } from "./flow-node";
+import { List } from "linqts";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -12,6 +13,10 @@ export class EditorWorkspace extends LitElement {
     };
 
     @property({ attribute: false }) public topNodeZindex = 1;
+
+    @property({ attribute: false }) private connectionDragging = false;
+    @property({ attribute: false }) private connectionFrom: { x: number, y: number } = { x: 0, y: 0 };
+    @property({ attribute: false }) private connectionTo: { x: number, y: number } = { x: 0, y: 0 };
 
     private isPanning = false;
 
@@ -32,6 +37,29 @@ export class EditorWorkspace extends LitElement {
 
         project.addListener("cleared", () => {
             this.requestUpdate();
+        });
+
+        project.addListener("connectionstart", (e: MouseEvent, s: NodeSocket) => {
+            if (e.buttons !== 1) { return; }
+            const socketBox = (IdentityDomLink.map[s.id] as HTMLElement).getBoundingClientRect();
+            this.connectionFrom = this.pageToOffset({ x: socketBox.left + socketBox.width / 2, y: socketBox.top + socketBox.height / 2 });
+            console.debug({ x: socketBox.left, y: socketBox.top });
+            this.addEventListener("mousemove", project.connectionDragging);
+
+            this.addEventListener("mouseup", (ee: MouseEvent) => {
+                project.endConnectionDrag(ee, null);
+            });
+
+        });
+
+        project.addListener("connecting", (e: MouseEvent) => {
+            this.connectionTo = { x: e.offsetX, y: e.offsetY };
+            this.connectionDragging = true;
+        });
+
+        project.addListener("connectionend", (e: MouseEvent) => {
+            this.connectionDragging = false;
+            this.removeEventListener("mousemove", project.connectionDragging);
         });
 
         window.addEventListener("resize", () => {
@@ -73,26 +101,43 @@ export class EditorWorkspace extends LitElement {
         .button:active{
             background: rgba(0,0,0,0.06);
         }
+
+        svg{
+            pointer-events: none;
+            position:absolute;
+            display: block;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            stroke: rgb(80,80,80);
+            stroke-width: 4px;
+        }
         `;
     }
 
     public render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
         const nodeElements = project.nodes.Select((n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`).ToArray();
+
         return html`
         ${nodeElements}
-        <svg>
-            <line></line>
+        <svg style="stroke-width: ${this.camera.zoom * 4}px">
+            <connection-container .workspace="${this}"></connection-container>
+            <line style="display: ${this.connectionDragging ? null : `none`}" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
+
         <div class="view-options" style="${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
             ${project.nodes.Any() ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
         </div>
-        <!-- <div style="z-index: 500; padding: 5px; position: absolute">
+        <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
             y: ${this.camera.y} <br>
             zoom: ${this.camera.zoom} <br>
-        </div> -->
+        </div>
         `;
     }
 
@@ -105,17 +150,22 @@ export class EditorWorkspace extends LitElement {
 
     public fitCamera() {
         const padding = 25;
+        const nodeList = project.nodes.ToArray();
 
-        const XoutermostNode = project.nodes.OrderByDescending((n) => n.position.x).ToArray()[0] as Node;
+        const XouterleastNode = nodeList.sort((a, b) => a.position.x - b.position.x)[0] as Node;
+        const YouterleastNode = nodeList.sort((a, b) => a.position.y - b.position.y)[0] as Node;
+
+        const XoutermostNode = nodeList.sort((a, b) => b.position.x - a.position.x)[0] as Node;
+        const YoutermostNode = nodeList.sort((a, b) => b.position.y - a.position.y)[0] as Node;
+
         const XoutermostWidth = (IdentityDomLink.map[XoutermostNode.id] as FlowNode).scrollWidth;
-        const YoutermostNode = project.nodes.OrderByDescending((n) => n.position.y).ToArray()[0] as Node;
         const YoutermostHeight = (IdentityDomLink.map[YoutermostNode.id] as FlowNode).scrollHeight;
 
         const fitBounds = {
-            left: project.nodes.Min((n) => n.position.x) - padding,
+            left: XouterleastNode.position.x - padding,
             right: XoutermostNode.position.x + padding + XoutermostWidth,
-            top: project.nodes.Max((n) => n.position.y) + padding + YoutermostHeight,
-            bottom: project.nodes.Min((n) => n.position.y) - padding,
+            top: YoutermostNode.position.y + padding + YoutermostHeight,
+            bottom: YouterleastNode.position.y - padding,
         };
         const fitWidth = fitBounds.right - fitBounds.left;
         const fitHeight = fitBounds.top - fitBounds.bottom;
@@ -140,7 +190,7 @@ export class EditorWorkspace extends LitElement {
         this.updateBackground();
     }
 
-    public screenToWorld(point: { x?: number, y?: number }) {
+    public offsetToWorld(point: { x?: number, y?: number }) {
         const halfSize = this.halfSize;
         return {
             x: (point.x - halfSize.x) / this.camera.zoom - this.camera.x,
@@ -148,11 +198,19 @@ export class EditorWorkspace extends LitElement {
         };
     }
 
-    public worldToScreen(point: { x?: number, y?: number }) {
+    public worldToOffset(point: { x?: number, y?: number }) {
         const halfSize = this.halfSize;
         return {
             x: (point.x + this.camera.x) * this.camera.zoom + halfSize.x,
             y: (point.y + this.camera.y) * this.camera.zoom + halfSize.y
+        };
+    }
+
+    public pageToOffset(point: { x?: number, y?: number }) {
+        const box = this.getBoundingClientRect();
+        return {
+            x: point.x - box.left,
+            y: point.y - box.top
         };
     }
 
@@ -162,6 +220,7 @@ export class EditorWorkspace extends LitElement {
     }
 
     private startPan(event: MouseEvent) {
+        if (this.connectionDragging) { return; }
         if (event.buttons !== 4) { return; }
         this.isPanning = true;
         window.addEventListener("mousemove", this.onMove);

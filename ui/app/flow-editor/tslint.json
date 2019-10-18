@@ -10,6 +10,7 @@
     "max-classes-per-file": false,
     "max-line-length": false,
     "ordered-imports": false,
+    "member-ordering": false,
     "object-literal-sort-keys": false,
     "ban-types": false,
     "array-type": false,

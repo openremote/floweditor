@@ -7,6 +7,8 @@ export class Project extends EventEmitter {
     public connections = new List<NodeConnection>();
 
     private isConnecting = false;
+    private connectionStartSocket: NodeSocket;
+    private connectionEndSocket: NodeSocket;
 
     public clear() {
         this.nodes = new List<Node>();
@@ -29,15 +31,15 @@ export class Project extends EventEmitter {
 
     public startConnectionDrag = (e: MouseEvent, socket: NodeSocket) => {
         this.isConnecting = true;
-        this.emit("connectionstart");
+        this.emit("connectionstart", e, socket);
     }
 
     public connectionDragging = (e: MouseEvent) => {
-        this.emit("connecting", {x: e.x, y: e.y});
+        this.emit("connecting", e);
     }
 
     public endConnectionDrag = (e: MouseEvent, socket: NodeSocket) => {
         this.isConnecting = false;
-        this.emit("connectionend");
+        this.emit("connectionend", e, socket);
     }
 }

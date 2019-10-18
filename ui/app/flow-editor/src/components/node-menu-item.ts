@@ -102,7 +102,7 @@ export class NodeMenuItem extends LitElement {
         if (target instanceof EditorWorkspace) {
             const copy = CopyMachine.copy(this.node);
             const workspace = target as EditorWorkspace;
-            copy.position = workspace.screenToWorld({ x: e.clientX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
+            copy.position = workspace.offsetToWorld({ x: e.clientX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
             project.addNode(copy);
         }
     }

@@ -1,6 +1,5 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { Node, NodeType, NodeSocket, NodeDataType } from "@openremote/model";
-import { Camera } from "../models/camera";
+import { Node, NodeSocket, NodeDataType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink } from "node-structure";
 import { project } from "..";
@@ -10,12 +9,10 @@ export class FlowNode extends LitElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
-    constructor(){
+    constructor() {
         super();
-        console.log("yep... new one made");
+        console.debug("new flow node component created");
     }
-
-    private isDragging = false;
 
     public firstUpdated() {
         this.workspace.addEventListener("pan", () => {
@@ -139,7 +136,7 @@ export class FlowNode extends LitElement {
             console.warn("Node component has null node");
         }
 
-        const pos = this.workspace.worldToScreen(this.node.position);
+        const pos = this.workspace.worldToOffset(this.node.position);
         this.style.left = pos.x + "px";
         this.style.top = pos.y + "px";
         this.style.transform = `scale(${this.workspace.camera.zoom})`;
@@ -177,10 +174,12 @@ export class FlowNode extends LitElement {
         }
 
         const md = (e: MouseEvent) => {
+            IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
             project.startConnectionDrag(e, socket);
         };
 
         const mu = (e: MouseEvent) => {
+            IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
             project.endConnectionDrag(e, socket);
         };
 
@@ -190,7 +189,6 @@ export class FlowNode extends LitElement {
     private startDrag = (e: MouseEvent) => {
         if (e.buttons !== 1) { return; }
 
-        this.isDragging = true;
         this.bringToFront();
         window.addEventListener("mouseup", this.stopDrag);
         window.addEventListener("mousemove", this.onDrag);
@@ -207,6 +205,5 @@ export class FlowNode extends LitElement {
     private stopDrag = (e: MouseEvent) => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onDrag);
-        this.isDragging = false;
     }
 }
