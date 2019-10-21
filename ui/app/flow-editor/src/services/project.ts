@@ -30,8 +30,11 @@ export class Project extends EventEmitter {
     }
 
     public removeNode(node: Node) {
-        this.emit("noderemoved", asEnumerable(this.nodes).Where((n) => n.id === node.id).ToArray());
-        this.nodes = asEnumerable(this.nodes).Where((n) => n.id !== node.id).ToArray();
+
+        asEnumerable(this.nodes).Where((n) => n.id === node.id).ToArray().forEach((n) => {
+            this.emit("noderemoved", n);
+            this.nodes.splice(this.nodes.indexOf(n), 1);
+        });
     }
 
     public startConnectionDrag = (e: MouseEvent, socket: NodeSocket, isInputNode: boolean) => {
@@ -64,6 +67,13 @@ export class Project extends EventEmitter {
         this.createConnection(this.connectionStartSocket, this.connectionEndSocket);
     }
 
+    public removeConnection(connection: NodeConnection) {
+        asEnumerable(this.connections).Where((c) => c.to.id === connection.to.id && c.from.id === connection.from.id).ToArray().forEach((c) => {
+            this.emit("connectionremoved", c);
+            this.connections.splice(this.connections.indexOf(c), 1);
+        });
+    }
+
     public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {
         if (!fromSocket ||
             !toSocket) {
@@ -72,9 +82,12 @@ export class Project extends EventEmitter {
 
         if (!SocketTypeMatcher.match(fromSocket.type, toSocket.type) ||
             fromSocket.id === toSocket.id ||
-            fromSocket.nodeId === toSocket.nodeId ||
-            asEnumerable(this.connections).Count((c) => c.to.id === toSocket.id) > 0) {
+            fromSocket.nodeId === toSocket.nodeId) {
             return false;
+        }
+
+        for (const c of asEnumerable(this.connections).Where((n) => n.to.id === toSocket.id).ToArray()) {
+            this.removeConnection(c);
         }
 
         this.connections.push({

@@ -11,6 +11,22 @@ export class ConnectionLine extends LitElement {
 
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
+    public static get styles() {
+        return css`
+            svg{
+                fill: none;  
+                overflow: visible;
+                position: absolute;
+                pointer-events: all;
+            }
+            
+            polyline:hover{
+                pointer-events: all;
+                stroke: var(--highlight);
+            }
+        `;
+    }
+
     public firstUpdated() {
         const update = () => { this.requestUpdate(); };
         this.workspace.addEventListener("pan", update);
@@ -27,7 +43,7 @@ export class ConnectionLine extends LitElement {
         const to = Utilities.getCenter(toElement.getBoundingClientRect());
         const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
-        return html`<svg style="fill: none; stroke-width: ${this.workspace.camera.zoom * 4}px; overflow: visible; position: absolute;"><polyline 
+        return html`<svg style="stroke-width: ${this.workspace.camera.zoom * 4}px;"><polyline 
         points="
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
         

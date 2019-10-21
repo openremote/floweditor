@@ -152,7 +152,7 @@ export class FlowNode extends LitElement {
         }
 
         return html`
-        <div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}" style="background: ${""}">${this.node.name || "invalid"}</div>
+        <div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>
         <div class="socket-side inputs">${inputs}</div>
         <div class="socket-side outputs">${outputs}</div>
         `;
