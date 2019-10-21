@@ -25,12 +25,16 @@ export class ConnectionLine extends LitElement {
         const parentSize = this.workspace.clientRect;
         const from = Utilities.getCenter(fromElement.getBoundingClientRect());
         const to = Utilities.getCenter(toElement.getBoundingClientRect());
+        const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
-        return html`<svg style="overflow: visible; position: absolute;"><line 
-        x1="${from.x - parentSize.left}" 
-        y1="${from.y - parentSize.top}"
-        x2="${to.x - parentSize.left}"
-        y2="${to.y - parentSize.top}"
-        ></line></svg>`;
+        return html`<svg style="fill: none; stroke-width: ${this.workspace.camera.zoom * 4}px; overflow: visible; position: absolute;"><polyline 
+        points="
+        ${from.x - parentSize.left}, ${from.y - parentSize.top} 
+        
+        ${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} 
+        ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}
+
+        ${to.x - parentSize.left}, ${to.y - parentSize.top}"
+        ></polyline></svg>`;
     }
 }

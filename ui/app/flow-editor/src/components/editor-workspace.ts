@@ -258,6 +258,7 @@ export class EditorWorkspace extends LitElement {
     }
 
     private onZoom = (event: WheelEvent) => {
+        if (this.connectionDragging) { return; }
         const magnification = 0.9 * this.scrollSensitivity;
         const rz = event.deltaY < 0 ? this.camera.zoom * magnification : this.camera.zoom / magnification;
         if (rz < this.zoomLowerBound || rz > this.zoomUpperBound) { return; }

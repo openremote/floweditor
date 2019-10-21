@@ -1,5 +1,6 @@
 import { Integration } from "./services/integration";
 import { Project } from "./services/project";
+import { Input } from "./services/input";
 
 export { NodePanel } from "./components/node-panel";
 export { EditorWorkspace } from "./components/editor-workspace";
@@ -13,8 +14,9 @@ export { MainApplication as Application } from "./components/main-application";
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
 
-export { Project } from "./services/project";
 export { Integration } from "./services/integration";
+export { Project } from "./services/project";
+export { Input } from "./services/input";
 
 export { Utilities } from "./utils";
 

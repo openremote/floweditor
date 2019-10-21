@@ -202,8 +202,8 @@ export class FlowNode extends LitElement {
             x: this.node.position.x + e.movementX / this.workspace.camera.zoom,
             y: this.node.position.y + e.movementY / this.workspace.camera.zoom
         };
-        this.dispatchEvent(new CustomEvent("dragged"));
         this.requestUpdate();
+        this.dispatchEvent(new CustomEvent("dragged"));
     }
 
     private stopDrag = (e: MouseEvent) => {
