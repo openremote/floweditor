@@ -1,11 +1,11 @@
 import { LitElement, html, customElement, css } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
-import { List } from "linqts";
 import { integration } from "..";
+import { asEnumerable } from "ts-linq";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {
-    private nodes: List<Node> = new List();
+    private nodes: Node[] = [];
 
     static get styles() {
         return css`
@@ -42,14 +42,16 @@ export class NodePanel extends LitElement {
         `;
     }
 
-    firstUpdated() {
+    public firstUpdated() {
         this.refreshNodes();
     }
 
     public async refreshNodes() {
-        this.nodes = new List();
+        this.nodes = [];
         const allNodes = (await integration.rest.api.FlowResource.getAllNodeDefinitions()).data;
-        this.nodes.AddRange(allNodes);
+        for (const n of allNodes) {
+            this.nodes.push(n);
+        }
         this.requestUpdate();
     }
 
@@ -58,15 +60,17 @@ export class NodePanel extends LitElement {
         const processors = [];
         const outputs = [];
 
-        for (const node of this.nodes.Where((n) => n.type === NodeType.INPUT).ToArray()) {
+        const enumerable = asEnumerable(this.nodes);
+
+        for (const node of enumerable.Where((n) => n.type === NodeType.INPUT).ToArray()) {
             inputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (const node of this.nodes.Where((n) => n.type === NodeType.PROCESSOR).ToArray()) {
+        for (const node of enumerable.Where((n) => n.type === NodeType.PROCESSOR).ToArray()) {
             processors.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (const node of this.nodes.Where((n) => n.type === NodeType.OUTPUT).ToArray()) {
+        for (const node of enumerable.Where((n) => n.type === NodeType.OUTPUT).ToArray()) {
             outputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 

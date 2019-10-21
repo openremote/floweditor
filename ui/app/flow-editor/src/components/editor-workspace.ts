@@ -4,7 +4,8 @@ import { project } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { FlowNode } from "./flow-node";
-import { List } from "linqts";
+import { ConnectionContainer } from "./connection-container";
+import { asEnumerable } from "ts-linq";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -25,6 +26,11 @@ export class EditorWorkspace extends LitElement {
     private readonly zoomUpperBound = 10;
     private readonly renderBackground = false;
 
+    private cachedClientRect: ClientRect;
+    public get clientRect() {
+        return this.cachedClientRect;
+    }
+
     constructor() {
         super();
         project.addListener("nodeadded", () => {
@@ -43,11 +49,12 @@ export class EditorWorkspace extends LitElement {
             if (e.buttons !== 1) { return; }
             const socketBox = (IdentityDomLink.map[s.id] as HTMLElement).getBoundingClientRect();
             this.connectionFrom = this.pageToOffset({ x: socketBox.left + socketBox.width / 2, y: socketBox.top + socketBox.height / 2 });
-            console.debug({ x: socketBox.left, y: socketBox.top });
             this.addEventListener("mousemove", project.connectionDragging);
 
             this.addEventListener("mouseup", (ee: MouseEvent) => {
-                project.endConnectionDrag(ee, null);
+                if (project.isCurrentlyConnecting) {
+                    project.endConnectionDrag(ee, null, false);
+                }
             });
 
         });
@@ -63,6 +70,7 @@ export class EditorWorkspace extends LitElement {
         });
 
         window.addEventListener("resize", () => {
+            this.cachedClientRect = this.getBoundingClientRect();
             this.dispatchEvent(new CustomEvent("pan"));
         });
 
@@ -102,9 +110,9 @@ export class EditorWorkspace extends LitElement {
             background: rgba(0,0,0,0.06);
         }
 
-        svg{
+        svg, connection-container {
             pointer-events: none;
-            position:absolute;
+            position: absolute;
             display: block;
             left: 0;
             right: 0;
@@ -118,20 +126,30 @@ export class EditorWorkspace extends LitElement {
         `;
     }
 
+    public firstUpdated() {
+        this.cachedClientRect = this.getBoundingClientRect();
+    }
+
     public render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
-        const nodeElements = project.nodes.Select((n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`).ToArray();
+        this.style.strokeWidth = `${this.camera.zoom * 4}px`;
+
+        const nodeElements = [];
+
+        for (const n of project.nodes) {
+            nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
+        }
 
         return html`
         ${nodeElements}
-        <svg style="stroke-width: ${this.camera.zoom * 4}px">
-            <connection-container .workspace="${this}"></connection-container>
+        <connection-container .workspace="${this}"></connection-container>
+        <svg>
             <line style="display: ${this.connectionDragging ? null : `none`}" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
 
         <div class="view-options" style="${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
-            ${project.nodes.Any() ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
+            ${project.nodes.length !== 0 ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
         </div>
         <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
@@ -150,13 +168,13 @@ export class EditorWorkspace extends LitElement {
 
     public fitCamera() {
         const padding = 25;
-        const nodeList = project.nodes.ToArray();
 
-        const XouterleastNode = nodeList.sort((a, b) => a.position.x - b.position.x)[0] as Node;
-        const YouterleastNode = nodeList.sort((a, b) => a.position.y - b.position.y)[0] as Node;
+        const enumerable = asEnumerable(project.nodes);
+        const XouterleastNode = enumerable.OrderBy((a) => a.position.x).First() as Node;
+        const YouterleastNode = enumerable.OrderBy((a) => a.position.y).First() as Node;
 
-        const XoutermostNode = nodeList.sort((a, b) => b.position.x - a.position.x)[0] as Node;
-        const YoutermostNode = nodeList.sort((a, b) => b.position.y - a.position.y)[0] as Node;
+        const XoutermostNode = enumerable.OrderByDescending((a) => a.position.x).First() as Node;
+        const YoutermostNode = enumerable.OrderByDescending((a) => a.position.y).First() as Node;
 
         const XoutermostWidth = (IdentityDomLink.map[XoutermostNode.id] as FlowNode).scrollWidth;
         const YoutermostHeight = (IdentityDomLink.map[YoutermostNode.id] as FlowNode).scrollHeight;
@@ -170,7 +188,7 @@ export class EditorWorkspace extends LitElement {
         const fitWidth = fitBounds.right - fitBounds.left;
         const fitHeight = fitBounds.top - fitBounds.bottom;
 
-        const totalBounds = this.getBoundingClientRect();
+        const totalBounds = this.clientRect;
         const center = {
             x: (fitBounds.left + fitBounds.right) / 2.0,
             y: (fitBounds.top + fitBounds.bottom) / 2.0
@@ -207,7 +225,7 @@ export class EditorWorkspace extends LitElement {
     }
 
     public pageToOffset(point: { x?: number, y?: number }) {
-        const box = this.getBoundingClientRect();
+        const box = this.clientRect;
         return {
             x: point.x - box.left,
             y: point.y - box.top
@@ -215,7 +233,7 @@ export class EditorWorkspace extends LitElement {
     }
 
     public get halfSize() {
-        const box = this.getBoundingClientRect();
+        const box = this.cachedClientRect;
         return { x: box.width / 2, y: box.height / 2 };
     }
 

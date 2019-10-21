@@ -143,12 +143,12 @@ export class FlowNode extends LitElement {
 
         const inputs = [];
         for (const socket of this.node.inputs) {
-            inputs.push(this.socketTemplate(socket));
+            inputs.push(this.socketTemplate(socket, true));
         }
 
         const outputs = [];
         for (const socket of this.node.outputs) {
-            outputs.push(this.socketTemplate(socket));
+            outputs.push(this.socketTemplate(socket, false));
         }
 
         return html`
@@ -162,7 +162,7 @@ export class FlowNode extends LitElement {
         this.style.zIndex = `${this.workspace.topNodeZindex++}`;
     }
 
-    private socketTemplate(socket: NodeSocket) {
+    private socketTemplate(socket: NodeSocket, isInputSocket: boolean) {
         let color = "null";
 
         switch (socket.type) {
@@ -175,12 +175,15 @@ export class FlowNode extends LitElement {
 
         const md = (e: MouseEvent) => {
             IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
-            project.startConnectionDrag(e, socket);
+            if (project.isCurrentlyConnecting) { return; }
+            project.startConnectionDrag(e, socket, isInputSocket);
+            e.stopPropagation();
         };
 
         const mu = (e: MouseEvent) => {
             IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
-            project.endConnectionDrag(e, socket);
+            project.endConnectionDrag(e, socket, isInputSocket);
+            e.stopPropagation();
         };
 
         return html`<div @mousedown="${md}" @mouseup="${mu}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
@@ -199,6 +202,7 @@ export class FlowNode extends LitElement {
             x: this.node.position.x + e.movementX / this.workspace.camera.zoom,
             y: this.node.position.y + e.movementY / this.workspace.camera.zoom
         };
+        this.dispatchEvent(new CustomEvent("dragged"));
         this.requestUpdate();
     }
 

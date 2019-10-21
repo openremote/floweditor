@@ -16,6 +16,8 @@ export { Status } from "./models/status";
 export { Project } from "./services/project";
 export { Integration } from "./services/integration";
 
+export { Utilities } from "./utils";
+
 export { OrIcon } from "@openremote/or-icon";
 export * from "@webcomponents/webcomponentsjs";
 

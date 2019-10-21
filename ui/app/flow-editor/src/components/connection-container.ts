@@ -8,8 +8,22 @@ import { project } from "..";
 export class ConnectionContainer extends LitElement {
     @property({ attribute: false }) private workspace: EditorWorkspace;
 
+    constructor() {
+        super();
+        project.addListener("connectioncreated", (from: NodeSocket, to: NodeSocket) => {
+            console.debug(from);
+            console.debug(to);
+            this.requestUpdate();
+        });
+    }
+
     public render() {
-        const connections = project.connections.Select((c) => html`<connection-line .from="${c.from}" .to="${c.to}"></connection-line>`).ToArray();
+        const connections = [];
+        for (const c of project.connections) {
+            connections.push(html`<connection-line .workspace="${this.workspace}" .from="${c.from}" .to="${c.to}"></connection-line>`);
+        }
+
+        console.debug(connections);
         return html`${connections}`;
     }
 }
