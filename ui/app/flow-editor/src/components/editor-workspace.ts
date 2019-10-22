@@ -150,6 +150,7 @@ export class EditorWorkspace extends LitElement {
         <svg>
             <line style="display: ${this.connectionDragging ? null : `none`}" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
+        <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
             ${project.nodes.length !== 0 ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
@@ -168,7 +169,7 @@ export class EditorWorkspace extends LitElement {
         this.dispatchEvent(new CustomEvent("zoom"));
         this.updateBackground();
     }
-    
+
     public fitCamera() {
         const padding = 25;
 

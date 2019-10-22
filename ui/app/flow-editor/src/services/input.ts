@@ -1,18 +1,24 @@
 import { EventEmitter } from "events";
 import { asEnumerable } from "ts-linq";
+import { SelectableElement } from "../components/selectable-element";
 
 export class Input extends EventEmitter {
     public selected: Element[] = [];
+    public selectables: SelectableElement[] = [];
     private keysCurrentlyHeld: string[] = [];
 
     constructor() {
         super();
         window.addEventListener("keydown", this.onkeydown);
         window.addEventListener("keyup", this.onkeyup);
+        window.addEventListener("blur", () => {
+            this.clearSelection();
+            this.keysCurrentlyHeld = [];
+        })
     }
 
-    public select(element: Element) {
-        if (!this.mutliselectEnabled) { this.clearSelection(); }
+    public select(element: Element, forceMultipleSelection = false) {
+        if (!this.mutliselectEnabled && !forceMultipleSelection) { this.clearSelection(); }
         if (this.selected.includes(element)) { return; }
         this.selected.push(element);
         this.emit("selected", element);
