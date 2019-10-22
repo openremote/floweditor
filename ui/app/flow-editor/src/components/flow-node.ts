@@ -2,10 +2,10 @@ import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket, NodeDataType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink } from "node-structure";
-import { project } from "..";
+import { project, input, SelectableElement } from "..";
 
 @customElement("flow-node")
-export class FlowNode extends LitElement {
+export class FlowNode extends SelectableElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
@@ -45,6 +45,8 @@ export class FlowNode extends LitElement {
 
             box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
             z-index: 0;
+
+            transition: box-shadow 200ms;
 
             --socket-size: 24px;
             --socket-display-size: 14px;
@@ -140,6 +142,7 @@ export class FlowNode extends LitElement {
         this.style.left = pos.x + "px";
         this.style.top = pos.y + "px";
         this.style.transform = `scale(${this.workspace.camera.zoom})`;
+        this.style.boxShadow = this.selected ? "var(--highlight) 0 0 0 3px" : null;
 
         const inputs = [];
         for (const socket of this.node.inputs) {

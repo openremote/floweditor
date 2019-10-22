@@ -1,7 +1,7 @@
 import { Node, NodeConnection, NodeSocket } from "@openremote/model";
 import { EventEmitter } from "events";
 import { SocketTypeMatcher } from "node-structure";
-import { asEnumerable, Range } from "ts-linq";
+import { asEnumerable } from "ts-linq";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];

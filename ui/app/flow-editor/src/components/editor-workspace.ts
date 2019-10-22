@@ -1,10 +1,9 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Camera } from "../models/camera";
-import { project } from "..";
+import { project, input } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { FlowNode } from "./flow-node";
-import { ConnectionContainer } from "./connection-container";
 import { asEnumerable } from "ts-linq";
 
 @customElement("editor-workspace")
@@ -64,7 +63,7 @@ export class EditorWorkspace extends LitElement {
             this.connectionDragging = true;
         });
 
-        project.addListener("connectionend", (e: MouseEvent) => {
+        project.addListener("connectionend", () => {
             this.connectionDragging = false;
             this.removeEventListener("mousemove", project.connectionDragging);
         });
@@ -74,7 +73,12 @@ export class EditorWorkspace extends LitElement {
             this.dispatchEvent(new CustomEvent("pan"));
         });
 
-        this.addEventListener("mousedown", this.startPan);
+        this.addEventListener("mousedown", (e) => {
+            this.startPan(e);
+            if (e.buttons === 1) {
+                input.clearSelection();
+            }
+        });
         this.addEventListener("wheel", this.onZoom);
     }
 
@@ -146,8 +150,7 @@ export class EditorWorkspace extends LitElement {
         <svg>
             <line style="display: ${this.connectionDragging ? null : `none`}" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
-
-        <div class="view-options" style="${this.topNodeZindex + 1}">
+        <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
             ${project.nodes.length !== 0 ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
         </div>
@@ -165,7 +168,7 @@ export class EditorWorkspace extends LitElement {
         this.dispatchEvent(new CustomEvent("zoom"));
         this.updateBackground();
     }
-
+    
     public fitCamera() {
         const padding = 25;
 
@@ -273,7 +276,7 @@ export class EditorWorkspace extends LitElement {
         this.updateBackground();
     }
 
-    private stopPan = (event: MouseEvent) => {
+    private stopPan = () => {
         if (!this.isPanning) { return; }
         window.removeEventListener("mousemove", this.onMove);
         this.isPanning = false;

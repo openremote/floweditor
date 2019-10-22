@@ -1,11 +1,11 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
-import { Node, NodeSocket, NodeDataType } from "@openremote/model";
+import { html, customElement, css, property } from "lit-element";
+import { NodeSocket } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink } from "node-structure";
-import { project, Utilities } from "..";
+import { Utilities, SelectableElement } from "..";
 
 @customElement("connection-line")
-export class ConnectionLine extends LitElement {
+export class ConnectionLine extends SelectableElement {
     @property({ attribute: false }) public from: NodeSocket;
     @property({ attribute: false }) public to: NodeSocket;
 
@@ -18,10 +18,15 @@ export class ConnectionLine extends LitElement {
                 overflow: visible;
                 position: absolute;
                 pointer-events: all;
+                stroke-linejoin: round;
+                transition: stroke-width 120ms;
+            }
+            polyline{
+                pointer-events: all;
+                transition: stroke 120ms;
             }
             
-            polyline:hover{
-                pointer-events: all;
+            polyline:hover, polyline[selected = true]{
                 stroke: var(--highlight);
             }
         `;
@@ -43,7 +48,8 @@ export class ConnectionLine extends LitElement {
         const to = Utilities.getCenter(toElement.getBoundingClientRect());
         const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
-        return html`<svg style="stroke-width: ${this.workspace.camera.zoom * 4}px;"><polyline 
+        return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 6 : 4)}px;"><polyline 
+        selected="${this.selected}"
         points="
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
         

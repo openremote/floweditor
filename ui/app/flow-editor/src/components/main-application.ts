@@ -15,6 +15,7 @@ export class MainApplication extends LitElement {
             grid-template-areas: 
                 "topbar topbar"
                 "node-panel workspace";
+            /* for some reason, this gets completely ignored in Firefox */
         }
         `;
     }
