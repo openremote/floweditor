@@ -49,9 +49,9 @@ export class ConnectionLine extends SelectableElement {
 
     public firstUpdated() {
         const update = () => { this.requestUpdate(); };
-        this.workspace.addEventListener("pan", update);
-        this.workspace.addEventListener("zoom", update);
-        this.workspace.addEventListener("nodemove", update);
+
+        this.fromNodeElement.addEventListener("updated", update);
+        this.toNodeElement.addEventListener("updated", update);
 
         project.addListener("connectioncreated", () => { this.requiresElementRetrieval = true; });
         project.addListener("connectionremoved", () => { this.requiresElementRetrieval = true; });

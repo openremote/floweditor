@@ -9,6 +9,8 @@ export class FlowNode extends SelectableElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
+    private minimal = false;
+
     constructor() {
         super();
     }
@@ -26,6 +28,9 @@ export class FlowNode extends SelectableElement {
     static get styles() {
         return css`
         :host{
+            --socket-size: 24px;
+            --socket-display-size: 14px;
+
             white-space: nowrap;
             min-width: 80px;
             min-height: 80px;
@@ -44,9 +49,16 @@ export class FlowNode extends SelectableElement {
 
             box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
             z-index: 0;
+        }
 
-            --socket-size: 24px;
-            --socket-display-size: 14px;
+        :host([minimal = true]){
+            min-width: 60px;
+            min-height: 60px;
+            grid-template-columns: var(--socket-display-size) 1fr var(--socket-display-size);
+            grid-template-rows: auto;
+            grid-template-areas: 
+                "input title output";
+            
         }
 
         .socket-side{
@@ -109,7 +121,7 @@ export class FlowNode extends SelectableElement {
             color: white;
             cursor: grab;
         }
-        
+
         .title.input{
             background: var(--input-color);
             text-align: right;
@@ -124,14 +136,36 @@ export class FlowNode extends SelectableElement {
             background: var(--output-color);
             text-align: left;
         }
+        
+        .title.minimal{
+            background: transparent;
+            font-size: 24px;
+            line-height: 50%;
+            display: table;
+            padding: 15px 0 15px 0;
+            text-align: center;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        
+        .title.minimal[singlechar]{
+            font-size: 32px;
+        }
         `;
     }
 
-    public render() {
+    protected updated() {
+        this.dispatchEvent(new CustomEvent("updated"));
+    }
+
+    protected render() {
         IdentityDomLink.map[this.node.id] = this;
 
-        if (!this.node) {
-            this.node = {};
+        this.minimal = (this.node.displayCharacter || "").length !== 0;
+        this.setAttribute("minimal", this.minimal.toString());
+        if (this.minimal) {
+            this.addEventListener("mousedown", this.startDrag);
+            this.style.background = `var(--${this.node.type.toLowerCase()}-color)`;
         }
 
         const pos = this.workspace.worldToOffset(this.node.position);
@@ -148,11 +182,19 @@ export class FlowNode extends SelectableElement {
             outputs.push(this.socketTemplate(socket, false));
         }
 
-        return html`
+        if (this.minimal) {
+            return html`
+        <div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>
+        <div class="socket-side inputs">${inputs}</div>
+        <div class="socket-side outputs">${outputs}</div>
+        `;
+        } else {
+            return html`
         <div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>
         <div class="socket-side inputs">${inputs}</div>
         <div class="socket-side outputs">${outputs}</div>
         `;
+        }
     }
 
     public bringToFront() {
@@ -171,16 +213,20 @@ export class FlowNode extends SelectableElement {
         }
 
         const md = (e: MouseEvent) => {
+            if (e.buttons !== 1) { return; }
             IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
             if (project.isCurrentlyConnecting) { return; }
             project.startConnectionDrag(e, socket, isInputSocket);
             e.stopPropagation();
+            e.stopImmediatePropagation();
         };
 
         const mu = (e: MouseEvent) => {
             IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
             project.endConnectionDrag(e, socket, isInputSocket);
+            if (e.buttons !== 1) { return; }
             e.stopPropagation();
+            e.stopImmediatePropagation();
         };
 
         return html`<div @mousedown="${md}" @mouseup="${mu}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;

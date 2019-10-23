@@ -79,7 +79,8 @@ export class EditorWorkspace extends LitElement {
                 input.clearSelection();
             }
         });
-        this.addEventListener("wheel", this.onZoom);
+
+        this.addEventListener("wheel", this.onZoom, { passive: true });
     }
 
     static get styles() {

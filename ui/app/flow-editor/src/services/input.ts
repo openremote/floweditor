@@ -14,7 +14,8 @@ export class Input extends EventEmitter {
         window.addEventListener("blur", () => {
             this.clearSelection();
             this.keysCurrentlyHeld = [];
-        })
+        });
+        this.setMaxListeners(256);
     }
 
     public select(element: Element, forceMultipleSelection = false) {

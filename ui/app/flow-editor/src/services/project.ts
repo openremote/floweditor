@@ -12,6 +12,11 @@ export class Project extends EventEmitter {
     private connectionStartSocket: NodeSocket;
     private connectionEndSocket: NodeSocket;
 
+    constructor() {
+        super();
+        this.setMaxListeners(256);
+    }
+
     public get isCurrentlyConnecting() {
         return this.isConnecting;
     }
@@ -74,6 +79,7 @@ export class Project extends EventEmitter {
             console.warn("attempt to delete nonexistent connection");
         } else {
             this.connections.splice(index, 1);
+            this.emit("connectionremoved", connection);
         }
     }
 
