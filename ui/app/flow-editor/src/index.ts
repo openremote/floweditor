@@ -12,6 +12,7 @@ export { FlowNode } from "./components/flow-node";
 export { ConnectionLine } from "./components/connection-line";
 export { ConnectionContainer } from "./components/connection-container";
 export { SelectionBox } from "./components/selection-box";
+export { ContextMenu } from "./components/context-menu";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";

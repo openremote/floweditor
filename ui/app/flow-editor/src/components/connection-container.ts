@@ -15,7 +15,7 @@ export class ConnectionContainer extends LitElement {
         });
     }
 
-    public render() {
+    protected render() {
         const connections = [];
         for (const c of project.connections) {
             connections.push(html`<connection-line .workspace="${this.workspace}" .from="${c.from}" .to="${c.to}"></connection-line>`);

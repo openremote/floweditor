@@ -39,7 +39,7 @@ export class TopBar extends LitElement {
         `;
     }
 
-    public render() {
+    protected render() {
         return html`
         <span class="title">Flow Editor</span>
         <a class="button">Save</a>

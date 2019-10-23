@@ -131,11 +131,11 @@ export class EditorWorkspace extends LitElement {
         `;
     }
 
-    public firstUpdated() {
+    protected firstUpdated() {
         this.cachedClientRect = this.getBoundingClientRect();
     }
 
-    public render() {
+    protected render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
 
         const nodeElements = [];

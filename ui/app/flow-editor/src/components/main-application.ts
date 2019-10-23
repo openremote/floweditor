@@ -20,13 +20,13 @@ export class MainApplication extends LitElement {
         `;
     }
 
-    public firstUpdated() {
+    protected firstUpdated() {
         integration.addListener("initialise", () => {
             this.requestUpdate();
         });
     }
 
-    public render() {
+    protected render() {
         if (integration.status === Status.Idle || integration.status === Status.Loading) { return; }
 
         if (integration.status === Status.Success) {
@@ -34,6 +34,7 @@ export class MainApplication extends LitElement {
             <editor-workspace style="grid-area: workspace"></editor-workspace>
             <node-panel style="grid-area: node-panel"></node-panel>
             <top-bar style="grid-area: topbar"></top-bar>
+            <context-menu></context-menu>
         `;
         } else {
             return html`${integration.openremote.error}`;

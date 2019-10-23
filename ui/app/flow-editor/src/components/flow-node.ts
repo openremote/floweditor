@@ -15,7 +15,7 @@ export class FlowNode extends SelectableElement {
         super();
     }
 
-    public firstUpdated() {
+    protected firstUpdated() {
         this.workspace.addEventListener("pan", () => {
             this.requestUpdate();
         });
@@ -182,19 +182,15 @@ export class FlowNode extends SelectableElement {
             outputs.push(this.socketTemplate(socket, false));
         }
 
-        if (this.minimal) {
-            return html`
-        <div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>
+        const title = this.minimal ?
+            html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
+            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
+
+        return html`
+        ${title}
         <div class="socket-side inputs">${inputs}</div>
         <div class="socket-side outputs">${outputs}</div>
         `;
-        } else {
-            return html`
-        <div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>
-        <div class="socket-side inputs">${inputs}</div>
-        <div class="socket-side outputs">${outputs}</div>
-        `;
-        }
     }
 
     public bringToFront() {
@@ -202,15 +198,7 @@ export class FlowNode extends SelectableElement {
     }
 
     private socketTemplate(socket: NodeSocket, isInputSocket: boolean) {
-        let color = "null";
-
-        switch (socket.type) {
-            case NodeDataType.ANY: color = "var(--any)"; break;
-            case NodeDataType.NUMBER: color = "var(--number)"; break;
-            case NodeDataType.BOOLEAN: color = "var(--boolean)"; break;
-            case NodeDataType.STRING: color = "var(--string)"; break;
-            case NodeDataType.COLOR: color = "var(--color)"; break;
-        }
+        const color = `var(--${socket.type.toString().toLowerCase()})`;
 
         const md = (e: MouseEvent) => {
             if (e.buttons !== 1) { return; }

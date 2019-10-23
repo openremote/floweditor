@@ -47,7 +47,7 @@ export class ConnectionLine extends SelectableElement {
         `;
     }
 
-    public firstUpdated() {
+    protected firstUpdated() {
         const update = () => { this.requestUpdate(); };
 
         this.fromNodeElement.addEventListener("updated", update);
@@ -59,7 +59,7 @@ export class ConnectionLine extends SelectableElement {
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
     }
 
-    public render() {
+    protected render() {
         if (this.requiresElementRetrieval) {
             this.retrieveElements();
         }

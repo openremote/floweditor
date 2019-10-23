@@ -12,7 +12,7 @@ export class SelectionBox extends LitElement {
 
     public readonly distanceTreshold = 20;
 
-    public firstUpdated() {
+    protected firstUpdated() {
         this.workspace.addEventListener("mousedown", this.workspaceMouseDown);
         window.addEventListener("mouseup", this.workspaceMouseUp);
     }
@@ -36,7 +36,7 @@ export class SelectionBox extends LitElement {
         `;
     }
 
-    public render() {
+    protected render() {
         if (!this.isSelecting) { return html``; }
         return html`<svg><rect x="${this.selectionBox.x}px" y="${this.selectionBox.y}px" width="${this.selectionBox.width}px" height="${this.selectionBox.height}px"></rect></svg>`;
     }

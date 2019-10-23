@@ -48,7 +48,7 @@ export class NodeMenuItem extends LitElement {
         `;
     }
 
-    public render() {
+    protected render() {
         switch (this.node.type) {
             case NodeType.INPUT:
                 this.classList.add("input-node");

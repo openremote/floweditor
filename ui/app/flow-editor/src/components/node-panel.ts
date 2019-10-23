@@ -42,7 +42,7 @@ export class NodePanel extends LitElement {
         `;
     }
 
-    public firstUpdated() {
+    protected firstUpdated() {
         this.refreshNodes();
     }
 
@@ -55,7 +55,7 @@ export class NodePanel extends LitElement {
         this.requestUpdate();
     }
 
-    public render() {
+    protected render() {
         const inputs = [];
         const processors = [];
         const outputs = [];
