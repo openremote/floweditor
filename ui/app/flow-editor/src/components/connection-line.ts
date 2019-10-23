@@ -2,7 +2,7 @@ import { html, customElement, css, property } from "lit-element";
 import { NodeSocket } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { IdentityDomLink, IdentityAssigner } from "node-structure";
-import { Utilities, SelectableElement } from "..";
+import { Utilities, SelectableElement, project } from "..";
 import { FlowNode } from "./flow-node";
 
 @customElement("connection-line")
@@ -12,12 +12,15 @@ export class ConnectionLine extends SelectableElement {
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
     @property({ type: String }) private polylineId: string;
+    @property({ attribute: false }) private requiresElementRetrieval = true;
 
     private fromNodeElement: FlowNode;
     private toNodeElement: FlowNode;
 
     private fromElement: HTMLElement;
     private toElement: HTMLElement;
+
+    private readonly fancyLine = false;
 
     constructor() {
         super();
@@ -34,11 +37,11 @@ export class ConnectionLine extends SelectableElement {
                 stroke-linejoin: round;
             }
 
-            polyline{
+            polyline, line{
                 pointer-events: all;
             }
             
-            polyline:hover, polyline[selected = true]{
+            polyline:hover, line:hover, polyline[selected = true], line[selected = true]{
                 stroke: var(--highlight);
             }
         `;
@@ -50,11 +53,14 @@ export class ConnectionLine extends SelectableElement {
         this.workspace.addEventListener("zoom", update);
         this.workspace.addEventListener("nodemove", update);
 
+        project.addListener("connectioncreated", () => { this.requiresElementRetrieval = true; });
+        project.addListener("connectionremoved", () => { this.requiresElementRetrieval = true; });
+
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
     }
 
     public render() {
-        if (!this.fromNodeElement || !this.toNodeElement || !this.fromElement || !this.toElement) {
+        if (this.requiresElementRetrieval) {
             this.retrieveElements();
         }
 
@@ -67,12 +73,10 @@ export class ConnectionLine extends SelectableElement {
         selected="${this.selected}"
         points="
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
-        
-        ${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} 
-        ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}
-
+        ${this.fancyLine ? `${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}` : ``}
         ${to.x - parentSize.left}, ${to.y - parentSize.top}"
-        ></polyline></svg>`;
+        ></polyline>
+        </svg>`;
     }
 
     private retrieveElements() {

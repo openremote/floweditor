@@ -2,6 +2,7 @@ import { Node, NodeConnection, NodeSocket } from "@openremote/model";
 import { EventEmitter } from "events";
 import { SocketTypeMatcher } from "node-structure";
 import { asEnumerable } from "ts-linq";
+import { input } from "..";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];
@@ -68,10 +69,12 @@ export class Project extends EventEmitter {
     }
 
     public removeConnection(connection: NodeConnection) {
-        asEnumerable(this.connections).Where((c) => c.to.id === connection.to.id && c.from.id === connection.from.id).ToArray().forEach((c) => {
-            this.emit("connectionremoved", c);
-            this.connections.splice(this.connections.indexOf(c), 1);
-        });
+        const index = this.connections.indexOf(connection);
+        if (index === -1) {
+            console.warn("attempt to delete nonexistent connection");
+        } else {
+            this.connections.splice(index, 1);
+        }
     }
 
     public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {
@@ -86,7 +89,7 @@ export class Project extends EventEmitter {
             return false;
         }
 
-        for (const c of asEnumerable(this.connections).Where((n) => n.to.id === toSocket.id).ToArray()) {
+        for (const c of this.connections.filter((j) => j.to.id === toSocket.id)) {
             this.removeConnection(c);
         }
 

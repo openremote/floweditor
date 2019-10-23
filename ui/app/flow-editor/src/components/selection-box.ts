@@ -51,11 +51,11 @@ export class SelectionBox extends LitElement {
     }
 
     private mouseMove = (e: MouseEvent) => {
-        const width = e.offsetX - this.workspace.clientRect.left - this.selectionStartPosition.x;
-        const height = e.offsetY - this.workspace.clientRect.top - this.selectionStartPosition.y;
+        const width = e.pageX - this.workspace.clientRect.left - this.selectionStartPosition.x;
+        const height = e.pageY - this.workspace.clientRect.top - this.selectionStartPosition.y;
 
         if (width < 0) {
-            this.selectionBox.x = e.offsetX - this.workspace.clientRect.left;
+            this.selectionBox.x = e.pageX - this.workspace.clientRect.left;
             this.selectionBox.width = Math.abs(this.selectionBox.x - this.selectionStartPosition.x);
         } else {
             this.selectionBox.x = this.selectionStartPosition.x;
@@ -63,7 +63,7 @@ export class SelectionBox extends LitElement {
         }
 
         if (height < 0) {
-            this.selectionBox.y = e.offsetY - this.workspace.clientRect.top;
+            this.selectionBox.y = e.pageY - this.workspace.clientRect.top;
             this.selectionBox.height = Math.abs(this.selectionBox.y - this.selectionStartPosition.y);
         } else {
             this.selectionBox.y = this.selectionStartPosition.y;

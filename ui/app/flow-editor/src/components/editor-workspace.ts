@@ -136,7 +136,6 @@ export class EditorWorkspace extends LitElement {
 
     public render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
-        this.style.strokeWidth = `${this.camera.zoom * 4}px`;
 
         const nodeElements = [];
 
@@ -148,7 +147,7 @@ export class EditorWorkspace extends LitElement {
         ${nodeElements}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
-            <line style="display: ${this.connectionDragging ? null : `none`}; stroke-opacity: 0.25" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
+            <line style="display: ${this.connectionDragging ? null : `none`}; stroke-dasharray: 20, 10; stroke-opacity: 0.25; stroke-width: ${this.camera.zoom * 4}px" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
@@ -263,6 +262,7 @@ export class EditorWorkspace extends LitElement {
 
     private onZoom = (event: WheelEvent) => {
         if (this.connectionDragging) { return; }
+        if (this.isPanning) { return; }
         const magnification = 0.9 * this.scrollSensitivity;
         const rz = event.deltaY < 0 ? this.camera.zoom * magnification : this.camera.zoom / magnification;
         if (rz < this.zoomLowerBound || rz > this.zoomUpperBound) { return; }
