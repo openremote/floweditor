@@ -98,7 +98,6 @@ export class NodeMenuItem extends LitElement {
         } catch (error) {
             target = this.shadowRoot.ownerDocument.elementFromPoint(e.clientX, e.clientY);
         }
-        console.debug(target);
         if (target instanceof EditorWorkspace) {
             const copy = CopyMachine.copy(this.node);
             const workspace = target as EditorWorkspace;

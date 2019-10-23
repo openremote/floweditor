@@ -11,7 +11,6 @@ export class FlowNode extends SelectableElement {
 
     constructor() {
         super();
-        console.debug("new flow node component created");
     }
 
     public firstUpdated() {
@@ -45,8 +44,6 @@ export class FlowNode extends SelectableElement {
 
             box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
             z-index: 0;
-
-            transition: box-shadow 200ms;
 
             --socket-size: 24px;
             --socket-display-size: 14px;
@@ -135,13 +132,10 @@ export class FlowNode extends SelectableElement {
 
         if (!this.node) {
             this.node = {};
-            console.warn("Node component has null node");
         }
 
         const pos = this.workspace.worldToOffset(this.node.position);
-        this.style.left = pos.x + "px";
-        this.style.top = pos.y + "px";
-        this.style.transform = `scale(${this.workspace.camera.zoom})`;
+        this.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${this.workspace.camera.zoom})`;
         this.style.boxShadow = this.selected ? "var(--highlight) 0 0 0 3px" : null;
 
         const inputs = [];

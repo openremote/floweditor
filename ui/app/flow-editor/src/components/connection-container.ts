@@ -11,8 +11,6 @@ export class ConnectionContainer extends LitElement {
     constructor() {
         super();
         project.addListener("connectioncreated", (from: NodeSocket, to: NodeSocket) => {
-            console.debug(from);
-            console.debug(to);
             this.requestUpdate();
         });
     }
@@ -23,7 +21,6 @@ export class ConnectionContainer extends LitElement {
             connections.push(html`<connection-line .workspace="${this.workspace}" .from="${c.from}" .to="${c.to}"></connection-line>`);
         }
 
-        console.debug(connections);
         return html`${connections}`;
     }
 }

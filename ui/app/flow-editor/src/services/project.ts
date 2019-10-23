@@ -95,7 +95,6 @@ export class Project extends EventEmitter {
             to: toSocket
         });
 
-        console.debug(this.connections);
         this.emit("connectioncreated", fromSocket, toSocket);
         return true;
     }

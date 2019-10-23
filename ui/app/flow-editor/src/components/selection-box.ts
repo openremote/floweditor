@@ -47,15 +47,15 @@ export class SelectionBox extends LitElement {
         this.selectionBox.y = e.offsetY;
         this.selectionStartPosition.x = this.selectionBox.x;
         this.selectionStartPosition.y = this.selectionBox.y;
-        this.workspace.addEventListener("mousemove", this.mouseMove);
+        window.addEventListener("mousemove", this.mouseMove);
     }
 
     private mouseMove = (e: MouseEvent) => {
-        const width = e.offsetX - this.selectionStartPosition.x;
-        const height = e.offsetY - this.selectionStartPosition.y;
+        const width = e.offsetX - this.workspace.clientRect.left - this.selectionStartPosition.x;
+        const height = e.offsetY - this.workspace.clientRect.top - this.selectionStartPosition.y;
 
         if (width < 0) {
-            this.selectionBox.x = e.offsetX;
+            this.selectionBox.x = e.offsetX - this.workspace.clientRect.left;
             this.selectionBox.width = Math.abs(this.selectionBox.x - this.selectionStartPosition.x);
         } else {
             this.selectionBox.x = this.selectionStartPosition.x;
@@ -63,7 +63,7 @@ export class SelectionBox extends LitElement {
         }
 
         if (height < 0) {
-            this.selectionBox.y = e.offsetY;
+            this.selectionBox.y = e.offsetY - this.workspace.clientRect.top;
             this.selectionBox.height = Math.abs(this.selectionBox.y - this.selectionStartPosition.y);
         } else {
             this.selectionBox.y = this.selectionStartPosition.y;
@@ -75,7 +75,7 @@ export class SelectionBox extends LitElement {
     }
 
     private workspaceMouseUp = (e: MouseEvent) => {
-        this.workspace.removeEventListener("mousemove", this.mouseMove);
+        window.removeEventListener("mousemove", this.mouseMove);
         if (this.isSelecting) {
             this.selectInBounds();
             this.isSelecting = false;
@@ -84,11 +84,16 @@ export class SelectionBox extends LitElement {
 
     private selectInBounds() {
         input.clearSelection();
+        const offsetBox = {
+            x: this.selectionBox.x + this.workspace.clientRect.left,
+            y: this.selectionBox.y + this.workspace.clientRect.top,
+            width: this.selectionBox.width,
+            height: this.selectionBox.height,
+        };
         for (const selectable of input.selectables) {
-            const rect = selectable.getBoundingClientRect();
-            if (Utilities.isBoxInsideBox({ x: rect.left, y: rect.top, width: rect.width, height: rect.height }, this.selectionBox)) {
-                // TODO: FIX OFFSET!
-                input.select(selectable);
+            const rect = selectable.handle.getBoundingClientRect();
+            if (Utilities.isBoxInsideBox({ x: rect.left, y: rect.top, width: rect.width, height: rect.height }, offsetBox)) {
+                input.select(selectable, true);
             }
         }
     }

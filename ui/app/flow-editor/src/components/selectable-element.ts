@@ -3,38 +3,44 @@ import { input } from "..";
 
 export class SelectableElement extends LitElement {
     @property({ attribute: false }) private isSelected = false;
-    private handle: Element;
+    private selectableHandle: Element;
 
     constructor() {
         super();
         this.setHandle(this);
+        input.selectables.push(this);
+        input.addListener("selected", this.onSelected);
+        input.addListener("deselected", this.onDeselected);
     }
 
     public get selected() {
         return this.isSelected;
     }
 
-    public setHandle(element: HTMLElement) {
-        if (this.handle !== null) {
-            input.removeListener("selected", this.onSelected);
-            input.removeListener("deselected", this.onDeselected);
-            element.removeEventListener("mousedown", this.handleSelection);
+    public get handle() {
+        return this.selectableHandle;
+    }
+
+    public disconnectedCallback() {
+        input.selectables.splice(input.selectables.indexOf(this), 1);
+    }
+
+    public setHandle(element: Element) {
+        if (this.selectableHandle) {
+            this.selectableHandle.removeEventListener("mousedown", this.handleSelection);
         }
-        
-        this.handle = element;
-        input.addListener("selected", this.onSelected);
-        input.addListener("deselected", this.onDeselected);
         element.addEventListener("mousedown", this.handleSelection);
+        this.selectableHandle = element;
     }
 
     private readonly onSelected = (e: Element) => {
-        if (e === this.handle) {
+        if (e === this) {
             this.isSelected = true;
         }
     }
 
     private readonly onDeselected = (e: Element) => {
-        if (e === this.handle) {
+        if (e === this) {
             this.isSelected = false;
         }
     }

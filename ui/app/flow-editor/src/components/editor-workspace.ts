@@ -59,7 +59,7 @@ export class EditorWorkspace extends LitElement {
         });
 
         project.addListener("connecting", (e: MouseEvent) => {
-            this.connectionTo = { x: e.offsetX, y: e.offsetY };
+            this.connectionTo = { x: e.pageX - this.clientRect.left, y: e.pageY - this.clientRect.top };
             this.connectionDragging = true;
         });
 
@@ -148,7 +148,7 @@ export class EditorWorkspace extends LitElement {
         ${nodeElements}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
-            <line style="display: ${this.connectionDragging ? null : `none`}" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
+            <line style="display: ${this.connectionDragging ? null : `none`}; stroke-opacity: 0.25" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">

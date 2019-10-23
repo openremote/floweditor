@@ -42,6 +42,7 @@ export class Input extends EventEmitter {
     }
 
     public clearSelection() {
+        if (this.mutliselectEnabled) { return; }
         const originallySelected = asEnumerable(this.selected).ToArray();
         for (const element of originallySelected) {
             this.deselect(element);
