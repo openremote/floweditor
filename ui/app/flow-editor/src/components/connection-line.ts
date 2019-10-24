@@ -1,12 +1,11 @@
 import { html, customElement, css, property } from "lit-element";
-import { NodeSocket } from "@openremote/model";
-import { EditorWorkspace } from "./editor-workspace";
+import { NodeSocket, NodeConnection } from "@openremote/model";
 import { IdentityDomLink, IdentityAssigner } from "node-structure";
-import { Utilities, SelectableElement, project } from "..";
-import { FlowNode } from "./flow-node";
+import { Utilities, SelectableElement, EditorWorkspace, FlowNode } from "..";
 
 @customElement("connection-line")
 export class ConnectionLine extends SelectableElement {
+    @property({ attribute: false }) public connection: NodeConnection;
     @property({ attribute: false }) public from: NodeSocket;
     @property({ attribute: false }) public to: NodeSocket;
     @property({ attribute: false }) public workspace: EditorWorkspace;
@@ -44,25 +43,32 @@ export class ConnectionLine extends SelectableElement {
             polyline:hover, line:hover, polyline[selected = true], line[selected = true]{
                 stroke: var(--highlight);
             }
+
+            text{
+                fill: red;
+                stroke: none;
+            }
         `;
     }
 
     protected firstUpdated() {
-        const update = () => { this.requestUpdate(); };
-
-        this.fromNodeElement.addEventListener("updated", update);
-        this.toNodeElement.addEventListener("updated", update);
-
-        project.addListener("connectioncreated", () => { this.requiresElementRetrieval = true; });
-        project.addListener("connectionremoved", () => { this.requiresElementRetrieval = true; });
-
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
     }
 
+    private nodeChanged = () => { this.requestUpdate(); };
+
     protected render() {
-        if (this.requiresElementRetrieval) {
-            this.retrieveElements();
-        }
+        if (this.fromNodeElement) { this.fromNodeElement.removeEventListener("updated", this.nodeChanged); }
+        if (this.toNodeElement) { this.toNodeElement.removeEventListener("updated", this.nodeChanged); }
+
+        this.fromNodeElement = IdentityDomLink.map[this.from.nodeId];
+        this.toNodeElement = IdentityDomLink.map[this.to.nodeId];
+
+        this.fromElement = IdentityDomLink.map[this.from.id];
+        this.toElement = IdentityDomLink.map[this.to.id];
+
+        this.fromNodeElement.addEventListener("updated", this.nodeChanged);
+        this.toNodeElement.addEventListener("updated", this.nodeChanged);
 
         const parentSize = this.workspace.clientRect;
         const from = Utilities.getCenter(this.fromElement.getBoundingClientRect());
@@ -76,14 +82,7 @@ export class ConnectionLine extends SelectableElement {
         ${this.fancyLine ? `${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}` : ``}
         ${to.x - parentSize.left}, ${to.y - parentSize.top}"
         ></polyline>
+        <text x="${(from.x + to.x) / 2 - parentSize.left}" y="${(from.y + to.y) / 2 - parentSize.top}">${this.from.nodeId} -> ${this.to.nodeId}</text>
         </svg>`;
-    }
-
-    private retrieveElements() {
-        this.fromNodeElement = IdentityDomLink.map[this.from.nodeId];
-        this.toNodeElement = IdentityDomLink.map[this.to.nodeId];
-
-        this.fromElement = IdentityDomLink.map[this.from.id];
-        this.toElement = IdentityDomLink.map[this.to.id];
     }
 }

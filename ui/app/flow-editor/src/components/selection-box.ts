@@ -1,5 +1,5 @@
 import { LitElement, customElement, property, html, css } from "lit-element";
-import { EditorWorkspace, input, project, Utilities } from "..";
+import { EditorWorkspace, input, Utilities } from "..";
 
 @customElement("selection-box")
 export class SelectionBox extends LitElement {
@@ -74,7 +74,7 @@ export class SelectionBox extends LitElement {
         this.requestUpdate();
     }
 
-    private workspaceMouseUp = (e: MouseEvent) => {
+    private workspaceMouseUp = () => {
         window.removeEventListener("mousemove", this.mouseMove);
         if (this.isSelecting) {
             this.selectInBounds();

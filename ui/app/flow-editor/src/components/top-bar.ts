@@ -1,4 +1,5 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
+import { IdentityDomLink } from "node-structure";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {
@@ -45,6 +46,9 @@ export class TopBar extends LitElement {
         <a class="button">Save</a>
         <a class="button">Open</a>
         <a class="button">Help</a>
+
+        <a class="debug button" @click="${() => console.log(IdentityDomLink.map)}">PRINT IDENTITY MAP</a>
+
         <a class="button right">Log out</a>
         `;
     }

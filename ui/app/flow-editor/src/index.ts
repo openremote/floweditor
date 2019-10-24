@@ -9,6 +9,7 @@ export { TopBar } from "./components/top-bar";
 export { NodeMenuItem } from "./components/node-menu-item";
 export { SelectableElement } from "./components/selectable-element";
 export { FlowNode } from "./components/flow-node";
+export { FlowNodeSocket } from "./components/flow-node-socket";
 export { ConnectionLine } from "./components/connection-line";
 export { ConnectionContainer } from "./components/connection-container";
 export { SelectionBox } from "./components/selection-box";
@@ -16,6 +17,7 @@ export { ContextMenu } from "./components/context-menu";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
+export { ContextMenuButton } from "./models/context-menu-button";
 
 export { Integration } from "./services/integration";
 export { Project } from "./services/project";

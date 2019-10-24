@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import { asEnumerable } from "ts-linq";
-import { SelectableElement } from "../components/selectable-element";
+import { project, SelectableElement } from "..";
 
 export class Input extends EventEmitter {
     public selected: Element[] = [];
@@ -15,6 +15,7 @@ export class Input extends EventEmitter {
             this.clearSelection();
             this.keysCurrentlyHeld = [];
         });
+        project.addListener("cleared", () => { this.clearSelection(); });
         this.setMaxListeners(256);
     }
 
@@ -27,15 +28,18 @@ export class Input extends EventEmitter {
 
     public deselect(element: Element) {
         const index = this.selected.indexOf(element);
-        if (index === -1) { return; }
+        if (index === -1) {
+            console.warn("Attempt to deselect nonexistent node");
+            return;
+        }
         this.selected.splice(index, 1);
         this.emit("deselected", element);
     }
 
-    public handleSelection(element: Element) {
+    public handleSelection(element: Element, neverDeselect = false) {
         if (!this.mutliselectEnabled && this.selected.length > 1) {
             this.select(element);
-        } else if (this.selected.includes(element)) {
+        } else if (this.selected.includes(element) && !neverDeselect) {
             this.deselect(element);
         } else {
             this.select(element);

@@ -1,6 +1,6 @@
 import { Node, NodeConnection, NodeSocket } from "@openremote/model";
 import { EventEmitter } from "events";
-import { SocketTypeMatcher } from "node-structure";
+import { SocketTypeMatcher, IdentityDomLink } from "node-structure";
 import { asEnumerable } from "ts-linq";
 import { input } from "..";
 
@@ -36,10 +36,20 @@ export class Project extends EventEmitter {
     }
 
     public removeNode(node: Node) {
-
-        asEnumerable(this.nodes).Where((n) => n.id === node.id).ToArray().forEach((n) => {
-            this.emit("noderemoved", n);
+        input.clearSelection();
+        this.connections.filter((c) => c.from.nodeId === node.id || c.to.nodeId === node.id).forEach((c) => {
+            this.removeConnection(c);
+        });
+        this.nodes.filter((n) => n.id === node.id).forEach((n) => {
             this.nodes.splice(this.nodes.indexOf(n), 1);
+            // IdentityDomLink.map[n.id] = null;
+            // for (const inputSocket of n.inputs) {
+            //     IdentityDomLink.map[inputSocket.id] = null;
+            // }
+            // for (const outputSocket of n.outputs) {
+            //     IdentityDomLink.map[outputSocket.id] = null;
+            // }
+            this.emit("noderemoved", n);
         });
     }
 
@@ -62,6 +72,7 @@ export class Project extends EventEmitter {
     }
 
     public endConnectionDrag = (e: MouseEvent, socket: NodeSocket, isInputNode: boolean) => {
+        if (!this.isConnecting) { return; }
         if (isInputNode) {
             this.connectionEndSocket = socket;
         } else {
@@ -74,13 +85,16 @@ export class Project extends EventEmitter {
     }
 
     public removeConnection(connection: NodeConnection) {
-        const index = this.connections.indexOf(connection);
-        if (index === -1) {
-            console.warn("attempt to delete nonexistent connection");
-        } else {
-            this.connections.splice(index, 1);
-            this.emit("connectionremoved", connection);
-        }
+        input.clearSelection();
+        this.connections.filter((c) => c.from.id === connection.from.id && c.to.id === connection.to.id).forEach((c) => {
+            const index = this.connections.indexOf(c);
+            if (index === -1) {
+                console.warn("attempt to delete nonexistent connection");
+            } else {
+                this.connections.splice(index, 1);
+                this.emit("connectionremoved", c);
+            }
+        });
     }
 
     public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {

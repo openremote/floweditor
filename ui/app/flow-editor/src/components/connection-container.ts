@@ -1,8 +1,5 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { Node, NodeSocket, NodeDataType } from "@openremote/model";
-import { EditorWorkspace } from "./editor-workspace";
-import { IdentityDomLink } from "node-structure";
-import { project } from "..";
+import { project, EditorWorkspace } from "..";
 
 @customElement("connection-container")
 export class ConnectionContainer extends LitElement {
@@ -10,17 +7,18 @@ export class ConnectionContainer extends LitElement {
 
     constructor() {
         super();
-        project.addListener("connectioncreated", (from: NodeSocket, to: NodeSocket) => {
+        project.addListener("connectioncreated", () => {
+            this.requestUpdate();
+        });
+        project.addListener("connectionremoved", () => {
+            this.requestUpdate();
+        });
+        project.addListener("cleared", () => {
             this.requestUpdate();
         });
     }
 
     protected render() {
-        const connections = [];
-        for (const c of project.connections) {
-            connections.push(html`<connection-line .workspace="${this.workspace}" .from="${c.from}" .to="${c.to}"></connection-line>`);
-        }
-
-        return html`${connections}`;
+        return html`${project.connections.map((c) => html`<connection-line .workspace="${this.workspace}" .connection="${c}" .from="${c.from}" .to="${c.to}"></connection-line>`)}`;
     }
 }

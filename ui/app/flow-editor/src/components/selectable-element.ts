@@ -49,6 +49,8 @@ export class SelectableElement extends LitElement {
         if (event.buttons === 1) {
             input.handleSelection(this);
             event.stopPropagation();
+        } else if (event.buttons === 2) {
+            input.handleSelection(this, true);
         }
     }
 }

@@ -1,16 +1,13 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { Camera } from "../models/camera";
-import { project, input } from "..";
+import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { FlowNode } from "./flow-node";
 import { asEnumerable } from "ts-linq";
+import { ContextMenuButton } from "../models/context-menu-button";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
-    @property({ attribute: false, reflect: true }) public camera: Camera = {
-        x: 0, y: 0, zoom: 1
-    };
+    @property({ attribute: false, reflect: true }) public camera: Camera = { x: 0, y: 0, zoom: 1 };
 
     @property({ attribute: false }) public topNodeZindex = 1;
 
@@ -80,6 +77,27 @@ export class EditorWorkspace extends LitElement {
             }
         });
 
+        this.addEventListener("contextmenu", (e) => {
+            const selectedNodes = input.selected.filter((s) => s instanceof FlowNode) as FlowNode[];
+            const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine) as ConnectionLine[];
+
+            const buttons: ContextMenuButton[] = [
+                {
+                    label: "Delete node",
+                    action: () => selectedNodes.forEach((n) => project.removeNode(n.node)),
+                    disabled: selectedNodes.length === 0
+                },
+                {
+                    label: "Cut connection",
+                    action: () => selectedConnections.forEach((n) => project.removeConnection(n.connection)),
+                    disabled: selectedConnections.length === 0
+                },
+                // { label: "Clear project", action: () => project.clear()},
+            ];
+            ContextMenu.open(e.pageX, e.pageY, buttons);
+            e.preventDefault();
+        });
+
         this.addEventListener("wheel", this.onZoom, { passive: true });
     }
 
@@ -137,15 +155,8 @@ export class EditorWorkspace extends LitElement {
 
     protected render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
-
-        const nodeElements = [];
-
-        for (const n of project.nodes) {
-            nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
-        }
-
         return html`
-        ${nodeElements}
+        ${project.nodes.map((n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
             <line style="display: ${this.connectionDragging ? null : `none`}; stroke-dasharray: 20, 10; stroke-opacity: 0.25; stroke-width: ${this.camera.zoom * 4}px" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>

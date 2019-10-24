@@ -1,36 +1,35 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
-import { Node, NodeSocket, NodeDataType } from "@openremote/model";
-import { EditorWorkspace } from "./editor-workspace";
+import { html, customElement, css, property } from "lit-element";
+import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { project, input, SelectableElement } from "..";
+import { EditorWorkspace, SelectableElement } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
-    private minimal = false;
+    @property({ attribute: false }) private minimal = false;
 
     constructor() {
         super();
     }
 
     protected firstUpdated() {
+        IdentityDomLink.map[this.node.id] = this;
+
         this.workspace.addEventListener("pan", () => {
             this.requestUpdate();
         });
         this.workspace.addEventListener("zoom", () => {
             this.requestUpdate();
         });
+
         this.bringToFront();
     }
 
     static get styles() {
         return css`
         :host{
-            --socket-size: 24px;
-            --socket-display-size: 14px;
-
             white-space: nowrap;
             min-width: 80px;
             min-height: 80px;
@@ -67,23 +66,13 @@ export class FlowNode extends SelectableElement {
             justify-content: center;
             justify-content: space-evenly;
         }
-        
-        .socket .circle{
-            background: grey;
-            width: var(--socket-display-size);
-            height: var(--socket-display-size);
-            border-radius: 100%;
-            pointer-events: none;
-
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
-        }
-        
+              
         .inputs{
             grid-area: input;
             align-items: flex-start;
         }
         
-        .inputs .socket{
+        .inputs flow-node-socket{
             transform: translateX(calc(var(--socket-size) / -2));
         }
         
@@ -92,11 +81,11 @@ export class FlowNode extends SelectableElement {
             align-items: flex-end;
         }
         
-        .outputs .socket{
+        .outputs flow-node-socket{
             transform: translateX(calc(var(--socket-size) / 2));
         }
         
-        .socket{
+        flow-node-socket{
             border-radius: 100%;
             margin: 0 2px 0 2px;
             display: flex;
@@ -107,7 +96,7 @@ export class FlowNode extends SelectableElement {
             height: var(--socket-size);
         }
 
-        .socket:hover{
+        flow-node-socket:hover{
             background: var(--highlight);
         }
 
@@ -154,18 +143,22 @@ export class FlowNode extends SelectableElement {
         `;
     }
 
+    public disconnectedCallback() {
+        delete IdentityDomLink.map[this.node.id];
+    }
+
     protected updated() {
         this.dispatchEvent(new CustomEvent("updated"));
     }
 
     protected render() {
-        IdentityDomLink.map[this.node.id] = this;
-
         this.minimal = (this.node.displayCharacter || "").length !== 0;
         this.setAttribute("minimal", this.minimal.toString());
         if (this.minimal) {
             this.addEventListener("mousedown", this.startDrag);
             this.style.background = `var(--${this.node.type.toLowerCase()}-color)`;
+        } else {
+            this.style.background = null;
         }
 
         const pos = this.workspace.worldToOffset(this.node.position);
@@ -174,22 +167,22 @@ export class FlowNode extends SelectableElement {
 
         const inputs = [];
         for (const socket of this.node.inputs) {
-            inputs.push(this.socketTemplate(socket, true));
+            inputs.push(this.socketTemplate());
         }
 
         const outputs = [];
         for (const socket of this.node.outputs) {
-            outputs.push(this.socketTemplate(socket, false));
+            outputs.push(this.socketTemplate());
         }
 
         const title = this.minimal ?
             html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
-            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
+            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.id || "invalid"}</div>`;
 
         return html`
         ${title}
-        <div class="socket-side inputs">${inputs}</div>
-        <div class="socket-side outputs">${outputs}</div>
+        <div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket .socket="${i}" side="input"></flow-node-socket>`)}</div>
+        <div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket .socket="${i}" side="output"></flow-node-socket>`)}</div>
         `;
     }
 
@@ -197,27 +190,8 @@ export class FlowNode extends SelectableElement {
         this.style.zIndex = `${this.workspace.topNodeZindex++}`;
     }
 
-    private socketTemplate(socket: NodeSocket, isInputSocket: boolean) {
-        const color = `var(--${socket.type.toString().toLowerCase()})`;
-
-        const md = (e: MouseEvent) => {
-            if (e.buttons !== 1) { return; }
-            IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
-            if (project.isCurrentlyConnecting) { return; }
-            project.startConnectionDrag(e, socket, isInputSocket);
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-        };
-
-        const mu = (e: MouseEvent) => {
-            IdentityDomLink.map[socket.id] = (e.target as HTMLElement);
-            project.endConnectionDrag(e, socket, isInputSocket);
-            if (e.buttons !== 1) { return; }
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-        };
-
-        return html`<div @mousedown="${md}" @mouseup="${mu}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+    private socketTemplate() {
+        ;
     }
 
     private startDrag = (e: MouseEvent) => {
@@ -237,7 +211,7 @@ export class FlowNode extends SelectableElement {
         this.dispatchEvent(new CustomEvent("dragged"));
     }
 
-    private stopDrag = (e: MouseEvent) => {
+    private stopDrag = () => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onDrag);
     }
