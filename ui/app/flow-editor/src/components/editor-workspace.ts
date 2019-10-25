@@ -167,18 +167,26 @@ export class EditorWorkspace extends LitElement {
         ${project.nodes.map((n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
-            <line style="display: ${this.connectionDragging ? null : `none`}; stroke-dasharray: 20, 10; stroke-opacity: 0.25; stroke-width: ${this.camera.zoom * 4}px" x1="${this.connectionFrom.x}" y1="${this.connectionFrom.y}" x2="${this.connectionTo.x}" y2="${this.connectionTo.y}"></line>
+            <line style="display: 
+            ${this.connectionDragging ? null : `none`}; 
+            stroke-dasharray: ${20 * this.camera.zoom}, ${10 * this.camera.zoom}; 
+            stroke-opacity: 0.25; stroke-width: ${this.camera.zoom * 4}px" 
+            
+            x1="${this.connectionFrom.x}" 
+            y1="${this.connectionFrom.y}" 
+            x2="${this.connectionTo.x}" 
+            y2="${this.connectionTo.y}"></line>
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
             ${project.nodes.length !== 0 ? html`<div class="button" @click="${() => this.fitCamera(project.nodes)}">Fit view</div>` : null}
         </div>
-        <div style="z-index: 500; padding: 5px; position: absolute">
+        <!-- <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
             y: ${this.camera.y} <br>
             zoom: ${this.camera.zoom} <br>
-        </div>
+        </div> -->
         `;
     }
 

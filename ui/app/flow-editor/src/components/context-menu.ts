@@ -47,7 +47,7 @@ export class ContextMenu extends LitElement {
     public static open(x: number, y: number, buttons: (ContextMenuEntry)[]) {
         ContextMenu.main.style.top = y + "px";
         ContextMenu.main.style.left = x + "px";
-        window.addEventListener("mouseup", ContextMenu.main.closeCallback);
+        window.addEventListener("mousedown", ContextMenu.main.closeCallback);
         window.addEventListener("blur", ContextMenu.main.closeCallback);
         window.addEventListener("wheel", ContextMenu.main.closeCallback);
         ContextMenu.main.entries = buttons;
@@ -55,7 +55,7 @@ export class ContextMenu extends LitElement {
     }
 
     public static close() {
-        window.removeEventListener("mouseup", ContextMenu.main.closeCallback);
+        window.removeEventListener("mousedown", ContextMenu.main.closeCallback);
         window.removeEventListener("blur", ContextMenu.main.closeCallback);
         window.removeEventListener("wheel", ContextMenu.main.closeCallback);
         ContextMenu.main.isOpen = false;

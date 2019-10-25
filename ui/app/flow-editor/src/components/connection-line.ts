@@ -32,8 +32,9 @@ export class ConnectionLine extends SelectableElement {
                 pointer-events: none;
                 stroke-linejoin: round;
             }
-
+            
             polyline, line{
+                position: absolute;
                 pointer-events: all;
             }
             

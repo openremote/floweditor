@@ -18,8 +18,6 @@ export class FlowNodeSocket extends LitElement {
             height: var(--socket-display-size);
             border-radius: 100%;
             pointer-events: none;
-
-            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
         }`;
     }
 
