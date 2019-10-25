@@ -10,6 +10,8 @@ export class ContextMenu extends LitElement {
     private static main: ContextMenu;
     public static get opened() { return ContextMenu.main.isOpen; }
 
+    private container: Element;
+
     public static get styles() {
         return css`
         :host{
@@ -44,7 +46,8 @@ export class ContextMenu extends LitElement {
         }`;
     }
 
-    public static open(x: number, y: number, buttons: (ContextMenuEntry)[]) {
+    public static open(x: number, y: number, container: Element, buttons: (ContextMenuEntry)[]) {
+        ContextMenu.main.container = container;
         ContextMenu.main.style.top = y + "px";
         ContextMenu.main.style.left = x + "px";
         window.addEventListener("mousedown", ContextMenu.main.closeCallback);
@@ -63,6 +66,18 @@ export class ContextMenu extends LitElement {
 
     protected firstUpdated() {
         ContextMenu.main = this;
+    }
+
+    protected updated() {
+        const bounds = this.container.getBoundingClientRect();
+        const box = this.getBoundingClientRect();
+        if (box.top + box.height > bounds.bottom) {
+            this.style.top = box.top - box.height + "px";
+        }
+
+        if (box.left + box.width > bounds.right) {
+            this.style.left = bounds.right - box.width + "px";
+        }
     }
 
     private closeCallback = () => {

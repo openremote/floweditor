@@ -102,7 +102,7 @@ export class EditorWorkspace extends LitElement {
                     disabled: selectedNodes.length === 0
                 },
             ];
-            ContextMenu.open(e.pageX, e.pageY, buttons);
+            ContextMenu.open(e.pageX, e.pageY, this, buttons);
             e.preventDefault();
         });
 
@@ -171,7 +171,7 @@ export class EditorWorkspace extends LitElement {
             ${this.connectionDragging ? null : `none`}; 
             stroke-dasharray: ${20 * this.camera.zoom}, ${10 * this.camera.zoom}; 
             stroke-opacity: 0.25; stroke-width: ${this.camera.zoom * 4}px" 
-            
+
             x1="${this.connectionFrom.x}" 
             y1="${this.connectionFrom.y}" 
             x2="${this.connectionTo.x}" 

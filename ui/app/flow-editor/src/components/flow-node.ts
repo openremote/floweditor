@@ -47,7 +47,6 @@ export class FlowNode extends SelectableElement {
             position: absolute;
             border-radius: var(--roundness);
             transform-origin: 0 0;
-
            
             z-index: 0;
         }

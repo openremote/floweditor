@@ -51,6 +51,7 @@ export class ConnectionLine extends SelectableElement {
 
     protected firstUpdated() {
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
+        project.addListener("connectionremoved", this.nodeChanged);
     }
 
     private nodeChanged = () => { this.requestUpdate(); };
