@@ -19,6 +19,6 @@ export class ConnectionContainer extends LitElement {
     }
 
     protected render() {
-        return html`${project.connections.map((c) => html`<connection-line .workspace="${this.workspace}" .connection="${c}" .from="${c.from}" .to="${c.to}"></connection-line>`)}`;
+        return html`${project.connections.map((c) => html`<connection-line .workspace="${this.workspace}" .connection="${c}"></connection-line>`)}`;
     }
 }

@@ -1,7 +1,7 @@
 import { html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { EditorWorkspace, SelectableElement } from "..";
+import { EditorWorkspace, SelectableElement, project } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
@@ -21,6 +21,9 @@ export class FlowNode extends SelectableElement {
         });
         this.workspace.addEventListener("zoom", () => {
             this.requestUpdate();
+        });
+        project.addListener("connectionremoved", () => {
+            this.linkIdentity();
         });
 
         this.bringToFront();
@@ -202,7 +205,7 @@ export class FlowNode extends SelectableElement {
         window.removeEventListener("mousemove", this.onDrag);
     }
 
-    private linkIdentity(){
+    private linkIdentity() {
         if (!this.identityDeleted) {
             IdentityDomLink.map[this.node.id] = this;
         }
