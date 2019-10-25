@@ -1,9 +1,9 @@
 import { LitElement, property, customElement, html, css } from "lit-element";
-import { ContextMenuButton } from "..";
+import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 
 @customElement("context-menu")
 export class ContextMenu extends LitElement {
-    private buttons: ContextMenuButton[] = [];
+    private entries: ContextMenuEntry[] = [];
 
     @property({ attribute: false }) private isOpen = false;
 
@@ -32,16 +32,25 @@ export class ContextMenu extends LitElement {
         .muted{
             pointer-events: none;
             color: rgb(150,150,150);
+        }
+        .context-menu-separator{
+            --thickness: 1px;
+            border: 0;
+            height: var(--thickness);
+            border-bottom: solid var(--thickness);
+            border-color: rgb(234,234,234);
+            padding: 0;
+            margin: 5px 10px calc(5px - var(--thickness)) 10px;
         }`;
     }
 
-    public static open(x: number, y: number, buttons: ContextMenuButton[]) {
+    public static open(x: number, y: number, buttons: (ContextMenuEntry)[]) {
         ContextMenu.main.style.top = y + "px";
         ContextMenu.main.style.left = x + "px";
         window.addEventListener("mouseup", ContextMenu.main.closeCallback);
         window.addEventListener("blur", ContextMenu.main.closeCallback);
         window.addEventListener("wheel", ContextMenu.main.closeCallback);
-        ContextMenu.main.buttons = buttons;
+        ContextMenu.main.entries = buttons;
         ContextMenu.main.isOpen = true;
     }
 
@@ -65,8 +74,17 @@ export class ContextMenu extends LitElement {
         if (!this.isOpen) {
             return html``;
         }
-        const buttonElements = this.buttons.map(this.buttonTemplate);
-        return html`${buttonElements.length > 0 ? buttonElements : html`<div class="context-menu-button muted">Empty</div>`}`;
+        const elements = this.entries.map(
+            (e) => {
+                switch (e.type) {
+                    case "button":
+                        return this.buttonTemplate(e as ContextMenuButton);
+                    case "separator":
+                        return this.separatorTemplate();
+                }
+            }
+        );
+        return html`${elements.length > 0 ? elements : html`<div class="context-menu-button muted">Empty</div>`}`;
     }
 
     private buttonTemplate(button: ContextMenuButton) {
@@ -78,5 +96,9 @@ export class ContextMenu extends LitElement {
             e.stopPropagation();
         };
         return html`<div class="context-menu-button ${(button.disabled || false) ? `muted` : ``}" @mousedown="${action}">${button.label}</div>`;
+    }
+
+    private separatorTemplate() {
+        return html`<div class="context-menu-separator"></div>`;
     }
 }

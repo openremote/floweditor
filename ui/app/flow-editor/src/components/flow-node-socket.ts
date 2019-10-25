@@ -8,6 +8,8 @@ export class FlowNodeSocket extends LitElement {
     @property({ attribute: false }) public socket: NodeSocket;
     @property({ type: String }) public side: "input" | "output";
 
+    private identityDeleted = false;
+
     public static get styles() {
         return css`
         .circle{
@@ -20,9 +22,9 @@ export class FlowNodeSocket extends LitElement {
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
         }`;
     }
-        
-    public disconnectedCallback(){
-        delete IdentityDomLink.map[this.socket.id];
+
+    public disconnectedCallback() {
+        this.identityDeleted = delete IdentityDomLink.map[this.socket.id];
     }
 
     protected firstUpdated() {
@@ -46,6 +48,7 @@ export class FlowNodeSocket extends LitElement {
         const isInputSocket = this.side === "input";
 
         const md = (e: MouseEvent) => {
+            this.linkIdentity();
             if (e.buttons !== 1) { return; }
             if (project.isCurrentlyConnecting) { return; }
             project.startConnectionDrag(e, this.socket, isInputSocket);
@@ -54,6 +57,7 @@ export class FlowNodeSocket extends LitElement {
         };
 
         const mu = (e: MouseEvent) => {
+            this.linkIdentity();
             project.endConnectionDrag(e, this.socket, isInputSocket);
             if (e.buttons !== 1) { return; }
             e.stopPropagation();
@@ -63,10 +67,19 @@ export class FlowNodeSocket extends LitElement {
         this.addEventListener("mousedown", md);
         this.addEventListener("mouseup", mu);
     }
-    
+
+    protected updated() {
+        this.linkIdentity();
+    }
+
     protected render() {
-        IdentityDomLink.map[this.socket.id] = this;
         const color = `var(--${this.socket.type.toString().toLowerCase()})`;
-        return html`<div title="${this.socket.id}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        return html`<div title="${this.socket.type}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+    }
+
+    private linkIdentity() {
+        if (!this.identityDeleted) {
+            IdentityDomLink.map[this.socket.id] = this;
+        }
     }
 }

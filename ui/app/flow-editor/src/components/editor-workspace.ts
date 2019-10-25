@@ -3,7 +3,7 @@ import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input } from ".
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { asEnumerable } from "ts-linq";
-import { ContextMenuButton } from "../models/context-menu-button";
+import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -81,18 +81,26 @@ export class EditorWorkspace extends LitElement {
             const selectedNodes = input.selected.filter((s) => s instanceof FlowNode) as FlowNode[];
             const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine) as ConnectionLine[];
 
-            const buttons: ContextMenuButton[] = [
+            const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
                 {
+                    type: "button",
                     label: "Delete node",
                     action: () => selectedNodes.forEach((n) => project.removeNode(n.node)),
                     disabled: selectedNodes.length === 0
                 },
                 {
+                    type: "button",
                     label: "Cut connection",
                     action: () => selectedConnections.forEach((n) => project.removeConnection(n.connection)),
                     disabled: selectedConnections.length === 0
                 },
-                // { label: "Clear project", action: () => project.clear()},
+                { type: "separator" },
+                {
+                    type: "button",
+                    label: "Fit view to selected nodes",
+                    action: () => this.fitCamera(selectedNodes.map((n) => n.node)),
+                    disabled: selectedNodes.length === 0
+                },
             ];
             ContextMenu.open(e.pageX, e.pageY, buttons);
             e.preventDefault();
@@ -164,7 +172,7 @@ export class EditorWorkspace extends LitElement {
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             <div class="button" @click="${this.resetCamera}">Reset view</div>
-            ${project.nodes.length !== 0 ? html`<div class="button" @click="${this.fitCamera}">Fit view</div>` : null}
+            ${project.nodes.length !== 0 ? html`<div class="button" @click="${() => this.fitCamera(project.nodes)}">Fit view</div>` : null}
         </div>
         <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
@@ -181,10 +189,10 @@ export class EditorWorkspace extends LitElement {
         this.updateBackground();
     }
 
-    public fitCamera() {
+    public fitCamera(nodes: Node[]) {
         const padding = 25;
 
-        const enumerable = asEnumerable(project.nodes);
+        const enumerable = asEnumerable(nodes);
         const XouterleastNode = enumerable.OrderBy((a) => a.position.x).First() as Node;
         const YouterleastNode = enumerable.OrderBy((a) => a.position.y).First() as Node;
 

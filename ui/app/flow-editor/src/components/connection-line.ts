@@ -63,9 +63,12 @@ export class ConnectionLine extends SelectableElement {
 
         this.fromNodeElement = IdentityDomLink.map[this.from.nodeId];
         this.toNodeElement = IdentityDomLink.map[this.to.nodeId];
-
         this.fromElement = IdentityDomLink.map[this.from.id];
         this.toElement = IdentityDomLink.map[this.to.id];
+
+        if (!this.fromNodeElement || !this.toNodeElement || !this.fromElement || !this.toElement) {
+            return html``;
+        }
 
         this.fromNodeElement.addEventListener("updated", this.nodeChanged);
         this.toNodeElement.addEventListener("updated", this.nodeChanged);
@@ -82,7 +85,7 @@ export class ConnectionLine extends SelectableElement {
         ${this.fancyLine ? `${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}` : ``}
         ${to.x - parentSize.left}, ${to.y - parentSize.top}"
         ></polyline>
-        <text x="${(from.x + to.x) / 2 - parentSize.left}" y="${(from.y + to.y) / 2 - parentSize.top}">${this.from.nodeId} -> ${this.to.nodeId}</text>
+        <!-- <text x="${(from.x + to.x) / 2 - parentSize.left}" y="${(from.y + to.y) / 2 - parentSize.top}">${this.from.nodeId} -> ${this.to.nodeId}</text> -->
         </svg>`;
     }
 }

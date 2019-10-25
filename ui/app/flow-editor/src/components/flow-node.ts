@@ -7,16 +7,15 @@ import { EditorWorkspace, SelectableElement } from "..";
 export class FlowNode extends SelectableElement {
     @property({ attribute: false }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
-
     @property({ attribute: false }) private minimal = false;
+
+    private identityDeleted = false;
 
     constructor() {
         super();
     }
 
     protected firstUpdated() {
-        IdentityDomLink.map[this.node.id] = this;
-
         this.workspace.addEventListener("pan", () => {
             this.requestUpdate();
         });
@@ -144,10 +143,11 @@ export class FlowNode extends SelectableElement {
     }
 
     public disconnectedCallback() {
-        delete IdentityDomLink.map[this.node.id];
+        this.identityDeleted = delete IdentityDomLink.map[this.node.id];
     }
 
     protected updated() {
+        this.linkIdentity();
         this.dispatchEvent(new CustomEvent("updated"));
     }
 
@@ -165,19 +165,9 @@ export class FlowNode extends SelectableElement {
         this.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${this.workspace.camera.zoom})`;
         this.style.boxShadow = this.selected ? "var(--highlight) 0 0 0 3px" : null;
 
-        const inputs = [];
-        for (const socket of this.node.inputs) {
-            inputs.push(this.socketTemplate());
-        }
-
-        const outputs = [];
-        for (const socket of this.node.outputs) {
-            outputs.push(this.socketTemplate());
-        }
-
         const title = this.minimal ?
             html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
-            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.id || "invalid"}</div>`;
+            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
 
         return html`
         ${title}
@@ -188,10 +178,6 @@ export class FlowNode extends SelectableElement {
 
     public bringToFront() {
         this.style.zIndex = `${this.workspace.topNodeZindex++}`;
-    }
-
-    private socketTemplate() {
-        ;
     }
 
     private startDrag = (e: MouseEvent) => {
@@ -214,5 +200,11 @@ export class FlowNode extends SelectableElement {
     private stopDrag = () => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onDrag);
+    }
+
+    private linkIdentity(){
+        if (!this.identityDeleted) {
+            IdentityDomLink.map[this.node.id] = this;
+        }
     }
 }

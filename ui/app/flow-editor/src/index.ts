@@ -17,7 +17,7 @@ export { ContextMenu } from "./components/context-menu";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
-export { ContextMenuButton } from "./models/context-menu-button";
+export { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "./models/context-menu-button";
 
 export { Integration } from "./services/integration";
 export { Project } from "./services/project";
