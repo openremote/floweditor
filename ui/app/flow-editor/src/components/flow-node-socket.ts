@@ -72,7 +72,7 @@ export class FlowNodeSocket extends LitElement {
 
     protected render() {
         const color = `var(--${this.socket.type.toString().toLowerCase()})`;
-        return html`<div title="${this.socket.type}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        return html`<div title="${this.socket.name}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
     }
 
     private linkIdentity() {

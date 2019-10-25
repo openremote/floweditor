@@ -14,6 +14,7 @@ export { ConnectionLine } from "./components/connection-line";
 export { ConnectionContainer } from "./components/connection-container";
 export { SelectionBox } from "./components/selection-box";
 export { ContextMenu } from "./components/context-menu";
+export { InternalPicker } from "./components/internal-picker";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
@@ -26,6 +27,7 @@ export { Input } from "./services/input";
 export { Utilities } from "./utils";
 
 export { OrIcon } from "@openremote/or-icon";
+export { OrInput, InputType } from "@openremote/or-input";
 export * from "@webcomponents/webcomponentsjs";
 
 export const integration: Integration = new Integration();

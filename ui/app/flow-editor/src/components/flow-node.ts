@@ -61,6 +61,15 @@ export class FlowNode extends SelectableElement {
             
         }
 
+        .internal-container{
+            grid-area: internal;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0 5px 0;
+        }
+
         .socket-side{
             display: flex;
             flex-direction: column;
@@ -174,6 +183,7 @@ export class FlowNode extends SelectableElement {
         return html`
         ${title}
         <div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket .socket="${i}" side="input"></flow-node-socket>`)}</div>
+        ${this.minimal ? null : html`<div class="internal-container">${this.node.internals.map((i) => html`<internal-picker .node="${this.node}" .internal="${i}"></internal-picker>`)}</div>`}
         <div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket .socket="${i}" side="output"></flow-node-socket>`)}</div>
         `;
     }
