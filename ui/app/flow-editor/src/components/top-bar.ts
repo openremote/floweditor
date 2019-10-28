@@ -49,6 +49,7 @@ export class TopBar extends LitElement {
         <a class="button">Help</a>
 
         <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); console.log(project); }}">print info</a>
+        <a class="debug button" @click="${() => { console.log({nodes: project.nodes, connections: project.connections}); }}">print node structure</a>
 
         <a class="button right">Log out</a>
         `;

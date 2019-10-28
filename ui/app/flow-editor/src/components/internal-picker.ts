@@ -13,6 +13,18 @@ export class InternalPicker extends LitElement {
 
     public static get styles() {
         return css`
+            :host{
+                padding: 0;
+                margin: 0;
+                display: flex;
+            }
+
+            textarea{
+                font-family: 
+                padding: 10px;
+                min-width: 150px;
+                min-height: 37px;
+            }
         `;
     }
 
@@ -53,20 +65,20 @@ export class InternalPicker extends LitElement {
     }
 
     private get dropdownInput(): TemplateResult {
-        return html`<select>
+        return html`<select @input="${(e: any) => this.internal.value = e.target.value}">
             ${this.internal.picker.options.map((o) => html`<option value="${o.value}" >${o.name}</option>`)}
         </select>`;
     }
 
     private get multilineInput(): TemplateResult {
-        return html`<textarea></textarea>`;
+        return html`<textarea @change="${(e: any) => this.internal.value = e.target.value}"></textarea>`;
     }
 
     private get numberInput(): TemplateResult {
-        return html`<input type="number"/>`;
+        return html`<input @change="${(e: any) => this.internal.value = e.target.value}" type="number"/>`;
     }
 
     private get textInput(): TemplateResult {
-        return html`<input type="text"/>`;
+        return html`<input @change="${(e: any) => this.internal.value = e.target.value}" type="text"/>`;
     }
 }

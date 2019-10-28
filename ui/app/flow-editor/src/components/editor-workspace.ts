@@ -179,7 +179,7 @@ export class EditorWorkspace extends LitElement {
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
-            <div class="button" @click="${this.resetCamera}">Reset view</div>
+            ${!this.isCameraInDefaultPosition ? html`<div class="button" @click="${this.resetCamera}">Reset view</div>` : null}
             ${project.nodes.length !== 0 ? html`<div class="button" @click="${() => this.fitCamera(project.nodes)}">Fit view</div>` : null}
         </div>
         <!-- <div style="z-index: 500; padding: 5px; position: absolute">
@@ -309,6 +309,11 @@ export class EditorWorkspace extends LitElement {
         if (!this.isPanning) { return; }
         window.removeEventListener("mousemove", this.onMove);
         this.isPanning = false;
+    }
+
+    private get isCameraInDefaultPosition() {
+        const errorMargin = 0.05;
+        return (Math.abs(this.camera.x) < errorMargin && Math.abs(this.camera.y) < errorMargin && this.camera.zoom > (1 - errorMargin) && this.camera.zoom < (1 + errorMargin));
     }
 
     private updateBackground() {

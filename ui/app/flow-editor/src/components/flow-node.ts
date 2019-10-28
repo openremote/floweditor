@@ -38,7 +38,7 @@ export class FlowNode extends SelectableElement {
             background: rgb(200,200,200);
 
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            grid-template-columns: auto auto auto;
             grid-template-rows: auto 1fr;
             grid-template-areas: 
                 "title title title"
@@ -58,7 +58,6 @@ export class FlowNode extends SelectableElement {
             grid-template-rows: auto;
             grid-template-areas: 
                 "input title output";
-            
         }
 
         .internal-container{
@@ -67,7 +66,7 @@ export class FlowNode extends SelectableElement {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 5px 0 5px 0;
+            padding: 8px 0 8px 0;
         }
 
         .socket-side{
@@ -138,7 +137,7 @@ export class FlowNode extends SelectableElement {
         
         .title.minimal{
             background: transparent;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 50%;
             display: table;
             padding: 15px 0 15px 0;
@@ -180,11 +179,14 @@ export class FlowNode extends SelectableElement {
             html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
             html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
 
+        const inputSide = html`<div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket .socket="${i}" side="input"></flow-node-socket>`)}</div>`;
+        const outputSide = html`<div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket .socket="${i}" side="output"></flow-node-socket>`)}</div>`;
+        const spacer = html`<div style="width: 10px"></div>`;
         return html`
         ${title}
-        <div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket .socket="${i}" side="input"></flow-node-socket>`)}</div>
+        ${this.node.inputs.length > 0 ? inputSide : spacer}
         ${this.minimal ? null : html`<div class="internal-container">${this.node.internals.map((i) => html`<internal-picker .node="${this.node}" .internal="${i}"></internal-picker>`)}</div>`}
-        <div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket .socket="${i}" side="output"></flow-node-socket>`)}</div>
+        ${this.node.outputs.length > 0 ? outputSide : spacer}
         `;
     }
 

@@ -69,6 +69,7 @@ export class ContextMenu extends LitElement {
     }
 
     protected updated() {
+        if (!this.container) { return; }
         const bounds = this.container.getBoundingClientRect();
         const box = this.getBoundingClientRect();
         if (box.top + box.height > bounds.bottom) {
