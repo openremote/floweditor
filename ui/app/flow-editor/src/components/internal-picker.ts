@@ -1,6 +1,5 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
-import { Node, Picker, PickerType, NodeInternal } from "@openremote/model";
-import { InputType } from "@openremote/or-input";
+import { Node, PickerType } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 
 @customElement("internal-picker")
@@ -25,12 +24,20 @@ export class InternalPicker extends LitElement {
                 display: flex;
             }
 
-            textarea{
+            input{
+                border: 0;
+            }
+
+            textarea, input[type=text]
+            {
                 font-family: inherit;
                 padding: 10px;
+                border-radius: var(--roundness);    
+            }
+
+            textarea{
                 min-width: 150px;
                 min-height: 37px;
-                border-radius: var(--roundness);
             }
         `;
     }
@@ -62,7 +69,7 @@ export class InternalPicker extends LitElement {
     }
 
     private get assetAttributeInput(): TemplateResult {
-        return html`<or-input type="button" label="Pick asset"></or-input>`;
+        return html`<or-asset-tree></or-asset-tree>`;
     }
 
     private get colorInput(): TemplateResult {

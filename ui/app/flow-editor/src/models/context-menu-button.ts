@@ -4,7 +4,8 @@ export interface ContextMenuEntry {
 
 export interface ContextMenuButton extends ContextMenuEntry {
     type: "button";
-    label?: String;
+    label?: string;
+    icon?: string;
     action?: () => void;
     disabled?: boolean;
 }

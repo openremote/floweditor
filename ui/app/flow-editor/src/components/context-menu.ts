@@ -1,5 +1,5 @@
 import { LitElement, property, customElement, html, css } from "lit-element";
-import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
+import { ContextMenuEntry, ContextMenuButton } from "..";
 
 @customElement("context-menu")
 export class ContextMenu extends LitElement {
@@ -15,7 +15,6 @@ export class ContextMenu extends LitElement {
     public static get styles() {
         return css`
         :host{
-            min-width: 250px;
             display: inline-block;
             position: absolute;
             background: white;
@@ -25,11 +24,27 @@ export class ContextMenu extends LitElement {
             z-index: 1000;
         }
         .context-menu-button{
-            padding: 5px 10px 5px 10px;
             color: rgb(0,0,0);
+            display: grid;
+            align-items: center;
+            justify-items: start;
+            grid-template-rows: 32px;
+            grid-template-columns: 32px 220px;
+            grid-template-areas:
+                "icon label";
         }
         .context-menu-button:hover{
             background: whitesmoke;
+        }
+        .label
+        {
+            grid-area: label;
+        }
+        or-icon{
+            justify-self: center;
+            grid-area: icon;
+            height: 16px;
+            width: 16px;
         }
         .muted{
             pointer-events: none;
@@ -111,7 +126,10 @@ export class ContextMenu extends LitElement {
             e.stopImmediatePropagation();
             e.stopPropagation();
         };
-        return html`<div class="context-menu-button ${(button.disabled || false) ? `muted` : ``}" @mousedown="${action}">${button.label}</div>`;
+        return html`
+        <div class="context-menu-button ${(button.disabled || false) ? `muted` : ``}" @mousedown="${action}">
+        ${button.icon ? html`<or-icon icon="${button.icon}"></or-icon>` : null}
+        <span class="label">${button.label}</span></div>`;
     }
 
     private separatorTemplate() {

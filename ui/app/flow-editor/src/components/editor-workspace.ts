@@ -3,6 +3,7 @@ import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input } from ".
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
+import { OrInput } from "@openremote/or-input";
 import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 
 @customElement("editor-workspace")
@@ -86,12 +87,14 @@ export class EditorWorkspace extends LitElement {
             const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
                 {
                     type: "button",
+                    icon: "delete",
                     label: "Delete node",
                     action: () => selectedNodes.forEach((n) => project.removeNode(n.node)),
                     disabled: selectedNodes.length === 0
                 },
                 {
                     type: "button",
+                    icon: "scissors-cutting",
                     label: "Cut connection",
                     action: () => selectedConnections.forEach((n) => project.removeConnection(n.connection)),
                     disabled: selectedConnections.length === 0
@@ -99,6 +102,7 @@ export class EditorWorkspace extends LitElement {
                 { type: "separator" },
                 {
                     type: "button",
+                    icon: "fit-to-page-outline",
                     label: "Fit view to selected nodes",
                     action: () => this.fitCamera(selectedNodes.map((n) => n.node)),
                     disabled: selectedNodes.length === 0
@@ -133,6 +137,12 @@ export class EditorWorkspace extends LitElement {
             margin: 10px 10px 0 0;
             cursor:pointer;
             background: rgba(0,0,0,0.02);
+        }
+
+        or-input[type=button]
+        {
+            margin: 10px 10px 0 0;
+            color: inherit;
         }
         
         .button:hover{
@@ -182,9 +192,13 @@ export class EditorWorkspace extends LitElement {
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
+            ${!this.isCameraInDefaultPosition ? html`<or-input type="button" icon="vector-square" @click="${this.resetCamera}" label="Reset view"></or-input>` : null}
+            ${project.nodes.length !== 0 ? html`<or-input type="button" icon="fit-to-page-outline" @click="${() => this.fitCamera(project.nodes)}" label="Fit view"></or-input>` : null}
+        </div>
+        <!-- <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             ${!this.isCameraInDefaultPosition ? html`<div class="button" @click="${this.resetCamera}">Reset view</div>` : null}
             ${project.nodes.length !== 0 ? html`<div class="button" @click="${() => this.fitCamera(project.nodes)}">Fit view</div>` : null}
-        </div>
+        </div> -->
         <!-- <div style="z-index: 500; padding: 5px; position: absolute">
             x: ${this.camera.x} <br>
             y: ${this.camera.y} <br>
