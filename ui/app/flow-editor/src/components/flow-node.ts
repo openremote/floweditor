@@ -1,13 +1,16 @@
 import { html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { EditorWorkspace, SelectableElement, project } from "..";
+import { EditorWorkspace, SelectableElement, project, Project, nodeConverter, input } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
-    @property({ attribute: false }) public node: Node;
+    @property({ converter: nodeConverter, reflect: true }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
-    @property({ attribute: false }) private minimal = false;
+
+    @property({ type: Boolean, reflect: true }) private minimal = false;
+    @property({ attribute: false }) private isBeingDragged = false;
+    @property({ attribute: false }) private deleted = false;
 
     private identityDeleted = false;
 
@@ -16,18 +19,14 @@ export class FlowNode extends SelectableElement {
     }
 
     protected firstUpdated() {
-        this.workspace.addEventListener("pan", () => {
-            this.requestUpdate();
-        });
-        this.workspace.addEventListener("zoom", () => {
-            this.requestUpdate();
-        });
-        project.addListener("connectionremoved", () => {
-            this.linkIdentity();
-        });
-
+        this.workspace.addEventListener("pan", this.forceUpdate);
+        this.workspace.addEventListener("zoom", this.forceUpdate);
+        project.addListener("connectionremoved", this.linkIdentity);
+        this.minimal = (this.node.displayCharacter || "").length !== 0;
         this.bringToFront();
     }
+
+    private forceUpdate = () => { this.requestUpdate(); };
 
     static get styles() {
         return css`
@@ -51,7 +50,7 @@ export class FlowNode extends SelectableElement {
             z-index: 0;
         }
 
-        :host([minimal = true]){
+        :host([minimal]){
             min-width: 60px;
             min-height: 60px;
             grid-template-columns: var(--socket-display-size) 1fr var(--socket-display-size);
@@ -154,16 +153,25 @@ export class FlowNode extends SelectableElement {
 
     public disconnectedCallback() {
         this.identityDeleted = delete IdentityDomLink.map[this.node.id];
+        super.disconnectedCallback();
     }
 
     protected updated() {
+        if (project.nodes.filter((n) => n.id === this.node.id).length === 0) {
+            this.delete();
+            return;
+        }
         this.linkIdentity();
         this.dispatchEvent(new CustomEvent("updated"));
     }
 
     protected render() {
-        this.minimal = (this.node.displayCharacter || "").length !== 0;
-        this.setAttribute("minimal", this.minimal.toString());
+        if (this.deleted) {
+            this.style.pointerEvents = "none";
+            this.style.display = "none";
+            return html``;
+        }
+
         if (this.minimal) {
             this.addEventListener("mousedown", this.startDrag);
             this.style.background = `var(--${this.node.type.toLowerCase()}-color)`;
@@ -185,7 +193,7 @@ export class FlowNode extends SelectableElement {
         return html`
         ${title}
         ${this.node.inputs.length > 0 ? inputSide : spacer}
-        ${this.minimal ? null : html`<div class="internal-container">${this.node.internals.map((i) => html`<internal-picker .node="${this.node}" .internal="${i}"></internal-picker>`)}</div>`}
+        ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) => html`<internal-picker .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
         `;
     }
@@ -200,6 +208,7 @@ export class FlowNode extends SelectableElement {
         this.bringToFront();
         window.addEventListener("mouseup", this.stopDrag);
         window.addEventListener("mousemove", this.onDrag);
+        this.isBeingDragged = true;
     }
 
     private onDrag = (e: MouseEvent) => {
@@ -214,11 +223,19 @@ export class FlowNode extends SelectableElement {
     private stopDrag = () => {
         window.removeEventListener("mouseup", this.stopDrag);
         window.removeEventListener("mousemove", this.onDrag);
+        this.isBeingDragged = false;
     }
 
-    private linkIdentity() {
+    private linkIdentity = () => {
         if (!this.identityDeleted) {
             IdentityDomLink.map[this.node.id] = this;
         }
+    }
+
+    private delete(){
+        this.workspace.removeEventListener("pan", this.forceUpdate);
+        this.workspace.removeEventListener("zoom", this.forceUpdate);
+        project.removeListener("connectionremoved", this.linkIdentity);
+        this.deleted = true;
     }
 }

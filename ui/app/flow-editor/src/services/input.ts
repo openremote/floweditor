@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
-import { asEnumerable } from "ts-linq";
 import { project, SelectableElement } from "..";
+import { List } from "linqts";
 
 export class Input extends EventEmitter {
     public selected: Element[] = [];
@@ -48,7 +48,7 @@ export class Input extends EventEmitter {
 
     public clearSelection() {
         if (this.mutliselectEnabled) { return; }
-        const originallySelected = asEnumerable(this.selected).ToArray();
+        const originallySelected = new List<Element>(this.selected).ToArray();
         for (const element of originallySelected) {
             this.deselect(element);
         }

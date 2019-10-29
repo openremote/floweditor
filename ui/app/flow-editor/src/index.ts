@@ -26,6 +26,8 @@ export { Input } from "./services/input";
 
 export { Utilities } from "./utils";
 
+export { nodeConverter } from "./converters/node-converter";
+
 export { OrIcon } from "@openremote/or-icon";
 export { OrInput, InputType } from "@openremote/or-input";
 export * from "@webcomponents/webcomponentsjs";
@@ -37,3 +39,4 @@ export const input: Input = new Input();
 window.addEventListener("load", () => {
     integration.initialise();
 });
+

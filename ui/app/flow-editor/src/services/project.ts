@@ -1,8 +1,7 @@
 import { Node, NodeConnection, NodeSocket } from "@openremote/model";
 import { EventEmitter } from "events";
-import { SocketTypeMatcher, IdentityDomLink } from "node-structure";
-import { asEnumerable } from "ts-linq";
-import { input } from "..";
+import { SocketTypeMatcher, } from "node-structure";
+import { input, } from "..";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];
@@ -28,7 +27,7 @@ export class Project extends EventEmitter {
     }
 
     public addNode(node: Node) {
-        if (asEnumerable(this.nodes).Any((n) => n.id === node.id)) {
+        if (this.nodes.filter((n) => n.id === node.id).length > 0) {
             throw new Error("Node with identical identity already exists in the project");
         }
         this.nodes.push(node);

@@ -1,14 +1,20 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
 import { Node, Picker, PickerType, NodeInternal } from "@openremote/model";
 import { InputType } from "@openremote/or-input";
+import { nodeConverter } from "../converters/node-converter";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
-    @property({ attribute: false }) public node: Node;
-    @property({ attribute: false }) public internal: NodeInternal;
+    @property({ converter: nodeConverter, reflect: true }) public node: Node;
+    @property({ type: Number, reflect: true }) public internalIndex: number;
+    @property({ type: Object, reflect: true }) public value: any;
 
     constructor() {
         super();
+    }
+
+    public get internal() {
+        return this.node.internals[this.internalIndex];
     }
 
     public static get styles() {
@@ -20,19 +26,22 @@ export class InternalPicker extends LitElement {
             }
 
             textarea{
-                font-family: 
+                font-family: inherit;
                 padding: 10px;
                 min-width: 150px;
                 min-height: 37px;
+                border-radius: var(--roundness);
             }
         `;
     }
 
     protected firstUpdated() {
         this.addEventListener("contextmenu", (e) => e.stopPropagation());
+        this.addEventListener("wheel", (e) => e.stopPropagation());
     }
 
     protected render() {
+        console.log(this.internal.value);
         switch (this.internal.picker.type) {
             case PickerType.ASSET_ATTRIBUTE:
                 return this.assetAttributeInput;
@@ -53,11 +62,11 @@ export class InternalPicker extends LitElement {
     }
 
     private get assetAttributeInput(): TemplateResult {
-        return html`unimplemented`;
+        return html`<or-input type="button" label="Pick asset"></or-input>`;
     }
 
     private get colorInput(): TemplateResult {
-        return html`<input type="text"/>`;
+        return html`unimplemented`;
     }
 
     private get doubleDropdownInput(): TemplateResult {
@@ -65,20 +74,25 @@ export class InternalPicker extends LitElement {
     }
 
     private get dropdownInput(): TemplateResult {
-        return html`<select @input="${(e: any) => this.internal.value = e.target.value}">
+        return html`<select @input="${(e: any) => this.setValue(e.target.value)}">
             ${this.internal.picker.options.map((o) => html`<option value="${o.value}" >${o.name}</option>`)}
         </select>`;
     }
 
     private get multilineInput(): TemplateResult {
-        return html`<textarea @change="${(e: any) => this.internal.value = e.target.value}"></textarea>`;
+        return html`<textarea @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}"></textarea>`;
     }
 
     private get numberInput(): TemplateResult {
-        return html`<input @change="${(e: any) => this.internal.value = e.target.value}" type="number"/>`;
+        return html`<input @input="${(e: any) => this.setValue(e.target.value)}" type="number" placeholder="${this.internal.name}"/>`;
     }
 
     private get textInput(): TemplateResult {
-        return html`<input @change="${(e: any) => this.internal.value = e.target.value}" type="text"/>`;
+        return html`<input @input="${(e: any) => this.setValue(e.target.value)}" type="text" placeholder="${this.internal.name}"/>`;
+    }
+
+    private setValue(value: any) {
+        this.value = value;
+        this.node.internals[this.internalIndex].value = value;
     }
 }

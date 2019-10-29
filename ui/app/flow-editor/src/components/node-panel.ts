@@ -1,7 +1,6 @@
 import { LitElement, html, customElement, css } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
 import { integration } from "..";
-import { asEnumerable } from "ts-linq";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {
@@ -60,17 +59,15 @@ export class NodePanel extends LitElement {
         const processors = [];
         const outputs = [];
 
-        const enumerable = asEnumerable(this.nodes);
-
-        for (const node of enumerable.Where((n) => n.type === NodeType.INPUT).ToArray()) {
+        for (const node of this.nodes.filter((n) => n.type === NodeType.INPUT)) {
             inputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (const node of enumerable.Where((n) => n.type === NodeType.PROCESSOR).ToArray()) {
+        for (const node of this.nodes.filter((n) => n.type === NodeType.PROCESSOR)) {
             processors.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 
-        for (const node of enumerable.Where((n) => n.type === NodeType.OUTPUT).ToArray()) {
+        for (const node of this.nodes.filter((n) => n.type === NodeType.OUTPUT)) {
             outputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
         }
 

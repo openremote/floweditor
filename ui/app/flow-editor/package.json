@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "core-util-is": "^1.0.2",
+    "linqts": "^1.12.6",
     "lit-element": "^2.2.0"
   },
   "devDependencies": {

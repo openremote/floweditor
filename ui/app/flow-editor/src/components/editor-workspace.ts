@@ -1,8 +1,8 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
+import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
 import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { asEnumerable } from "ts-linq";
+import { List } from "linqts";
 import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 
 @customElement("editor-workspace")
@@ -21,6 +21,7 @@ export class EditorWorkspace extends LitElement {
     private readonly zoomLowerBound = .2;
     private readonly zoomUpperBound = 10;
     private readonly renderBackground = false;
+    private nodeElements: TemplateResult[] = [];
 
     private cachedClientRect: ClientRect;
     public get clientRect() {
@@ -29,11 +30,12 @@ export class EditorWorkspace extends LitElement {
 
     constructor() {
         super();
-        project.addListener("nodeadded", () => {
+        project.addListener("nodeadded", (n: Node) => {
+            this.nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
             this.requestUpdate();
         });
 
-        project.addListener("noderemoved", () => {
+        project.addListener("noderemoved", (n: Node) => {
             this.requestUpdate();
         });
 
@@ -164,7 +166,8 @@ export class EditorWorkspace extends LitElement {
     protected render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
         return html`
-        ${project.nodes.map((n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
+        ${this.nodeElements}
+        <!-- ${project.nodes.map((n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)} -->
         <connection-container .workspace="${this}"></connection-container>
         <svg>
             <line style="display: 
@@ -200,7 +203,7 @@ export class EditorWorkspace extends LitElement {
     public fitCamera(nodes: Node[]) {
         const padding = 25;
 
-        const enumerable = asEnumerable(nodes);
+        const enumerable = new List<Node>(nodes);
         const XouterleastNode = enumerable.OrderBy((a) => a.position.x).First() as Node;
         const YouterleastNode = enumerable.OrderBy((a) => a.position.y).First() as Node;
 
