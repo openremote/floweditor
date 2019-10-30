@@ -48,7 +48,6 @@ export class InternalPicker extends LitElement {
     }
 
     protected render() {
-        console.log(this.internal.value);
         switch (this.internal.picker.type) {
             case PickerType.ASSET_ATTRIBUTE:
                 return this.assetAttributeInput;

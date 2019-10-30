@@ -41,13 +41,6 @@ export class Project extends EventEmitter {
         });
         this.nodes.filter((n) => n.id === node.id).forEach((n) => {
             this.nodes.splice(this.nodes.indexOf(n), 1);
-            // IdentityDomLink.map[n.id] = null;
-            // for (const inputSocket of n.inputs) {
-            //     IdentityDomLink.map[inputSocket.id] = null;
-            // }
-            // for (const outputSocket of n.outputs) {
-            //     IdentityDomLink.map[outputSocket.id] = null;
-            // }
             this.emit("noderemoved", n);
         });
     }

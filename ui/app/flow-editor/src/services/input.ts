@@ -32,7 +32,6 @@ export class Input extends EventEmitter {
             console.warn("Attempt to deselect nonexistent node");
             return;
         }
-        this.selected.splice(index, 1);
         this.emit("deselected", element);
     }
 
@@ -48,10 +47,8 @@ export class Input extends EventEmitter {
 
     public clearSelection() {
         if (this.mutliselectEnabled) { return; }
-        const originallySelected = new List<Element>(this.selected).ToArray();
-        for (const element of originallySelected) {
-            this.deselect(element);
-        }
+        this.selected.forEach((e) => this.emit("deselected", e));
+        this.selected = [];
         this.emit("selectioncleared");
     }
 
