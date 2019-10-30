@@ -1,9 +1,11 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
-import { Node, PickerType } from "@openremote/model";
+import { Node, PickerType, AssetAttributeInternalValue } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { PopupModal } from "./popup-modal";
 import { modal } from "..";
+import manager from "@openremote/core";
+import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -75,10 +77,25 @@ export class InternalPicker extends LitElement {
         return html`unimplemented<br/>picker`;
     }
 
+    private get assetTreeTemplate(){
+        return html`<or-asset-tree realm="${manager.getRealm()}" @or-asset-tree-request-select="${(e: OrAssetTreeRequestSelectEvent) => {
+            console.log(e.detail.detail.node.asset.id);
+            const value: AssetAttributeInternalValue ={
+                assetId: e.detail.detail.node.asset.id,
+                attributeName: "nothing yet"
+            }
+            this.setValue(value);
+            modal.element.close();
+        }}"
+        style="width: auto; height: 80vh;"
+        ></or-asset-tree>`;
+    }
+
     private get assetAttributeInput(): TemplateResult {
+        const hasAssetSelected = this.internal.value ? this.internal.value.assetId : false;
         return html`
-        <or-input type="button" label="Select asset" icon="format-list-bulleted-square" @click = "${(e) => {
-            modal.element.content = html`it works!! my time machine works`;
+        <or-input type="button" label="${hasAssetSelected ? this.internal.value.assetId : "Select asset"}" icon="format-list-bulleted-square" @click = "${(e) => {
+            modal.element.content = this.assetTreeTemplate;
             modal.element.header = "Pick an asset";
             modal.element.open();
         }}"></or-input>

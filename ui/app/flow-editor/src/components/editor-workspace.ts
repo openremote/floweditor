@@ -194,7 +194,7 @@ export class EditorWorkspace extends LitElement {
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             ${!this.isCameraInDefaultPosition ? html`<or-input type="button" icon="vector-square" @click="${this.resetCamera}" label="Reset view"></or-input>` : null}
-            ${project.nodes.length !== 0 ? html`<or-input type="button" icon="camera" @click="${() => this.fitCamera(project.nodes)}" label="Fit view"></or-input>` : null}
+            ${project.nodes.length !== 0 ? html`<or-input type="button" icon="fit-to-page-outline" @click="${() => this.fitCamera(project.nodes)}" label="Fit view"></or-input>` : null}
         </div>
         <!-- <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             ${!this.isCameraInDefaultPosition ? html`<div class="button" @click="${this.resetCamera}">Reset view</div>` : null}
