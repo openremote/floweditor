@@ -46,7 +46,6 @@ export class FlowNode extends SelectableElement {
             position: absolute;
             border-radius: var(--roundness);
             transform-origin: 0 0;
-           
             z-index: 0;
         }
 
@@ -91,21 +90,6 @@ export class FlowNode extends SelectableElement {
         
         .outputs flow-node-socket{
             transform: translateX(calc(var(--socket-size) / 2));
-        }
-        
-        flow-node-socket{
-            border-radius: 100%;
-            margin: 0 2px 0 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: none;
-            width: var(--socket-size);
-            height: var(--socket-size);
-        }
-
-        flow-node-socket:hover{
-            background: var(--highlight);
         }
 
         .title{
@@ -187,8 +171,8 @@ export class FlowNode extends SelectableElement {
             html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
             html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
 
-        const inputSide = html`<div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket .socket="${i}" side="input"></flow-node-socket>`)}</div>`;
-        const outputSide = html`<div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket .socket="${i}" side="output"></flow-node-socket>`)}</div>`;
+        const inputSide = html`<div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket ?renderlabel="${!this.minimal}" .socket="${i}" side="input"></flow-node-socket>`)}</div>`;
+        const outputSide = html`<div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket ?renderlabel="${!this.minimal}" .socket="${i}" side="output"></flow-node-socket>`)}</div>`;
         const spacer = html`<div style="width: 10px"></div>`;
         return html`
         ${title}

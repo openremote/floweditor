@@ -7,11 +7,35 @@ import { IdentityDomLink } from "node-structure";
 export class FlowNodeSocket extends LitElement {
     @property({ attribute: false }) public socket: NodeSocket;
     @property({ type: String }) public side: "input" | "output";
+    @property({ type: Boolean }) public renderLabel = false;
 
     private identityDeleted = false;
 
     public static get styles() {
         return css`
+        :host{
+            width: auto;
+            height: var(--socket-size);
+            margin: 2px;
+            display: inline-block;
+        }
+        .socket{
+            background: none;
+            height: var(--socket-size);
+            width: var(--socket-size);
+            border-radius: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .socket:hover{
+            background: var(--highlight);
+        }
+        .label{
+            display:inline-block;
+            vertical-align: top;
+            color: rgba(0,0,0,.5);
+        }
         .circle{
             background: grey;
             width: var(--socket-display-size);
@@ -25,7 +49,12 @@ export class FlowNodeSocket extends LitElement {
         this.identityDeleted = delete IdentityDomLink.map[this.socket.id];
     }
 
+    public get socketTypeString(){
+        return this.socket.type.toString().toLowerCase();
+    }
+
     protected firstUpdated() {
+        this.title = this.socketTypeString;
         IdentityDomLink.map[this.socket.id] = this;
         project.addListener("connectioncreated", () => {
             this.requestUpdate();
@@ -71,8 +100,15 @@ export class FlowNodeSocket extends LitElement {
     }
 
     protected render() {
-        const color = `var(--${this.socket.type.toString().toLowerCase()})`;
-        return html`<div title="${this.socket.name}" class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        const color = `var(--${this.socketTypeString})`;
+        const socket = html`<div class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        if (!this.renderLabel) { return socket; }
+        const label = html`<div class="label">${this.socket.name}</div>`;
+        if (this.side === "input") {
+            return html`${socket}${label}`;
+        } else {
+            return html`${label}${socket}`;
+        }
     }
 
     private linkIdentity() {

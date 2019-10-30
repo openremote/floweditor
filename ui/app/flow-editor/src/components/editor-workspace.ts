@@ -94,7 +94,7 @@ export class EditorWorkspace extends LitElement {
                 },
                 {
                     type: "button",
-                    icon: "scissors-cutting",
+                    icon: "content-cut",
                     label: "Cut connection",
                     action: () => selectedConnections.forEach((n) => project.removeConnection(n.connection)),
                     disabled: selectedConnections.length === 0

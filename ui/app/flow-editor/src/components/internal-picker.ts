@@ -1,6 +1,7 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
 import { Node, PickerType } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
+import { OrInputChangedEvent } from "@openremote/or-input";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -22,17 +23,20 @@ export class InternalPicker extends LitElement {
                 padding: 0;
                 margin: 0;
                 display: flex;
+                flex-direction: column;
             }
 
             input{
                 border: 0;
             }
 
-            textarea, input[type=text]
+            textarea, input[type=text], input[type=number], select
             {
                 font-family: inherit;
                 padding: 10px;
                 border-radius: var(--roundness);    
+                width: auto;
+                border: none;
             }
 
             textarea{
@@ -55,6 +59,8 @@ export class InternalPicker extends LitElement {
                 return this.colorInput;
             case PickerType.DOUBLE_DROPDOWN:
                 return this.doubleDropdownInput;
+            case PickerType.CHECKBOX:
+                return this.checkBoxInput;
             case PickerType.DROPDOWN:
                 return this.dropdownInput;
             case PickerType.MULTILINE:
@@ -68,11 +74,17 @@ export class InternalPicker extends LitElement {
     }
 
     private get assetAttributeInput(): TemplateResult {
-        return html`<or-asset-tree></or-asset-tree>`;
+        return html`
+        <or-input type="button" label="Select asset" icon="format-list-bulleted-square"></or-input>
+        <select style="margin-top: 10px">
+            <option>an attribute</option>
+            <option>another attribute</option>
+        </select>
+        `;
     }
 
     private get colorInput(): TemplateResult {
-        return html`unimplemented`;
+        return html`<or-input type="color"></or-input>`; // looks strange
     }
 
     private get doubleDropdownInput(): TemplateResult {
@@ -83,6 +95,14 @@ export class InternalPicker extends LitElement {
         return html`<select @input="${(e: any) => this.setValue(e.target.value)}">
             ${this.internal.picker.options.map((o) => html`<option value="${o.value}" >${o.name}</option>`)}
         </select>`;
+    }
+
+    private get checkBoxInput(): TemplateResult {
+        // return html`<input type="checkbox" @input="${(e: any) => this.setValue(e.target.value)}"/>`;
+        return html`<or-input type="checkbox" 
+        @or-input-changed="${(e: OrInputChangedEvent) => {
+                this.setValue(e.detail.value);
+            }}"></or-input>`;
     }
 
     private get multilineInput(): TemplateResult {
