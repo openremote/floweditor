@@ -28,6 +28,10 @@ export class TopBar extends LitElement {
             background: whitesmoke;
         }
 
+        .debug.button{
+            background: yellow;
+        }
+
         .title{
             margin: 0 0 0 15px;
             width: calc(var(--node-panel-width) - 15px);
