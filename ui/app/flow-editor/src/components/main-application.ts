@@ -35,6 +35,7 @@ export class MainApplication extends LitElement {
             <node-panel style="grid-area: node-panel"></node-panel>
             <top-bar style="grid-area: topbar"></top-bar>
             <context-menu></context-menu>
+            <popup-modal id="popup-modal"></popup-modal>
         `;
         } else {
             return html`${integration.openremote.error}`;

@@ -2,6 +2,8 @@ import { LitElement, property, customElement, html, css, TemplateResult } from "
 import { Node, PickerType } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
+import { PopupModal } from "./popup-modal";
+import { modal } from "..";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -75,7 +77,11 @@ export class InternalPicker extends LitElement {
 
     private get assetAttributeInput(): TemplateResult {
         return html`
-        <or-input type="button" label="Select asset" icon="format-list-bulleted-square"></or-input>
+        <or-input type="button" label="Select asset" icon="format-list-bulleted-square" @click = "${(e) => {
+            modal.element.content = html`it works!! my time machine works`;
+            modal.element.header = "Pick an asset";
+            modal.element.open();
+        }}"></or-input>
         <select style="margin-top: 10px">
             <option>an attribute</option>
             <option>another attribute</option>
