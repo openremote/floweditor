@@ -2,6 +2,7 @@ import { html, customElement, css, property } from "lit-element";
 import { NodeSocket, NodeConnection } from "@openremote/model";
 import { IdentityDomLink, IdentityAssigner } from "node-structure";
 import { Utilities, SelectableElement, EditorWorkspace, FlowNode, project } from "..";
+import { FlowNodeSocket } from "./flow-node-socket";
 
 @customElement("connection-line")
 export class ConnectionLine extends SelectableElement {
@@ -13,8 +14,8 @@ export class ConnectionLine extends SelectableElement {
     private fromNodeElement: FlowNode;
     private toNodeElement: FlowNode;
 
-    private fromElement: HTMLElement;
-    private toElement: HTMLElement;
+    private fromElement: FlowNodeSocket;
+    private toElement: FlowNodeSocket;
 
     private readonly fancyLine = false;
 
@@ -74,8 +75,8 @@ export class ConnectionLine extends SelectableElement {
         this.toNodeElement.addEventListener("updated", this.nodeChanged);
 
         const parentSize = this.workspace.clientRect;
-        const from = Utilities.getCenter(this.fromElement.getBoundingClientRect());
-        const to = Utilities.getCenter(this.toElement.getBoundingClientRect());
+        const from = this.fromElement.connectionPosition;
+        const to = this.toElement.connectionPosition;
         const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
         return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 6 : 4)}px;"><polyline id="${this.polylineId}"

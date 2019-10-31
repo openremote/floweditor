@@ -2,6 +2,7 @@ import { LitElement, customElement, property, html, css } from "lit-element";
 import { project } from "..";
 import { NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
+import { Utilities } from "../utils";
 
 @customElement("flow-node-socket")
 export class FlowNodeSocket extends LitElement {
@@ -10,6 +11,12 @@ export class FlowNodeSocket extends LitElement {
     @property({ type: Boolean }) public renderLabel = false;
 
     private identityDeleted = false;
+    private circleElem: HTMLElement;
+    private readonly circleId = "circle";
+
+    public get connectionPosition() {
+        return Utilities.getCenter(this.circleElem.getBoundingClientRect());
+    }
 
     public static get styles() {
         return css`
@@ -49,7 +56,7 @@ export class FlowNodeSocket extends LitElement {
         this.identityDeleted = delete IdentityDomLink.map[this.socket.id];
     }
 
-    public get socketTypeString(){
+    public get socketTypeString() {
         return this.socket.type.toString().toLowerCase();
     }
 
@@ -97,11 +104,12 @@ export class FlowNodeSocket extends LitElement {
 
     protected updated() {
         this.linkIdentity();
+        this.circleElem = this.shadowRoot.getElementById(this.circleId);
     }
 
     protected render() {
         const color = `var(--${this.socketTypeString})`;
-        const socket = html`<div class="socket"><div class="circle" style="background: ${color}"></div></div>`;
+        const socket = html`<div class="socket"><div class="circle" id=${this.circleId} style="background: ${color}"></div></div>`;
         if (!this.renderLabel) { return socket; }
         const label = html`<div class="label">${this.socket.name}</div>`;
         if (this.side === "input") {

@@ -6,6 +6,7 @@ import { List } from "linqts";
 import { OrAssetTree, OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 import manager from "@openremote/core";
+import { FlowNodeSocket } from "./flow-node-socket";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -47,8 +48,8 @@ export class EditorWorkspace extends LitElement {
 
         project.addListener("connectionstart", (e: MouseEvent, s: NodeSocket) => {
             if (e.buttons !== 1) { return; }
-            const socketBox = (IdentityDomLink.map[s.id] as HTMLElement).getBoundingClientRect();
-            this.connectionFrom = this.pageToOffset({ x: socketBox.left + socketBox.width / 2, y: socketBox.top + socketBox.height / 2 });
+            const pos = (IdentityDomLink.map[s.id] as FlowNodeSocket).connectionPosition;
+            this.connectionFrom = this.pageToOffset(pos);
             this.addEventListener("mousemove", project.connectionDragging);
 
             this.addEventListener("mouseup", (ee: MouseEvent) => {

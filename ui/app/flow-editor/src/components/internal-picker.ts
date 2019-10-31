@@ -1,5 +1,5 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
-import { Node, PickerType, AssetAttributeInternalValue } from "@openremote/model";
+import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { PopupModal } from "./popup-modal";
@@ -11,7 +11,9 @@ import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 export class InternalPicker extends LitElement {
     @property({ converter: nodeConverter, reflect: true }) public node: Node;
     @property({ type: Number, reflect: true }) public internalIndex: number;
-    @property({ type: Object, reflect: true }) public value: any;
+
+    @property({ type: Array }) private attributeNames: { name: string, label: string }[] = [];
+    @property({ type: Object }) private selectedAsset: Asset;
 
     constructor() {
         super();
@@ -52,7 +54,6 @@ export class InternalPicker extends LitElement {
 
     protected firstUpdated() {
         this.addEventListener("contextmenu", (e) => e.stopPropagation());
-        this.addEventListener("wheel", (e) => e.stopPropagation());
     }
 
     protected render() {
@@ -77,32 +78,72 @@ export class InternalPicker extends LitElement {
         return html`unimplemented<br/>picker`;
     }
 
-    private get assetTreeTemplate(){
+    private get assetTreeTemplate() {
         return html`<or-asset-tree realm="${manager.getRealm()}" @or-asset-tree-request-select="${(e: OrAssetTreeRequestSelectEvent) => {
             console.log(e.detail.detail.node.asset.id);
-            const value: AssetAttributeInternalValue ={
+            const value: AssetAttributeInternalValue = {
                 assetId: e.detail.detail.node.asset.id,
                 attributeName: "nothing yet"
-            }
+            };
             this.setValue(value);
+            this.populateAttributeNames();
             modal.element.close();
         }}"
         style="width: auto; height: 80vh;"
         ></or-asset-tree>`;
     }
 
+    private populateAttributeNames() {
+        manager.rest.api.AssetResource.queryAssets({
+            ids: [this.internal.value.assetId],
+            select: {
+                excludeAttributes: false, excludeAttributeMeta: false
+            }
+        }).then((response) => {
+            if (response.data.length === 0) {
+                console.warn(`Asset with id ${this.internal.value.assetId} is missing`);
+                return;
+            }
+            this.selectedAsset = response.data[0];
+            if (this.selectedAsset.attributes != null) {
+                this.attributeNames = [];
+                for (const att of Object.keys(this.selectedAsset.attributes)) {
+                    const meta = (this.selectedAsset.attributes[att] as AssetState).meta;
+                    if (!meta) { continue; }
+                    if (meta.find((m) => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
+                        this.attributeNames.push({
+                            name: att,
+                            label: meta.find((b) => b.name === MetaItemType.LABEL.urn && b.value).value || att
+                        });
+                    }
+                }
+                this.internal.value.attributeName = this.attributeNames[0].name;
+            } else {
+                this.attributeNames = [];
+            }
+        });
+    }
+
     private get assetAttributeInput(): TemplateResult {
         const hasAssetSelected = this.internal.value ? this.internal.value.assetId : false;
         return html`
-        <or-input type="button" label="${hasAssetSelected ? this.internal.value.assetId : "Select asset"}" icon="format-list-bulleted-square" @click = "${(e) => {
-            modal.element.content = this.assetTreeTemplate;
-            modal.element.header = "Pick an asset";
-            modal.element.open();
-        }}"></or-input>
-        <select style="margin-top: 10px">
-            <option>an attribute</option>
-            <option>another attribute</option>
-        </select>
+        <or-input type="button" label="${hasAssetSelected ? this.selectedAsset.name : "Select asset"}" 
+        icon="format-list-bulleted-square" 
+        @click="${() => {
+                modal.element.content = this.assetTreeTemplate;
+                modal.element.header = "Pick an asset";
+                modal.element.open();
+            }}"></or-input>
+            ${
+            hasAssetSelected ? (
+                this.attributeNames.length === 0 ?
+                    html`<span>No rule state attributes</span>` :
+                    html`        
+                <select style="margin-top: 10px" @input="${(e: any) => this.setValue(e.target.value)}">
+                    ${this.attributeNames.map((a) => html`<option value="${a.name}" title="${a.name}">${a.label}</option>`)}
+                </select>`) :
+                null
+            }
         `;
     }
 
@@ -129,11 +170,19 @@ export class InternalPicker extends LitElement {
     }
 
     private get multilineInput(): TemplateResult {
-        return html`<textarea @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}"></textarea>`;
+        return html`<textarea @wheel="${(e: any) => {
+            if (e.target.clientHeight < e.target.scrollHeight) {
+                return e.stopPropagation();
+            }
+        }}" @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}"></textarea>`;
     }
 
     private get numberInput(): TemplateResult {
-        return html`<input @input="${(e: any) => this.setValue(e.target.value)}" type="number" placeholder="${this.internal.name}"/>`;
+        return html`<input @wheel="${(e: any) => {
+            if (e.target === this.shadowRoot.activeElement) {
+                return e.stopPropagation();
+            }
+        }}" @input="${(e: any) => this.setValue(e.target.value)}" type="number" placeholder="${this.internal.name}"/>`;
     }
 
     private get textInput(): TemplateResult {
@@ -141,7 +190,6 @@ export class InternalPicker extends LitElement {
     }
 
     private setValue(value: any) {
-        this.value = value;
         this.node.internals[this.internalIndex].value = value;
     }
 }
