@@ -32,6 +32,15 @@ export class Project extends EventEmitter {
         this.existingFlowRuleDesc = desc;
     }
 
+    public fromNodeCollection(collection: NodeCollection) {
+        this.clear();
+        this.connections = [];
+        collection.nodes.forEach((node) => {
+            this.addNode(node);
+        });
+        this.connections = collection.connections;
+    }
+
     public toNodeCollection(name: string, description: string): NodeCollection {
         return {
             name,

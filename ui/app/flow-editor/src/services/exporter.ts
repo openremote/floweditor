@@ -7,6 +7,10 @@ export class Exporter {
         return JSON.stringify(collection);
     }
 
+    public jsonToFlow(json: string): NodeCollection {
+        return JSON.parse(json);
+    }
+
     public exportAsNew(collection: NodeCollection) {
         const json = this.flowToJson(collection);
         const ruleApi = manager.rest.api.RulesResource;

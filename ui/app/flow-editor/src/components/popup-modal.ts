@@ -69,7 +69,7 @@ export class PopupModal extends LitElement {
 
     protected firstUpdated() {
         modal.element = this;
-        this.addEventListener("click", this.close);
+        this.addEventListener("mousedown", this.close);
         window.addEventListener("keyup", (e: KeyboardEvent) => {
             if (e.key === "Escape") {
                 this.close();
@@ -84,7 +84,7 @@ export class PopupModal extends LitElement {
         }
         this.style.display = null;
         return html`
-        <div class="modal" @click="${(e: KeyboardEvent) => { e.stopPropagation(); }}">
+        <div class="modal" @mousedown="${(e: MouseEvent) => { e.stopPropagation(); }}">
             <div class="title">${this.header}</div>
             ${this.content}
             ${this.closeButton ? html`<or-icon class="close-button" icon="window-close" @click="${this.close}"></or-icon>` : null}
