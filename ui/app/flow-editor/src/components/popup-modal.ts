@@ -39,7 +39,7 @@ export class PopupModal extends LitElement {
         }
         .modal{
             min-width: 300px;
-            min-height: 300px;
+            min-height: 64px;
             width: auto;
             height: auto;
             display: inline-block;

@@ -1,4 +1,4 @@
-import { Node, NodeConnection, NodeSocket } from "@openremote/model";
+import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/model";
 import { EventEmitter } from "events";
 import { SocketTypeMatcher, } from "node-structure";
 import { input, } from "..";
@@ -6,6 +6,11 @@ import { input, } from "..";
 export class Project extends EventEmitter {
     public nodes: Node[] = [];
     public connections: NodeConnection[] = [];
+
+    public existingFlowRuleId = -1;
+    public existingFlowRuleName: string = null;
+    public existingFlowRuleDesc: string = null;
+    public isInUnsavedState = false;
 
     private isConnecting = false;
     private connectionStartSocket: NodeSocket;
@@ -18,6 +23,22 @@ export class Project extends EventEmitter {
 
     public get isCurrentlyConnecting() {
         return this.isConnecting;
+    }
+
+    public setCurrentProject(id: number, name: string, desc: string) {
+        this.isInUnsavedState = false;
+        this.existingFlowRuleId = id;
+        this.existingFlowRuleName = name;
+        this.existingFlowRuleDesc = desc;
+    }
+
+    public toNodeCollection(name: string, description: string): NodeCollection {
+        return {
+            name,
+            description,
+            connections: this.connections,
+            nodes: this.nodes
+        };
     }
 
     public clear() {
@@ -89,7 +110,9 @@ export class Project extends EventEmitter {
         });
     }
 
-    public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {
+    public isValidConnection(connection: NodeConnection) {
+        const fromSocket = connection.from;
+        const toSocket = connection.to;
         if (!fromSocket ||
             !toSocket) {
             return false;
@@ -100,16 +123,22 @@ export class Project extends EventEmitter {
             fromSocket.nodeId === toSocket.nodeId) {
             return false;
         }
+        return true;
+    }
+
+    public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {
+        const connection = {
+            from: fromSocket,
+            to: toSocket
+        };
+
+        if (!this.isValidConnection(connection)) { return false; }
 
         for (const c of this.connections.filter((j) => j.to.id === toSocket.id)) {
             this.removeConnection(c);
         }
 
-        this.connections.push({
-            from: fromSocket,
-            to: toSocket
-        });
-
+        this.connections.push(connection);
         this.emit("connectioncreated", fromSocket, toSocket);
         return true;
     }

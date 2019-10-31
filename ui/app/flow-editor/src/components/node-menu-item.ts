@@ -99,7 +99,7 @@ export class NodeMenuItem extends LitElement {
             y: workspace.clientRect.top,
             width: workspace.clientRect.width,
             height: workspace.clientRect.height,
-        })){
+        })) {
             const copy = CopyMachine.copy(this.node);
             copy.position = workspace.offsetToWorld({ x: e.offsetX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
             project.addNode(copy);

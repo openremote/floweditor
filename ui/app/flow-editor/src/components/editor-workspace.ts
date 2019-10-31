@@ -35,14 +35,17 @@ export class EditorWorkspace extends LitElement {
         super();
         project.addListener("nodeadded", (n: Node) => {
             this.nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
+            project.isInUnsavedState = true;
             this.requestUpdate();
         });
 
         project.addListener("noderemoved", (n: Node) => {
+            project.isInUnsavedState = true;
             this.requestUpdate();
         });
 
         project.addListener("cleared", () => {
+            project.isInUnsavedState = true;
             this.requestUpdate();
         });
 
@@ -67,6 +70,7 @@ export class EditorWorkspace extends LitElement {
 
         project.addListener("connectionend", () => {
             this.connectionDragging = false;
+            project.isInUnsavedState = true;
             this.removeEventListener("mousemove", project.connectionDragging);
         });
 

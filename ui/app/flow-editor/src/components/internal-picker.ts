@@ -129,7 +129,7 @@ export class InternalPicker extends LitElement {
     private get assetAttributeInput(): TemplateResult {
         const hasAssetSelected = this.internal.value ? this.internal.value.assetId : false;
         return html`
-        <or-input type="button" label="${hasAssetSelected ? this.selectedAsset.name : "Select asset"}" 
+        <or-input type="button" fullwidth label="${hasAssetSelected ? this.selectedAsset.name : "Select asset"}" 
         icon="format-list-bulleted-square" 
         @click="${() => {
                 modal.element.content = this.assetTreeTemplate;
@@ -141,7 +141,13 @@ export class InternalPicker extends LitElement {
                 this.attributeNames.length === 0 ?
                     html`<span>No rule state attributes</span>` :
                     html`        
-                <select style="margin-top: 10px" @input="${(e: any) => this.setValue(e.target.value)}">
+                <select style="margin-top: 10px" @input="${(e: any) => {
+                            const value: AssetAttributeInternalValue = {
+                                assetId: this.selectedAsset.id,
+                                attributeName: e.target.value
+                            };
+                            return this.setValue(value);
+                        }}">
                     ${this.attributeNames.map((a) => html`<option value="${a.name}" title="${a.name}">${a.label}</option>`)}
                 </select>`) :
                 null
