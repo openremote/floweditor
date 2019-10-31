@@ -117,7 +117,9 @@ export class InternalPicker extends LitElement {
                         });
                     }
                 }
-                this.internal.value.attributeName = this.attributeNames[0].name;
+                if (this.attributeNames.length !== 0) {
+                    this.internal.value.attributeName = this.attributeNames[0].name;
+                }
             } else {
                 this.attributeNames = [];
             }
@@ -191,5 +193,11 @@ export class InternalPicker extends LitElement {
 
     private setValue(value: any) {
         this.node.internals[this.internalIndex].value = value;
+        this.onPicked();
+    }
+
+    private async onPicked() {
+        await this.updateComplete;
+        this.dispatchEvent(new CustomEvent("picked"));
     }
 }

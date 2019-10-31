@@ -15,23 +15,23 @@ export class MainApplication extends LitElement {
             grid-template-areas: 
                 "topbar topbar"
                 "node-panel workspace";
-            /* for some reason, this gets completely ignored in Firefox */
         }
         `;
     }
 
     protected firstUpdated() {
+        this.id = "app";
         integration.addListener("initialise", () => {
             this.requestUpdate();
         });
     }
 
     protected render() {
-        if (integration.status === Status.Idle || integration.status === Status.Loading) { return; }
+        if (integration.status === Status.Idle || integration.status === Status.Loading) { return html``; }
 
         if (integration.status === Status.Success) {
             return html`
-            <editor-workspace style="grid-area: workspace"></editor-workspace>
+            <editor-workspace id="workspace" style="grid-area: workspace"></editor-workspace>
             <node-panel style="grid-area: node-panel"></node-panel>
             <top-bar style="grid-area: topbar"></top-bar>
             <context-menu></context-menu>

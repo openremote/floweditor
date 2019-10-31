@@ -177,7 +177,10 @@ export class FlowNode extends SelectableElement {
         return html`
         ${title}
         ${this.node.inputs.length > 0 ? inputSide : spacer}
-        ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) => html`<internal-picker .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
+        ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) =>
+            html`<internal-picker @picked="${() => {
+                this.dispatchEvent(new CustomEvent("updated"));
+            }}" .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
         `;
     }
@@ -216,7 +219,7 @@ export class FlowNode extends SelectableElement {
         }
     }
 
-    private delete(){
+    private delete() {
         this.workspace.removeEventListener("pan", this.forceUpdate);
         this.workspace.removeEventListener("zoom", this.forceUpdate);
         project.removeListener("connectionremoved", this.linkIdentity);

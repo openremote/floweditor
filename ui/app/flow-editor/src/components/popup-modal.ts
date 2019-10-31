@@ -78,7 +78,11 @@ export class PopupModal extends LitElement {
     }
 
     protected render() {
-        if (!this.isOpen) { return html``; }
+        if (!this.isOpen) {
+            this.style.display = "none";
+            return html``;
+        }
+        this.style.display = null;
         return html`
         <div class="modal" @click="${(e: KeyboardEvent) => { e.stopPropagation(); }}">
             <div class="title">${this.header}</div>

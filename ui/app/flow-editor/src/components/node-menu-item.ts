@@ -3,6 +3,7 @@ import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
 import { project } from "..";
+import { Utilities } from "../utils";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -92,16 +93,15 @@ export class NodeMenuItem extends LitElement {
         window.removeEventListener("mousemove", this.onMove);
         this.isDragging = false;
 
-        let target: Element;
-        try {
-            target = this.shadowRoot.elementFromPoint(e.clientX, e.clientY);
-        } catch (error) {
-            target = this.shadowRoot.ownerDocument.elementFromPoint(e.clientX, e.clientY);
-        }
-        if (target instanceof EditorWorkspace) {
+        const workspace = document.getElementById("app").shadowRoot.getElementById("workspace") as EditorWorkspace;
+        if (Utilities.isPointInsideBox(e.offsetX, e.offsetY, {
+            x: workspace.clientRect.left,
+            y: workspace.clientRect.top,
+            width: workspace.clientRect.width,
+            height: workspace.clientRect.height,
+        })){
             const copy = CopyMachine.copy(this.node);
-            const workspace = target as EditorWorkspace;
-            copy.position = workspace.offsetToWorld({ x: e.clientX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
+            copy.position = workspace.offsetToWorld({ x: e.offsetX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
             project.addNode(copy);
         }
     }
