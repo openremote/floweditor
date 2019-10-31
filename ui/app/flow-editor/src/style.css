@@ -33,9 +33,9 @@ body {
     --string: rgb(45, 180, 221);
     --color: rgb(255, 228, 78);
 
-    --input-color: hsl(222, 59%, 39%);
+    --input-color: hsl(222, 60%, 46%);
     --processor-color: hsl(102, 58%, 39%);
-    --output-color: hsl(282, 58%, 39%);
+    --output-color: hsl(282, 60%, 47%);
 
     --input-color-h: hsl(222, 49%, 49%);
     --processor-color-h: hsl(102, 48%, 49%);
