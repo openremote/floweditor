@@ -223,8 +223,8 @@ export class EditorWorkspace extends LitElement {
         const XouterleastNode = enumerable.OrderBy((a) => a.position.x).First() as Node;
         const YouterleastNode = enumerable.OrderBy((a) => a.position.y).First() as Node;
 
-        const XoutermostNode = enumerable.OrderByDescending((a) => a.position.x).First() as Node;
-        const YoutermostNode = enumerable.OrderByDescending((a) => a.position.y).First() as Node;
+        const XoutermostNode = enumerable.OrderByDescending((a) => a.position.x + (IdentityDomLink.map[a.id] as FlowNode).scrollWidth).First() as Node;
+        const YoutermostNode = enumerable.OrderByDescending((a) => a.position.y + (IdentityDomLink.map[a.id] as FlowNode).scrollHeight).First() as Node;
 
         const XoutermostWidth = (IdentityDomLink.map[XoutermostNode.id] as FlowNode).scrollWidth;
         const YoutermostHeight = (IdentityDomLink.map[YoutermostNode.id] as FlowNode).scrollHeight;
