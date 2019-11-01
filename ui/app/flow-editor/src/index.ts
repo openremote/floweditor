@@ -18,6 +18,7 @@ export { SelectionBox } from "./components/selection-box";
 export { ContextMenu } from "./components/context-menu";
 export { InternalPicker } from "./components/internal-picker";
 export { PopupModal } from "./components/popup-modal";
+export { RuleBrowser } from "./components/rule-browser";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
