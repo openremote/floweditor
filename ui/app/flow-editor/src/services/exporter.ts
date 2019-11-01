@@ -40,7 +40,7 @@ export class Exporter {
             existing.rules = json;
             ruleApi.updateGlobalRuleset(existing.id, existing).then((e) => {
                 if (e.status === 204) {
-                    project.isInUnsavedState = false;
+                    project.unsavedState = false;
                     console.log("Successfully saved ruleset");
                 } else {
                     console.log("Something went wrong while saving ruleset\nHTTP status " + e.status);

@@ -2,15 +2,17 @@ import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/mo
 import { EventEmitter } from "events";
 import { SocketTypeMatcher, } from "node-structure";
 import { input, } from "..";
+import { EditorWorkspace } from "../components/editor-workspace";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];
     public connections: NodeConnection[] = [];
+    public workspace: EditorWorkspace;
 
     public existingFlowRuleId = -1;
     public existingFlowRuleName: string = null;
     public existingFlowRuleDesc: string = null;
-    public isInUnsavedState = false;
+    private isInUnsavedState = false;
 
     private isConnecting = false;
     private connectionStartSocket: NodeSocket;
@@ -25,20 +27,36 @@ export class Project extends EventEmitter {
         return this.isConnecting;
     }
 
+    public set unsavedState(state: boolean) {
+        if (this.isInUnsavedState !== state) {
+            this.isInUnsavedState = state;
+            this.emit("unsavedstateset", state);
+        }
+    }
+
+    public get unsavedState() {
+        return this.isInUnsavedState;
+    }
+
     public setCurrentProject(id: number, name: string, desc: string) {
-        this.isInUnsavedState = false;
+        this.unsavedState = false;
         this.existingFlowRuleId = id;
         this.existingFlowRuleName = name;
         this.existingFlowRuleDesc = desc;
+        this.emit("projectset", id);
     }
 
-    public fromNodeCollection(collection: NodeCollection) {
-        this.clear();
-        this.connections = [];
+    public async fromNodeCollection(collection: NodeCollection) {
+        await this.clear();
         collection.nodes.forEach((node) => {
             this.addNode(node);
         });
-        this.connections = collection.connections;
+        await this.workspace.updateComplete;
+        collection.connections.forEach((conn) => {
+            this.createConnection(conn.from, conn.to);
+        });
+        this.emit("nodecollectionloaded", collection);
+        this.unsavedState = false;
     }
 
     public toNodeCollection(name: string, description: string): NodeCollection {
@@ -50,9 +68,15 @@ export class Project extends EventEmitter {
         };
     }
 
-    public clear() {
+    public async clear() {
+        input.clearSelection();
+        this.nodes.forEach((n) => {
+            this.removeNode(n);
+        });
+        await this.workspace.updateComplete;
         this.nodes = [];
         this.connections = [];
+        this.unsavedState = true;
         this.emit("cleared");
     }
 
@@ -61,6 +85,7 @@ export class Project extends EventEmitter {
             throw new Error("Node with identical identity already exists in the project");
         }
         this.nodes.push(node);
+        this.unsavedState = true;
         this.emit("nodeadded", node);
     }
 
@@ -71,6 +96,7 @@ export class Project extends EventEmitter {
         });
         this.nodes.filter((n) => n.id === node.id).forEach((n) => {
             this.nodes.splice(this.nodes.indexOf(n), 1);
+            this.unsavedState = true;
             this.emit("noderemoved", n);
         });
     }
@@ -114,6 +140,7 @@ export class Project extends EventEmitter {
                 console.warn("attempt to delete nonexistent connection");
             } else {
                 this.connections.splice(index, 1);
+                this.unsavedState = true;
                 this.emit("connectionremoved", c);
             }
         });
@@ -148,6 +175,7 @@ export class Project extends EventEmitter {
         }
 
         this.connections.push(connection);
+        this.unsavedState = true;
         this.emit("connectioncreated", fromSocket, toSocket);
         return true;
     }

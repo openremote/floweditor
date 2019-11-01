@@ -54,30 +54,27 @@ export class FlowNodeSocket extends LitElement {
 
     public disconnectedCallback() {
         this.identityDeleted = delete IdentityDomLink.map[this.socket.id];
+        project.removeListener("connectioncreated", this.forceUpdate);
+        project.removeListener("connectionremoved", this.forceUpdate);
+        project.removeListener("nodeadded", this.forceUpdate);
+        project.removeListener("noderemoved", this.forceUpdate);
+        project.removeListener("cleared", this.forceUpdate);
     }
 
     public get socketTypeString() {
         return this.socket.type.toString().toLowerCase();
     }
 
+    private forceUpdate = () => this.requestUpdate();
+
     protected firstUpdated() {
         this.title = this.socketTypeString;
         IdentityDomLink.map[this.socket.id] = this;
-        project.addListener("connectioncreated", () => {
-            this.requestUpdate();
-        });
-        project.addListener("connectionremoved", () => {
-            this.requestUpdate();
-        });
-        project.addListener("nodeadded", () => {
-            this.requestUpdate();
-        });
-        project.addListener("noderemoved", () => {
-            this.requestUpdate();
-        });
-        project.addListener("cleared", () => {
-            this.requestUpdate();
-        });
+        project.addListener("connectioncreated", this.forceUpdate);
+        project.addListener("connectionremoved", this.forceUpdate);
+        project.addListener("nodeadded", this.forceUpdate);
+        project.addListener("noderemoved", this.forceUpdate);
+        project.addListener("cleared", this.forceUpdate);
 
         const isInputSocket = this.side === "input";
 

@@ -48,10 +48,16 @@ export class TopBar extends LitElement {
         `;
     }
 
+    protected firstUpdated() {
+        project.addListener("unsavedstateset", () => {
+            this.requestUpdate();
+        });
+    }
+
     protected render() {
         return html`
         <span class="title">Flow Editor</span>
-        <a class="button" @click="${this.save}">Save</a>
+        <a class="button" @click="${this.save}">Save ${project.existingFlowRuleName}${project.unsavedState ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
@@ -75,7 +81,6 @@ export class TopBar extends LitElement {
 
     private async showRuleBrowser() {
         const response = await manager.rest.api.RulesResource.getGlobalRulesets();
-        console.log(response.data);
         modal.element.content = html`${response.data.map((r: GlobalRuleset) => html`<button @click="${async () => {
             const ruleset = (await manager.rest.api.RulesResource.getGlobalRuleset(r.id)).data;
             const collection = exporter.jsonToFlow(ruleset.rules);

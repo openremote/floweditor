@@ -35,17 +35,15 @@ export class EditorWorkspace extends LitElement {
         super();
         project.addListener("nodeadded", (n: Node) => {
             this.nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
-            project.isInUnsavedState = true;
             this.requestUpdate();
         });
 
         project.addListener("noderemoved", (n: Node) => {
-            project.isInUnsavedState = true;
             this.requestUpdate();
         });
 
         project.addListener("cleared", () => {
-            project.isInUnsavedState = true;
+            this.nodeElements = [];
             this.requestUpdate();
         });
 
@@ -60,7 +58,6 @@ export class EditorWorkspace extends LitElement {
                     project.endConnectionDrag(ee, null, false);
                 }
             });
-
         });
 
         project.addListener("connecting", (e: MouseEvent) => {
@@ -70,7 +67,6 @@ export class EditorWorkspace extends LitElement {
 
         project.addListener("connectionend", () => {
             this.connectionDragging = false;
-            project.isInUnsavedState = true;
             this.removeEventListener("mousemove", project.connectionDragging);
         });
 
@@ -117,7 +113,7 @@ export class EditorWorkspace extends LitElement {
             ContextMenu.open(e.pageX, e.pageY, this, buttons);
             e.preventDefault();
         });
-
+        project.workspace = this;
         this.addEventListener("wheel", this.onZoom, { passive: true });
     }
 

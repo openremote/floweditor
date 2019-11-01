@@ -7,10 +7,13 @@ export class SelectableElement extends LitElement {
 
     constructor() {
         super();
-        this.setHandle(this);
         input.selectables.push(this);
         input.addListener("selected", this.onSelected);
         input.addListener("deselected", this.onDeselected);
+    }
+
+    protected firstUpdated() {
+        this.setHandle(this);
     }
 
     public get selected() {
@@ -22,6 +25,9 @@ export class SelectableElement extends LitElement {
     }
 
     public disconnectedCallback() {
+        super.disconnectedCallback();
+        input.removeListener("selected", this.onSelected);
+        input.removeListener("deselected", this.onDeselected);
         input.selectables.splice(input.selectables.indexOf(this), 1);
     }
 

@@ -14,6 +14,7 @@ export class InternalPicker extends LitElement {
 
     @property({ type: Array }) private attributeNames: { name: string, label: string }[] = [];
     @property({ type: Object }) private selectedAsset: Asset;
+    @property({ type: Boolean }) private assetIntialised = false;
 
     constructor() {
         super();
@@ -59,6 +60,9 @@ export class InternalPicker extends LitElement {
     protected render() {
         switch (this.internal.picker.type) {
             case PickerType.ASSET_ATTRIBUTE:
+                if (this.internal.value && !this.assetIntialised) {
+                    this.readAssetOnCreation();
+                }
                 return this.assetAttributeInput;
             case PickerType.COLOR:
                 return this.colorInput;
@@ -78,6 +82,10 @@ export class InternalPicker extends LitElement {
         return html`unimplemented<br/>picker`;
     }
 
+    private async readAssetOnCreation() {
+        this.populateAttributeNames();
+    }
+
     private get assetTreeTemplate() {
         return html`<or-asset-tree realm="${manager.getRealm()}" @or-asset-tree-request-select="${(e: OrAssetTreeRequestSelectEvent) => {
             console.log(e.detail.detail.node.asset.id);
@@ -93,41 +101,51 @@ export class InternalPicker extends LitElement {
         ></or-asset-tree>`;
     }
 
-    private populateAttributeNames() {
-        manager.rest.api.AssetResource.queryAssets({
+    private async populateAttributeNames() {
+        const response = await manager.rest.api.AssetResource.queryAssets({
             ids: [this.internal.value.assetId],
             select: {
                 excludeAttributes: false, excludeAttributeMeta: false
             }
-        }).then((response) => {
-            if (response.data.length === 0) {
-                console.warn(`Asset with id ${this.internal.value.assetId} is missing`);
-                return;
+        });
+
+        if (response.data.length === 0) {
+            this.assetIntialised = true;
+            console.warn(`Asset with id ${this.internal.value.assetId} is missing`);
+            return;
+        }
+        this.selectedAsset = response.data[0];
+        if (this.selectedAsset.attributes != null) {
+            this.attributeNames = [];
+            for (const att of Object.keys(this.selectedAsset.attributes)) {
+                const meta = (this.selectedAsset.attributes[att] as AssetState).meta;
+                if (!meta) { continue; }
+                if (meta.find((m) => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
+                    this.attributeNames.push({
+                        name: att,
+                        label: meta.find((b) => b.name === MetaItemType.LABEL.urn && b.value).value || att
+                    });
+                }
             }
-            this.selectedAsset = response.data[0];
-            if (this.selectedAsset.attributes != null) {
-                this.attributeNames = [];
-                for (const att of Object.keys(this.selectedAsset.attributes)) {
-                    const meta = (this.selectedAsset.attributes[att] as AssetState).meta;
-                    if (!meta) { continue; }
-                    if (meta.find((m) => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
-                        this.attributeNames.push({
-                            name: att,
-                            label: meta.find((b) => b.name === MetaItemType.LABEL.urn && b.value).value || att
-                        });
+            if (this.attributeNames.length !== 0) {
+                if (this.internal.value) {
+                    if (this.internal.value.attributeName) {
+                        this.assetIntialised = true;
+                        await this.updateComplete;
+                        (this.shadowRoot.getElementById("attribute-select") as HTMLSelectElement).value = this.internal.value.attributeName;
+                        return;
                     }
                 }
-                if (this.attributeNames.length !== 0) {
-                    this.internal.value.attributeName = this.attributeNames[0].name;
-                }
-            } else {
-                this.attributeNames = [];
+                this.internal.value.attributeName = this.attributeNames[0].name;
             }
-        });
+        } else {
+            this.attributeNames = [];
+        }
+        this.assetIntialised = true;
     }
 
     private get assetAttributeInput(): TemplateResult {
-        const hasAssetSelected = this.internal.value ? this.internal.value.assetId : false;
+        const hasAssetSelected = this.selectedAsset;
         return html`
         <or-input type="button" fullwidth label="${hasAssetSelected ? this.selectedAsset.name : "Select asset"}" 
         icon="format-list-bulleted-square" 
@@ -141,7 +159,7 @@ export class InternalPicker extends LitElement {
                 this.attributeNames.length === 0 ?
                     html`<span>No rule state attributes</span>` :
                     html`        
-                <select style="margin-top: 10px" @input="${(e: any) => {
+                <select id="attribute-select" style="margin-top: 10px" @input="${(e: any) => {
                             const value: AssetAttributeInternalValue = {
                                 assetId: this.selectedAsset.id,
                                 attributeName: e.target.value
@@ -170,7 +188,7 @@ export class InternalPicker extends LitElement {
     }
 
     private get checkBoxInput(): TemplateResult {
-        // return html`<input type="checkbox" @input="${(e: any) => this.setValue(e.target.value)}"/>`;
+        return html`<input type="checkbox" @input="${(e: any) => this.setValue(e.target.value)}"/>`;
         return html`<or-input type="checkbox" 
         @or-input-changed="${(e: OrInputChangedEvent) => {
                 this.setValue(e.detail.value);
@@ -190,11 +208,11 @@ export class InternalPicker extends LitElement {
             if (e.target === this.shadowRoot.activeElement) {
                 return e.stopPropagation();
             }
-        }}" @input="${(e: any) => this.setValue(e.target.value)}" type="number" placeholder="${this.internal.name}"/>`;
+        }}" @input="${(e: any) => this.setValue(parseFloat(e.target.value))}" value="${this.internal.value || 0}" type="number" placeholder="${this.internal.name}"/>`;
     }
 
     private get textInput(): TemplateResult {
-        return html`<input @input="${(e: any) => this.setValue(e.target.value)}" type="text" placeholder="${this.internal.name}"/>`;
+        return html`<input @input="${(e: any) => this.setValue(e.target.value)}" value="${this.internal.value || ""}" type="text" placeholder="${this.internal.name}"/>`;
     }
 
     private setValue(value: any) {

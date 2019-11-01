@@ -19,8 +19,10 @@ export class FlowNode extends SelectableElement {
     }
 
     protected firstUpdated() {
+        super.firstUpdated();
         this.workspace.addEventListener("pan", this.forceUpdate);
         this.workspace.addEventListener("zoom", this.forceUpdate);
+        project.addListener("cleared", this.forceUpdate);
         project.addListener("connectionremoved", this.linkIdentity);
         this.minimal = (this.node.displayCharacter || "").length !== 0;
         this.bringToFront();
@@ -137,6 +139,10 @@ export class FlowNode extends SelectableElement {
 
     public disconnectedCallback() {
         this.identityDeleted = delete IdentityDomLink.map[this.node.id];
+        this.workspace.removeEventListener("pan", this.forceUpdate);
+        this.workspace.removeEventListener("zoom", this.forceUpdate);
+        project.removeListener("cleared", this.forceUpdate);
+        project.removeListener("connectionremoved", this.linkIdentity);
         super.disconnectedCallback();
     }
 
@@ -179,6 +185,7 @@ export class FlowNode extends SelectableElement {
         ${this.node.inputs.length > 0 ? inputSide : spacer}
         ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) =>
             html`<internal-picker @picked="${() => {
+                project.unsavedState = true;
                 this.dispatchEvent(new CustomEvent("updated"));
             }}" .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
@@ -204,6 +211,7 @@ export class FlowNode extends SelectableElement {
             y: this.node.position.y + e.movementY / this.workspace.camera.zoom
         };
         this.requestUpdate();
+        project.unsavedState = true;
         this.dispatchEvent(new CustomEvent("dragged"));
     }
 
@@ -220,9 +228,12 @@ export class FlowNode extends SelectableElement {
     }
 
     private delete() {
+        this.identityDeleted = delete IdentityDomLink.map[this.node.id];
         this.workspace.removeEventListener("pan", this.forceUpdate);
         this.workspace.removeEventListener("zoom", this.forceUpdate);
+        project.removeListener("cleared", this.forceUpdate);
         project.removeListener("connectionremoved", this.linkIdentity);
+        super.disconnectedCallback();
         this.deleted = true;
     }
 }
