@@ -33,8 +33,7 @@ export class PopupModal extends LitElement {
             --closebutton-padding: 12px;
             --modal-padding: 10px;
         }
-        :host(:not([isopen]))
-        {
+        :host(:not([isopen])){
             display: none;
         }
         .modal{
@@ -63,6 +62,19 @@ export class PopupModal extends LitElement {
             width: 100%;
             text-transform: uppercase;
             font-weight: bold;
+        }
+        .list-button {
+            cursor: pointer;
+            padding: 8px 0 8px 8px;
+        }
+        .list-button:hover {
+            background: whitesmoke;
+        }
+        .list-button:active {
+            background: none;
+        }
+        or-icon{
+            width: 18px;
         }
         `;
     }

@@ -72,9 +72,9 @@ export class NodePanel extends LitElement {
         }
 
         return html`
-        <div class="category"> <span>INPUT</span> ${inputs}</div>
-        <div class="category"> <span>PROCESSOR</span> ${processors}</div>
-        <div class="category"> <span>OUTPUT</span> ${outputs}</div>
+        <div class="category"> <span>Input</span> ${inputs}</div>
+        <div class="category"> <span>Processor</span> ${processors}</div>
+        <div class="category"> <span>Output</span> ${outputs}</div>
         `;
     }
 }

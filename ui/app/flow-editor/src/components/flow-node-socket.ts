@@ -68,7 +68,7 @@ export class FlowNodeSocket extends LitElement {
     private forceUpdate = () => this.requestUpdate();
 
     protected firstUpdated() {
-        this.title = this.socketTypeString;
+        this.title = Utilities.humanLike(this.socketTypeString);
         IdentityDomLink.map[this.socket.id] = this;
         project.addListener("connectioncreated", this.forceUpdate);
         project.addListener("connectionremoved", this.forceUpdate);

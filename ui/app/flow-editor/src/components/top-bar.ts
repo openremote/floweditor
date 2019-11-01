@@ -4,6 +4,7 @@ import { project, modal, exporter } from "..";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import manager from "@openremote/core";
 import { GlobalRuleset } from "@openremote/model";
+import { Utilities } from "../utils";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {
@@ -57,7 +58,7 @@ export class TopBar extends LitElement {
     protected render() {
         return html`
         <span class="title">Flow Editor</span>
-        <a class="button" @click="${this.save}">Save ${project.existingFlowRuleName}${project.unsavedState ? "*" : ""}</a>
+        <a class="button" @click="${this.save}">Save ${project.existingFlowRuleName}${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
@@ -80,13 +81,28 @@ export class TopBar extends LitElement {
     }
 
     private async showRuleBrowser() {
-        const response = await manager.rest.api.RulesResource.getGlobalRulesets();
-        modal.element.content = html`${response.data.map((r: GlobalRuleset) => html`<button @click="${async () => {
+        const now = new Date();
+        const loadRule = async (r: GlobalRuleset) => {
             const ruleset = (await manager.rest.api.RulesResource.getGlobalRuleset(r.id)).data;
             const collection = exporter.jsonToFlow(ruleset.rules);
             project.fromNodeCollection(collection);
             project.setCurrentProject(r.id, r.name, collection.description);
-        }}">${r.name}</button>`)}`;
+            modal.element.close();
+        };
+
+        const getButton = (r: GlobalRuleset) => {
+            return html`<div class="list-button" @click="${() => { loadRule(r); }}">${r.name} 
+            ${r.error ? html`<or-icon title="${Utilities.humanLike(r.status)}" icon="alert-outline"></or-icon>` : null}
+            ${r.enabled ? null : html`<or-icon title="Disabled" icon="sleep"></or-icon>`}
+            </div>`;
+        }
+
+        const response = await manager.rest.api.RulesResource.getGlobalRulesets();
+        modal.element.content = html`
+            <div style="display: flex; flex-direction: column; width: auto; align-items: stretch;">
+            ${response.data.length === 0 ? html`<span>No rules to display...</span>` : response.data.map((r: GlobalRuleset) => getButton(r))}
+            </div>
+        `;
         modal.element.header = "Select a Flow rule";
         modal.element.open();
     }

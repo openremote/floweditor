@@ -17,4 +17,8 @@ export class Utilities {
         return a.x >= b.x && (a.width - deltaX <= b.width) &&
             a.y >= b.y && (a.height - deltaY <= b.height);
     }
+
+    public static humanLike(input: string) {
+        return (input[0].toUpperCase() + input.toLowerCase().substr(1)).replace("_", " ");
+    }
 }
