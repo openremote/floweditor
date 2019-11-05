@@ -4,6 +4,7 @@ import { Input } from "./services/input";
 import { ModalService } from "./services/modal";
 import { Exporter } from "./services/exporter";
 import { Shortcuts } from "./services/shortcuts";
+import { CopyPasteManager } from "./services/copy-paste-manager";
 
 export { MainApplication as Application } from "./components/main-application";
 export { NodePanel } from "./components/node-panel";
@@ -30,6 +31,7 @@ export { Project } from "./services/project";
 export { Input } from "./services/input";
 export { ModalService } from "./services/modal";
 export { Exporter } from "./services/exporter";
+export { CopyPasteManager } from "./services/copy-paste-manager";
 
 export { Utilities } from "./utils";
 
@@ -41,6 +43,7 @@ export { OrInput, InputType } from "@openremote/or-input";
 export * from "@webcomponents/webcomponentsjs";
 
 export const integration = new Integration();
+export const copyPasteManager = new CopyPasteManager();
 export const project = new Project();
 export const input = new Input();
 export const modal = new ModalService();

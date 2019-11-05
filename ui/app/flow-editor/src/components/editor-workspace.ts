@@ -89,6 +89,26 @@ export class EditorWorkspace extends LitElement {
             const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
                 {
                     type: "button",
+                    label: "Duplicate",
+                    action: () => alert("unimplemented"),
+                    disabled: selectedNodes.length === 0
+                },
+                {
+                    type: "button",
+                    icon: "content-copy",
+                    label: "Copy",
+                    action: () => alert("unimplemented"),
+                    disabled: selectedNodes.length === 0
+                },
+                {
+                    type: "button",
+                    icon: "content-paste",
+                    label: "Paste",
+                    action: () => alert("unimplemented"),
+                    disabled: selectedNodes.length === 0
+                },
+                {
+                    type: "button",
                     icon: "delete",
                     label: "Delete node",
                     action: () => selectedNodes.forEach((n) => project.removeNode(n.node)),
