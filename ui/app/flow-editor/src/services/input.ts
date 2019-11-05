@@ -63,13 +63,11 @@ export class Input extends EventEmitter {
     private onkeydown = (e: KeyboardEvent) => {
         if (this.keysCurrentlyHeld.includes(e.key)) { return; }
         this.keysCurrentlyHeld.push(e.key);
-        console.debug(e.key + " down");
     }
 
     private onkeyup = (e: KeyboardEvent) => {
         const index = this.keysCurrentlyHeld.indexOf(e.key);
         if (index === -1) { return; }
         this.keysCurrentlyHeld.splice(index, 1);
-        console.debug(e.key + " up");
     }
 }

@@ -3,6 +3,7 @@ import { Project } from "./services/project";
 import { Input } from "./services/input";
 import { ModalService } from "./services/modal";
 import { Exporter } from "./services/exporter";
+import { Shortcuts } from "./services/shortcuts";
 
 export { MainApplication as Application } from "./components/main-application";
 export { NodePanel } from "./components/node-panel";
@@ -44,6 +45,7 @@ export const project = new Project();
 export const input = new Input();
 export const modal = new ModalService();
 export const exporter = new Exporter();
+export const shortcuts = new Shortcuts();
 
 window.addEventListener("load", () => {
     integration.initialise();

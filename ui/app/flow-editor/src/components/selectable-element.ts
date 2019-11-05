@@ -28,7 +28,7 @@ export class SelectableElement extends LitElement {
         super.disconnectedCallback();
         input.removeListener("selected", this.onSelected);
         input.removeListener("deselected", this.onDeselected);
-        input.selectables.splice(input.selectables.indexOf(this), 1);
+        // input.selectables.splice(input.selectables.indexOf(this), 1);
     }
 
     public setHandle(element: Element) {

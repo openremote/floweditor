@@ -1,6 +1,6 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { IdentityDomLink } from "node-structure";
-import { project, modal, exporter } from "..";
+import { project, modal, exporter, shortcuts, input } from "..";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import manager from "@openremote/core";
 import { GlobalRuleset } from "@openremote/model";
@@ -63,7 +63,9 @@ export class TopBar extends LitElement {
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
 
-        <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); console.log(project); }}">print info</a>
+        <a class="debug button" @click="${() => { console.log(project); }}">project</a>
+        <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); }}">IdentityDomLink.map</a>
+        <a class="debug button" @click="${() => { console.log(input.selectables); }}">input.selectables</a>
         <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a>
 
         <a class="button right">Log out</a>
