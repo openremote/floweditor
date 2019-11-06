@@ -188,7 +188,7 @@ export class InternalPicker extends LitElement {
     }
 
     private get checkBoxInput(): TemplateResult {
-        return html`<input type="checkbox" @input="${(e: any) => this.setValue(e.target.value)}"/>`;
+        return html`<input type="checkbox" ?checked="${this.internal.value || false}" @input="${(e: any) => this.setValue(e.target.checked)}"/>`;
         return html`<or-input type="checkbox" 
         @or-input-changed="${(e: OrInputChangedEvent) => {
                 this.setValue(e.detail.value);

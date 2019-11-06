@@ -1,14 +1,11 @@
 import { LitElement, customElement, css, property, html } from "lit-element";
 import { GlobalRuleset } from "@openremote/model";
-import { Utilities, exporter, project, modal } from "..";
+import { Utilities, exporter, project, modal, Status } from "..";
 import manager from "@openremote/core";
 
 @customElement("rule-browser")
 export class RuleBrowser extends LitElement {
-    @property({ type: Number }) private status = 0;
-    // 0 Loading
-    // 1 Success
-    // 2 Failure
+    @property({ type: Number }) private status = Status.Idle;
     private retrievedRules: GlobalRuleset[] = [];
 
     public static get styles() {
@@ -41,28 +38,28 @@ export class RuleBrowser extends LitElement {
     }
 
     protected async firstUpdated() {
-        this.status = 0;
+        this.status = Status.Loading;
         try {
             const response = await manager.rest.api.RulesResource.getGlobalRulesets();
             this.retrievedRules = response.data;
-            this.status = 1;
+            this.status = Status.Success;
         } catch (error) {
-            this.status = 2;
+            this.status = Status.Failure;
         }
     }
 
     protected render() {
         let result = html``;
         switch (this.status) {
-            case 0:
+            case Status.Loading:
                 result = html`<span style="text-align: center;"><or-icon icon="loading"></or-icon></span>`;
                 break;
-            case 1:
+            case Status.Success:
                 result = html`${this.retrievedRules.length === 0 ?
                     html`<span>No rules to display...</span>` :
                     this.retrievedRules.map((r: GlobalRuleset) => this.getButton(r))}`;
                 break;
-            case 2:
+            case Status.Failure:
                 result = html`<span>Failed to load rules...</span>`;
                 break;
         }
@@ -74,7 +71,7 @@ export class RuleBrowser extends LitElement {
     }
 
     private loadRule = async (r: GlobalRuleset) => {
-        this.status = 0;
+        this.status = Status.Loading;
         const ruleset = (await manager.rest.api.RulesResource.getGlobalRuleset(r.id)).data;
         const collection = exporter.jsonToFlow(ruleset.rules);
         project.fromNodeCollection(collection);

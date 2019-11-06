@@ -24,6 +24,7 @@ export { RuleBrowser } from "./components/rule-browser";
 
 export { Camera } from "./models/camera";
 export { Status } from "./models/status";
+export { LightNodeCollection } from "./models/light-node-collection";
 export { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "./models/context-menu-button";
 
 export { Integration } from "./services/integration";

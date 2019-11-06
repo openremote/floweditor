@@ -1,5 +1,5 @@
 import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
-import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input } from "..";
+import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
@@ -7,6 +7,7 @@ import { OrAssetTree, OrAssetTreeRequestSelectEvent } from "@openremote/or-asset
 import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
 import manager from "@openremote/core";
 import { FlowNodeSocket } from "./flow-node-socket";
+import { LightNodeCollection } from "../models/light-node-collection";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -90,7 +91,21 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     label: "Duplicate",
-                    action: () => alert("unimplemented"),
+                    action: async () => {
+                        const clone: LightNodeCollection = copyPasteManager.cloneIsolated({
+                            nodes: selectedNodes.map((n) => n.node),
+                            connections: selectedConnections.map((c) => c.connection)
+                        });
+                        clone.nodes.forEach((n) => {
+                            n.position.x += 25;
+                            n.position.y += 25;
+                            project.addNode(n);
+                        });
+                        await this.updateComplete;
+                        clone.connections.forEach((c) => {
+                            project.createConnection(c.from, c.to);
+                        });
+                    },
                     disabled: selectedNodes.length === 0
                 },
                 {
