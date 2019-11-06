@@ -1,5 +1,5 @@
 import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
-import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager } from "..";
+import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager, shortcuts } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
@@ -90,37 +90,23 @@ export class EditorWorkspace extends LitElement {
             const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
                 {
                     type: "button",
-                    label: "Duplicate",
-                    action: async () => {
-                        const clone: LightNodeCollection = copyPasteManager.cloneIsolated({
-                            nodes: selectedNodes.map((n) => n.node),
-                            connections: selectedConnections.map((c) => c.connection)
-                        });
-                        clone.nodes.forEach((n) => {
-                            n.position.x += 25;
-                            n.position.y += 25;
-                            project.addNode(n);
-                        });
-                        await this.updateComplete;
-                        clone.connections.forEach((c) => {
-                            project.createConnection(c.from, c.to);
-                        });
-                    },
-                    disabled: selectedNodes.length === 0
-                },
-                {
-                    type: "button",
                     icon: "content-copy",
                     label: "Copy",
-                    action: () => alert("unimplemented"),
+                    action: () => {
+                        const pos = this.offsetToWorld({ x: e.offsetX, y: e.offsetY });
+                        this.copy(pos.x, pos.y);
+                    },
                     disabled: selectedNodes.length === 0
                 },
                 {
                     type: "button",
                     icon: "content-paste",
                     label: "Paste",
-                    action: () => alert("unimplemented"),
-                    disabled: selectedNodes.length === 0
+                    action: () => {
+                        const pos = this.offsetToWorld({ x: e.offsetX, y: e.offsetY });
+                        this.paste(pos.x, pos.y);
+                    },
+                    disabled: copyPasteManager.isFull
                 },
                 {
                     type: "button",
@@ -150,6 +136,26 @@ export class EditorWorkspace extends LitElement {
         });
         project.workspace = this;
         this.addEventListener("wheel", this.onZoom, { passive: true });
+    }
+
+    private async paste(x: number, y: number) {
+        const clone: LightNodeCollection = copyPasteManager.getFromClipboard({ x, y });
+        clone.nodes.forEach((n) => {
+            project.addNode(n);
+        });
+        await this.updateComplete;
+        clone.connections.forEach((c) => {
+            project.createConnection(c.from, c.to);
+        });
+    }
+
+    private copy(x: number, y: number) {
+        const selectedNodes = input.selected.filter((s) => s instanceof FlowNode) as FlowNode[];
+        const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine) as ConnectionLine[];
+        copyPasteManager.putInClipboard({
+            nodes: selectedNodes.map((n) => n.node),
+            connections: selectedConnections.map((c) => c.connection)
+        }, { x, y });
     }
 
     static get styles() {

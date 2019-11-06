@@ -32,6 +32,7 @@ export class Input extends EventEmitter {
             console.warn("Attempt to deselect nonexistent node");
             return;
         }
+        this.selected.splice(index, 1);
         this.emit("deselected", element);
     }
 

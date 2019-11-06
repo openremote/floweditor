@@ -1,7 +1,7 @@
 import { project, input, FlowNode, ConnectionLine } from "..";
 
 export class Shortcuts {
-    public actions: { keys: string[], action: () => void }[] = [
+    public actions: { keys: string[], requireCtrl?: boolean, action: () => void }[] = [
         {
             keys: ["Delete", "Backspace"],
             action: () => {

@@ -56,11 +56,11 @@ export class RuleBrowser extends LitElement {
                 break;
             case Status.Success:
                 result = html`${this.retrievedRules.length === 0 ?
-                    html`<span>No rules to display...</span>` :
+                    html`<span>No rules to display</span>` :
                     this.retrievedRules.map((r: GlobalRuleset) => this.getButton(r))}`;
                 break;
             case Status.Failure:
-                result = html`<span>Failed to load rules...</span>`;
+                result = html`<span>Failed to load rules</span>`;
                 break;
         }
         return html`
