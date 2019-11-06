@@ -200,7 +200,7 @@ export class InternalPicker extends LitElement {
             if (e.target.clientHeight < e.target.scrollHeight) {
                 return e.stopPropagation();
             }
-        }}" @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}"></textarea>`;
+        }}" @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}">${this.internal.value || ""}</textarea>`;
     }
 
     private get numberInput(): TemplateResult {

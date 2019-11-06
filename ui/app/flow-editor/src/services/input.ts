@@ -3,7 +3,7 @@ import { project, SelectableElement } from "..";
 import { List } from "linqts";
 
 export class Input extends EventEmitter {
-    public selected: Element[] = [];
+    public selected: SelectableElement[] = [];
     public selectables: SelectableElement[] = [];
     private keysCurrentlyHeld: string[] = [];
 
@@ -19,24 +19,28 @@ export class Input extends EventEmitter {
         this.setMaxListeners(256);
     }
 
-    public select(element: Element, forceMultipleSelection = false) {
+    public select(element: SelectableElement, forceMultipleSelection = false) {
         if (!this.mutliselectEnabled && !forceMultipleSelection) { this.clearSelection(); }
         if (this.selected.includes(element)) { return; }
-        this.selected.push(element);
         this.emit("selected", element);
+        if (element.selected) {
+            this.selected.push(element);
+        }
     }
 
-    public deselect(element: Element) {
+    public deselect(element: SelectableElement) {
         const index = this.selected.indexOf(element);
         if (index === -1) {
             console.warn("Attempt to deselect nonexistent node");
             return;
         }
-        this.selected.splice(index, 1);
         this.emit("deselected", element);
+        if (!element.selected) {
+            this.selected.splice(index, 1);
+        }
     }
 
-    public handleSelection(element: Element, neverDeselect = false) {
+    public handleSelection(element: SelectableElement, neverDeselect = false) {
         if (!this.mutliselectEnabled && this.selected.length > 1) {
             this.select(element);
         } else if (this.selected.includes(element) && !neverDeselect) {

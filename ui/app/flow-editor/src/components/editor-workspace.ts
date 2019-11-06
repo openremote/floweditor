@@ -84,8 +84,8 @@ export class EditorWorkspace extends LitElement {
         });
 
         this.addEventListener("contextmenu", (e) => {
-            const selectedNodes = input.selected.filter((s) => s instanceof FlowNode) as FlowNode[];
-            const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine) as ConnectionLine[];
+            const selectedNodes = input.selected.filter((s) => s instanceof FlowNode && s.selected) as FlowNode[];
+            const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine && s.selected) as ConnectionLine[];
 
             const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
                 {
@@ -111,16 +111,9 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     icon: "delete",
-                    label: "Delete node",
-                    action: () => selectedNodes.forEach((n) => project.removeNode(n.node)),
-                    disabled: selectedNodes.length === 0
-                },
-                {
-                    type: "button",
-                    icon: "content-cut",
-                    label: "Cut connection",
-                    action: () => selectedConnections.forEach((n) => project.removeConnection(n.connection)),
-                    disabled: selectedConnections.length === 0
+                    label: "Delete",
+                    action: () => { selectedNodes.forEach((n) => project.removeNode(n.node)); selectedConnections.forEach((n) => project.removeConnection(n.connection)); },
+                    disabled: selectedNodes.length === 0 && selectedConnections.length === 0
                 },
                 { type: "separator" },
                 {
@@ -150,8 +143,8 @@ export class EditorWorkspace extends LitElement {
     }
 
     private copy(x: number, y: number) {
-        const selectedNodes = input.selected.filter((s) => s instanceof FlowNode) as FlowNode[];
-        const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine) as ConnectionLine[];
+        const selectedNodes = input.selected.filter((s) => s instanceof FlowNode && s.selected) as FlowNode[];
+        const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine && s.selected) as ConnectionLine[];
         copyPasteManager.putInClipboard({
             nodes: selectedNodes.map((n) => n.node),
             connections: selectedConnections.map((c) => c.connection)
