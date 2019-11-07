@@ -2,8 +2,9 @@ import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
-import { project } from "..";
+import { project, newIds } from "..";
 import { Utilities } from "../utils";
+import { FlowNode } from "./flow-node";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -101,6 +102,7 @@ export class NodeMenuItem extends LitElement {
             height: workspace.clientRect.height,
         })) {
             const copy = CopyMachine.copy(this.node);
+            newIds.add(copy.id);
             copy.position = workspace.offsetToWorld({ x: e.offsetX - workspace.offsetLeft, y: e.offsetY - workspace.offsetTop });
             project.addNode(copy);
         }

@@ -1,7 +1,7 @@
 import { html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { EditorWorkspace, SelectableElement, project, Project, nodeConverter, input } from "..";
+import { EditorWorkspace, SelectableElement, project, nodeConverter, newIds } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
@@ -14,18 +14,29 @@ export class FlowNode extends SelectableElement {
 
     private identityDeleted = false;
 
+
     constructor() {
         super();
     }
 
-    protected firstUpdated() {
+    protected async firstUpdated() {
         super.firstUpdated();
+
         this.workspace.addEventListener("pan", this.setTranslate);
         this.workspace.addEventListener("zoom", this.setTranslate);
         project.addListener("cleared", this.forceUpdate);
         project.addListener("connectionremoved", this.linkIdentity);
         this.minimal = (this.node.displayCharacter || "").length !== 0;
         this.bringToFront();
+        if (newIds.has(this.node.id)) {
+            await this.updateComplete;
+            await this.updateComplete;
+            const size = this.getBoundingClientRect();
+            this.node.position.x -= size.width / 2 / this.workspace.camera.zoom;
+            this.node.position.y -= size.height / 2 / this.workspace.camera.zoom;
+            this.setTranslate();
+            newIds.delete(this.node.id);
+        }
     }
 
     private forceUpdate = () => { this.requestUpdate(); };

@@ -50,6 +50,7 @@ export const input = new Input();
 export const modal = new ModalService();
 export const exporter = new Exporter();
 export const shortcuts = new Shortcuts();
+export const newIds: Set<string> = new Set<string>();
 
 window.addEventListener("load", () => {
     integration.initialise();
