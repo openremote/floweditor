@@ -20,7 +20,7 @@ export class Project extends EventEmitter {
 
     constructor() {
         super();
-        this.setMaxListeners(256);
+        this.setMaxListeners(1024);
     }
 
     public get isCurrentlyConnecting() {

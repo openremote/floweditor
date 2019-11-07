@@ -35,7 +35,7 @@ export class EditorWorkspace extends LitElement {
     constructor() {
         super();
         project.addListener("nodeadded", (n: Node) => {
-            this.nodeElements.push(html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`);
+            this.nodeElements.push(html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`);
             this.requestUpdate();
         });
 

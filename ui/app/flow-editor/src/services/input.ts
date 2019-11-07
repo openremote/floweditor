@@ -16,7 +16,7 @@ export class Input extends EventEmitter {
             this.keysCurrentlyHeld = [];
         });
         project.addListener("cleared", () => { this.clearSelection(); });
-        this.setMaxListeners(256);
+        this.setMaxListeners(1024);
     }
 
     public select(element: SelectableElement, forceMultipleSelection = false) {

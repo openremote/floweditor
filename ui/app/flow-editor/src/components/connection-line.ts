@@ -55,23 +55,23 @@ export class ConnectionLine extends SelectableElement {
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
         project.addListener("connectionremoved", this.nodeChanged);
     }
-
+    
     public disconnectedCallback() {
         super.disconnectedCallback();
         project.removeListener("connectionremoved", this.nodeChanged);
     }
-
+    
     private nodeChanged = () => { this.requestUpdate(); };
-
+    
     protected render() {
         if (this.fromNodeElement) { this.fromNodeElement.removeEventListener("updated", this.nodeChanged); }
         if (this.toNodeElement) { this.toNodeElement.removeEventListener("updated", this.nodeChanged); }
-
+        
         this.fromNodeElement = IdentityDomLink.map[this.connection.from.nodeId];
         this.toNodeElement = IdentityDomLink.map[this.connection.to.nodeId];
         this.fromElement = IdentityDomLink.map[this.connection.from.id];
         this.toElement = IdentityDomLink.map[this.connection.to.id];
-
+        
         if (!this.fromNodeElement || !this.toNodeElement || !this.fromElement || !this.toElement) {
             console.warn("Attempt to render invalid connection");
             return html``;

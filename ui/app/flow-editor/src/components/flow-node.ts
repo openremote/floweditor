@@ -20,8 +20,8 @@ export class FlowNode extends SelectableElement {
 
     protected firstUpdated() {
         super.firstUpdated();
-        this.workspace.addEventListener("pan", this.forceUpdate);
-        this.workspace.addEventListener("zoom", this.forceUpdate);
+        this.workspace.addEventListener("pan", this.setTranslate);
+        this.workspace.addEventListener("zoom", this.setTranslate);
         project.addListener("cleared", this.forceUpdate);
         project.addListener("connectionremoved", this.linkIdentity);
         this.minimal = (this.node.displayCharacter || "").length !== 0;
@@ -139,8 +139,8 @@ export class FlowNode extends SelectableElement {
 
     public disconnectedCallback() {
         this.identityDeleted = delete IdentityDomLink.map[this.node.id];
-        this.workspace.removeEventListener("pan", this.forceUpdate);
-        this.workspace.removeEventListener("zoom", this.forceUpdate);
+        this.workspace.removeEventListener("pan", this.setTranslate);
+        this.workspace.removeEventListener("zoom", this.setTranslate);
         project.removeListener("cleared", this.forceUpdate);
         project.removeListener("connectionremoved", this.linkIdentity);
         super.disconnectedCallback();
@@ -169,8 +169,7 @@ export class FlowNode extends SelectableElement {
             this.style.background = null;
         }
 
-        const pos = this.workspace.worldToOffset(this.node.position);
-        this.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${this.workspace.camera.zoom})`;
+        this.setTranslate();
         this.style.boxShadow = this.selected ? "var(--highlight) 0 0 0 3px" : null;
 
         const title = this.minimal ?
@@ -184,12 +183,19 @@ export class FlowNode extends SelectableElement {
         ${title}
         ${this.node.inputs.length > 0 ? inputSide : spacer}
         ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) =>
-            html`<internal-picker @picked="${() => {
+            html`<internal-picker @picked="${async () => {
                 project.unsavedState = true;
+                await this.updateComplete;
                 this.dispatchEvent(new CustomEvent("updated"));
             }}" .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
         `;
+    }
+
+    private setTranslate = () => {
+        const pos = this.workspace.worldToOffset(this.node.position);
+        this.style.transform = `translate(${pos.x}px, ${pos.y}px) scale(${this.workspace.camera.zoom})`;
+        this.dispatchEvent(new CustomEvent("updated"));
     }
 
     public bringToFront() {
@@ -210,7 +216,7 @@ export class FlowNode extends SelectableElement {
             x: this.node.position.x + e.movementX / this.workspace.camera.zoom,
             y: this.node.position.y + e.movementY / this.workspace.camera.zoom
         };
-        this.requestUpdate();
+        this.setTranslate();
         project.unsavedState = true;
         this.dispatchEvent(new CustomEvent("dragged"));
     }
@@ -229,8 +235,8 @@ export class FlowNode extends SelectableElement {
 
     private delete() {
         this.identityDeleted = delete IdentityDomLink.map[this.node.id];
-        this.workspace.removeEventListener("pan", this.forceUpdate);
-        this.workspace.removeEventListener("zoom", this.forceUpdate);
+        this.workspace.removeEventListener("pan", this.setTranslate);
+        this.workspace.removeEventListener("zoom", this.setTranslate);
         project.removeListener("cleared", this.forceUpdate);
         project.removeListener("connectionremoved", this.linkIdentity);
         super.disconnectedCallback();
