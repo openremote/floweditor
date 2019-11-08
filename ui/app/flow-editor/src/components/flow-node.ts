@@ -46,7 +46,7 @@ export class FlowNode extends SelectableElement {
             white-space: nowrap;
             min-width: 80px;
             min-height: 80px;
-            background: rgb(200,200,200);
+            background: rgba(200,200,200, 0.85);
 
             display: grid;
             grid-template-columns: auto auto auto;

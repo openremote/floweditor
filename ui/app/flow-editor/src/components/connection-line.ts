@@ -85,7 +85,7 @@ export class ConnectionLine extends SelectableElement {
         const to = this.toElement.connectionPosition;
         const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
-        return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 6 : 4)}px;"><polyline id="${this.polylineId}"
+        return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 5 : 3)}px;"><polyline id="${this.polylineId}"
         selected="${this.selected}"
         points="
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
