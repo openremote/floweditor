@@ -22,6 +22,7 @@ export class RuleBrowser extends LitElement {
         }
         or-icon{
             width: 18px;
+            vertical-align: text-top;
         }
         or-icon[icon=loading]{
             animation: spin 600ms infinite linear;

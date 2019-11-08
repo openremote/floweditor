@@ -58,15 +58,16 @@ export class TopBar extends LitElement {
     protected render() {
         return html`
         <span class="title">Flow Editor</span>
-        <a class="button" @click="${this.save}">Save ${project.existingFlowRuleName}${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
+        <a class="button" @click="${() => project.clear(true)}">New</a>
+        <a class="button" @click="${this.save}">Save <i>${project.existingFlowRuleName}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
 
-        <a class="debug button" @click="${() => { console.log(project); }}">project</a>
+        <!-- <a class="debug button" @click="${() => { console.log(project); }}">project</a>
         <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); }}">IdentityDomLink.map</a>
         <a class="debug button" @click="${() => { console.log(input.selectables); }}">input.selectables</a>
-        <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a>
+        <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a> -->
 
         <a class="button right">Log out</a>
         `;

@@ -14,7 +14,6 @@ export class FlowNode extends SelectableElement {
 
     private identityDeleted = false;
 
-
     constructor() {
         super();
     }

@@ -68,7 +68,7 @@ export class Project extends EventEmitter {
         };
     }
 
-    public async clear() {
+    public async clear(alsoResetProject = false) {
         input.clearSelection();
         this.nodes.forEach((n) => {
             this.removeNode(n);
@@ -76,7 +76,10 @@ export class Project extends EventEmitter {
         await this.workspace.updateComplete;
         this.nodes = [];
         this.connections = [];
-        this.unsavedState = true;
+        this.unsavedState = !alsoResetProject;
+        if (alsoResetProject) {
+            this.setCurrentProject(-1, null, null);
+        }
         this.emit("cleared");
     }
 
