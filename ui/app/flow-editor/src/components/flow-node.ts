@@ -10,9 +10,6 @@ export class FlowNode extends SelectableElement {
 
     @property({ type: Boolean, reflect: true }) private minimal = false;
     @property({ attribute: false }) private isBeingDragged = false;
-    @property({ attribute: false }) private deleted = false;
-
-    private identityDeleted = false;
 
     constructor() {
         super();
@@ -148,7 +145,6 @@ export class FlowNode extends SelectableElement {
     }
 
     public disconnectedCallback() {
-        this.identityDeleted = delete IdentityDomLink.map[this.node.id];
         this.workspace.removeEventListener("pan", this.setTranslate);
         this.workspace.removeEventListener("zoom", this.setTranslate);
         project.removeListener("cleared", this.forceUpdate);
@@ -157,21 +153,11 @@ export class FlowNode extends SelectableElement {
     }
 
     protected updated() {
-        if (project.nodes.filter((n) => n.id === this.node.id).length === 0) {
-            this.delete();
-            return;
-        }
         this.linkIdentity();
         this.dispatchEvent(new CustomEvent("updated"));
     }
 
     protected render() {
-        if (this.deleted) {
-            this.style.pointerEvents = "none";
-            this.style.display = "none";
-            return html``;
-        }
-
         if (this.minimal) {
             this.addEventListener("mousedown", this.startDrag);
             this.style.background = `var(--${this.node.type.toLowerCase()}-color)`;
@@ -238,18 +224,6 @@ export class FlowNode extends SelectableElement {
     }
 
     private linkIdentity = () => {
-        if (!this.identityDeleted) {
-            IdentityDomLink.map[this.node.id] = this;
-        }
-    }
-
-    private delete() {
-        this.identityDeleted = delete IdentityDomLink.map[this.node.id];
-        this.workspace.removeEventListener("pan", this.setTranslate);
-        this.workspace.removeEventListener("zoom", this.setTranslate);
-        project.removeListener("cleared", this.forceUpdate);
-        project.removeListener("connectionremoved", this.linkIdentity);
-        super.disconnectedCallback();
-        this.deleted = true;
+        IdentityDomLink.map[this.node.id] = this;
     }
 }

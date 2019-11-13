@@ -1,11 +1,10 @@
 import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
+import { repeat } from "lit-element/node_modules/lit-html/directives/repeat";
 import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager, shortcuts } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
-import { OrAssetTree, OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
-import { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "..";
-import manager from "@openremote/core";
+import { ContextMenuButton, ContextMenuSeparator } from "..";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { LightNodeCollection } from "../models/light-node-collection";
 
@@ -25,7 +24,6 @@ export class EditorWorkspace extends LitElement {
     private readonly zoomLowerBound = .2;
     private readonly zoomUpperBound = 10;
     private readonly renderBackground = false;
-    private nodeElements: TemplateResult[] = [];
 
     private cachedClientRect: ClientRect;
     public get clientRect() {
@@ -35,7 +33,6 @@ export class EditorWorkspace extends LitElement {
     constructor() {
         super();
         project.addListener("nodeadded", (n: Node) => {
-            this.nodeElements.push(html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`);
             this.requestUpdate();
         });
 
@@ -44,7 +41,6 @@ export class EditorWorkspace extends LitElement {
         });
 
         project.addListener("cleared", () => {
-            this.nodeElements = [];
             this.requestUpdate();
         });
 
@@ -212,8 +208,10 @@ export class EditorWorkspace extends LitElement {
     protected render() {
         this.style.backgroundImage = this.renderBackground ? "url('src/grid.png')" : null;
         return html`
-        ${this.nodeElements}
-        <!-- ${project.nodes.map((n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)} -->
+        ${repeat(
+            project.nodes,
+            (i) => i.id,
+            (n, index) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
             <line style="display: 
