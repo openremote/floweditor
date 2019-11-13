@@ -1,11 +1,11 @@
 import { html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { EditorWorkspace, SelectableElement, project, nodeConverter, newIds } from "..";
+import { EditorWorkspace, SelectableElement, project, nodeConverter, newIds, input } from "..";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
-    @property({ converter: nodeConverter, reflect: true }) public node: Node;
+    @property({ converter: nodeConverter }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
 
     @property({ type: Boolean, reflect: true }) private minimal = false;
@@ -17,14 +17,14 @@ export class FlowNode extends SelectableElement {
 
     protected async firstUpdated() {
         super.firstUpdated();
-
+        this.linkIdentity();
         this.workspace.addEventListener("pan", this.setTranslate);
         this.workspace.addEventListener("zoom", this.setTranslate);
         project.addListener("cleared", this.forceUpdate);
         project.addListener("connectionremoved", this.linkIdentity);
         this.minimal = (this.node.displayCharacter || "").length !== 0;
         this.bringToFront();
-        if (newIds.has(this.node.id)) {
+        if (newIds.has(this.node.id)) { // node centering has to keep track of which nodes were created by the user
             await this.updateComplete;
             await this.updateComplete;
             const size = this.getBoundingClientRect();
@@ -32,6 +32,9 @@ export class FlowNode extends SelectableElement {
             this.node.position.y -= size.height / 2 / this.workspace.camera.zoom;
             this.setTranslate();
             newIds.delete(this.node.id);
+        }
+        if (this.minimal) {
+            this.addEventListener("mousedown", this.startDrag);
         }
     }
 
@@ -152,14 +155,13 @@ export class FlowNode extends SelectableElement {
         super.disconnectedCallback();
     }
 
-    protected updated() {
+    protected async updated() {
         this.linkIdentity();
         this.dispatchEvent(new CustomEvent("updated"));
     }
 
     protected render() {
         if (this.minimal) {
-            this.addEventListener("mousedown", this.startDrag);
             this.style.background = `var(--${this.node.type.toLowerCase()}-color)`;
         } else {
             this.style.background = null;
@@ -200,7 +202,6 @@ export class FlowNode extends SelectableElement {
 
     private startDrag = (e: MouseEvent) => {
         if (e.buttons !== 1) { return; }
-
         this.bringToFront();
         window.addEventListener("mouseup", this.stopDrag);
         window.addEventListener("mousemove", this.onDrag);

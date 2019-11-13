@@ -1,8 +1,9 @@
 import { html, customElement, css, property } from "lit-element";
-import { NodeSocket, NodeConnection } from "@openremote/model";
+import { NodeConnection } from "@openremote/model";
 import { IdentityDomLink, IdentityAssigner } from "node-structure";
-import { Utilities, SelectableElement, EditorWorkspace, FlowNode, project } from "..";
+import { SelectableElement, EditorWorkspace, FlowNode, project } from "..";
 import { FlowNodeSocket } from "./flow-node-socket";
+import { ResizeObserver } from "resize-observer";
 
 @customElement("connection-line")
 export class ConnectionLine extends SelectableElement {
@@ -16,7 +17,7 @@ export class ConnectionLine extends SelectableElement {
 
     private fromElement: FlowNodeSocket;
     private toElement: FlowNodeSocket;
-
+    private resizeObserver: ResizeObserver;
     private readonly fancyLine = false;
 
     constructor() {
@@ -53,32 +54,42 @@ export class ConnectionLine extends SelectableElement {
     protected firstUpdated() {
         super.firstUpdated();
         this.setHandle(this.shadowRoot.getElementById(this.polylineId));
-        project.addListener("connectionremoved", this.nodeChanged);
     }
-    
+
     public disconnectedCallback() {
         super.disconnectedCallback();
+        this.resizeObserver.disconnect();
         project.removeListener("connectionremoved", this.nodeChanged);
     }
-    
-    private nodeChanged = () => { this.requestUpdate(); };
-    
-    protected render() {
-        if (this.fromNodeElement) { this.fromNodeElement.removeEventListener("updated", this.nodeChanged); }
-        if (this.toNodeElement) { this.toNodeElement.removeEventListener("updated", this.nodeChanged); }
-        
-        this.fromNodeElement = IdentityDomLink.map[this.connection.from.nodeId];
-        this.toNodeElement = IdentityDomLink.map[this.connection.to.nodeId];
-        this.fromElement = IdentityDomLink.map[this.connection.from.id];
-        this.toElement = IdentityDomLink.map[this.connection.to.id];
-        
-        if (!this.fromNodeElement || !this.toNodeElement || !this.fromElement || !this.toElement) {
-            console.warn("Attempt to render invalid connection");
-            return html``;
-        }
 
-        this.fromNodeElement.addEventListener("updated", this.nodeChanged);
-        this.toNodeElement.addEventListener("updated", this.nodeChanged);
+    private nodeChanged = () => { this.requestUpdate(); };
+
+    private get isInvalid() {
+        return (!this.fromNodeElement || !this.toNodeElement || !this.fromElement || !this.toElement);
+    }
+
+    protected render() {
+        if (this.isInvalid) {
+            this.fromNodeElement = IdentityDomLink.map[this.connection.from.nodeId];
+            this.toNodeElement = IdentityDomLink.map[this.connection.to.nodeId];
+            this.fromElement = IdentityDomLink.map[this.connection.from.id];
+            this.toElement = IdentityDomLink.map[this.connection.to.id];
+            if (this.isInvalid) {
+                console.warn(this.fromNodeElement);
+                console.warn(this.toNodeElement);
+                console.warn(this.fromElement);
+                console.warn(this.toElement);
+
+                console.warn("Attempt to render invalid connection");
+                return html``;
+            } else {
+                this.fromNodeElement.addEventListener("updated", this.nodeChanged);
+                this.toNodeElement.addEventListener("updated", this.nodeChanged);
+                this.resizeObserver = new ResizeObserver(this.nodeChanged);
+                this.resizeObserver.observe(this.fromNodeElement);
+                this.resizeObserver.observe(this.toNodeElement);
+            }
+        }
 
         const parentSize = this.workspace.clientRect;
         const from = this.fromElement.connectionPosition;

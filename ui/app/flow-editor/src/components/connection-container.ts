@@ -1,4 +1,5 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
+import { LitElement, html, customElement, property } from "lit-element";
+import { repeat } from "lit-html/directives/repeat";
 import { project, EditorWorkspace } from "..";
 
 @customElement("connection-container")
@@ -19,6 +20,6 @@ export class ConnectionContainer extends LitElement {
     }
 
     protected render() {
-        return html`${project.connections.map((c) => html`<connection-line .workspace="${this.workspace}" .connection="${c}"></connection-line>`)}`;
+        return html`${repeat(project.connections, (c) => c.from.id + c.to.id, (c) => html`<connection-line .workspace="${this.workspace}" .connection="${c}"></connection-line>`)}`;
     }
 }

@@ -1,5 +1,5 @@
 import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
-import { repeat } from "lit-element/node_modules/lit-html/directives/repeat";
+import { repeat } from "lit-html/directives/repeat";
 import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager, shortcuts } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
@@ -211,7 +211,7 @@ export class EditorWorkspace extends LitElement {
         ${repeat(
             project.nodes,
             (i) => i.id,
-            (n, index) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
+            (n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
             <line style="display: 

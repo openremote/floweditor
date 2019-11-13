@@ -20,7 +20,7 @@ export class Input extends EventEmitter {
     }
 
     public select(element: SelectableElement, forceMultipleSelection = false) {
-        if (!this.mutliselectEnabled && !forceMultipleSelection) { this.clearSelection(); }
+        if (!this.multiSelectedEnabled && !forceMultipleSelection) { this.clearSelection(); }
         if (this.selected.includes(element)) { return; }
         this.emit("selected", element);
         if (element.selected) {
@@ -41,7 +41,7 @@ export class Input extends EventEmitter {
     }
 
     public handleSelection(element: SelectableElement, neverDeselect = false) {
-        if (!this.mutliselectEnabled && this.selected.length > 1) {
+        if (!this.multiSelectedEnabled && this.selected.length > 1) {
             this.select(element);
         } else if (this.selected.includes(element) && !neverDeselect) {
             this.deselect(element);
@@ -50,8 +50,8 @@ export class Input extends EventEmitter {
         }
     }
 
-    public clearSelection() {
-        if (this.mutliselectEnabled) { return; }
+    public clearSelection(ignoreMultiselect = false) {
+        if (this.multiSelectedEnabled && !ignoreMultiselect) { return; }
         this.selected.forEach((e) => this.emit("deselected", e));
         this.selected = [];
         this.emit("selectioncleared");
@@ -61,7 +61,7 @@ export class Input extends EventEmitter {
         return this.keysCurrentlyHeld.includes(key);
     }
 
-    public get mutliselectEnabled() {
+    public get multiSelectedEnabled() {
         return this.isHeld("Shift") || this.isHeld("Control");
     }
 

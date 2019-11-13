@@ -14,9 +14,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@types/resize-observer-browser": "^0.1.2",
     "core-util-is": "^1.0.2",
     "linqts": "^1.12.6",
-    "lit-element": "^2.2.0"
+    "lit-element": "^2.2.0",
+    "resize-observer": "^1.0.0"
   },
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^2.3.0",

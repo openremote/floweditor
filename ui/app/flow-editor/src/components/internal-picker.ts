@@ -2,10 +2,11 @@ import { LitElement, property, customElement, html, css, TemplateResult } from "
 import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
-import { modal } from "..";
+import { modal, project } from "..";
 import rest from "@openremote/rest";
 import manager from "@openremote/core";
 import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
+import { ResizeObserver } from "resize-observer";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -15,6 +16,8 @@ export class InternalPicker extends LitElement {
     @property({ type: Array }) private attributeNames: { name: string, label: string }[] = [];
     @property({ type: Object }) private selectedAsset: Asset;
     @property({ type: Boolean }) private assetIntialised = false;
+
+    private resizeObserver: ResizeObserver;
 
     constructor() {
         super();
@@ -32,11 +35,9 @@ export class InternalPicker extends LitElement {
                 display: flex;
                 flex-direction: column;
             }
-
             input{
                 border: 0;
             }
-
             textarea, input[type=text], input[type=number], select
             {
                 font-family: inherit;
@@ -45,7 +46,6 @@ export class InternalPicker extends LitElement {
                 width: auto;
                 border: none;
             }
-
             textarea{
                 min-width: 150px;
                 min-height: 37px;
@@ -55,14 +55,18 @@ export class InternalPicker extends LitElement {
 
     protected firstUpdated() {
         this.addEventListener("contextmenu", (e) => e.stopPropagation());
+        this.resizeObserver = new ResizeObserver((a, b) => {
+            const rect = a[0]!.contentRect;
+            project.unsavedState = true;
+            this.node.size = { x: rect.width - 20, y: rect.height - 20 };
+        });
+        this.resizeObserver.observe(this);
     }
 
     protected render() {
         switch (this.internal.picker.type) {
             case PickerType.ASSET_ATTRIBUTE:
-                if (this.internal.value && !this.assetIntialised) {
-                    this.readAssetOnCreation();
-                }
+                if (this.internal.value && !this.assetIntialised) { this.readAssetOnCreation(); }
                 return this.assetAttributeInput;
             case PickerType.COLOR:
                 return this.colorInput;
@@ -83,7 +87,7 @@ export class InternalPicker extends LitElement {
     }
 
     private async readAssetOnCreation() {
-        this.populateAttributeNames();
+        await this.populateAttributeNames();
     }
 
     private get assetTreeTemplate() {
@@ -196,11 +200,12 @@ export class InternalPicker extends LitElement {
     }
 
     private get multilineInput(): TemplateResult {
+        const sizeString = this.node.size ? `width:${this.node.size.x}px; height:${this.node.size.y}px` : ``;
         return html`<textarea @wheel="${(e: any) => {
             if (e.target.clientHeight < e.target.scrollHeight) {
                 return e.stopPropagation();
             }
-        }}" @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}">${this.internal.value || ""}</textarea>`;
+        }}" style="${sizeString}" @input="${(e: any) => this.setValue(e.target.value)}" placeholder="${this.internal.name}">${this.internal.value || ""}</textarea>`;
     }
 
     private get numberInput(): TemplateResult {

@@ -1,4 +1,6 @@
 import { project, input, FlowNode, ConnectionLine } from "..";
+import { SelectableElement } from "../components/selectable-element";
+import { List } from "linqts";
 
 export class Shortcuts {
     public actions: { keys: string[], requireCtrl?: boolean, action: () => void }[] = [
@@ -15,13 +17,10 @@ export class Shortcuts {
             keys: ["KeyA"],
             requireCtrl: true,
             action: () => {
-                const allSelectables = input.selectables;
-                if (allSelectables.filter((s) => s.selected).length !== 0) {
-                    allSelectables.forEach((s) => {
-                        input.deselect(s);
-                    });
+                if (input.selected.length > 0) {
+                    input.clearSelection(true);
                 } else {
-                    allSelectables.forEach((s) => {
+                    input.selectables.forEach((s) => {
                         input.select(s, true);
                     });
                 }

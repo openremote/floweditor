@@ -2,23 +2,17 @@ import { LitElement, property } from "lit-element";
 import { input } from "..";
 
 export class SelectableElement extends LitElement {
-    @property({ attribute: false }) private isSelected = false;
-    private selectableHandle: Element;
-    private _deleted = false;
+    @property({ type: Boolean }) private isSelected = false;
+    @property({ attribute: false }) private selectableHandle: Element;
 
-    constructor() {
-        super();
+    protected firstUpdated() {
+        this.setHandle(this);
         input.selectables.push(this);
         input.addListener("selected", this.onSelected);
         input.addListener("deselected", this.onDeselected);
     }
 
-    protected firstUpdated() {
-        this.setHandle(this);
-    }
-
     public get selected() {
-        if (this._deleted) { return false; }
         return this.isSelected;
     }
 
@@ -28,15 +22,16 @@ export class SelectableElement extends LitElement {
 
     public disconnectedCallback() {
         super.disconnectedCallback();
+        if (this.selected) {
+            input.selected.splice(input.selected.indexOf(this), 1);
+        }
         this.isSelected = false;
         input.removeListener("selected", this.onSelected);
         input.removeListener("deselected", this.onDeselected);
-        this._deleted = true;
-        // input.selectables.splice(input.selectables.indexOf(this), 1);
+        input.selectables.splice(input.selectables.indexOf(this), 1);
     }
 
     public setHandle(element: Element) {
-        if (this._deleted) { return; }
         if (this.selectableHandle) {
             this.selectableHandle.removeEventListener("mousedown", this.handleSelection);
         }
@@ -45,21 +40,18 @@ export class SelectableElement extends LitElement {
     }
 
     private readonly onSelected = (e: Element) => {
-        if (this._deleted) { return; }
         if (e === this) {
             this.isSelected = true;
         }
     }
 
     private readonly onDeselected = (e: Element) => {
-        if (this._deleted) { return; }
         if (e === this) {
             this.isSelected = false;
         }
     }
 
     private readonly handleSelection = (event: MouseEvent) => {
-        if (this._deleted) { return; }
         if (event.buttons === 1) {
             input.handleSelection(this);
             event.stopPropagation();
