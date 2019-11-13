@@ -2,8 +2,8 @@ import { LitElement, property, customElement, html, css, TemplateResult } from "
 import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
-import { PopupModal } from "./popup-modal";
 import { modal } from "..";
+import rest from "@openremote/rest";
 import manager from "@openremote/core";
 import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 
@@ -102,7 +102,7 @@ export class InternalPicker extends LitElement {
     }
 
     private async populateAttributeNames() {
-        const response = await manager.rest.api.AssetResource.queryAssets({
+        const response = await rest.api.AssetResource.queryAssets({
             ids: [this.internal.value.assetId],
             select: {
                 excludeAttributes: false, excludeAttributeMeta: false

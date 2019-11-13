@@ -1,5 +1,6 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
+import openremote from "@openremote/core";
 import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
 import { project, newIds } from "..";

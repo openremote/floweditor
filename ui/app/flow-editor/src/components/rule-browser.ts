@@ -1,7 +1,7 @@
 import { LitElement, customElement, css, property, html } from "lit-element";
 import { GlobalRuleset } from "@openremote/model";
 import { Utilities, exporter, project, modal, Status } from "..";
-import manager from "@openremote/core";
+import rest from "@openremote/rest";
 
 @customElement("rule-browser")
 export class RuleBrowser extends LitElement {
@@ -41,7 +41,7 @@ export class RuleBrowser extends LitElement {
     protected async firstUpdated() {
         this.status = Status.Loading;
         try {
-            const response = await manager.rest.api.RulesResource.getGlobalRulesets();
+            const response = await rest.api.RulesResource.getGlobalRulesets();
             this.retrievedRules = response.data;
             this.status = Status.Success;
         } catch (error) {
@@ -73,7 +73,7 @@ export class RuleBrowser extends LitElement {
 
     private loadRule = async (r: GlobalRuleset) => {
         this.status = Status.Loading;
-        const ruleset = (await manager.rest.api.RulesResource.getGlobalRuleset(r.id)).data;
+        const ruleset = (await rest.api.RulesResource.getGlobalRuleset(r.id)).data;
         const collection = exporter.jsonToFlow(ruleset.rules);
         project.fromNodeCollection(collection);
         project.setCurrentProject(r.id, r.name, collection.description);
