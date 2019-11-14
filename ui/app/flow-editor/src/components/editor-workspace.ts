@@ -198,9 +198,7 @@ export class EditorWorkspace extends LitElement {
         this.updateBackground();
     }
 
-    public fitCamera(nodes: Node[]) {
-        const padding = 25;
-
+    public fitCamera(nodes: Node[], padding = 25) {
         const enumerable = new List<Node>();
         enumerable.AddRange(nodes);
         const XouterleastNode = enumerable.OrderBy((a) => a.position.x).First() as Node;

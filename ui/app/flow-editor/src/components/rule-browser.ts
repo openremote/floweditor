@@ -66,8 +66,7 @@ export class RuleBrowser extends LitElement {
         return html`
         <div style="display: flex; flex-direction: column; width: auto; align-items: stretch;">
         ${result}
-        </div>
-        `
+        </div>`;
     }
 
     private loadRule = async (r: GlobalRuleset) => {

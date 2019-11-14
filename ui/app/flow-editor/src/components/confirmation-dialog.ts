@@ -3,7 +3,7 @@ import { LitElement, html, customElement, css, property } from "lit-element";
 @customElement("confirmation-dialog")
 export class ConfirmationDialog extends LitElement {
     @property({ type: String }) public agreeText = "Yes";
-    @property({ type: String }) public disagreeText = "No";
+    @property({ type: String }) public disagreeText = "Cancel";
     @property({ type: String }) public question = "Are you sure?";
 
     public static get styles() {
@@ -26,12 +26,12 @@ export class ConfirmationDialog extends LitElement {
         return html`
         <div class="question">${this.question}</div>
         <div class="container">
-            <or-input type="button" unElevated label="${this.disagreeText}"
-                @click="${() => {this.dispatchEvent(new CustomEvent("disagreed"));}}">
+            <or-input type="button" unElevated label="${this.agreeText}"
+                @click="${() => { this.dispatchEvent(new CustomEvent("agreed")); }}">
             </or-input>
 
-            <or-input type="button" label="${this.agreeText}"
-                @click="${() => {this.dispatchEvent(new CustomEvent("agreed"));}}">
+            <or-input type="button" label="${this.disagreeText}"
+                @click="${() => { this.dispatchEvent(new CustomEvent("disagreed")); }}">
             </or-input>
         </div>
         `;

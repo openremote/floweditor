@@ -52,7 +52,11 @@ export class TopBar extends LitElement {
         return html`
         <span class="title">Flow Editor</span>
         <a class="button" @click="${() => {
-                modal.confirmation(() => { project.clear(true); }, "New project");
+                if (project.unsavedState) {
+                    modal.confirmation(() => { project.clear(true); }, "New project");
+                } else {
+                    project.clear(true);
+                }
             }}">New</a>
         <a class="button" @click="${this.save}">Save <i>${Utilities.ellipsis(project.existingFlowRuleName)}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
