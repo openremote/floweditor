@@ -15,7 +15,6 @@ export class NodePanel extends LitElement {
             flex-direction: column;
             align-items: center;
         }
-
         .category{
             display: flex;
             width: 80%;
@@ -24,21 +23,17 @@ export class NodePanel extends LitElement {
             text-align: center;
             padding: 15px 15px 0 15px;
         }
-
         .category span{
             margin:0;
             color: rgb(125,125,125);
             padding: 0 0 15px 0 ;
         }
-
         .input-node{ background-color: var(--input-color); }
         .processor-node{ background-color: var(--processor-color); }
         .output-node{ background-color: var(--output-color); }
-
         .input-node:hover{ background-color: var(--input-color-h); }
         .processor-node:hover{ background-color: var(--processor-color-h); }
-        .output-node:hover{ background-color: var(--output-color-h); }
-        `;
+        .output-node:hover{ background-color: var(--output-color-h); }`;
     }
 
     protected firstUpdated() {

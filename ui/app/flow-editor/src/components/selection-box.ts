@@ -28,12 +28,10 @@ export class SelectionBox extends LitElement {
             transition: stroke-width 120ms;
             z-index: 1000;
         }
-
         rect{
             fill: var(--highlight-faded);
             outline: solid 1px var(--highlight);
-        }
-        `;
+        }`;
     }
 
     protected render() {

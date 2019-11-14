@@ -49,8 +49,7 @@ export class InternalPicker extends LitElement {
             textarea{
                 min-width: 150px;
                 min-height: 37px;
-            }
-        `;
+            }`;
     }
 
     protected firstUpdated() {

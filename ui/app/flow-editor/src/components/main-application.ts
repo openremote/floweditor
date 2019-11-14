@@ -15,8 +15,7 @@ export class MainApplication extends LitElement {
             grid-template-areas: 
                 "topbar topbar"
                 "node-panel workspace";
-        }
-        `;
+        }`;
     }
 
     protected firstUpdated() {

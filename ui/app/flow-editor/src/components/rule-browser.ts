@@ -34,8 +34,7 @@ export class RuleBrowser extends LitElement {
             100%{
                 transform: rotateZ(360deg);
             }
-        }
-        `;
+        }`;
     }
 
     protected async firstUpdated() {

@@ -62,8 +62,7 @@ export class PopupModal extends LitElement {
             width: 100%;
             text-transform: uppercase;
             font-weight: bold;
-        }
-        `;
+        }`;
     }
 
     protected firstUpdated() {

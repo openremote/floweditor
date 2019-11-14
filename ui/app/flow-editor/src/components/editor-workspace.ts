@@ -11,22 +11,21 @@ import { EditorWorkspaceStyle } from "../styles/editor-workspace-style";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
-    @property({ attribute: false, reflect: true }) public camera: Camera = { x: 0, y: 0, zoom: 1 };
+    @property({ attribute: false }) public camera: Camera = { x: 0, y: 0, zoom: 1 };
 
     @property({ attribute: false }) public topNodeZindex = 1;
+    @property({ attribute: false }) public renderBackground = true;
+    @property({ attribute: false }) public scrollSensitivity = 1.25;
+    @property({ attribute: false }) public zoomLowerBound = .2;
+    @property({ attribute: false }) public zoomUpperBound = 10;
 
     @property({ attribute: false }) private connectionDragging = false;
     @property({ attribute: false }) private connectionFrom: { x: number, y: number } = { x: 0, y: 0 };
     @property({ attribute: false }) private connectionTo: { x: number, y: number } = { x: 0, y: 0 };
 
     private isPanning = false;
-
-    private readonly scrollSensitivity = 1.25;
-    private readonly zoomLowerBound = .2;
-    private readonly zoomUpperBound = 10;
-    private readonly renderBackground = false;
-
     private cachedClientRect: ClientRect;
+
     public get clientRect() {
         return this.cachedClientRect;
     }

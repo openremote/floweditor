@@ -34,21 +34,17 @@ export class ConnectionLine extends SelectableElement {
                 pointer-events: none;
                 stroke-linejoin: round;
             }
-            
             polyline, line{
                 position: absolute;
                 pointer-events: all;
             }
-            
             polyline:hover, line:hover, polyline[selected = true], line[selected = true]{
                 stroke: var(--highlight);
             }
-
             text{
                 fill: red;
                 stroke: none;
-            }
-        `;
+            }`;
     }
 
     protected firstUpdated() {

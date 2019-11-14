@@ -39,7 +39,6 @@ export class NodeMenuItem extends LitElement {
             cursor:grab;
             transition: box-shadow 150ms;
         }
-        
         .node-drag-item{
             z-index: 5000;
             position: absolute;
@@ -47,8 +46,7 @@ export class NodeMenuItem extends LitElement {
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 15px;
             filter: opacity(90%);
             pointer-events: none;
-        }
-        `;
+        }`;
     }
 
     protected render() {
