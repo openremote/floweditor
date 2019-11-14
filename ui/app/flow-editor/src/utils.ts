@@ -21,4 +21,18 @@ export class Utilities {
     public static humanLike(input: string) {
         return (input[0].toUpperCase() + input.toLowerCase().substr(1)).replace("_", " ");
     }
+
+    public static ellipsis(input: String, maxLength = 15, ellipsis = "...") {
+        if (ellipsis.length > maxLength) {
+            console.warn("Invalid ellipsis parameters: given ellipsis is longer than the max length");
+            return input;
+        }
+        if (!input) {
+            return "";
+        }
+        if (input.length > 8) {
+            return input.substr(0, maxLength - ellipsis.length) + ellipsis;
+        }
+        return input;
+    }
 }

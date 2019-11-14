@@ -80,7 +80,7 @@ export class RuleBrowser extends LitElement {
     }
 
     private getButton = (r: GlobalRuleset) => {
-        return html`<div class="list-button" @click="${() => { this.loadRule(r); }}">${r.name} 
+        return html`<div class="list-button" @click="${() => { this.loadRule(r); }}">${Utilities.ellipsis(r.name, 50)} 
         ${r.error ? html`<or-icon title="${Utilities.humanLike(r.status)}" icon="alert-outline"></or-icon>` : null}
         ${r.enabled ? null : html`<or-icon title="Disabled" icon="sleep"></or-icon>`}
         </div>`;

@@ -14,7 +14,7 @@ export class EditorWorkspace extends LitElement {
     @property({ attribute: false }) public camera: Camera = { x: 0, y: 0, zoom: 1 };
 
     @property({ attribute: false }) public topNodeZindex = 1;
-    @property({ attribute: false }) public renderBackground = true;
+    @property({ attribute: false }) public renderBackground = false;
     @property({ attribute: false }) public scrollSensitivity = 1.25;
     @property({ attribute: false }) public zoomLowerBound = .2;
     @property({ attribute: false }) public zoomUpperBound = 10;

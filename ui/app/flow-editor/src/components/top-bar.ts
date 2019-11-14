@@ -51,8 +51,10 @@ export class TopBar extends LitElement {
     protected render() {
         return html`
         <span class="title">Flow Editor</span>
-        <a class="button" @click="${() => project.clear(true)}">New</a>
-        <a class="button" @click="${this.save}">Save <i>${project.existingFlowRuleName}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
+        <a class="button" @click="${() => {
+                modal.confirmation(() => { project.clear(true); }, "New project");
+            }}">New</a>
+        <a class="button" @click="${this.save}">Save <i>${Utilities.ellipsis(project.existingFlowRuleName)}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
@@ -77,7 +79,7 @@ export class TopBar extends LitElement {
         }
     }
 
-    private async showRuleBrowser() {
+    private showRuleBrowser() {
         modal.element.content = html`<rule-browser @ruleloaded="${() => modal.element.close()}"></rule-browser>`;
         modal.element.header = "Select a Flow rule";
         modal.element.open();

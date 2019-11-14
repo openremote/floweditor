@@ -56,9 +56,9 @@ export class InternalPicker extends LitElement {
         this.addEventListener("contextmenu", (e) => e.stopPropagation());
         this.resizeObserver = new ResizeObserver((a, b) => {
             const rect = a[0]!.contentRect;
-            project.unsavedState = true;
             this.node.size = { x: rect.width - 20, y: rect.height - 20 };
         });
+        this.addEventListener("mousedown", () => { project.unsavedState = true; });
         this.resizeObserver.observe(this);
     }
 
