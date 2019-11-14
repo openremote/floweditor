@@ -1491,11 +1491,6 @@
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.5.3.tgz#1c3b71b091eaeaf5924538006b7f70603ce63d38"
   integrity sha512-Jugo5V/1bS0fRhy2z8+cUAHEyWOATaz4rbyLVvcFs7+dXp5HfwpEwzF1Q11bB10ApUqHf+yTauxI0UXQDwGrbA==
 
-"@types/resize-observer-browser@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@types/resize-observer-browser/-/resize-observer-browser-0.1.2.tgz#615d567c094c6500d760289be0ce48c9798672c9"
-  integrity sha512-4mrAenvAObVQthn05TldKpZ/xW236GyCrpyQvH4hmKVWdobpqM8Fub5Kn4lTNZRKANZ3+P1bq8Zp53asvklKTQ==
-
 "@types/selenium-webdriver@^3.0.0":
   version "3.0.16"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.16.tgz#50a4755f8e33edacd9c406729e9b930d2451902a"

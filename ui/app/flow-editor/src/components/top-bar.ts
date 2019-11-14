@@ -64,10 +64,11 @@ export class TopBar extends LitElement {
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
         <a class="button">Help</a>
 
-        <a class="debug button" @click="${() => { console.log(project); }}">project</a>
-        <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); }}">IdentityDomLink.map</a>
-        <a class="debug button" @click="${() => { console.log(input.selectables); }}">input.selectables</a>
-        <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a>
+        <!-- <a class="debug button" @click="${() => { console.log(project); }}">project</a> -->
+        <!-- <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); }}">IdentityDomLink.map</a> -->
+        <!-- <a class="debug button" @click="${() => { console.log(input.selectables); }}">input.selectables</a> -->
+        <!-- <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a> -->
+        <!-- <a class="debug button" @click="${() => { console.log(JSON.stringify({ nodes: project.nodes, connections: project.connections }, null, 2)); }}">print json</a> -->
 
         <a class="button right">Log out</a>
         `;
