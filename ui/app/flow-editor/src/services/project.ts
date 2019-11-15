@@ -1,6 +1,6 @@
 import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/model";
 import { EventEmitter } from "events";
-import { SocketTypeMatcher, } from "node-structure";
+import { SocketTypeMatcher } from "node-structure";
 import { input, } from "..";
 import { EditorWorkspace } from "../components/editor-workspace";
 

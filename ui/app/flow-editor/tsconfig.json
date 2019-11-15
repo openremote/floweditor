@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "module": "esNext",
+    "module": "commonjs",
     "target": "es6",
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
+    "types": [
+      "mocha",
+    ],
     "lib": [
       "dom",
       "es7"

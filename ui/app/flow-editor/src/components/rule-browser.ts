@@ -1,6 +1,6 @@
 import { LitElement, customElement, css, property, html } from "lit-element";
 import { GlobalRuleset } from "@openremote/model";
-import { Utilities, exporter, project, modal, Status } from "..";
+import { Utilities, exporter, project, Status } from "..";
 import rest from "@openremote/rest";
 
 @customElement("rule-browser")

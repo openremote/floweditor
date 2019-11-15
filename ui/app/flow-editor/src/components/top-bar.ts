@@ -1,9 +1,7 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
+import { LitElement, html, customElement, css, } from "lit-element";
 import { IdentityDomLink } from "node-structure";
-import { project, modal, exporter, shortcuts, input } from "..";
+import { project, modal, exporter, input } from "..";
 import { OrInputChangedEvent } from "@openremote/or-input";
-import manager from "@openremote/core";
-import { GlobalRuleset } from "@openremote/model";
 import { Utilities } from "../utils";
 
 @customElement("top-bar")
