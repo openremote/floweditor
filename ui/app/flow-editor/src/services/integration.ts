@@ -24,9 +24,10 @@ export class Integration extends EventEmitter {
             keycloakUrl: "http://localhost:8080/auth",
             auth: Auth.KEYCLOAK,
             autoLogin: true,
-            realm: "master"
+            realm: "master",
         }).then((result) => {
             this.integrationStatus = result ? Status.Success : Status.Failure;
+            openremote.language = "nl";
             this.emit("initialise", result);
         }).catch((e) => {
             this.integrationStatus = Status.Failure;

@@ -1,11 +1,10 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
-import openremote from "@openremote/core";
 import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
 import { project, newIds } from "..";
 import { Utilities } from "../utils";
-import { FlowNode } from "./flow-node";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {
@@ -63,13 +62,17 @@ export class NodeMenuItem extends LitElement {
         }
 
         return html`
-        ${this.node.name}
+        ${this.flowNodeName}
         ${this.isDragging ? this.dragNodeTemplate : null}
         `;
     }
 
     private get dragNodeTemplate() {
-        return html`<div class="node-drag-item" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px">${this.node.name}</div>`;
+        return html`<div class="node-drag-item" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px">${this.flowNodeName}</div>`;
+    }
+
+    private get flowNodeName() {
+        return i18next.t(this.node.name, Utilities.humanLike(this.node.name));
     }
 
     private startDrag = (e: MouseEvent) => {

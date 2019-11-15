@@ -3,6 +3,7 @@ import { IdentityDomLink } from "node-structure";
 import { project, modal, exporter, input } from "..";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { Utilities } from "../utils";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {
@@ -48,7 +49,7 @@ export class TopBar extends LitElement {
 
     protected render() {
         return html`
-        <span class="title">Flow Editor</span>
+        <span class="title">${i18next.t("flowEditor")}</span>
         <a class="button" @click="${() => {
                 if (project.unsavedState) {
                     modal.confirmation(() => { project.clear(true); }, "New project");
@@ -56,10 +57,10 @@ export class TopBar extends LitElement {
                     project.clear(true);
                 }
             }}">New</a>
-        <a class="button" @click="${this.save}">Save <i>${Utilities.ellipsis(project.existingFlowRuleName)}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
+        <a class="button" @click="${this.save}">${i18next.t("save")} <i>${Utilities.ellipsis(project.existingFlowRuleName)}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
-        <a class="button">Help</a>
+        <!-- <a class="button">Help</a> -->
 
         <!-- <a class="debug button" @click="${() => { console.log(project); }}">project</a> -->
         <!-- <a class="debug button" @click="${() => { console.log(IdentityDomLink.map); }}">IdentityDomLink.map</a> -->
@@ -67,7 +68,7 @@ export class TopBar extends LitElement {
         <!-- <a class="debug button" @click="${() => { console.log({ nodes: project.nodes, connections: project.connections }); }}">print node structure</a> -->
         <!-- <a class="debug button" @click="${() => { console.log(JSON.stringify({ nodes: project.nodes, connections: project.connections }, null, 2)); }}">print json</a> -->
 
-        <a class="button right">Log out</a>
+        <!-- <a class="button right">Log out</a> -->
         `;
     }
 
@@ -92,15 +93,15 @@ export class TopBar extends LitElement {
         let chosenDesc = "";
         modal.element.content = html`
             <div style="display: flex; flex-direction: column; width: auto; justify-content: space-between; align-items: stretch;">
-            <or-input style="margin-bottom: 16px; width:100%;" required type="text" itle="Name" placeholder="Name" label="Name"
+            <or-input style="margin-bottom: 16px; width:100%;" required type="text" label="${i18next.t("name")}"
             @or-input-changed="${(e: OrInputChangedEvent) => { chosenName = e.detail.value; }}"
             ></or-input>
-            <or-input style="margin-bottom: 16px; width:100%;" fullwidth type="textarea" title="Description" placeholder="Description" label="Description"
+            <or-input style="margin-bottom: 16px; width:100%;" fullwidth type="textarea" label="${i18next.t("description")}"
             @or-input-changed="${(e: OrInputChangedEvent) => { chosenDesc = e.detail.value; }}"
             ></or-input>
             <div>
-                <or-input style="text-align: left; margin-right: 10px" type="button" label="Cancel" @click="${modal.element.close}"></or-input>
-                <or-input style="text-align: right" type="button" unelevated label="Save as global ruleset" @click="${() => {
+                <or-input style="text-align: left; margin-right: 10px" type="button" label="${i18next.t("cancel")}" @click="${modal.element.close}"></or-input>
+                <or-input style="text-align: right" type="button" unelevated label="${i18next.t("save")}" @click="${() => {
                 if (!chosenName) { return; }
                 exporter.exportAsNew(project.toNodeCollection(chosenName, chosenDesc));
                 modal.element.close();

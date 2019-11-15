@@ -2,6 +2,7 @@ import { LitElement, customElement, css, property, html } from "lit-element";
 import { GlobalRuleset } from "@openremote/model";
 import { Utilities, exporter, project, Status } from "..";
 import rest from "@openremote/rest";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("rule-browser")
 export class RuleBrowser extends LitElement {
@@ -81,7 +82,7 @@ export class RuleBrowser extends LitElement {
     private getButton = (r: GlobalRuleset) => {
         return html`<div class="list-button" @click="${() => { this.loadRule(r); }}">${Utilities.ellipsis(r.name, 50)} 
         ${r.error ? html`<or-icon title="${Utilities.humanLike(r.status)}" icon="alert-outline"></or-icon>` : null}
-        ${r.enabled ? null : html`<or-icon title="Disabled" icon="sleep"></or-icon>`}
+        ${r.enabled ? null : html`<or-icon title="${i18next.t("disabled") as string}" icon="sleep"></or-icon>`}
         </div>`;
     }
 }

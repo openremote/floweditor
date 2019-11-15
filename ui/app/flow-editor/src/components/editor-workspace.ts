@@ -1,6 +1,6 @@
-import { LitElement, html, customElement, css, property, TemplateResult } from "lit-element";
+import { LitElement, html, customElement, property } from "lit-element";
 import { repeat } from "lit-html/directives/repeat";
-import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager, shortcuts } from "..";
+import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
@@ -8,6 +8,7 @@ import { ContextMenuButton, ContextMenuSeparator } from "..";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { LightNodeCollection } from "../models/light-node-collection";
 import { EditorWorkspaceStyle } from "../styles/editor-workspace-style";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -87,7 +88,7 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     icon: "content-copy",
-                    label: "Copy",
+                    label: i18next.t("copy", "Copy"),
                     action: () => {
                         const pos = this.offsetToWorld({ x: e.offsetX, y: e.offsetY });
                         this.copy(pos.x, pos.y);
@@ -97,7 +98,7 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     icon: "content-paste",
-                    label: "Paste",
+                    label: i18next.t("paste", "Paste"),
                     action: () => {
                         const pos = this.offsetToWorld({ x: e.offsetX, y: e.offsetY });
                         this.paste(pos.x, pos.y);
@@ -107,7 +108,7 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     icon: "delete",
-                    label: "Delete",
+                    label: i18next.t("delete", "Delete"),
                     action: () => { selectedNodes.forEach((n) => project.removeNode(n.node)); selectedConnections.forEach((n) => project.removeConnection(n.connection)); },
                     disabled: selectedNodes.length === 0 && selectedConnections.length === 0
                 },
@@ -115,7 +116,7 @@ export class EditorWorkspace extends LitElement {
                 {
                     type: "button",
                     icon: "fit-to-page-outline",
-                    label: "Fit view to selected nodes",
+                    label: i18next.t("fitViewToSelectedNodes", "Fit view to selected nodes"),
                     action: () => this.fitCamera(selectedNodes.map((n) => n.node)),
                     disabled: selectedNodes.length === 0
                 },
@@ -176,8 +177,8 @@ export class EditorWorkspace extends LitElement {
         </svg>
         <selection-box .workspace="${this}"></selection-box>
         <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
-            ${!this.isCameraInDefaultPosition ? html`<or-input type="button" icon="vector-square" @click="${this.resetCamera}" label="Reset view"></or-input>` : null}
-            ${project.nodes.length !== 0 ? html`<or-input type="button" icon="fit-to-page-outline" @click="${() => this.fitCamera(project.nodes)}" label="Fit view"></or-input>` : null}
+            ${!this.isCameraInDefaultPosition ? html`<or-input type="button" icon="vector-square" @click="${this.resetCamera}" label="${i18next.t("resetView", "Reset view")}"></or-input>` : null}
+            ${project.nodes.length !== 0 ? html`<or-input type="button" icon="fit-to-page-outline" @click="${() => this.fitCamera(project.nodes)}" label="${i18next.t("fitView", "Fit view")}"></or-input>` : null}
         </div>
         <!-- <div class="view-options" style="z-index: ${this.topNodeZindex + 1}">
             ${!this.isCameraInDefaultPosition ? html`<div class="button" @click="${this.resetCamera}">Reset view</div>` : null}

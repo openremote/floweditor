@@ -11,6 +11,7 @@
     "max-line-length": false,
     "ordered-imports": false,
     "member-ordering": false,
+    "prefer-for-of": false,
     "object-literal-sort-keys": false,
     "ban-types": false,
     "array-type": false,

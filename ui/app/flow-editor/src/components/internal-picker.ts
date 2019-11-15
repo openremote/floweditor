@@ -7,6 +7,7 @@ import rest from "@openremote/rest";
 import manager from "@openremote/core";
 import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 import { ResizeObserver } from "resize-observer";
+import i18next from "i18next";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -150,17 +151,17 @@ export class InternalPicker extends LitElement {
     private get assetAttributeInput(): TemplateResult {
         const hasAssetSelected = this.selectedAsset;
         return html`
-        <or-input type="button" fullwidth label="${hasAssetSelected ? this.selectedAsset.name : "Select asset"}" 
+        <or-input type="button" fullwidth label="${hasAssetSelected ? this.selectedAsset.name : (i18next.t("selectAsset", "Select asset"))}" 
         icon="format-list-bulleted-square" 
         @click="${() => {
                 modal.element.content = this.assetTreeTemplate;
-                modal.element.header = "Pick an asset";
+                modal.element.header = i18next.t("assets", "Assets");
                 modal.element.open();
             }}"></or-input>
             ${
             hasAssetSelected ? (
                 this.attributeNames.length === 0 ?
-                    html`<span>No rule state attributes</span>` :
+                    html`<span>${i18next.t("noRuleStateAttributes", "No rule state attributes")}</span>` :
                     html`        
                 <select id="attribute-select" style="margin-top: 10px" @input="${(e: any) => {
                             const value: AssetAttributeInternalValue = {

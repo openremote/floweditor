@@ -1,6 +1,7 @@
 import { LitElement, html, customElement, css } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
 import { integration } from "..";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {
@@ -67,9 +68,9 @@ export class NodePanel extends LitElement {
         }
 
         return html`
-        <div class="category"> <span>Input</span> ${inputs}</div>
-        <div class="category"> <span>Processor</span> ${processors}</div>
-        <div class="category"> <span>Output</span> ${outputs}</div>
+        <div class="category"> <span>${i18next.t("input", "Input")}</span> ${inputs}</div>
+        <div class="category"> <span>${i18next.t("processors", "Processors")}</span> ${processors}</div>
+        <div class="category"> <span>${i18next.t("output", "Output")}</span> ${outputs}</div>
         `;
     }
 }

@@ -3,6 +3,8 @@ import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { EditorWorkspace, SelectableElement, project, nodeConverter, newIds, input } from "..";
 import { FlowNodeStyle } from "../styles/flow-node-style";
+import { i18next } from "@openremote/or-translate";
+import { Utilities } from "../utils";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
@@ -69,8 +71,8 @@ export class FlowNode extends SelectableElement {
         this.style.boxShadow = this.selected ? "var(--highlight) 0 0 0 3px" : null;
 
         const title = this.minimal ?
-            html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${this.node.displayCharacter}</div>` :
-            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${this.node.name || "invalid"}</div>`;
+            html`<div class="title minimal" ?singlechar="${this.node.displayCharacter.length === 1}">${i18next.t(this.node.displayCharacter)}</div>` :
+            html`<div class="title ${this.node.type.toLowerCase()}" @mousedown="${this.startDrag}">${i18next.t(this.node.name) || "invalid"}</div>`;
 
         const inputSide = html`<div class="socket-side inputs">${this.node.inputs.map((i) => html`<flow-node-socket ?renderlabel="${!this.minimal}" .socket="${i}" side="input"></flow-node-socket>`)}</div>`;
         const outputSide = html`<div class="socket-side outputs">${this.node.outputs.map((i) => html`<flow-node-socket ?renderlabel="${!this.minimal}" .socket="${i}" side="output"></flow-node-socket>`)}</div>`;

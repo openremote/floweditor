@@ -19,7 +19,16 @@ export class Utilities {
     }
 
     public static humanLike(input: string) {
-        return (input[0].toUpperCase() + input.toLowerCase().substr(1)).replace("_", " ");
+        const a = (input[0].toUpperCase() + input.toLowerCase().substr(1)).replace("_", " ");
+        let n = input[0].toUpperCase();
+        for (let i = 1; i < input.length; i++) {
+            const character = input[i];
+            if (character === character.toUpperCase()) {
+                n += " ";
+            }
+            n += character.toLowerCase();
+        }
+        return n;
     }
 
     public static ellipsis(input: String, maxLength = 15, ellipsis = "...") {

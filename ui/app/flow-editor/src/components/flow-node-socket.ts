@@ -3,6 +3,7 @@ import { project } from "..";
 import { NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { Utilities } from "../utils";
+import { i18next } from "@openremote/or-translate";
 
 @customElement("flow-node-socket")
 export class FlowNodeSocket extends LitElement {
@@ -109,7 +110,7 @@ export class FlowNodeSocket extends LitElement {
         const color = `var(--${this.socketTypeString})`;
         const socket = html`<div class="socket"><div class="circle" id=${this.circleId} style="background: ${color}"></div></div>`;
         if (!this.renderLabel) { return socket; }
-        const label = html`<div class="label">${this.socket.name}</div>`;
+        const label = html`<div class="label">${i18next.t(this.socket.name)}</div>`;
         if (this.side === "input") {
             return html`${socket}${label}`;
         } else {

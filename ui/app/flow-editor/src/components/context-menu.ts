@@ -1,5 +1,6 @@
 import { LitElement, property, customElement, html, css } from "lit-element";
 import { ContextMenuEntry, ContextMenuButton } from "..";
+import i18next from "i18next";
 
 @customElement("context-menu")
 export class ContextMenu extends LitElement {
@@ -115,7 +116,7 @@ export class ContextMenu extends LitElement {
                 }
             }
         );
-        return html`${elements.length > 0 ? elements : html`<div class="context-menu-button muted">Empty</div>`}`;
+        return html`${elements.length > 0 ? elements : html`<div class="context-menu-button muted">...</div>`}`;
     }
 
     private buttonTemplate(button: ContextMenuButton) {
