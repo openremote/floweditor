@@ -1,10 +1,10 @@
 import { html, customElement, css, property } from "lit-element";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
-import { EditorWorkspace, SelectableElement, project, nodeConverter, newIds, input } from "..";
+import { EditorWorkspace, SelectableElement, project, newIds } from "..";
 import { FlowNodeStyle } from "../styles/flow-node-style";
 import { i18next } from "@openremote/or-translate";
-import { Utilities } from "../utils";
+import { nodeConverter } from "../converters/node-converter";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {

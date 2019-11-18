@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var CopyPlugin = require("copy-webpack-plugin");
 var path = require("path");
 
 module.exports = {
@@ -24,8 +25,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             chunksSortMode: 'none',
             inject: false,
-            template: 'index.html'
-        })
+            favicon: "src/favicon.png",
+            template: 'src/index.html'
+        }),
+        new CopyPlugin([
+          { from: './src/style.css', to: './style.css' },
+        ]),
     ],
     module: {
         rules: [
@@ -49,7 +54,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.css$/,
+                test: /\.css$/i,
                 use: [
                     { loader: "css-loader" }
                 ]

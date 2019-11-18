@@ -6,7 +6,7 @@ import { Exporter } from "./services/exporter";
 import { Shortcuts } from "./services/shortcuts";
 import { CopyPasteManager } from "./services/copy-paste-manager";
 
-export { MainApplication as Application } from "./components/main-application";
+export { MainApplication as FlowEditor } from "./components/main-application";
 export { NodePanel } from "./components/node-panel";
 export { EditorWorkspace } from "./components/editor-workspace";
 export { TopBar } from "./components/top-bar";
@@ -35,13 +35,6 @@ export { ModalService } from "./services/modal";
 export { Exporter } from "./services/exporter";
 export { CopyPasteManager } from "./services/copy-paste-manager";
 
-export { Utilities } from "./utils";
-
-export { nodeConverter } from "./converters/node-converter";
-
-export { OrIcon } from "@openremote/or-icon";
-export { OrAssetTree } from "@openremote/or-asset-tree";
-export { OrInput, InputType } from "@openremote/or-input";
 export * from "@webcomponents/webcomponentsjs";
 
 export const integration = new Integration();
