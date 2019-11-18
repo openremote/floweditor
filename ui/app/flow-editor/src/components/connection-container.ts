@@ -1,6 +1,7 @@
 import { LitElement, html, customElement, property } from "lit-element";
 import { repeat } from "lit-html/directives/repeat";
-import { project, EditorWorkspace } from "..";
+import { EditorWorkspace } from "./editor-workspace";
+import { project } from "./main-application";
 
 @customElement("connection-container")
 export class ConnectionContainer extends LitElement {

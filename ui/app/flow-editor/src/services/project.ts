@@ -1,8 +1,8 @@
 import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/model";
 import { EventEmitter } from "events";
 import { SocketTypeMatcher } from "node-structure";
-import { input, } from "..";
 import { EditorWorkspace } from "../components/editor-workspace";
+import { input } from "../components/main-application";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];

@@ -1,6 +1,6 @@
-import { project, input, FlowNode, ConnectionLine } from "..";
-import { SelectableElement } from "../components/selectable-element";
-import { List } from "linqts";
+import { FlowNode } from "../components/flow-node";
+import { ConnectionLine } from "../components/connection-line";
+import { input, project } from "../components/main-application";
 
 export class Shortcuts {
     public actions: { keys: string[], requireCtrl?: boolean, action: () => void }[] = [

@@ -2,9 +2,9 @@ import { LitElement, html, customElement, css, property } from "lit-element";
 import { Node, NodeType } from "@openremote/model";
 import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
-import { project, newIds } from "..";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
+import { newIds, project } from "./main-application";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {

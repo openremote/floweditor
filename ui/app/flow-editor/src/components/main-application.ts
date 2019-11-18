@@ -1,11 +1,33 @@
 import { LitElement, html, customElement, css, property } from "lit-element";
-import { integration } from "..";
 import { Status } from "../models/status";
+import { Integration } from "../services/integration";
+import { CopyPasteManager } from "../services/copy-paste-manager";
+import { Project } from "../services/project";
+import { Input } from "../services/input";
+import { ModalService } from "../services/modal";
+import { Exporter } from "../services/exporter";
+import { Shortcuts } from "../services/shortcuts";
+
+export const integration = new Integration();
+export const copyPasteManager = new CopyPasteManager();
+export const project = new Project();
+export const input = new Input();
+export const modal = new ModalService();
+export const exporter = new Exporter();
+export const shortcuts = new Shortcuts();
+export const newIds: Set<string> = new Set<string>();
 
 @customElement("main-application")
 export class MainApplication extends LitElement {
     @property({ type: Boolean }) public showHeader = true;
     @property({ type: Boolean }) public showNodePanel = true;
+
+    constructor() {
+        super();
+        window.addEventListener("load", () => {
+            integration.initialise();
+        });
+    }
 
     static get styles() {
         return css`
@@ -42,7 +64,7 @@ export class MainApplication extends LitElement {
             "node-panel workspace"
             `;
         }
-        
+
         if (!this.showHeader) {
             this.style.gridTemplateAreas = this.style.gridTemplateAreas.replace("topbar topbar", "node-panel workspace");
         }

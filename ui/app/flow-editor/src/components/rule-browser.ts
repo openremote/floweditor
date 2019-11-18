@@ -1,10 +1,10 @@
 import { LitElement, customElement, css, property, html } from "lit-element";
 import { GlobalRuleset } from "@openremote/model";
-import {  exporter, project } from "..";
 import rest from "@openremote/rest";
 import { i18next } from "@openremote/or-translate";
 import { Utilities } from "../utils";
 import { Status } from "../models/status";
+import { exporter, project } from "./main-application";
 
 @customElement("rule-browser")
 export class RuleBrowser extends LitElement {

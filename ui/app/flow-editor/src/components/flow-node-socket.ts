@@ -1,9 +1,9 @@
 import { LitElement, customElement, property, html, css } from "lit-element";
-import { project } from "..";
 import { NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
+import { project } from "./main-application";
 
 @customElement("flow-node-socket")
 export class FlowNodeSocket extends LitElement {

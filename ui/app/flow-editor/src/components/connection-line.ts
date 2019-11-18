@@ -1,9 +1,12 @@
 import { html, customElement, css, property } from "lit-element";
 import { NodeConnection } from "@openremote/model";
 import { IdentityDomLink, IdentityAssigner } from "node-structure";
-import { SelectableElement, EditorWorkspace, FlowNode, project } from "..";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { ResizeObserver } from "resize-observer";
+import { SelectableElement } from "./selectable-element";
+import { EditorWorkspace } from "./editor-workspace";
+import { FlowNode } from "./flow-node";
+import { project } from "./main-application";
 
 @customElement("connection-line")
 export class ConnectionLine extends SelectableElement {

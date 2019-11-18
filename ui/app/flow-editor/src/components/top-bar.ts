@@ -1,9 +1,9 @@
 import { LitElement, html, customElement, css, } from "lit-element";
 import { IdentityDomLink } from "node-structure";
-import { project, modal, exporter, input } from "..";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
+import { project, modal, input, exporter } from "./main-application";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {

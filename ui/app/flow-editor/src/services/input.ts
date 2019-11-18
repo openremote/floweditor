@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
-import { project, SelectableElement } from "..";
 import { List } from "linqts";
+import { SelectableElement } from "../components/selectable-element";
+import { project } from "../components/main-application";
 
 export class Input extends EventEmitter {
     public selected: SelectableElement[] = [];

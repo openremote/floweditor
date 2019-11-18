@@ -1,5 +1,5 @@
 import { LitElement, property } from "lit-element";
-import { input } from "..";
+import { input } from "./main-application";
 
 export class SelectableElement extends LitElement {
     @property({ type: Boolean }) private isSelected = false;

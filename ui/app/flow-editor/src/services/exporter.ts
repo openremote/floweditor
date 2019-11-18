@@ -1,6 +1,6 @@
 import { NodeCollection, GlobalRuleset, RulesetLang } from "@openremote/model";
 import manager from "@openremote/core";
-import { project } from "..";
+import { project } from "../components/main-application";
 
 export class Exporter {
     public flowToJson(collection: NodeCollection) {

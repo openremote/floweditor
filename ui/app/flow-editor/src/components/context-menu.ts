@@ -1,6 +1,5 @@
 import { LitElement, property, customElement, html, css } from "lit-element";
-import { ContextMenuEntry, ContextMenuButton } from "..";
-import i18next from "i18next";
+import { ContextMenuEntry, ContextMenuButton } from "../models/context-menu-button";
 
 @customElement("context-menu")
 export class ContextMenu extends LitElement {

@@ -1,6 +1,6 @@
 import { ComplexAttributeConverter } from "lit-element";
-import { project } from "..";
 import { Node } from "@openremote/model";
+import { project } from "../components/main-application";
 
 export const nodeConverter: ComplexAttributeConverter<unknown, unknown> = {
     fromAttribute: (value: string) => {

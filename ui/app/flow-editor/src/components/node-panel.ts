@@ -1,7 +1,7 @@
 import { LitElement, html, customElement, css } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
-import { integration } from "..";
 import { i18next } from "@openremote/or-translate";
+import { integration } from "./main-application";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {

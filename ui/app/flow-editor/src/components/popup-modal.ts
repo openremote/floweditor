@@ -1,5 +1,5 @@
 import { customElement, LitElement, css, html, property, TemplateResult } from "lit-element";
-import { modal } from "..";
+import { modal } from "./main-application";
 
 @customElement("popup-modal")
 export class PopupModal extends LitElement {

@@ -1,14 +1,18 @@
 import { LitElement, html, customElement, property } from "lit-element";
 import { repeat } from "lit-html/directives/repeat";
-import { ConnectionLine, ContextMenu, FlowNode, Camera, project, input, copyPasteManager } from "..";
 import { Node, NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { List } from "linqts";
-import { ContextMenuButton, ContextMenuSeparator } from "..";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { LightNodeCollection } from "../models/light-node-collection";
 import { EditorWorkspaceStyle } from "../styles/editor-workspace-style";
 import { i18next } from "@openremote/or-translate";
+import { FlowNode } from "./flow-node";
+import { ConnectionLine } from "./connection-line";
+import { ContextMenuButton, ContextMenuSeparator } from "../models/context-menu-button";
+import { ContextMenu } from "./context-menu";
+import { project, input, copyPasteManager } from "./main-application";
+import { Camera } from "../models/camera";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {

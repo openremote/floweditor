@@ -2,12 +2,12 @@ import { LitElement, property, customElement, html, css, TemplateResult } from "
 import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
-import { modal, project } from "..";
 import rest from "@openremote/rest";
 import manager from "@openremote/core";
 import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 import { ResizeObserver } from "resize-observer";
 import i18next from "i18next";
+import { project, modal } from "./main-application";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
