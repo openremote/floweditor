@@ -1,60 +1,67 @@
-const path = require("path");
-const dist = path.resolve(__dirname, "dist");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require("path");
 
 module.exports = {
-  entry: "./src/index.ts",
-  mode: "development",
-  watch: true,
-  module: {
-    rules: [
-      // {
-      //   test: /\.tsx?$/,
-      //   loader: "ts-loader",
-      //   exclude: /node_modules/,
-      //   options: {
-      //     configFile: "tsconfig.json"
-      //   }
-      // },
-      {
-        test: /\.js$/,
-        use: ["source-map-loader"],
-        enforce: "pre",
-        exclude: [
-          /node_modules/
+    mode: 'development',
+    entry: {
+        'bundle': './src/index.js'
+    },
+    output: {
+        path: __dirname + "/dist",
+        filename: "[name].[hash].js",
+        publicPath: ""
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        port: 1234,
+        contentBase: './dist',
+        publicPath: "/" + __dirname.split(path.sep).slice(-1)[0]  + "/"
+    },
+    watchOptions: {
+        ignored: ['**/*.ts', 'node_modules']
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            chunksSortMode: 'none',
+            inject: false,
+            template: 'index.html'
+        })
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                enforce: "pre",
+                exclude: [
+                    /node_modules/
+                ]
+            },
+            {
+                test: /\.js$/,
+                include: function(modulePath) {
+                    return /(@webcomponents[\/|\\]shadycss|lit-css|styled-lit-element|lit-html|lit-element|@polymer|@lit|pwa-helpers)/.test(modulePath) || !/node_modules/.test(modulePath);
+                },
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "css-loader" }
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                loader: 'url-loader',
+                options: {
+                    outputPath: "images/",
+                    limit: 10000
+                }
+            }
         ]
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader',],
-      },
-    ]
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"]
-  },
-  watchOptions: {
-    ignored: ['**/*.ts', 'node_modules']
-  },
-  output: {
-    filename: "bundle.js",
-    path: dist
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Flow Editor",
-      filename: "index.html",
-      template: "src/index.html",
-      alwaysWriteToDisk: true,
-      minify: false
-    }),
-    new HtmlWebpackHarddiskPlugin({
-      outputPath: path.resolve(__dirname, "dist")
-    })
-  ]
+    }
 };
