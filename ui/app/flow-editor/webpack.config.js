@@ -9,13 +9,21 @@ module.exports = {
   watch: true,
   module: {
     rules: [
+      // {
+      //   test: /\.tsx?$/,
+      //   loader: "ts-loader",
+      //   exclude: /node_modules/,
+      //   options: {
+      //     configFile: "tsconfig.json"
+      //   }
+      // },
       {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-        exclude: /node_modules/,
-        options: {
-          configFile: "tsconfig.json"
-        }
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre",
+        exclude: [
+          /node_modules/
+        ]
       },
       {
         test: /\.css$/i,
@@ -29,6 +37,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
+  },
+  watchOptions: {
+    ignored: ['**/*.ts', 'node_modules']
   },
   output: {
     filename: "bundle.js",

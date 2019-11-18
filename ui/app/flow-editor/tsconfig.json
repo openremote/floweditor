@@ -1,18 +1,47 @@
+// {
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "target": "es6",
+//     "sourceMap": true,
+//     "experimentalDecorators": true,
+//     "allowSyntheticDefaultImports": true,
+//     "moduleResolution": "node",
+//     "types": [
+//       "mocha",
+//     ],
+//     "lib": [
+//       "dom",
+//       "es7"
+//     ]
+//   },
+//   "baseUrl": "./"
+// }
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es6",
+    "module": "esNext",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "noEmitOnError": true,
+    "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "types": [
-      "mocha",
-    ],
-    "lib": [
-      "dom",
-      "es7"
-    ]
+    "composite": true
   },
-  "baseUrl": "./"
+  "include": [
+    "./src"
+  ],
+  "references": [
+    { "path": "../../../openremote/ui/component/core" },
+    { "path": "../../../openremote/ui/component/or-translate" },
+    { "path": "../../../openremote/ui/component/rest" },
+    { "path": "../../../openremote/ui/component/or-input" },
+    { "path": "../../../openremote/ui/component/or-asset-tree" },
+    { "path": "../../../openremote/ui/component/or-icon" },
+  ]
 }

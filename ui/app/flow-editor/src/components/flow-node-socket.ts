@@ -43,6 +43,7 @@ export class FlowNodeSocket extends LitElement {
             display:inline-block;
             vertical-align: top;
             color: rgba(0,0,0,.5);
+            text-transform: lowercase;
         }
         .circle{
             background: grey;

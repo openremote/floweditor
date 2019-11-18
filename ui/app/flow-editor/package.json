@@ -6,9 +6,12 @@
   "main": "dist/bundle.js",
   "types": "src/index.ts",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "serve": "webpack-dev-server --open --port 1234",
+    "clean": "npx shx rm -rf dist",
+    "modelBuild": "node ../../model-build.js",
+    "modelWatch": "node ../../model-watch.js",
+    "build": "npx tsc -b && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack --mode production",
+    "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack-dev-server --port 1234 --mode development",
+    "watch": "npx tsc -b -w",
     "test": "mocha -opts ./src/test/mocha.opts ./src/**/*.spec.ts",
     "karma": "karma start --single-run --browsers Chrome karma.conf.js"
   },
@@ -37,7 +40,6 @@
     "karma-mocha": "^1.3.0",
     "mocha": "^6.2.2",
     "style-loader": "^1.0.0",
-    "ts-loader": "^6.2.0",
     "ts-node": "^8.5.2",
     "typescript": "^3.6.4",
     "webpack": "^4.41.1",
