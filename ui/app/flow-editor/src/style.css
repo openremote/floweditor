@@ -37,7 +37,7 @@ body {
     --processor-color: hsl(102, 58%, 39%);
     --output-color: hsl(282, 60%, 47%);
 
-    --input-color-h: hsl(222, 49%, 49%);
+    --input-color-h: hsl(222, 58%, 54%);
     --processor-color-h: hsl(102, 48%, 49%);
-    --output-color-h: hsl(282, 48%, 49%);
+    --output-color-h: hsl(282, 58%, 54%);
 }
