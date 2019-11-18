@@ -6,36 +6,14 @@ import { Exporter } from "./services/exporter";
 import { Shortcuts } from "./services/shortcuts";
 import { CopyPasteManager } from "./services/copy-paste-manager";
 
+import "@openremote/or-select";
+import "@openremote/or-asset-tree";
+import "@openremote/or-icon";
+import "@openremote/or-translate";
+
 export { MainApplication as FlowEditor } from "./components/main-application";
-export { NodePanel } from "./components/node-panel";
-export { EditorWorkspace } from "./components/editor-workspace";
-export { TopBar } from "./components/top-bar";
-export { NodeMenuItem } from "./components/node-menu-item";
-export { SelectableElement } from "./components/selectable-element";
-export { FlowNode } from "./components/flow-node";
-export { FlowNodeSocket } from "./components/flow-node-socket";
-export { ConnectionLine } from "./components/connection-line";
-export { ConnectionContainer } from "./components/connection-container";
-export { SelectionBox } from "./components/selection-box";
-export { ContextMenu } from "./components/context-menu";
-export { InternalPicker } from "./components/internal-picker";
-export { PopupModal } from "./components/popup-modal";
-export { RuleBrowser } from "./components/rule-browser";
-export { ConfirmationDialog } from "./components/confirmation-dialog";
-
 export { Camera } from "./models/camera";
-export { Status } from "./models/status";
 export { LightNodeCollection } from "./models/light-node-collection";
-export { ContextMenuEntry, ContextMenuButton, ContextMenuSeparator } from "./models/context-menu-button";
-
-export { Integration } from "./services/integration";
-export { Project } from "./services/project";
-export { Input } from "./services/input";
-export { ModalService } from "./services/modal";
-export { Exporter } from "./services/exporter";
-export { CopyPasteManager } from "./services/copy-paste-manager";
-
-export * from "@webcomponents/webcomponentsjs";
 
 export const integration = new Integration();
 export const copyPasteManager = new CopyPasteManager();

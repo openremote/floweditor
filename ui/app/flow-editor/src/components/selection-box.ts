@@ -1,6 +1,7 @@
 import { LitElement, customElement, property, html, css } from "lit-element";
-import { EditorWorkspace, input } from "..";
+import { input } from "..";
 import { Utilities } from "../utils";
+import { EditorWorkspace } from "./editor-workspace";
 
 @customElement("selection-box")
 export class SelectionBox extends LitElement {
