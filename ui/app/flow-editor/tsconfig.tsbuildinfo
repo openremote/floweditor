@@ -412,7 +412,7 @@
         "signature": "2265d2f0041b6c4cfd5297174f05271eac1e3f3a3bfd533914817a8678b3beae"
       },
       "./src/components/node-menu-item.ts": {
-        "version": "b967b3f4011fb995d9de83660d1a6dd841b8d2b41d8f1d39c0483904e6795d72",
+        "version": "e739aa33fda26ae69c21b7c6c14e8aa5bab6563e1c00be6ef4dfc9b0e1fbe908",
         "signature": "a4181a62de88e2a280b631b4bde4292cbad7d9b90d3b0de2de3a4dd25c03270f"
       },
       "./src/components/connection-container.ts": {
@@ -1905,8 +1905,8 @@
       }
     },
     "options": {
+      "module": 1,
       "target": 2,
-      "module": 99,
       "moduleResolution": 2,
       "lib": [
         "lib.dom.d.ts",
@@ -1918,6 +1918,7 @@
       "experimentalDecorators": true,
       "allowSyntheticDefaultImports": true,
       "composite": true,
+      "watch": true,
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
@@ -7822,17 +7823,37 @@
       "../../../node_modules/linqts/dist/src/enumerable.d.ts",
       "../../../node_modules/linqts/dist/index.d.ts",
       "./src/utils.ts",
+      "./src/components/flow-node-socket.ts",
       "./src/styles/editor-workspace-style.ts",
       "./src/styles/flow-node-style.ts",
+      "./src/converters/node-converter.ts",
+      "./src/components/selectable-element.ts",
+      "./src/components/flow-node.ts",
       "../../../node_modules/resize-observer/lib/contentrect.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserverentry.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobservercallback.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserver.d.ts",
+      "./src/components/connection-line.ts",
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
+      "./src/components/editor-workspace.ts",
+      "./src/services/project.ts",
+      "./src/services/input.ts",
+      "./src/components/popup-modal.ts",
       "./src/services/modal.ts",
+      "./src/services/exporter.ts",
+      "./src/services/shortcuts.ts",
+      "./src/components/main-application.ts",
+      "./src/components/node-panel.ts",
+      "./src/components/top-bar.ts",
+      "./src/components/node-menu-item.ts",
+      "./src/components/connection-container.ts",
+      "./src/components/selection-box.ts",
+      "./src/components/internal-picker.ts",
+      "./src/components/rule-browser.ts",
       "./src/components/confirmation-dialog.ts",
+      "./src/index.ts",
       "../../../node_modules/@types/chart.js/index.d.ts",
       "../../../node_modules/@types/geojson/index.d.ts",
       "../../../node_modules/@types/node/globals.d.ts",
@@ -8198,27 +8219,7 @@
       "../../../node_modules/@types/lodash-es/index.d.ts",
       "../../../node_modules/@types/mapbox-gl/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
-      "../../../node_modules/@types/simplebar/index.d.ts",
-      "./src/components/editor-workspace.ts",
-      "./src/index.ts",
-      "./src/components/selection-box.ts",
-      "./src/components/connection-container.ts",
-      "./src/components/node-menu-item.ts",
-      "./src/services/project.ts",
-      "./src/components/connection-line.ts",
-      "./src/components/flow-node.ts",
-      "./src/components/flow-node-socket.ts",
-      "./src/converters/node-converter.ts",
-      "./src/components/selectable-element.ts",
-      "./src/services/input.ts",
-      "./src/components/popup-modal.ts",
-      "./src/services/exporter.ts",
-      "./src/services/shortcuts.ts",
-      "./src/components/main-application.ts",
-      "./src/components/node-panel.ts",
-      "./src/components/top-bar.ts",
-      "./src/components/internal-picker.ts",
-      "./src/components/rule-browser.ts"
+      "../../../node_modules/@types/simplebar/index.d.ts"
     ]
   },
   "version": "3.6.4"

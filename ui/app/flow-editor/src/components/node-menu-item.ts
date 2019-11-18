@@ -37,8 +37,6 @@ export class NodeMenuItem extends LitElement {
             line-height: 22px;
             cursor:grab;
             transition: box-shadow 150ms;
-
-            text-transform: capitalize;
         }
         .node-drag-item{
             z-index: 5000;
