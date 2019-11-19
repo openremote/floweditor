@@ -19,6 +19,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDir": "src",
     "module": "commonjs",
     "target": "es6",
     "moduleResolution": "node",
@@ -31,10 +34,13 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "composite": true
+    "composite": true,
   },
   "include": [
     "./src"
+  ],
+  "exclude": [
+    "./src/test"
   ],
   "references": [
     { "path": "../../../openremote/ui/component/core" },

@@ -2,14 +2,14 @@
   "name": "node-structure",
   "version": "1.0.0",
   "description": "Node structure package for the flow editor",
-  "author": "Mestiez",
+  "author": "OpenRemote",
   "main": "dist/index.js",
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -b",
-    "test": "nyc --reporter=html mocha -r ts-node/register test/**/*.spec.ts"
+    "test": "yarn build && nyc --reporter=html mocha -r ./node_modules/ts-node/register test/**/*.ts"
   },
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "private": true,
   "devDependencies": {
     "@types/chai": "^4.2.5",
@@ -26,6 +26,7 @@
   },
   "workspaces": {
     "nohoist": [
+      "ts-node",
       "ts-node/**"
     ]
   }

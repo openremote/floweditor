@@ -19,11 +19,11 @@ export class Utilities {
     }
 
     public static humanLike(input: string) {
-        const a = (input[0].toUpperCase() + input.toLowerCase().substr(1)).replace("_", " ");
+        input = input.replace(/_+/gm, " ");
         let n = input[0].toUpperCase();
         for (let i = 1; i < input.length; i++) {
             const character = input[i];
-            if (character === character.toUpperCase()) {
+            if (character.match("[A-z]") && character === character.toUpperCase() && input[i - 1].trim().length !== 0) {
                 n += " ";
             }
             n += character.toLowerCase();
@@ -34,6 +34,9 @@ export class Utilities {
     public static ellipsis(input: String, maxLength = 15, ellipsis = "...") {
         if (ellipsis.length > maxLength) {
             console.warn("Invalid ellipsis parameters: given ellipsis is longer than the max length");
+            return input;
+        }
+        if (input.length < maxLength) {
             return input;
         }
         if (!input) {
