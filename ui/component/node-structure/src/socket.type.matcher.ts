@@ -7,7 +7,7 @@ export class SocketTypeMatcher {
     public static match(a: NodeDataType, b: NodeDataType) {
         return a === NodeDataType.ANY ||
             b === NodeDataType.ANY ||
-            SocketTypeMatcher.matches.find(t => t.type === a).matches.includes(b);
+            SocketTypeMatcher.matches.find((t) => t.type === a).matches.includes(b);
     }
     private static readonly matches: { type: NodeDataType, matches: NodeDataType[] }[] = [
         {
@@ -32,6 +32,12 @@ export class SocketTypeMatcher {
             type: NodeDataType.BOOLEAN,
             matches: [
                 NodeDataType.BOOLEAN,
+            ]
+        },
+        {
+            type: NodeDataType.COLOR,
+            matches: [
+                NodeDataType.COLOR,
             ]
         },
     ];

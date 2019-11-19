@@ -412,7 +412,7 @@
         "signature": "2265d2f0041b6c4cfd5297174f05271eac1e3f3a3bfd533914817a8678b3beae"
       },
       "./src/components/node-menu-item.ts": {
-        "version": "e739aa33fda26ae69c21b7c6c14e8aa5bab6563e1c00be6ef4dfc9b0e1fbe908",
+        "version": "b18dff34140b00b8f9e7ff6062a5c69b50d6bca9f9910bb1a202006609c54ca6",
         "signature": "a4181a62de88e2a280b631b4bde4292cbad7d9b90d3b0de2de3a4dd25c03270f"
       },
       "./src/components/connection-container.ts": {
@@ -7847,7 +7847,6 @@
       "./src/components/main-application.ts",
       "./src/components/node-panel.ts",
       "./src/components/top-bar.ts",
-      "./src/components/node-menu-item.ts",
       "./src/components/connection-container.ts",
       "./src/components/selection-box.ts",
       "./src/components/internal-picker.ts",
@@ -8219,7 +8218,8 @@
       "../../../node_modules/@types/lodash-es/index.d.ts",
       "../../../node_modules/@types/mapbox-gl/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
-      "../../../node_modules/@types/simplebar/index.d.ts"
+      "../../../node_modules/@types/simplebar/index.d.ts",
+      "./src/components/node-menu-item.ts"
     ]
   },
   "version": "3.6.4"

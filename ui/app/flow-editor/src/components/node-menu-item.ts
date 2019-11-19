@@ -45,6 +45,9 @@ export class NodeMenuItem extends LitElement {
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 15px;
             filter: opacity(90%);
             pointer-events: none;
+        }
+        .node-drag-item::first-letter{
+            text-transform: uppercase;
         }`;
     }
 

@@ -23,6 +23,7 @@ export class CopyMachine {
 
         minimalNode.type = node.type;
         minimalNode.position = { x: 0, y: 0 };
+        minimalNode.size = { x: 0, y: 0 };
 
         const clone: Node = JSON.parse(JSON.stringify(minimalNode));
         clone.id = IdentityAssigner.generateIdentity();
