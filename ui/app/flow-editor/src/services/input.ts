@@ -1,5 +1,4 @@
 import { EventEmitter } from "events";
-import { List } from "linqts";
 import { SelectableElement } from "../components/selectable-element";
 import { project } from "../components/main-application";
 

@@ -6,13 +6,13 @@
   "main": "dist/bundle.js",
   "types": "src/index.ts",
   "scripts": {
-    "clean": "npx shx rm -rf dist && npx shx rm -rf 'src/**/*.js'",
+    "clean": "npx shx rm -rf dist && cd src && del /s *.map.ts && del /s *.d.ts && del /s *.js",
     "modelBuild": "node ../../model-build.js",
     "modelWatch": "node ../../model-watch.js",
     "build": "npx tsc -b && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack --mode production",
     "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack-dev-server --mode development",
     "watch": "npx tsc -b -w",
-    "test": "yarn clean && nyc --reporter=html mocha -r ./node_modules/ts-node/register src/test/**/*.ts",
+    "test": "nyc --reporter=html mocha -r ./node_modules/ts-node/register src/test/**/*.ts",
     "karma": "karma start --single-run --browsers Chrome karma.conf.js"
   },
   "license": "AGPL-3.0-or-later",
