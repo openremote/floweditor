@@ -9,14 +9,17 @@ module.exports = {
     },
     output: {
         path: __dirname + "/dist",
-        filename: "[name].[hash].js",
+        filename: "[name].js",
         publicPath: ""
     },
     devtool: 'inline-source-map',
     devServer: {
         port: 1234,
         contentBase: './dist',
-        publicPath: "/" + __dirname.split(path.sep).slice(-1)[0]  + "/"
+        watchContentBase: true,
+        liveReload: true,
+        publicPath: "/" + __dirname.split(path.sep).slice(-1)[0]  + "/",
+
     },
     watchOptions: {
         ignored: ['**/*.ts', 'node_modules']

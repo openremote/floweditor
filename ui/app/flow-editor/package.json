@@ -11,7 +11,7 @@
     "modelWatch": "node ../../model-watch.js",
     "build": "npx tsc -b && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack --mode production",
     "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack-dev-server --mode development",
-    "watch": "npx tsc -b -w",
+    "watch": "start npx tsc -b -w && start webpack --watch",
     "test": "nyc --reporter=html mocha -r ./node_modules/ts-node/register src/test/**/*.ts",
     "karma": "karma start --single-run --browsers Chrome karma.conf.js"
   },

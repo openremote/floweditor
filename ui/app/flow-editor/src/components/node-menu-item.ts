@@ -46,7 +46,7 @@ export class NodeMenuItem extends LitElement {
             filter: opacity(90%);
             pointer-events: none;
         }
-        .node-drag-item::first-letter{
+        .label::first-letter{
             text-transform: uppercase;
         }`;
     }
@@ -65,13 +65,13 @@ export class NodeMenuItem extends LitElement {
         }
 
         return html`
-        ${this.flowNodeName}
+        <div class="label">${this.flowNodeName}</div>
         ${this.isDragging ? this.dragNodeTemplate : null}
         `;
     }
 
     private get dragNodeTemplate() {
-        return html`<div class="node-drag-item" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px">${this.flowNodeName}</div>`;
+        return html`<div class="node-drag-item" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px"><div class="label">${this.flowNodeName}</div></div>`;
     }
 
     private get flowNodeName() {

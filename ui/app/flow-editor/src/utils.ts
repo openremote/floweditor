@@ -32,6 +32,7 @@ export class Utilities {
     }
 
     public static ellipsis(input: String, maxLength = 15, ellipsis = "...") {
+        if (!input || !maxLength || !ellipsis) { return input; }
         if (ellipsis.length > maxLength) {
             console.warn("Invalid ellipsis parameters: given ellipsis is longer than the max length");
             return input;

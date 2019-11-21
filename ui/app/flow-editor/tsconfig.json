@@ -17,7 +17,7 @@
 //   "baseUrl": "./"
 // }
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",

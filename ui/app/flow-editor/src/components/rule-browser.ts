@@ -4,7 +4,7 @@ import rest from "@openremote/rest";
 import { i18next } from "@openremote/or-translate";
 import { Utilities } from "../utils";
 import { Status } from "../models/status";
-import { exporter, project } from "./main-application";
+import { exporter, project, modal } from "./main-application";
 
 @customElement("rule-browser")
 export class RuleBrowser extends LitElement {
@@ -74,7 +74,15 @@ export class RuleBrowser extends LitElement {
 
     private loadRule = async (r: GlobalRuleset) => {
         this.status = Status.Loading;
-        const ruleset = (await rest.api.RulesResource.getGlobalRuleset(r.id)).data;
+        let response: { data: GlobalRuleset };
+        try {
+            response = await rest.api.RulesResource.getGlobalRuleset(r.id);
+        } catch (error) {
+            modal.notification("Failure", "Something went wrong loading " + r.name);
+            this.status = Status.Failure;
+            return;
+        }
+        const ruleset = response.data;
         const collection = exporter.jsonToFlow(ruleset.rules);
         project.fromNodeCollection(collection);
         project.setCurrentProject(r.id, r.name, collection.description);

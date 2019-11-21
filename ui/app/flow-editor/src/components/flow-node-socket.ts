@@ -46,6 +46,7 @@ export class FlowNodeSocket extends LitElement {
             text-transform: lowercase;
         }
         .circle{
+            box-sizing: border-box;
             background: grey;
             width: var(--socket-display-size);
             height: var(--socket-display-size);
@@ -109,7 +110,11 @@ export class FlowNodeSocket extends LitElement {
 
     protected render() {
         const color = `var(--${this.socketTypeString})`;
-        const socket = html`<div class="socket"><div class="circle" id=${this.circleId} style="background: ${color}"></div></div>`;
+
+        const socket = html`<div class="socket">
+            <div class="circle" id=${this.circleId} style="background: ${color}"></div>
+            </div>`;
+
         if (!this.renderLabel) { return socket; }
         const label = html`<div class="label">${i18next.t(this.socket.name)}</div>`;
         if (this.side === "input") {

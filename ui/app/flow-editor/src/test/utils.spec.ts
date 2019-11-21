@@ -23,7 +23,7 @@ describe("utils", () => {
             left: -2.5,
             right: 2.5,
         })).to.deep.equal({
-            x: 0,
+            x: 0, 
             y: .5
         });
     });

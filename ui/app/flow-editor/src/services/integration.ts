@@ -27,7 +27,7 @@ export class Integration extends EventEmitter {
             realm: "master",
         }).then((result) => {
             this.integrationStatus = result ? Status.Success : Status.Failure;
-            openremote.language = "nl";
+            openremote.language = "en";
             this.emit("initialise", result);
         }).catch((e) => {
             this.integrationStatus = Status.Failure;

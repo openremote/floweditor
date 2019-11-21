@@ -19,3 +19,4 @@ export { InternalPicker } from "./components/internal-picker";
 export { PopupModal } from "./components/popup-modal";
 export { RuleBrowser } from "./components/rule-browser";
 export { ConfirmationDialog } from "./components/confirmation-dialog";
+export { NotificationDialog } from "./components/notification-dialog";

@@ -1,6 +1,6 @@
 import { NodeCollection, GlobalRuleset, RulesetLang } from "@openremote/model";
 import manager from "@openremote/core";
-import { project } from "../components/main-application";
+import { project, modal } from "../components/main-application";
 
 export class Exporter {
     public flowToJson(collection: NodeCollection) {
@@ -28,7 +28,11 @@ export class Exporter {
                 console.log("Successfully saved new ruleset");
             } else {
                 console.log("Something went wrong while saving NEW ruleset\nHTTP status " + e.status);
+                modal.notification("Failure", `Something went wrong while saving ${rs.name}`);
             }
+        }).catch((e) => {
+            console.log("Something went wrong while saving NEW ruleset\nHTTP status " + e);
+            modal.notification("Failure", `Something went wrong while saving ${rs.name}`);
         });
     }
 
@@ -43,9 +47,13 @@ export class Exporter {
                     project.unsavedState = false;
                     console.log("Successfully saved ruleset");
                 } else {
-                    console.log("Something went wrong while saving ruleset\nHTTP status " + e.status);
+                    console.log("Something went wrong while saving EXISTING ruleset\n" + e.status);
+                    modal.notification("Failure", `Something went wrong while saving ${collection.name}`);
                 }
             });
+        }).catch((e) => {
+            console.log("Something went wrong while saving EXISTING ruleset\n" + e);
+            modal.notification("Failure", `Something went wrong while saving ${collection.name}`);
         });
     }
 }
