@@ -1,12 +1,11 @@
-import { LitElement, html, customElement, css } from "lit-element";
+import { LitElement, html, customElement, css, property } from "lit-element";
 import { NodeType, Node } from "@openremote/model";
 import { i18next } from "@openremote/or-translate";
 import { integration } from "./main-application";
 
 @customElement("node-panel")
 export class NodePanel extends LitElement {
-    private nodes: Node[] = [];
-
+    @property({ type: Array }) public nodes: Node[] = [];
     static get styles() {
         return css`
         :host{
@@ -35,19 +34,6 @@ export class NodePanel extends LitElement {
         .input-node:hover{ background-color: var(--input-color-h); }
         .processor-node:hover{ background-color: var(--processor-color-h); }
         .output-node:hover{ background-color: var(--output-color-h); }`;
-    }
-
-    protected firstUpdated() {
-        this.refreshNodes();
-    }
-
-    public async refreshNodes() {
-        this.nodes = [];
-        const allNodes = (await integration.rest.api.FlowResource.getAllNodeDefinitions()).data;
-        for (const n of allNodes) {
-            this.nodes.push(n);
-        }
-        this.requestUpdate();
     }
 
     protected render() {

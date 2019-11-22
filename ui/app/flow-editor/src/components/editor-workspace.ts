@@ -1,7 +1,7 @@
 import { LitElement, html, customElement, property } from "lit-element";
 import { repeat } from "lit-html/directives/repeat";
-import { Node, NodeSocket } from "@openremote/model";
-import { IdentityDomLink } from "node-structure";
+import { Node, NodeSocket, NodeType } from "@openremote/model";
+import { IdentityDomLink, CopyMachine } from "node-structure";
 import { List } from "linqts";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { LightNodeCollection } from "../models/light-node-collection";
@@ -11,8 +11,9 @@ import { FlowNode } from "./flow-node";
 import { ConnectionLine } from "./connection-line";
 import { ContextMenuButton, ContextMenuSeparator } from "../models/context-menu-button";
 import { ContextMenu } from "./context-menu";
-import { project, input, copyPasteManager } from "./main-application";
+import { project, input, copyPasteManager, integration } from "./main-application";
 import { Camera } from "../models/camera";
+import { Utilities } from "../utils";
 
 @customElement("editor-workspace")
 export class EditorWorkspace extends LitElement {
@@ -88,7 +89,53 @@ export class EditorWorkspace extends LitElement {
             const selectedNodes = input.selected.filter((s) => s instanceof FlowNode && s.selected) as FlowNode[];
             const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine && s.selected) as ConnectionLine[];
 
-            const buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
+            const createNodeButtons = (type: NodeType) => {
+                let nB: (ContextMenuButton | ContextMenuSeparator)[] = [
+                    {
+                        type: "button",
+                        label: "",
+                        icon: "arrow-left",
+                        action: () => { this.dispatchEvent(new MouseEvent("contextmenu", e)); }
+                    }
+                ];
+                nB = nB.concat(integration.nodes.filter((n) => n.type === type).map((node) => {
+                    const b: ContextMenuButton = {
+                        type: "button",
+                        label: i18next.t(node.name, Utilities.humanLike(node.name)),
+                        action: () => {
+                            const copy = CopyMachine.copy(node);
+                            copy.position = this.offsetToWorld({ x: e.offsetX - this.offsetLeft, y: e.offsetY - this.offsetTop });
+                            project.addNode(copy);
+                        }
+                    };
+                    return b;
+                }));
+                return nB;
+            };
+
+            let buttons: (ContextMenuButton | ContextMenuSeparator)[] = [
+                {
+                    type: "button",
+                    label: i18next.t("input", "Input"),
+                    icon: "arrow-up-thick",
+                    action: () => { ContextMenu.open(e.pageX, e.pageY, this, createNodeButtons(NodeType.INPUT)); }
+                },
+                {
+                    type: "button",
+                    label: i18next.t("processors", "Processors"),
+                    icon: "settings",
+                    action: () => { ContextMenu.open(e.pageX, e.pageY, this, createNodeButtons(NodeType.PROCESSOR)); }
+                },
+                {
+                    type: "button",
+                    label: i18next.t("output", "Ouput"),
+                    icon: "arrow-down-thick",
+                    action: () => { ContextMenu.open(e.pageX, e.pageY, this, createNodeButtons(NodeType.OUTPUT)); }
+                },
+            ];
+
+            buttons = buttons.concat([
+                { type: "separator" },
                 {
                     type: "button",
                     icon: "content-copy",
@@ -124,7 +171,8 @@ export class EditorWorkspace extends LitElement {
                     action: () => this.fitCamera(selectedNodes.map((n) => n.node)),
                     disabled: selectedNodes.length === 0
                 },
-            ];
+            ]);
+
             ContextMenu.open(e.pageX, e.pageY, this, buttons);
             e.preventDefault();
         });

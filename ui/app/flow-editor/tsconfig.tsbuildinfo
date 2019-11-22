@@ -266,8 +266,8 @@
         "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
       },
       "./src/services/integration.ts": {
-        "version": "0c65b01b09301d6ac60f15c02a5ee2548a064ef44ac8042f6703d8c903168cb3",
-        "signature": "71950a65a036df4cb9df3d0b1127095293bd9f9779546099ded76893d140157b"
+        "version": "922c5fdaed0c9032bf1995cb32e7ff0814c2d8b28b328bf9e9e97049d19b38a5",
+        "signature": "49684a393e0f73e424ccebb369651fb2dbfac21f5f24da84f19fca92e7d0454b"
       },
       "./src/models/light-node-collection.ts": {
         "version": "5b0b00d858cf6385b3b6761d6977c9558f5af589b2cd569d55f61d9f932b0116",
@@ -372,7 +372,7 @@
         "signature": "08dbc8e07340cef0cf770cf5f13b1611c0b2a2dfeb1a71048dcdf5699958a053"
       },
       "./src/components/editor-workspace.ts": {
-        "version": "c6db1e03a77954da314d75cd61df5e6069010b7958d2c3f5e2cdc1aa03bccd0e",
+        "version": "fdfebf95653190a0544f395dd54c300dc7b76b7efd29d732d16bad3457a07d4b",
         "signature": "b77f1298c1271577ca69b1d5bab1a733db6c058a988e7fdbcb3a26c96596c77d"
       },
       "./src/services/project.ts": {
@@ -400,12 +400,12 @@
         "signature": "184d2bbbd7ef923fe5ba999e42c775e346a2fb0e1cf30f8a04a1ce7681733377"
       },
       "./src/components/main-application.ts": {
-        "version": "355190cd0d6f1f49581c4af250b8c9b6a6d4fc16f52193edf1cf0612d2004b27",
-        "signature": "128f0da9fa9ae258004c7f6326702a75b78f57c86f4b2bb68039656e2e71c867"
+        "version": "25a93d5dbaa9c3b63cd490ba9e3ed3b7ade964e66e9124de9380d524081a80d1",
+        "signature": "dc561b3b62d326db28a9ef24110c669545ca45f563ae5fcf128125b62b5c60a1"
       },
       "./src/components/node-panel.ts": {
-        "version": "d563721acc1032a407a5bc1b495344a0d2bec847fa54eaed7ea0d1829ed199d8",
-        "signature": "ec73efa398dbe93bb527d5dc0b47f9a6ec2109cfd2d7b8fac9cc4265fe1c584c"
+        "version": "9ef40a440b670143344625c53e9590c9615885fb0e35226aa7766c89a6237c1a",
+        "signature": "82099aff4f4a61ab2f473b5089051cf40ca179d546af41331866f767a206cae0"
       },
       "./src/components/top-bar.ts": {
         "version": "7fad53fd6bbfe07afa57e3bface222f1db4077c138754682645313b70eec4511",
@@ -432,7 +432,7 @@
         "signature": "5d0acabccef131e8612636b5fcfb5f5918da8552fb0d9ac73f78fc5dec7504c1"
       },
       "./src/components/confirmation-dialog.ts": {
-        "version": "6bbf27d88992ee253f8ea175079f8ea507b440bda9065eb47614bb53819e8e23",
+        "version": "65cf2215d18e7c3691408e55bacd37fd4d3af1862e7f6787313efca667e43fd2",
         "signature": "40b17138d18f146da44470fec06f7fd41451345a90377cc20e896fbfd98abaa0"
       },
       "./src/components/notification-dialog.ts": {
@@ -2278,8 +2278,10 @@
       "./src/services/integration.ts": [
         "../../../openremote/ui/component/core/dist/index.d.ts",
         "../../../openremote/ui/component/rest/dist/index.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../node_modules/@types/node/events.d.ts",
         "./src/models/status.ts",
+        "./src/components/main-application.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2462,6 +2464,7 @@
         "./src/components/context-menu.ts",
         "./src/components/main-application.ts",
         "./src/models/camera.ts",
+        "./src/utils.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5296,6 +5299,7 @@
       "./src/services/integration.ts": [
         "../../../openremote/ui/component/core/dist/index.d.ts",
         "../../../openremote/ui/component/rest/dist/index.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts",
         "./src/models/status.ts",
         "../../../node_modules/@types/node/events.d.ts"
       ],
@@ -5412,7 +5416,8 @@
         "./src/services/shortcuts.ts"
       ],
       "./src/components/node-panel.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts"
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts"
       ],
       "./src/components/top-bar.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts"
@@ -7890,7 +7895,6 @@
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
-      "./src/components/editor-workspace.ts",
       "./src/services/project.ts",
       "./src/services/input.ts",
       "./src/components/popup-modal.ts",
@@ -8276,7 +8280,8 @@
       "../../../node_modules/@types/mapbox-gl/index.d.ts",
       "../../../node_modules/@types/mocha/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
-      "../../../node_modules/@types/simplebar/index.d.ts"
+      "../../../node_modules/@types/simplebar/index.d.ts",
+      "./src/components/editor-workspace.ts"
     ]
   },
   "version": "3.6.4"

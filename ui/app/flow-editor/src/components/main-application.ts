@@ -19,8 +19,8 @@ export const newIds: Set<string> = new Set<string>();
 
 @customElement("main-application")
 export class MainApplication extends LitElement {
-    @property({ type: Boolean }) public showHeader = true;
-    @property({ type: Boolean }) public showNodePanel = true;
+    @property({ type: Boolean, reflect: true }) public showHeader;
+    @property({ type: Boolean, reflect: true }) public showNodePanel;
 
     constructor() {
         super();
@@ -75,7 +75,7 @@ export class MainApplication extends LitElement {
         if (integration.status === Status.Success) {
             return html`
             <editor-workspace id="workspace" style="grid-area: workspace"></editor-workspace>
-            ${(this.showNodePanel ? html`<node-panel style="grid-area: node-panel"></node-panel>` : null)}
+            ${(this.showNodePanel ? html`<node-panel style="grid-area: node-panel" .nodes= "${integration.nodes}"></node-panel>` : null)}
             ${(this.showHeader ? html`<top-bar style="grid-area: topbar"></top-bar>` : null)}
             <context-menu></context-menu>
             <popup-modal id="popup-modal"></popup-modal>

@@ -3,7 +3,7 @@ import { i18next } from "@openremote/or-translate";
 
 @customElement("confirmation-dialog")
 export class ConfirmationDialog extends LitElement {
-    @property({ type: String }) public agreeText = i18next.t("yes");
+    @property({ type: String }) public agreeText = i18next.t("ok");
     @property({ type: String }) public disagreeText = i18next.t("cancel");
     @property({ type: String }) public question = i18next.t("areYouSure", "Are you sure?");
 
