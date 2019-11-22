@@ -1,6 +1,6 @@
 import { ComplexAttributeConverter } from "lit-element";
 import { Node } from "@openremote/model";
-import { project } from "../components/main-application";
+import { project } from "../components/flow-editor";
 
 export const nodeConverter: ComplexAttributeConverter<unknown, unknown> = {
     fromAttribute: (value: string) => {

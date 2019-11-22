@@ -7,7 +7,7 @@ import manager from "@openremote/core";
 import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 import { ResizeObserver } from "resize-observer";
 import i18next from "i18next";
-import { project, modal } from "./main-application";
+import { project, modal } from "./flow-editor";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {

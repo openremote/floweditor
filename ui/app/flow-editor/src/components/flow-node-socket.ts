@@ -3,7 +3,7 @@ import { NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
-import { project } from "./main-application";
+import { project } from "./flow-editor";
 
 @customElement("flow-node-socket")
 export class FlowNodeSocket extends LitElement {

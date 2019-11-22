@@ -6,7 +6,7 @@ import { i18next } from "@openremote/or-translate";
 import { nodeConverter } from "../converters/node-converter";
 import { SelectableElement } from "./selectable-element";
 import { EditorWorkspace } from "./editor-workspace";
-import { project, newIds } from "./main-application";
+import { project, newIds } from "./flow-editor";
 
 @customElement("flow-node")
 export class FlowNode extends SelectableElement {
@@ -117,7 +117,6 @@ export class FlowNode extends SelectableElement {
         };
         this.setTranslate();
         project.unsavedState = true;
-        this.dispatchEvent(new CustomEvent("dragged"));
     }
 
     private stopDrag = () => {

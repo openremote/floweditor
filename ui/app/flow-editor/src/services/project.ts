@@ -2,7 +2,7 @@ import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/mo
 import { EventEmitter } from "events";
 import { SocketTypeMatcher } from "node-structure";
 import { EditorWorkspace } from "../components/editor-workspace";
-import { input } from "../components/main-application";
+import { input } from "../components/flow-editor";
 
 export class Project extends EventEmitter {
     public nodes: Node[] = [];

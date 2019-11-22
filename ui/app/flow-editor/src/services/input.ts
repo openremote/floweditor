@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import { SelectableElement } from "../components/selectable-element";
-import { project } from "../components/main-application";
+import { project } from "../components/flow-editor";
 
 export class Input extends EventEmitter {
     public selected: SelectableElement[] = [];

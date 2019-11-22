@@ -3,7 +3,7 @@ import rest from "@openremote/rest";
 import { Node } from "@openremote/model";
 import { EventEmitter } from "events";
 import { Status } from "../models/status";
-import { integration } from "../components/main-application";
+import { integration } from "../components/flow-editor";
 
 export class Integration extends EventEmitter {
     public openremote = openremote;

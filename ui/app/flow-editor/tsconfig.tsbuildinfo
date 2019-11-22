@@ -266,7 +266,7 @@
         "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
       },
       "./src/services/integration.ts": {
-        "version": "922c5fdaed0c9032bf1995cb32e7ff0814c2d8b28b328bf9e9e97049d19b38a5",
+        "version": "6f287e07836feaff438ae65cd2d81994f61ec09a86e13ba97efcba1f4a88924d",
         "signature": "49684a393e0f73e424ccebb369651fb2dbfac21f5f24da84f19fca92e7d0454b"
       },
       "./src/models/light-node-collection.ts": {
@@ -316,7 +316,7 @@
         "signature": "8b351761e7b503dbc64380c3334a3aa7c03a60e902cc1d6843ddd6e6e20d1c5d"
       },
       "./src/components/flow-node-socket.ts": {
-        "version": "c423591cb78abae9e428d6e5f4ef2ab03d2d8b297bcea17d3507c1da6351e593",
+        "version": "0ab2c2dc12da6d4b0c3b3ff1559f2c7414d84c1c2451948dd81b5abba71b2fd1",
         "signature": "8dac6d9981f8e00489734321a7ef89140e62a99f50018ad036a419ca525faa76"
       },
       "./src/styles/editor-workspace-style.ts": {
@@ -328,15 +328,15 @@
         "signature": "c9e2e1a8f1d5f292ccbfd4d54bb5e30925f9baef5e13be08b7702f6a6457cbfd"
       },
       "./src/converters/node-converter.ts": {
-        "version": "521f2e10b5d58a0cb557a4e6db1affcc1587d0f2199f03b4af09c069c474be95",
+        "version": "b35faeb2399ee2a25b9ec2ff4fcfac29a763ac5a7df4ee3e9408efa81b7b9ee4",
         "signature": "638ff189a9c348055d477845a4dfefe62abcac0552ad49026351159d86fdd9dc"
       },
       "./src/components/selectable-element.ts": {
-        "version": "c0ac1f1fc5497cb810ecdb0b839b7ed28c516f10b64b0004defca93d8eb64224",
+        "version": "a2a652a1dd168f67cb9e953151ab2c8cce41cf8e8b5fee017170a9616931d3cb",
         "signature": "241fefa3340ea0ff9c07ee5c3921c4d3b1a4db735295a833c22eb1220d2bebd3"
       },
       "./src/components/flow-node.ts": {
-        "version": "4f5d37151bc1a54da1926d8324b23afa82434e70265f1d761d28dee8478cb335",
+        "version": "180ac46826719831da95fa8799eb42cb96e9917a2435c90c33c5cfac7a85ac9c",
         "signature": "0cd4b9c2d8f01367d92396d685a6c0c0e46bd3fe04bbfbee1acd277a4a2ed76b"
       },
       "../../../node_modules/resize-observer/lib/contentrect.d.ts": {
@@ -356,8 +356,8 @@
         "signature": "2ef9985bc84d0215110db64b9627689da43e3a874d956be4644bd648214030d7"
       },
       "./src/components/connection-line.ts": {
-        "version": "0ef8f4f9985f406ccd987f66e86fdb18d2f64ef0b2ae7001cb7a07ff161af9d9",
-        "signature": "72849c4aff13c2faab14c4a8be066ba9c9138674cfbaa13323e45c79e245e28f"
+        "version": "a373f6377e3380ad507a09f6bc79456f8d73673fb8e3385fc36c32fd82333622",
+        "signature": "ecdda7f51fc7521bd7e9356cf66a97ca56df928b6ebadf10c1e2e4355bd72658"
       },
       "./src/models/context-menu-button.ts": {
         "version": "d367dbd31aea9f03bdaa00cd80c213bdb0448a0017f4b7b9553a1ea3d0770d6f",
@@ -372,19 +372,19 @@
         "signature": "08dbc8e07340cef0cf770cf5f13b1611c0b2a2dfeb1a71048dcdf5699958a053"
       },
       "./src/components/editor-workspace.ts": {
-        "version": "fdfebf95653190a0544f395dd54c300dc7b76b7efd29d732d16bad3457a07d4b",
+        "version": "bf1a590d292c830169b38685721503569c5bc22792e61724bbf5811d9138e166",
         "signature": "b77f1298c1271577ca69b1d5bab1a733db6c058a988e7fdbcb3a26c96596c77d"
       },
       "./src/services/project.ts": {
-        "version": "b96f9b65c8d26872f0c6df88257b47e5b2f724a8da6d5a279908f7567670ce41",
+        "version": "2e5d8413d1a022ffa32f2b63f2bd0fb8819b9582f1c74164479cb12c97df6c81",
         "signature": "b43c43eea0a259f38fcbb05f4fbaab35e81bb3036fbbd73ef92b2e1c3a560d58"
       },
       "./src/services/input.ts": {
-        "version": "5e4f6d406e1153477dd9061131c0d3349b135e357c2ab79c1cbf2075e349ed76",
+        "version": "ccbb22f3263bd97322c3f8f6150b7c9588981c5d4d0ed5f06dce3aa4d3007406",
         "signature": "d6eaae9e88e506fb48e5484b32f0ba9e373583a0130e6a653ccb7001f29c1017"
       },
       "./src/components/popup-modal.ts": {
-        "version": "0021711c83569a65d3536d217a025c6c20e1bcac34d2dd301432123bda075652",
+        "version": "6a70839049378cd90f46cb3d777d9e449a2de4d712e61c9ccc202c562a556c38",
         "signature": "653b44e31f3a96bbd861a17e6a56560567215bc176759ec473eace7f9081fa0c"
       },
       "./src/services/modal.ts": {
@@ -392,43 +392,43 @@
         "signature": "b9b483c8180c433e3893333c2398b4246487eef55f36cb627cd678236dc671f3"
       },
       "./src/services/exporter.ts": {
-        "version": "11f222b5b9cd6ac43b01bfe8eb98f7adf00472425d7ffe36fa31b146abe0ff8a",
+        "version": "db6a464435815c1aac24c1849ef443b193b25d88cc4fa7d3da06d2a6f08f497a",
         "signature": "30ebc87e84a1b7edf9c18d9565d078cee73b909a67a7718bca7a25ca1033850c"
       },
       "./src/services/shortcuts.ts": {
-        "version": "d5d342a1912661d1b69cb1498628084bdbacb24e4b9597042c0e0dc404a020d5",
+        "version": "1bec993d473c65a66335da69e61915364c22595e08c90239e6b8541de3c9b594",
         "signature": "184d2bbbd7ef923fe5ba999e42c775e346a2fb0e1cf30f8a04a1ce7681733377"
       },
-      "./src/components/main-application.ts": {
-        "version": "25a93d5dbaa9c3b63cd490ba9e3ed3b7ade964e66e9124de9380d524081a80d1",
-        "signature": "dc561b3b62d326db28a9ef24110c669545ca45f563ae5fcf128125b62b5c60a1"
+      "./src/components/flow-editor.ts": {
+        "version": "4cb0087faa795b2dd74cc591ae034c3ec200bc92c4c3a7c870d8964c0c0ec97e",
+        "signature": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f"
       },
       "./src/components/node-panel.ts": {
-        "version": "9ef40a440b670143344625c53e9590c9615885fb0e35226aa7766c89a6237c1a",
+        "version": "cded1d8dd98a8ebc4f8c7bdced6d7a1f9b4de2dee8c10b5cdce53b7339ec47c8",
         "signature": "82099aff4f4a61ab2f473b5089051cf40ca179d546af41331866f767a206cae0"
       },
       "./src/components/top-bar.ts": {
-        "version": "7fad53fd6bbfe07afa57e3bface222f1db4077c138754682645313b70eec4511",
+        "version": "7a2091aa7b0b6c6a6c3ded6e7624b0043dbff764322e96ad18f8ae216456b21d",
         "signature": "2265d2f0041b6c4cfd5297174f05271eac1e3f3a3bfd533914817a8678b3beae"
       },
       "./src/components/node-menu-item.ts": {
-        "version": "152922292fa31523b24932bcbda2e63273bd4b43bb7a330eba7e4e25b4cbdf80",
+        "version": "09e5958dbae54b8c9fbebdb2cd866badff240593662054fb1f19b6e9aaa18c4f",
         "signature": "a4181a62de88e2a280b631b4bde4292cbad7d9b90d3b0de2de3a4dd25c03270f"
       },
       "./src/components/connection-container.ts": {
-        "version": "d8adf4d6e88cee0cb7315896a3dea8e5efd194d0cbd45692154ab4f525f1b7e5",
+        "version": "efba532ec99d24544415af8b0b890bfc9bea805f6a93484a34ac5d0b0657918a",
         "signature": "0ea271d27efb511d88bb51527015943e822d69551bf7def9ba791eac2623c9dc"
       },
       "./src/components/selection-box.ts": {
-        "version": "aaeacb38b387392b1ae6c836cb6a1f38c46f31f245d61739ee148be950b2054f",
+        "version": "b64cd3fe23ffb276fd0cd154a12fb8eaaee2c707b04b15daf31aa092b002ec74",
         "signature": "6dd6e75ccc424020abb009e1d1c9ff2b091a3def32a0b0ebfce9cf3a0a5fa483"
       },
       "./src/components/internal-picker.ts": {
-        "version": "02c6d9f11fe15e5b770615cbe91e949a4a35e92ee5af2bb030b8f4d58113c23e",
+        "version": "2e0baa1e92b584004f280db74b97b72380fbf152e93a6c7d44453ffb0afd36fc",
         "signature": "b1886c6d1caeec7634a19efec49fd18974aa076d531d2084c1a43ec0d22a7844"
       },
       "./src/components/rule-browser.ts": {
-        "version": "9b59c893e43c189b15d814cb58f5fad660f4a5c80cd24f79917fbd3312326415",
+        "version": "9f77f24888891eb9a9f415b7c1b42615c409a2e359602a9a5e5ffdf75423dbb0",
         "signature": "5d0acabccef131e8612636b5fcfb5f5918da8552fb0d9ac73f78fc5dec7504c1"
       },
       "./src/components/confirmation-dialog.ts": {
@@ -440,12 +440,16 @@
         "signature": "939547d7703dac1b0f91a53e7beb3cd2949317c20809786c57cc9e6f890a5269"
       },
       "./src/index.ts": {
-        "version": "34ef5d11e6b6275f4a45e94fc834fc34c6bcbc43407c41d283c8815df675ded5",
-        "signature": "1319216b5a331062634f8c4b70d9fc0c9cd213fb91db8b44278b77ff41e61057"
+        "version": "87b4faac8902e4e0db84c7a6d7594ec66d19cf6a9d6e40ff66ebde955880169a",
+        "signature": "26bc04bd5541adeb17ff5f0680531d37707fd2082f1466bc267685d5766d0440"
       },
       "./src/components/confirmation-dialog copy.d.ts": {
         "version": "40b17138d18f146da44470fec06f7fd41451345a90377cc20e896fbfd98abaa0",
         "signature": "40b17138d18f146da44470fec06f7fd41451345a90377cc20e896fbfd98abaa0"
+      },
+      "./src/components/main-application.d.ts": {
+        "version": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f",
+        "signature": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f"
       },
       "../../../node_modules/@types/chai/index.d.ts": {
         "version": "4d46d75262498f3f7f2d6db1f9393324fe4f1999dff129c34c3ade6e79afd712",
@@ -2281,7 +2285,7 @@
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../node_modules/@types/node/events.d.ts",
         "./src/models/status.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2361,7 +2365,7 @@
         "../../component/node-structure/src/index.ts",
         "./src/utils.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2378,13 +2382,13 @@
       "./src/converters/node-converter.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/components/selectable-element.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2397,7 +2401,7 @@
         "./src/converters/node-converter.ts",
         "./src/components/selectable-element.ts",
         "./src/components/editor-workspace.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2430,7 +2434,7 @@
         "./src/components/selectable-element.ts",
         "./src/components/editor-workspace.ts",
         "./src/components/flow-node.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2462,7 +2466,7 @@
         "./src/components/connection-line.ts",
         "./src/models/context-menu-button.ts",
         "./src/components/context-menu.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "./src/models/camera.ts",
         "./src/utils.ts",
         "../../../node_modules/@types/node/util.d.ts",
@@ -2473,20 +2477,20 @@
         "../../../node_modules/@types/node/events.d.ts",
         "../../component/node-structure/src/index.ts",
         "./src/components/editor-workspace.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/services/input.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/components/selectable-element.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/components/popup-modal.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2500,18 +2504,18 @@
       "./src/services/exporter.ts": [
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/core/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/services/shortcuts.ts": [
         "./src/components/flow-node.ts",
         "./src/components/connection-line.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/components/main-application.ts": [
+      "./src/components/flow-editor.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "./src/models/status.ts",
         "./src/services/integration.ts",
@@ -2528,7 +2532,7 @@
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2538,7 +2542,7 @@
         "../../../openremote/ui/component/or-input/dist/index.d.ts",
         "./src/utils.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2549,7 +2553,7 @@
         "../../component/node-structure/src/index.ts",
         "./src/utils.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2557,7 +2561,7 @@
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../node_modules/lit-html/directives/repeat.d.ts",
         "./src/components/editor-workspace.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2565,7 +2569,7 @@
         "../../../node_modules/lit-element/lit-element.d.ts",
         "./src/utils.ts",
         "./src/components/editor-workspace.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2579,7 +2583,7 @@
         "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
         "../../../node_modules/resize-observer/lib/resizeobserver.d.ts",
         "../../../node_modules/i18next/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2590,7 +2594,7 @@
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
         "./src/utils.ts",
         "./src/models/status.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2611,7 +2615,7 @@
         "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "./src/components/node-panel.ts",
         "./src/components/editor-workspace.ts",
         "./src/components/top-bar.ts",
@@ -2633,6 +2637,18 @@
       ],
       "./src/components/confirmation-dialog copy.d.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/components/main-application.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "./src/services/integration.ts",
+        "./src/services/copy-paste-manager.ts",
+        "./src/services/project.ts",
+        "./src/services/input.ts",
+        "./src/services/modal.ts",
+        "./src/services/exporter.ts",
+        "./src/services/shortcuts.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5405,7 +5421,7 @@
       "./src/services/exporter.ts": [
         "../../../openremote/ui/component/model/dist/index.d.ts"
       ],
-      "./src/components/main-application.ts": [
+      "./src/components/flow-editor.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "./src/services/integration.ts",
         "./src/services/copy-paste-manager.ts",
@@ -5451,7 +5467,7 @@
         "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/main-application.ts",
+        "./src/components/flow-editor.ts",
         "./src/components/node-panel.ts",
         "./src/components/editor-workspace.ts",
         "./src/components/top-bar.ts",
@@ -7798,6 +7814,18 @@
       "../../../node_modules/@types/simplebar/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/components/main-application.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "./src/services/integration.ts",
+        "./src/services/copy-paste-manager.ts",
+        "./src/services/project.ts",
+        "./src/services/input.ts",
+        "./src/services/modal.ts",
+        "./src/services/exporter.ts",
+        "./src/services/shortcuts.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -7867,7 +7895,6 @@
       "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
       "./src/models/status.ts",
       "../../../node_modules/@types/events/index.d.ts",
-      "./src/services/integration.ts",
       "./src/models/light-node-collection.ts",
       "../../component/node-structure/src/utils.ts",
       "../../component/node-structure/src/identity.assigner.ts",
@@ -7881,34 +7908,17 @@
       "../../../node_modules/linqts/dist/src/enumerable.d.ts",
       "../../../node_modules/linqts/dist/index.d.ts",
       "./src/utils.ts",
-      "./src/components/flow-node-socket.ts",
       "./src/styles/editor-workspace-style.ts",
       "./src/styles/flow-node-style.ts",
-      "./src/converters/node-converter.ts",
-      "./src/components/selectable-element.ts",
-      "./src/components/flow-node.ts",
       "../../../node_modules/resize-observer/lib/contentrect.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserverentry.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobservercallback.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserver.d.ts",
-      "./src/components/connection-line.ts",
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
-      "./src/services/project.ts",
-      "./src/services/input.ts",
-      "./src/components/popup-modal.ts",
       "./src/services/modal.ts",
-      "./src/services/exporter.ts",
-      "./src/services/shortcuts.ts",
-      "./src/components/main-application.ts",
-      "./src/components/node-panel.ts",
-      "./src/components/top-bar.ts",
-      "./src/components/node-menu-item.ts",
-      "./src/components/connection-container.ts",
-      "./src/components/selection-box.ts",
-      "./src/components/internal-picker.ts",
-      "./src/components/rule-browser.ts",
+      "./src/components/flow-editor.ts",
       "./src/components/confirmation-dialog.ts",
       "./src/components/notification-dialog.ts",
       "./src/index.ts",
@@ -8281,7 +8291,26 @@
       "../../../node_modules/@types/mocha/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
       "../../../node_modules/@types/simplebar/index.d.ts",
-      "./src/components/editor-workspace.ts"
+      "./src/services/integration.ts",
+      "./src/components/flow-node-socket.ts",
+      "./src/converters/node-converter.ts",
+      "./src/components/selectable-element.ts",
+      "./src/components/flow-node.ts",
+      "./src/components/connection-line.ts",
+      "./src/components/editor-workspace.ts",
+      "./src/services/project.ts",
+      "./src/services/input.ts",
+      "./src/components/popup-modal.ts",
+      "./src/services/exporter.ts",
+      "./src/services/shortcuts.ts",
+      "./src/components/node-panel.ts",
+      "./src/components/top-bar.ts",
+      "./src/components/node-menu-item.ts",
+      "./src/components/connection-container.ts",
+      "./src/components/selection-box.ts",
+      "./src/components/internal-picker.ts",
+      "./src/components/rule-browser.ts",
+      "./src/components/main-application.d.ts"
     ]
   },
   "version": "3.6.4"

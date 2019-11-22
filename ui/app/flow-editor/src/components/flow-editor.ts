@@ -17,8 +17,8 @@ export const exporter = new Exporter();
 export const shortcuts = new Shortcuts();
 export const newIds: Set<string> = new Set<string>();
 
-@customElement("main-application")
-export class MainApplication extends LitElement {
+@customElement("flow-editor")
+export class FlowEditor extends LitElement {
     @property({ type: Boolean, reflect: true }) public showHeader;
     @property({ type: Boolean, reflect: true }) public showNodePanel;
 

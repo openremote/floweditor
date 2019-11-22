@@ -6,7 +6,7 @@ import { ResizeObserver } from "resize-observer";
 import { SelectableElement } from "./selectable-element";
 import { EditorWorkspace } from "./editor-workspace";
 import { FlowNode } from "./flow-node";
-import { project } from "./main-application";
+import { project } from "./flow-editor";
 
 @customElement("connection-line")
 export class ConnectionLine extends SelectableElement {
@@ -21,7 +21,8 @@ export class ConnectionLine extends SelectableElement {
     private fromElement: FlowNodeSocket;
     private toElement: FlowNodeSocket;
     private resizeObserver: ResizeObserver;
-    private readonly fancyLine = false;
+    private readonly fancyLine = true;
+    private readonly curveIntensity = 1;
 
     constructor() {
         super();
@@ -37,11 +38,11 @@ export class ConnectionLine extends SelectableElement {
                 pointer-events: none;
                 stroke-linejoin: round;
             }
-            polyline, line{
+            path, line{
                 position: absolute;
                 pointer-events: all;
             }
-            polyline:hover, line:hover, polyline[selected = true], line[selected = true]{
+            path:hover, line:hover, path[selected = true], line[selected = true]{
                 stroke: var(--highlight);
             }
             text{
@@ -95,11 +96,29 @@ export class ConnectionLine extends SelectableElement {
         const to = this.toElement.connectionPosition;
         const totalWidth = Math.min(Math.abs(from.x - to.x), 256 * this.workspace.camera.zoom);
 
+        if (this.fancyLine) {
+
+            const x1 = from.x - parentSize.left;
+            const y1 = from.y - parentSize.top;
+
+            const x2 = to.x - parentSize.left;
+            const y2 = to.y - parentSize.top;
+
+            const intensity = this.curveIntensity * (Math.abs(x1 - x2) / 2);
+            // const intensity = 100 * this.workspace.camera.zoom;
+
+            return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 5 : 3)}px;">
+                <path id="${this.polylineId}" 
+                d="M ${x1} ${y1} C ${x1 + intensity} ${y1}, ${x2 - intensity} ${y2}, ${x2} ${y2}"
+                selected="${this.selected}"
+                />
+            </svg>`;
+        }
+
         return html`<svg style="stroke-width: ${this.workspace.camera.zoom * (this.selected ? 5 : 3)}px;"><polyline id="${this.polylineId}"
         selected="${this.selected}"
         points="
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
-        ${this.fancyLine ? `${from.x - parentSize.left + totalWidth / 4}, ${from.y - parentSize.top} ${to.x - parentSize.left - totalWidth / 4}, ${to.y - parentSize.top}` : ``}
         ${to.x - parentSize.left}, ${to.y - parentSize.top}"
         ></polyline>
         <!-- <text x="${(from.x + to.x) / 2 - parentSize.left}" y="${(from.y + to.y) / 2 - parentSize.top}">${this.connection.from.nodeId} -> ${this.connection.to.nodeId}</text> -->

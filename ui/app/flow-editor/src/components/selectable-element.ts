@@ -1,5 +1,5 @@
 import { LitElement, property } from "lit-element";
-import { input } from "./main-application";
+import { input } from "./flow-editor";
 
 export class SelectableElement extends LitElement {
     @property({ type: Boolean }) private isSelected = false;

@@ -3,7 +3,7 @@ import { IdentityDomLink } from "node-structure";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
-import { project, modal, input, exporter } from "./main-application";
+import { project, modal, input, exporter } from "./flow-editor";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {

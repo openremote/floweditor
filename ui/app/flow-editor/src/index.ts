@@ -3,7 +3,7 @@ import "@openremote/or-asset-tree";
 import "@openremote/or-icon";
 import "@openremote/or-translate";
 
-export { MainApplication as FlowEditor } from "./components/main-application";
+export { FlowEditor } from "./components/flow-editor";
 export { NodePanel } from "./components/node-panel";
 export { EditorWorkspace } from "./components/editor-workspace";
 export { TopBar } from "./components/top-bar";

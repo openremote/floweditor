@@ -1,5 +1,5 @@
 import { customElement, LitElement, css, html, property, TemplateResult } from "lit-element";
-import { modal } from "./main-application";
+import { modal } from "./flow-editor";
 
 @customElement("popup-modal")
 export class PopupModal extends LitElement {

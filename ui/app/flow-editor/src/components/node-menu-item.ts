@@ -4,7 +4,7 @@ import { EditorWorkspace } from "./editor-workspace";
 import { CopyMachine } from "node-structure";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
-import { newIds, project } from "./main-application";
+import { newIds, project } from "./flow-editor";
 
 @customElement("node-menu-item")
 export class NodeMenuItem extends LitElement {

@@ -11,7 +11,7 @@ import { FlowNode } from "./flow-node";
 import { ConnectionLine } from "./connection-line";
 import { ContextMenuButton, ContextMenuSeparator } from "../models/context-menu-button";
 import { ContextMenu } from "./context-menu";
-import { project, input, copyPasteManager, integration } from "./main-application";
+import { project, input, copyPasteManager, integration } from "./flow-editor";
 import { Camera } from "../models/camera";
 import { Utilities } from "../utils";
 
@@ -214,7 +214,7 @@ export class EditorWorkspace extends LitElement {
         ${repeat(
             project.nodes,
             (i) => i.id,
-            (n) => html`<flow-node @dragged="${() => this.dispatchEvent(new CustomEvent("nodemove"))}" .node="${n}" .workspace="${this}"></flow-node>`)}
+            (n) => html`<flow-node .node="${n}" .workspace="${this}"></flow-node>`)}
         <connection-container .workspace="${this}"></connection-container>
         <svg>
             <line style="display: 

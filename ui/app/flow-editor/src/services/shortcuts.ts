@@ -1,6 +1,6 @@
 import { FlowNode } from "../components/flow-node";
 import { ConnectionLine } from "../components/connection-line";
-import { input, project } from "../components/main-application";
+import { input, project } from "../components/flow-editor";
 
 export class Shortcuts {
     public actions: { keys: string[], requireCtrl?: boolean, action: () => void }[] = [
