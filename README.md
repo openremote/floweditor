@@ -8,9 +8,9 @@ This project is a user interface for creating OpenRemote Flow rules using a drag
 
 ## Using the application
 
-Flow rules are generally used to define virtual attributes or link existing attributes. However, it can also be used to create normal rules. When you launch the editor you will be greeted with a large open space and a list of nodes. You can add nodes by drag-and-dropping them from the node panel into the workspace. To indicate data flow, you connect sockets from different nodes to each other.
+Flow rules are generally used to define virtual attributes or link existing attributes. However, it can also be used to create normal condition-action rules that process data. When you launch the editor you will be greeted with a large open space and a list of nodes. You can add nodes by drag-and-dropping them from the node panel into the workspace. To indicate data flow, you connect sockets from different nodes to each other.
 
-A flow rule usually consists of three parts: the input, the processing, and the output. The input side is blue and retrieves data from external sources such as the user or the Manager. The data then optionally flows through the processing part. This part is coloured green and typically does not interact with the outside world and only manipulates the data given by the input side. Data always ends up in the output side, coloured purple. This side receives data from the rest of the flow and sends it to external destinations (usually the Manager).
+A flow rule usually consists of three parts: the input, the processing, and the output. The input side is blue and retrieves data from external sources such as the user or the Manager. The data then optionally flows through the processing part. This part is coloured green and typically does not interact with the outside world and only manipulates the data given by the input side. Data always ends up in the output side, coloured purple. This side receives data from the rest of the flow and sends it to external destinations (usually the Manager). Flow rules are executed when asset attributes given in the input side have changed.
 
 Nodes are the functional parts of a flow rule. They in- and output data through their sockets. A node socket can be one of these data types:
  - Number (green)
