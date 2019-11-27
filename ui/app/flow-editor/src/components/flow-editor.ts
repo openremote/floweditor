@@ -19,9 +19,6 @@ export const newIds: Set<string> = new Set<string>();
 
 @customElement("flow-editor")
 export class FlowEditor extends LitElement {
-    @property({ type: Boolean, reflect: true }) public showHeader;
-    @property({ type: Boolean, reflect: true }) public showNodePanel;
-
     constructor() {
         super();
         window.addEventListener("load", () => {
@@ -35,11 +32,11 @@ export class FlowEditor extends LitElement {
             width: 100vw;
             height: 100vh;
             display: grid;
-            grid-template-columns: var(--node-panel-width) 1fr;
+            grid-template-columns: 1fr var(--node-panel-width);
             grid-template-rows: var(--topbar-height) 1fr;
             grid-template-areas: 
                 "topbar topbar"
-                "node-panel workspace";
+                "workspace node-panel";
         }`;
     }
 
@@ -53,30 +50,17 @@ export class FlowEditor extends LitElement {
     protected render() {
         if (integration.status === Status.Idle || integration.status === Status.Loading) { return html``; }
 
-        if (this.showHeader) {
-            this.style.gridTemplateAreas = `
-            "topbar topbar"
-            "node-panel workspace"
-            `;
-        } else {
-            this.style.gridTemplateAreas = `
-            "node-panel workspace"
-            "node-panel workspace"
-            `;
-        }
-
-        if (!this.showHeader) {
-            this.style.gridTemplateAreas = this.style.gridTemplateAreas.replace("topbar topbar", "node-panel workspace");
-        }
-        if (!this.showNodePanel) {
-            this.style.gridTemplateAreas = this.style.gridTemplateAreas.replace(/node-panel/g, "workspace");
-        }
-
+/*
+            <or-mwc-drawer .content="${html`
+                <node-panel .nodes="${integration.nodes}"></node-panel>
+            `}"></or-mwc-drawer>
+            <div class="mdc-drawer-app-content">
+*/
         if (integration.status === Status.Success) {
             return html`
+            <top-bar style="grid-area: topbar"></top-bar>
+            <node-panel style="grid-area: node-panel" .nodes= "${integration.nodes}"></node-panel>
             <editor-workspace id="workspace" style="grid-area: workspace"></editor-workspace>
-            ${(this.showNodePanel ? html`<node-panel style="grid-area: node-panel" .nodes= "${integration.nodes}"></node-panel>` : null)}
-            ${(this.showHeader ? html`<top-bar style="grid-area: topbar"></top-bar>` : null)}
             <context-menu></context-menu>
             <popup-modal id="popup-modal"></popup-modal>
         `;

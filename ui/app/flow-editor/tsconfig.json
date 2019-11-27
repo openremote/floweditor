@@ -46,5 +46,6 @@
     { "path": "../../../openremote/ui/component/or-input" },
     { "path": "../../../openremote/ui/component/or-asset-tree" },
     { "path": "../../../openremote/ui/component/or-icon" },
+    { "path": "../../../openremote/ui/component/or-mwc-components" },
   ]
 }

@@ -4,13 +4,14 @@ export const EditorWorkspaceStyle = css`
 :host{
     background: whitesmoke;
     position: relative;
+    display: block;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.2) 0 0 4px inset;
 }
 
 .view-options{
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     display: flex;
     flex-direction: row;
@@ -18,14 +19,14 @@ export const EditorWorkspaceStyle = css`
 
 .button{
     padding: 10px;
-    margin: 10px 10px 0 0;
+    margin: 10px;
     cursor:pointer;
     background: rgba(0,0,0,0.02);
 }
 
 or-input[type=button]
 {
-    margin: 10px 10px 0 0;
+    margin: 10px;
     color: inherit;
 }
 

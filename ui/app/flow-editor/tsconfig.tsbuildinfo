@@ -186,48 +186,36 @@
         "signature": "15d1d7f076d27ae16d10626263e890f1e39b663ebda325d5dfc41f48620df0ec"
       },
       "../../../openremote/ui/component/or-select/dist/index.d.ts": {
-        "version": "c7858a8b70a5677cf1d09a89c8e326cb96606b97990dacfd09ca720c064c6d40",
-        "signature": "c7858a8b70a5677cf1d09a89c8e326cb96606b97990dacfd09ca720c064c6d40"
+        "version": "3f9822ed0e3e930e51a6480695205b31d250669078ec50a5287167656d38c8dd",
+        "signature": "3f9822ed0e3e930e51a6480695205b31d250669078ec50a5287167656d38c8dd"
       },
       "../../../node_modules/@material/base/dist/mdc.base.d.ts": {
         "version": "7f6ac3a73a9e77aba988a23224335322ac7d77d5f7f7002bb37eb0ae8b0efae1",
         "signature": "7f6ac3a73a9e77aba988a23224335322ac7d77d5f7f7002bb37eb0ae8b0efae1"
       },
       "../../../openremote/ui/component/or-input/dist/index.d.ts": {
-        "version": "451125bbe58836ef90c4b8c431e0fa445d62dcd9337e7b54fa0608b74e93b275",
-        "signature": "451125bbe58836ef90c4b8c431e0fa445d62dcd9337e7b54fa0608b74e93b275"
-      },
-      "../../../openremote/ui/component/or-icon/dist/index.d.ts": {
-        "version": "d1c5bcef0969e20c5991f1551de2c180541e16953c78829760267c34abc24540",
-        "signature": "d1c5bcef0969e20c5991f1551de2c180541e16953c78829760267c34abc24540"
+        "version": "2ec2b59e2e97b39556308ac3b9faa36775ad44ab3743a361f5f212d383e7c46f",
+        "signature": "2ec2b59e2e97b39556308ac3b9faa36775ad44ab3743a361f5f212d383e7c46f"
       },
       "../../../openremote/ui/component/model/dist/index.d.ts": {
-        "version": "8f4d5996e280d9c1f223a3132ed440167673633aed4e85107438394b7da37c60",
-        "signature": "8f4d5996e280d9c1f223a3132ed440167673633aed4e85107438394b7da37c60"
+        "version": "2e83945d5cea2f20e081ce8b7dc6e06f2ef6f9061c5c727fb6b8de2ed55ac57a",
+        "signature": "2e83945d5cea2f20e081ce8b7dc6e06f2ef6f9061c5c727fb6b8de2ed55ac57a"
+      },
+      "../../../openremote/ui/component/core/dist/console.d.ts": {
+        "version": "906f80bd26bc2e18e962d2249720758860d727673082a5c9417e195bfda4f9cd",
+        "signature": "906f80bd26bc2e18e962d2249720758860d727673082a5c9417e195bfda4f9cd"
+      },
+      "../../../openremote/ui/component/core/dist/util.d.ts": {
+        "version": "dadb0532acb10d653ee56d430c6aef252f9c2ee0fd3b4ab78195f5f67234aee4",
+        "signature": "dadb0532acb10d653ee56d430c6aef252f9c2ee0fd3b4ab78195f5f67234aee4"
+      },
+      "../../../openremote/ui/component/core/dist/event.d.ts": {
+        "version": "3cc3499e9869fa6cbb338fd7313a9449f1147b0b91c698186aeca197fb0e4ed3",
+        "signature": "3cc3499e9869fa6cbb338fd7313a9449f1147b0b91c698186aeca197fb0e4ed3"
       },
       "../../../node_modules/i18next/index.d.ts": {
         "version": "099db2c7c486a8eb7dce02a8b81716b8be17e67e506caa9650a07a021be2faf2",
         "signature": "099db2c7c486a8eb7dce02a8b81716b8be17e67e506caa9650a07a021be2faf2"
-      },
-      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": {
-        "version": "a8a5fa5ff173019750169b8cac9e4417a66af4a1a2fd39110ab80f3a07d13a96",
-        "signature": "a8a5fa5ff173019750169b8cac9e4417a66af4a1a2fd39110ab80f3a07d13a96"
-      },
-      "../../../openremote/ui/component/or-translate/dist/index.d.ts": {
-        "version": "206de7dc1ddd256734a10454714faf4d4eca6033c967e91023fb07e74978ec87",
-        "signature": "206de7dc1ddd256734a10454714faf4d4eca6033c967e91023fb07e74978ec87"
-      },
-      "../../../openremote/ui/component/core/dist/console.d.ts": {
-        "version": "2e37c857a9e8b72aeef4a85c48278c9e7442c16e5f9815a2ca326f6140c1a20f",
-        "signature": "2e37c857a9e8b72aeef4a85c48278c9e7442c16e5f9815a2ca326f6140c1a20f"
-      },
-      "../../../openremote/ui/component/core/dist/util.d.ts": {
-        "version": "a8ac01dd5a30da368f09084b248b48adde49fd4d31f425cd9c735ac50980b87b",
-        "signature": "a8ac01dd5a30da368f09084b248b48adde49fd4d31f425cd9c735ac50980b87b"
-      },
-      "../../../openremote/ui/component/core/dist/event.d.ts": {
-        "version": "eefaa7a69752fb43375ee2ecbeeb00ec688eabddec7a2067d53b5fb0494f84ff",
-        "signature": "eefaa7a69752fb43375ee2ecbeeb00ec688eabddec7a2067d53b5fb0494f84ff"
       },
       "../../../openremote/ui/component/core/dist/asset-mixin.d.ts": {
         "version": "71fd1ca4c296ee656a86b6ba0a73e5830e6e56e77c23a0288dc491862257e7b5",
@@ -242,20 +230,76 @@
         "signature": "7d04801f5ace7a92365ca303eaf7ac2adab6b4c52d9779c8d90824e5218ddc78"
       },
       "../../../openremote/ui/component/rest/dist/restclient.d.ts": {
-        "version": "aee387dd1ff55b55bd2584c5bf3b921be276c27698560f194f60eb21cd6e8a24",
-        "signature": "aee387dd1ff55b55bd2584c5bf3b921be276c27698560f194f60eb21cd6e8a24"
+        "version": "a6354037abe966fa9fa19ebf99cbaaa9883fec0f7335b1df72cca903296fdb63",
+        "signature": "a6354037abe966fa9fa19ebf99cbaaa9883fec0f7335b1df72cca903296fdb63"
       },
       "../../../openremote/ui/component/rest/dist/index.d.ts": {
-        "version": "312a0ecc40730d49ab0b837ba665414081dc27a4e6f812076f288d5a5c00f57d",
-        "signature": "312a0ecc40730d49ab0b837ba665414081dc27a4e6f812076f288d5a5c00f57d"
+        "version": "afe890d5dd06ab060a148ab0525559472dc0f9d296565b3269ca56a577c31a5c",
+        "signature": "afe890d5dd06ab060a148ab0525559472dc0f9d296565b3269ca56a577c31a5c"
       },
       "../../../openremote/ui/component/core/dist/index.d.ts": {
-        "version": "64179d2f6351ced55a402c4fee74dc4f87eb6ee7844448e9f77bb21566b2082e",
-        "signature": "64179d2f6351ced55a402c4fee74dc4f87eb6ee7844448e9f77bb21566b2082e"
+        "version": "cc24b4b7775041993b6826f6680dcf5463c06fc906b84aac15364755f1aa6fc5",
+        "signature": "cc24b4b7775041993b6826f6680dcf5463c06fc906b84aac15364755f1aa6fc5"
+      },
+      "../../../openremote/ui/component/or-icon/dist/index.d.ts": {
+        "version": "55b2afd13298002d290976c358847fa34f686523f98d7ad245e4718e9d48ee32",
+        "signature": "55b2afd13298002d290976c358847fa34f686523f98d7ad245e4718e9d48ee32"
+      },
+      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": {
+        "version": "a8a5fa5ff173019750169b8cac9e4417a66af4a1a2fd39110ab80f3a07d13a96",
+        "signature": "a8a5fa5ff173019750169b8cac9e4417a66af4a1a2fd39110ab80f3a07d13a96"
+      },
+      "../../../openremote/ui/component/or-translate/dist/index.d.ts": {
+        "version": "206de7dc1ddd256734a10454714faf4d4eca6033c967e91023fb07e74978ec87",
+        "signature": "206de7dc1ddd256734a10454714faf4d4eca6033c967e91023fb07e74978ec87"
+      },
+      "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts": {
+        "version": "b6d760bb608d4ebb5ec2f8659eab850086ce049537bf771e623b2c6bf4fe55c1",
+        "signature": "b6d760bb608d4ebb5ec2f8659eab850086ce049537bf771e623b2c6bf4fe55c1"
       },
       "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts": {
-        "version": "b8bded3d8f11636cc0cc24516caeb51363ff3f7afc5e71570e28569979c089d6",
-        "signature": "b8bded3d8f11636cc0cc24516caeb51363ff3f7afc5e71570e28569979c089d6"
+        "version": "51e836bf2e1707304879209fbab70f10befa732c3d771752a952babd2f280efc",
+        "signature": "51e836bf2e1707304879209fbab70f10befa732c3d771752a952babd2f280efc"
+      },
+      "../../../node_modules/focus-trap/index.d.ts": {
+        "version": "8b0822cf5fe8a3684654a25a059286588c738518f636d1f0ca4cb3a5c37c1486",
+        "signature": "8b0822cf5fe8a3684654a25a059286588c738518f636d1f0ca4cb3a5c37c1486"
+      },
+      "../../../node_modules/@material/base/foundation.d.ts": {
+        "version": "caa2adea5afebec8eded1f9224dfb1479b13e4b180be9058c36960cb97611221",
+        "signature": "caa2adea5afebec8eded1f9224dfb1479b13e4b180be9058c36960cb97611221"
+      },
+      "../../../node_modules/@material/base/types.d.ts": {
+        "version": "cd986686765f762655509f5e251857eb6971901def068f3af7a4f73010f8dbdc",
+        "signature": "cd986686765f762655509f5e251857eb6971901def068f3af7a4f73010f8dbdc"
+      },
+      "../../../node_modules/@material/base/component.d.ts": {
+        "version": "71603165df91130267fa7817b884fb860a6229ad70c474c9126057f528ec97c4",
+        "signature": "71603165df91130267fa7817b884fb860a6229ad70c474c9126057f528ec97c4"
+      },
+      "../../../node_modules/@material/list/adapter.d.ts": {
+        "version": "1ae7eb2000b206f7fa983e57a617351055d8b55ea7ecbd0177c6c8c980a528e3",
+        "signature": "1ae7eb2000b206f7fa983e57a617351055d8b55ea7ecbd0177c6c8c980a528e3"
+      },
+      "../../../node_modules/@material/list/types.d.ts": {
+        "version": "0711980ce8b44a380bbdecc0d278927a8a498d1ea8c213b6c6a40462209174e8",
+        "signature": "0711980ce8b44a380bbdecc0d278927a8a498d1ea8c213b6c6a40462209174e8"
+      },
+      "../../../node_modules/@material/list/foundation.d.ts": {
+        "version": "a32e2d7a357153fd6122ff2d405aa74e65fc75a3c47d1ec160b7d93da4429ccd",
+        "signature": "a32e2d7a357153fd6122ff2d405aa74e65fc75a3c47d1ec160b7d93da4429ccd"
+      },
+      "../../../node_modules/@material/list/component.d.ts": {
+        "version": "a94374e06c05e52039ce07c7e9cb57612e6e65a34f23498333e6106629a7e67a",
+        "signature": "a94374e06c05e52039ce07c7e9cb57612e6e65a34f23498333e6106629a7e67a"
+      },
+      "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts": {
+        "version": "d1e45268dac2a6a5e8ec4852dc8560f67f66f5aa108889d68a618f0c1a320d62",
+        "signature": "d1e45268dac2a6a5e8ec4852dc8560f67f66f5aa108889d68a618f0c1a320d62"
+      },
+      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts": {
+        "version": "a54b41407c23e19cb68cf25d3aaac247948419768d47fea200a73e34957c7c6e",
+        "signature": "a54b41407c23e19cb68cf25d3aaac247948419768d47fea200a73e34957c7c6e"
       },
       "./src/models/status.ts": {
         "version": "e31b2b54da65ac1c9525921d884e94ba8e4d92ff7a2f8714b477365adb2e420c",
@@ -266,7 +310,7 @@
         "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
       },
       "./src/services/integration.ts": {
-        "version": "6f287e07836feaff438ae65cd2d81994f61ec09a86e13ba97efcba1f4a88924d",
+        "version": "1387295b5e75207c5f6cd08bdf2cf12887489b59f360b5582386aa733ee3d1bd",
         "signature": "49684a393e0f73e424ccebb369651fb2dbfac21f5f24da84f19fca92e7d0454b"
       },
       "./src/models/light-node-collection.ts": {
@@ -320,7 +364,7 @@
         "signature": "8dac6d9981f8e00489734321a7ef89140e62a99f50018ad036a419ca525faa76"
       },
       "./src/styles/editor-workspace-style.ts": {
-        "version": "556032bd55443e5b10df44446c789ada53c88b941fb9d20b638f790490250810",
+        "version": "797d01be3a8ab2d673ed9b06e45e7296a5bad6a72fa5fd154a43de7e30e2884a",
         "signature": "310a6a63e1224d510771dd23a9d34451381d8f77858bcd8f979a7a9d3f2d5d85"
       },
       "./src/styles/flow-node-style.ts": {
@@ -400,11 +444,11 @@
         "signature": "184d2bbbd7ef923fe5ba999e42c775e346a2fb0e1cf30f8a04a1ce7681733377"
       },
       "./src/components/flow-editor.ts": {
-        "version": "4cb0087faa795b2dd74cc591ae034c3ec200bc92c4c3a7c870d8964c0c0ec97e",
-        "signature": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f"
+        "version": "e963c6361838952fbc074e34d8002283f5616a22526d2b66e01a1ad21d5ebff6",
+        "signature": "05474ef5481a62a49061e3875f46ad9b80c571e2318ec4bb10ec642f652ef56f"
       },
       "./src/components/node-panel.ts": {
-        "version": "cded1d8dd98a8ebc4f8c7bdced6d7a1f9b4de2dee8c10b5cdce53b7339ec47c8",
+        "version": "78825ff1a64bd6102fe155d760d2517dece4b15b3654edd6ff7954e0b0e1671d",
         "signature": "82099aff4f4a61ab2f473b5089051cf40ca179d546af41331866f767a206cae0"
       },
       "./src/components/top-bar.ts": {
@@ -440,16 +484,8 @@
         "signature": "939547d7703dac1b0f91a53e7beb3cd2949317c20809786c57cc9e6f890a5269"
       },
       "./src/index.ts": {
-        "version": "87b4faac8902e4e0db84c7a6d7594ec66d19cf6a9d6e40ff66ebde955880169a",
-        "signature": "26bc04bd5541adeb17ff5f0680531d37707fd2082f1466bc267685d5766d0440"
-      },
-      "./src/components/confirmation-dialog copy.d.ts": {
-        "version": "40b17138d18f146da44470fec06f7fd41451345a90377cc20e896fbfd98abaa0",
-        "signature": "40b17138d18f146da44470fec06f7fd41451345a90377cc20e896fbfd98abaa0"
-      },
-      "./src/components/main-application.d.ts": {
-        "version": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f",
-        "signature": "1260f9611c7527099e33be927c434925e16d385b2220dbc1475d271d82c18d8f"
+        "version": "fb2e734ea1440c29b380023a02ba17082b3ea97a30ddb2142f2f15fe38a27ae9",
+        "signature": "b7a6a81e27846ab276bf24006a37e662b627532c542a1a9d90dacaeeb909d32a"
       },
       "../../../node_modules/@types/chai/index.d.ts": {
         "version": "4d46d75262498f3f7f2d6db1f9393324fe4f1999dff129c34c3ade6e79afd712",
@@ -1915,6 +1951,10 @@
         "version": "c4c03cf65951d980ba618ae9601d10438730803fc9c8a1f7b34af8739981e205",
         "signature": "c4c03cf65951d980ba618ae9601d10438730803fc9c8a1f7b34af8739981e205"
       },
+      "../../../node_modules/@types/navigo/index.d.ts": {
+        "version": "db09d3d7489f5855483821751af06377baa6f3157d1337301013581c04d87249",
+        "signature": "db09d3d7489f5855483821751af06377baa6f3157d1337301013581c04d87249"
+      },
       "../../../node_modules/@types/qs/index.d.ts": {
         "version": "dca5da58652b1b26ae6daf225335a7afebb435dd7fd378174b74c9e13cd4224b",
         "signature": "dca5da58652b1b26ae6daf225335a7afebb435dd7fd378174b74c9e13cd4224b"
@@ -2182,28 +2222,7 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../../openremote/ui/component/or-icon/dist/index.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../../../openremote/ui/component/model/dist/index.d.ts": [
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../node_modules/i18next/index.d.ts": [
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": [
-        "../../../node_modules/i18next/index.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../openremote/ui/component/or-translate/dist/index.d.ts": [
-        "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
-        "../../../node_modules/i18next/index.d.ts",
-        "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2220,6 +2239,10 @@
       "../../../openremote/ui/component/core/dist/event.d.ts": [
         "../../../openremote/ui/component/core/dist/util.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/i18next/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2261,13 +2284,92 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../../openremote/ui/component/or-icon/dist/index.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts",
+        "../../../openremote/ui/component/core/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": [
+        "../../../node_modules/i18next/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-translate/dist/index.d.ts": [
+        "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
+        "../../../node_modules/i18next/index.d.ts",
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/or-input/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+        "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts",
         "../../../openremote/ui/component/core/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/focus-trap/index.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/foundation.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/types.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/component.d.ts": [
+        "../../../node_modules/@material/base/foundation.d.ts",
+        "../../../node_modules/@material/base/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/adapter.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/types.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/foundation.d.ts": [
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/adapter.d.ts",
+        "../../../node_modules/@material/list/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/component.d.ts": [
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/foundation.d.ts",
+        "../../../node_modules/@material/list/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts": [
+        "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
+        "../../../node_modules/focus-trap/index.d.ts",
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/component.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2532,7 +2634,6 @@
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
-        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2615,6 +2716,7 @@
         "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+        "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
         "./src/components/flow-editor.ts",
         "./src/components/node-panel.ts",
         "./src/components/editor-workspace.ts",
@@ -2632,23 +2734,6 @@
         "./src/components/rule-browser.ts",
         "./src/components/confirmation-dialog.ts",
         "./src/components/notification-dialog.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/components/confirmation-dialog copy.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/components/main-application.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "./src/services/integration.ts",
-        "./src/services/copy-paste-manager.ts",
-        "./src/services/project.ts",
-        "./src/services/input.ts",
-        "./src/services/modal.ts",
-        "./src/services/exporter.ts",
-        "./src/services/shortcuts.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -4966,6 +5051,10 @@
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../../node_modules/@types/mocha/index.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@types/navigo/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5219,28 +5308,7 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../../../openremote/ui/component/or-icon/dist/index.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../../../openremote/ui/component/model/dist/index.d.ts": [
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../node_modules/i18next/index.d.ts": [
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": [
-        "../../../node_modules/i18next/index.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../../../openremote/ui/component/or-translate/dist/index.d.ts": [
-        "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
-        "../../../node_modules/i18next/index.d.ts",
-        "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5257,6 +5325,10 @@
       "../../../openremote/ui/component/core/dist/event.d.ts": [
         "../../../openremote/ui/component/core/dist/util.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/i18next/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5298,13 +5370,92 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../../openremote/ui/component/or-icon/dist/index.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts",
+        "../../../openremote/ui/component/core/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts": [
+        "../../../node_modules/i18next/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-translate/dist/index.d.ts": [
+        "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
+        "../../../node_modules/i18next/index.d.ts",
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/or-input/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+        "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts",
         "../../../openremote/ui/component/core/dist/index.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/focus-trap/index.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/foundation.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/types.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/base/component.d.ts": [
+        "../../../node_modules/@material/base/foundation.d.ts",
+        "../../../node_modules/@material/base/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/adapter.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/types.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/foundation.d.ts": [
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/adapter.d.ts",
+        "../../../node_modules/@material/list/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/list/component.d.ts": [
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/foundation.d.ts",
+        "../../../node_modules/@material/list/types.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts": [
+        "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
+        "../../../node_modules/focus-trap/index.d.ts",
+        "../../../node_modules/@material/base/dist/mdc.base.d.ts",
+        "../../../node_modules/@material/list/component.d.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5467,6 +5618,7 @@
         "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
         "../../../openremote/ui/component/or-icon/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+        "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
         "./src/components/flow-editor.ts",
         "./src/components/node-panel.ts",
         "./src/components/editor-workspace.ts",
@@ -5484,11 +5636,6 @@
         "./src/components/rule-browser.ts",
         "./src/components/confirmation-dialog.ts",
         "./src/components/notification-dialog.ts"
-      ],
-      "./src/components/confirmation-dialog copy.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../../node_modules/@types/chai/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
@@ -7807,23 +7954,15 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../../../node_modules/@types/navigo/index.d.ts": [
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../../../node_modules/@types/qs/index.d.ts": [
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../../node_modules/@types/simplebar/index.d.ts": [
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./src/components/main-application.d.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "./src/services/integration.ts",
-        "./src/services/copy-paste-manager.ts",
-        "./src/services/project.ts",
-        "./src/services/input.ts",
-        "./src/services/modal.ts",
-        "./src/services/exporter.ts",
-        "./src/services/shortcuts.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ]
@@ -7878,23 +8017,35 @@
       "../../../openremote/ui/component/or-select/dist/index.d.ts",
       "../../../node_modules/@material/base/dist/mdc.base.d.ts",
       "../../../openremote/ui/component/or-input/dist/index.d.ts",
-      "../../../openremote/ui/component/or-icon/dist/index.d.ts",
       "../../../openremote/ui/component/model/dist/index.d.ts",
-      "../../../node_modules/i18next/index.d.ts",
-      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
-      "../../../openremote/ui/component/or-translate/dist/index.d.ts",
       "../../../openremote/ui/component/core/dist/console.d.ts",
       "../../../openremote/ui/component/core/dist/util.d.ts",
       "../../../openremote/ui/component/core/dist/event.d.ts",
+      "../../../node_modules/i18next/index.d.ts",
       "../../../openremote/ui/component/core/dist/asset-mixin.d.ts",
       "../../../openremote/ui/component/core/dist/defaults.d.ts",
       "../../../node_modules/axios/index.d.ts",
       "../../../openremote/ui/component/rest/dist/restclient.d.ts",
       "../../../openremote/ui/component/rest/dist/index.d.ts",
       "../../../openremote/ui/component/core/dist/index.d.ts",
+      "../../../openremote/ui/component/or-icon/dist/index.d.ts",
+      "../../../openremote/ui/component/or-translate/dist/translate-mixin.d.ts",
+      "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+      "../../../openremote/ui/component/or-asset-tree/dist/style.d.ts",
       "../../../openremote/ui/component/or-asset-tree/dist/index.d.ts",
+      "../../../node_modules/focus-trap/index.d.ts",
+      "../../../node_modules/@material/base/foundation.d.ts",
+      "../../../node_modules/@material/base/types.d.ts",
+      "../../../node_modules/@material/base/component.d.ts",
+      "../../../node_modules/@material/list/adapter.d.ts",
+      "../../../node_modules/@material/list/types.d.ts",
+      "../../../node_modules/@material/list/foundation.d.ts",
+      "../../../node_modules/@material/list/component.d.ts",
+      "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
+      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
       "./src/models/status.ts",
       "../../../node_modules/@types/events/index.d.ts",
+      "./src/services/integration.ts",
       "./src/models/light-node-collection.ts",
       "../../component/node-structure/src/utils.ts",
       "../../component/node-structure/src/identity.assigner.ts",
@@ -7908,21 +8059,37 @@
       "../../../node_modules/linqts/dist/src/enumerable.d.ts",
       "../../../node_modules/linqts/dist/index.d.ts",
       "./src/utils.ts",
-      "./src/styles/editor-workspace-style.ts",
+      "./src/components/flow-node-socket.ts",
       "./src/styles/flow-node-style.ts",
+      "./src/converters/node-converter.ts",
+      "./src/components/selectable-element.ts",
+      "./src/components/flow-node.ts",
       "../../../node_modules/resize-observer/lib/contentrect.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserverentry.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobservercallback.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserver.d.ts",
+      "./src/components/connection-line.ts",
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
+      "./src/components/editor-workspace.ts",
+      "./src/services/project.ts",
+      "./src/services/input.ts",
+      "./src/components/popup-modal.ts",
       "./src/services/modal.ts",
+      "./src/services/exporter.ts",
+      "./src/services/shortcuts.ts",
       "./src/components/flow-editor.ts",
+      "./src/components/node-panel.ts",
+      "./src/components/top-bar.ts",
+      "./src/components/node-menu-item.ts",
+      "./src/components/connection-container.ts",
+      "./src/components/selection-box.ts",
+      "./src/components/internal-picker.ts",
+      "./src/components/rule-browser.ts",
       "./src/components/confirmation-dialog.ts",
       "./src/components/notification-dialog.ts",
       "./src/index.ts",
-      "./src/components/confirmation-dialog copy.d.ts",
       "../../../node_modules/@types/chai/index.d.ts",
       "../../../node_modules/@types/chart.js/index.d.ts",
       "../../../node_modules/@types/geojson/index.d.ts",
@@ -8289,28 +8456,10 @@
       "../../../node_modules/@types/lodash-es/index.d.ts",
       "../../../node_modules/@types/mapbox-gl/index.d.ts",
       "../../../node_modules/@types/mocha/index.d.ts",
+      "../../../node_modules/@types/navigo/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
       "../../../node_modules/@types/simplebar/index.d.ts",
-      "./src/services/integration.ts",
-      "./src/components/flow-node-socket.ts",
-      "./src/converters/node-converter.ts",
-      "./src/components/selectable-element.ts",
-      "./src/components/flow-node.ts",
-      "./src/components/connection-line.ts",
-      "./src/components/editor-workspace.ts",
-      "./src/services/project.ts",
-      "./src/services/input.ts",
-      "./src/components/popup-modal.ts",
-      "./src/services/exporter.ts",
-      "./src/services/shortcuts.ts",
-      "./src/components/node-panel.ts",
-      "./src/components/top-bar.ts",
-      "./src/components/node-menu-item.ts",
-      "./src/components/connection-container.ts",
-      "./src/components/selection-box.ts",
-      "./src/components/internal-picker.ts",
-      "./src/components/rule-browser.ts",
-      "./src/components/main-application.d.ts"
+      "./src/styles/editor-workspace-style.ts"
     ]
   },
   "version": "3.6.4"

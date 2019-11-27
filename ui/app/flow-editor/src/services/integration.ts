@@ -38,7 +38,7 @@ export class Integration extends EventEmitter {
             realm: "master",
         }).then(async (result) => {
             this.integrationStatus = result ? Status.Success : Status.Failure;
-            openremote.language = "nl";
+            openremote.language = "en";
             await this.refreshNodes();
             this.emit("initialise", result);
         }).catch((e) => {

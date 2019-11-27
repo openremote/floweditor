@@ -2,6 +2,7 @@ import "@openremote/or-select";
 import "@openremote/or-asset-tree";
 import "@openremote/or-icon";
 import "@openremote/or-translate";
+import "@openremote/or-mwc-components/dist/or-mwc-drawer";
 
 export { FlowEditor } from "./components/flow-editor";
 export { NodePanel } from "./components/node-panel";

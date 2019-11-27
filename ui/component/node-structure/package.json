@@ -7,6 +7,7 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "npx tsc -b",
+	"clean": "",
     "test": "yarn build && nyc --reporter=html mocha -r ./node_modules/ts-node/register test/**/*.ts"
   },
   "license": "AGPL-3.0-or-later",
