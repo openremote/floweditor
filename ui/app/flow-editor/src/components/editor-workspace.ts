@@ -162,8 +162,14 @@ export class EditorWorkspace extends LitElement {
                     type: "button",
                     icon: "delete",
                     label: i18next.t("delete", "Delete"),
-                    action: () => { selectedNodes.forEach((n) => project.removeNode(n.node)); selectedConnections.forEach((n) => project.removeConnection(n.connection)); },
-                    disabled: selectedNodes.length === 0 && selectedConnections.length === 0
+                    action: () => {
+                        selectedNodes.forEach((n) => {
+                            if (n.frozen) { return; }
+                            project.removeNode(n.node);
+                        }); 
+                        selectedConnections.forEach((n) => project.removeConnection(n.connection));
+                    },
+                    disabled: (selectedNodes.length === 0 && selectedConnections.length === 0) || (selectedNodes.every((n) => n.frozen))
                 },
                 { type: "separator" },
                 {
@@ -173,6 +179,13 @@ export class EditorWorkspace extends LitElement {
                     action: () => this.fitCamera(selectedNodes.map((n) => n.node)),
                     disabled: selectedNodes.length === 0
                 },
+                // {
+                //     type: "button",
+                //     icon: "snowflake",
+                //     label: "TOGGLE FROZEN",
+                //     action: () => selectedNodes.forEach((n) => n.frozen = !n.frozen),
+                //     disabled: selectedNodes.length === 0
+                // },
             ]);
 
             ContextMenu.open(e.pageX, e.pageY, this, buttons);

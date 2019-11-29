@@ -90,4 +90,14 @@ export const FlowNodeStyle = css`
 .title.minimal[singlechar]{
     font-size: 32px;
 }
+.lock-icon{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: rgba(255,255,255,0.8);
+    transform: scale(.7);
+}
+.lock-icon.input{
+    left: 0;
+}
 `;

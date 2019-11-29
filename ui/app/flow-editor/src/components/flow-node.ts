@@ -12,6 +12,7 @@ import { project, newIds } from "./flow-editor";
 export class FlowNode extends SelectableElement {
     @property({ converter: nodeConverter }) public node: Node;
     @property({ attribute: false }) public workspace: EditorWorkspace;
+    @property({ type: Boolean, reflect: true }) public frozen = false;
 
     @property({ type: Boolean, reflect: true }) private minimal = false;
     @property({ attribute: false }) private isBeingDragged = false;
@@ -83,7 +84,7 @@ export class FlowNode extends SelectableElement {
         ${title}
         ${this.node.inputs.length > 0 ? inputSide : spacer}
         ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) =>
-            html`<internal-picker @picked="${async () => {
+            html`<internal-picker style="pointer-events: ${(this.frozen ? "none" : null)}" @picked="${async () => {
                 project.unsavedState = true;
                 this.forceUpdate();
                 await this.updateComplete;
@@ -91,6 +92,7 @@ export class FlowNode extends SelectableElement {
                 project.removeInvalidConnections();
             }}" .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
+        ${(this.frozen ? html`<or-icon class="lock-icon ${this.node.type.toLowerCase()}" icon="lock"></or-icon>` : ``)}
         `;
     }
 
@@ -101,17 +103,19 @@ export class FlowNode extends SelectableElement {
     }
 
     public bringToFront() {
+        if (this.frozen) { return; }
         this.style.zIndex = `${this.workspace.topNodeZindex++}`;
     }
-
+    
     private startDrag = (e: MouseEvent) => {
+        if (this.frozen) { return; }
         if (e.buttons !== 1) { return; }
         this.bringToFront();
         window.addEventListener("mouseup", this.stopDrag);
         window.addEventListener("mousemove", this.onDrag);
         this.isBeingDragged = true;
     }
-
+    
     private onDrag = (e: MouseEvent) => {
         this.node.position = {
             x: this.node.position.x + e.movementX / this.workspace.camera.zoom,

@@ -7,7 +7,7 @@ export class Shortcuts {
         {
             keys: ["Delete", "Backspace"],
             action: () => {
-                const selectedNodes = input.selected.filter((s) => s instanceof FlowNode && s.selected) as FlowNode[];
+                const selectedNodes = input.selected.filter((s) => s instanceof FlowNode && s.selected && !s.frozen) as FlowNode[];
                 const selectedConnections = input.selected.filter((s) => s instanceof ConnectionLine && s.selected) as ConnectionLine[];
                 selectedConnections.forEach((n) => project.removeConnection(n.connection));
                 selectedNodes.forEach((n) => project.removeNode(n.node));
