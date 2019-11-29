@@ -1,0 +1,51 @@
+// {
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "target": "es6",
+//     "sourceMap": true,
+//     "experimentalDecorators": true,
+//     "allowSyntheticDefaultImports": true,
+//     "moduleResolution": "node",
+//     "types": [
+//       "mocha",
+//     ],
+//     "lib": [
+//       "dom",
+//       "es7"
+//     ]
+//   },
+//   "baseUrl": "./"
+// }
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "noEmitOnError": true,
+    "declaration": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "./src/test"
+  ],
+  "references": [
+    { "path": "../../../openremote/ui/component/core" },
+    { "path": "../../../openremote/ui/component/or-translate" },
+    { "path": "../../../openremote/ui/component/rest" },
+    { "path": "../../../openremote/ui/component/or-input" },
+    { "path": "../../../openremote/ui/component/or-asset-tree" },
+    { "path": "../../../openremote/ui/component/or-icon" },
+    { "path": "../../../openremote/ui/component/or-mwc-components" },
+  ]
+}

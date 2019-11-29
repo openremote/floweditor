@@ -1,7 +1,0 @@
-<div class="node {{node.type | graphNodeTypeClass}}" [ngStyle]="{'z-index': 500}" (mousedown)="startDrag($event)">
-  <div class="title">{{node.name | graphNodeName}}</div>
-</div>
-
-<div #dragElement class="floating node {{node.type | graphNodeTypeClass}}" *ngIf="isDragging" [ngStyle]="{'top': fY + 'px', 'left': fX + 'px'}">
-  <div class="title">{{node.name | graphNodeName}}</div>
-</div>

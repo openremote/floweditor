@@ -1,0 +1,59 @@
+{
+  "name": "flow-editor",
+  "version": "1.0.0",
+  "description": "Simple editor to link and process OpenRemote asset attributes",
+  "author": "OpenRemote",
+  "main": "dist/bundle.js",
+  "types": "src/index.ts",
+  "scripts": {
+    "clean": "npx shx rm -rf dist && cd src && del /s *.map.ts && del /s *.d.ts && del /s *.js",
+    "modelBuild": "node ../../model-build.js",
+    "modelWatch": "node ../../model-watch.js",
+    "build": "npx tsc -b && npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack --mode production",
+    "serve": "npx cross-env NODE_OPTIONS=--max_old_space_size=4096 webpack-dev-server --mode development",
+    "watch": "start npx tsc -b -w && start webpack --watch",
+    "test": "nyc --reporter=html mocha -r ./node_modules/ts-node/register src/test/**/*.ts",
+    "karma": "karma start --single-run --browsers Chrome karma.conf.js"
+  },
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "dependencies": {
+    "linqts": "^1.12.6",
+    "lit-element": "^2.2.0",
+    "resize-observer": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/runtime": "^7.2.0",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
+    "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^4.6.0",
+    "core-util-is": "^1.0.2",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-harddisk-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "workspaces": {
+    "nohoist": [
+      "ts-node",
+      "ts-node/**"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "defaultSeverity": "error",
+  "extends": "tslint:recommended",
+  "rules": {
+    "interface-name" : [true, "never-prefix"],
+    "variable-name": [false],
+    "trailing-comma": [false],
+    "no-trailing-whitespace": [false],
+    "no-console": [false],
+    "max-classes-per-file": false,
+    "max-line-length": false,
+    "ordered-imports": false,
+    "no-unused-expression": false,
+    "member-ordering": false,
+    "prefer-for-of": false,
+    "object-literal-sort-keys": false,
+    "ban-types": false,
+    "array-type": false,
+    "object-literal-shorthand": false
+  }
+}

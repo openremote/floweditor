@@ -12,7 +12,6 @@ task clean {
 
 task build {
     dependsOn tasks.getByPath(":yarnInstall")
-
     // Add dependency to openremote ui build for custom projects
     // and also remove node_modules dir from openremote repo
     if (isCustomProject() && parent == rootProject) {
