@@ -1,4 +1,4 @@
-import { LitElement, html, customElement, css, property } from "lit-element";
+import { LitElement, html, customElement, css, query, unsafeCSS } from "lit-element";
 import { Status } from "../models/status";
 import { Integration } from "../services/integration";
 import { CopyPasteManager } from "../services/copy-paste-manager";
@@ -7,6 +7,9 @@ import { Input } from "../services/input";
 import { ModalService } from "../services/modal";
 import { Exporter } from "../services/exporter";
 import { Shortcuts } from "../services/shortcuts";
+import { NodePanel } from "./node-panel";
+import { EditorWorkspace } from "./editor-workspace";
+import { TopBar } from "./top-bar";
 
 export const integration = new Integration();
 export const copyPasteManager = new CopyPasteManager();
@@ -27,17 +30,18 @@ export class FlowEditor extends LitElement {
     }
 
     static get styles() {
-        return css`
-        :host{
-            width: 100vw;
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr var(--node-panel-width);
-            grid-template-rows: var(--topbar-height) 1fr;
-            grid-template-areas: 
-                "topbar topbar"
-                "workspace node-panel";
-        }`;
+        return [
+            css`
+            :host{
+                width: 100vw;
+                height: 100vh;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-rows: var(--topbar-height) 1fr;
+                grid-template-areas: 
+                    "topbar topbar"
+                    "workspace node-panel";
+            }`];
     }
 
     protected firstUpdated() {
@@ -47,20 +51,18 @@ export class FlowEditor extends LitElement {
         });
     }
 
+    @query("node-panel") public nodePanel: NodePanel;
+    @query("top-bar") public topBar: TopBar;
+    @query("editor-workspace") public editorWorkspace: EditorWorkspace;
+
     protected render() {
         if (integration.status === Status.Idle || integration.status === Status.Loading) { return html``; }
 
-/*
-            <or-mwc-drawer .content="${html`
-                <node-panel .nodes="${integration.nodes}"></node-panel>
-            `}"></or-mwc-drawer>
-            <div class="mdc-drawer-app-content">
-*/
         if (integration.status === Status.Success) {
             return html`
-            <top-bar style="grid-area: topbar"></top-bar>
-            <node-panel style="grid-area: node-panel" .nodes= "${integration.nodes}"></node-panel>
-            <editor-workspace id="workspace" style="grid-area: workspace"></editor-workspace>
+            <top-bar .application="${this}" style="grid-area: topbar"></top-bar>
+            <node-panel .application="${this}" style="grid-area: node-panel" .nodes= "${integration.nodes}"></node-panel>
+            <editor-workspace .application="${this}" id="workspace" style="grid-area: workspace"></editor-workspace>
             <context-menu></context-menu>
             <popup-modal id="popup-modal"></popup-modal>
         `;

@@ -32,7 +32,7 @@ export class NodeMenuItem extends LitElement {
             border-radius: var(--roundness);
             box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -5px;
 
-            width: calc(var(--node-panel-width) * 0.7);
+            width: 200px;
             height: 22px;
             line-height: 22px;
             cursor:grab;
@@ -40,7 +40,7 @@ export class NodeMenuItem extends LitElement {
         }
         .node-drag-item{
             z-index: 5000;
-            position: absolute;
+            position: fixed;
             background: inherit;
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 15px;
             filter: opacity(90%);

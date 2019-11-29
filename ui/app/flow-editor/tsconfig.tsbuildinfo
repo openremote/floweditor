@@ -186,8 +186,8 @@
         "signature": "15d1d7f076d27ae16d10626263e890f1e39b663ebda325d5dfc41f48620df0ec"
       },
       "../../../openremote/ui/component/or-select/dist/index.d.ts": {
-        "version": "3f9822ed0e3e930e51a6480695205b31d250669078ec50a5287167656d38c8dd",
-        "signature": "3f9822ed0e3e930e51a6480695205b31d250669078ec50a5287167656d38c8dd"
+        "version": "c7858a8b70a5677cf1d09a89c8e326cb96606b97990dacfd09ca720c064c6d40",
+        "signature": "c7858a8b70a5677cf1d09a89c8e326cb96606b97990dacfd09ca720c064c6d40"
       },
       "../../../node_modules/@material/base/dist/mdc.base.d.ts": {
         "version": "7f6ac3a73a9e77aba988a23224335322ac7d77d5f7f7002bb37eb0ae8b0efae1",
@@ -202,16 +202,16 @@
         "signature": "2e83945d5cea2f20e081ce8b7dc6e06f2ef6f9061c5c727fb6b8de2ed55ac57a"
       },
       "../../../openremote/ui/component/core/dist/console.d.ts": {
-        "version": "906f80bd26bc2e18e962d2249720758860d727673082a5c9417e195bfda4f9cd",
-        "signature": "906f80bd26bc2e18e962d2249720758860d727673082a5c9417e195bfda4f9cd"
+        "version": "2e37c857a9e8b72aeef4a85c48278c9e7442c16e5f9815a2ca326f6140c1a20f",
+        "signature": "2e37c857a9e8b72aeef4a85c48278c9e7442c16e5f9815a2ca326f6140c1a20f"
       },
       "../../../openremote/ui/component/core/dist/util.d.ts": {
-        "version": "dadb0532acb10d653ee56d430c6aef252f9c2ee0fd3b4ab78195f5f67234aee4",
-        "signature": "dadb0532acb10d653ee56d430c6aef252f9c2ee0fd3b4ab78195f5f67234aee4"
+        "version": "4d533d17875cf155e9967f2dceda7d99df795c2b4b583c98deb6a2448d4484a0",
+        "signature": "4d533d17875cf155e9967f2dceda7d99df795c2b4b583c98deb6a2448d4484a0"
       },
       "../../../openremote/ui/component/core/dist/event.d.ts": {
-        "version": "3cc3499e9869fa6cbb338fd7313a9449f1147b0b91c698186aeca197fb0e4ed3",
-        "signature": "3cc3499e9869fa6cbb338fd7313a9449f1147b0b91c698186aeca197fb0e4ed3"
+        "version": "eefaa7a69752fb43375ee2ecbeeb00ec688eabddec7a2067d53b5fb0494f84ff",
+        "signature": "eefaa7a69752fb43375ee2ecbeeb00ec688eabddec7a2067d53b5fb0494f84ff"
       },
       "../../../node_modules/i18next/index.d.ts": {
         "version": "099db2c7c486a8eb7dce02a8b81716b8be17e67e506caa9650a07a021be2faf2",
@@ -230,16 +230,16 @@
         "signature": "7d04801f5ace7a92365ca303eaf7ac2adab6b4c52d9779c8d90824e5218ddc78"
       },
       "../../../openremote/ui/component/rest/dist/restclient.d.ts": {
-        "version": "a6354037abe966fa9fa19ebf99cbaaa9883fec0f7335b1df72cca903296fdb63",
-        "signature": "a6354037abe966fa9fa19ebf99cbaaa9883fec0f7335b1df72cca903296fdb63"
+        "version": "5a49eebe8874c1beefd6e1976b77404126e9aa7d4d24c9e623112e84b70cc642",
+        "signature": "5a49eebe8874c1beefd6e1976b77404126e9aa7d4d24c9e623112e84b70cc642"
       },
       "../../../openremote/ui/component/rest/dist/index.d.ts": {
-        "version": "afe890d5dd06ab060a148ab0525559472dc0f9d296565b3269ca56a577c31a5c",
-        "signature": "afe890d5dd06ab060a148ab0525559472dc0f9d296565b3269ca56a577c31a5c"
+        "version": "312a0ecc40730d49ab0b837ba665414081dc27a4e6f812076f288d5a5c00f57d",
+        "signature": "312a0ecc40730d49ab0b837ba665414081dc27a4e6f812076f288d5a5c00f57d"
       },
       "../../../openremote/ui/component/core/dist/index.d.ts": {
-        "version": "cc24b4b7775041993b6826f6680dcf5463c06fc906b84aac15364755f1aa6fc5",
-        "signature": "cc24b4b7775041993b6826f6680dcf5463c06fc906b84aac15364755f1aa6fc5"
+        "version": "d7b9e39e6b05277307475aa01fa339d133a40358645d7d1c2e1c450819619d26",
+        "signature": "d7b9e39e6b05277307475aa01fa339d133a40358645d7d1c2e1c450819619d26"
       },
       "../../../openremote/ui/component/or-icon/dist/index.d.ts": {
         "version": "55b2afd13298002d290976c358847fa34f686523f98d7ad245e4718e9d48ee32",
@@ -298,8 +298,8 @@
         "signature": "d1e45268dac2a6a5e8ec4852dc8560f67f66f5aa108889d68a618f0c1a320d62"
       },
       "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts": {
-        "version": "a54b41407c23e19cb68cf25d3aaac247948419768d47fea200a73e34957c7c6e",
-        "signature": "a54b41407c23e19cb68cf25d3aaac247948419768d47fea200a73e34957c7c6e"
+        "version": "002ed3149ce011b0b828d6d84dccace5b84fb9063c53831ab8fae93867588a7d",
+        "signature": "002ed3149ce011b0b828d6d84dccace5b84fb9063c53831ab8fae93867588a7d"
       },
       "./src/models/status.ts": {
         "version": "e31b2b54da65ac1c9525921d884e94ba8e4d92ff7a2f8714b477365adb2e420c",
@@ -416,8 +416,8 @@
         "signature": "08dbc8e07340cef0cf770cf5f13b1611c0b2a2dfeb1a71048dcdf5699958a053"
       },
       "./src/components/editor-workspace.ts": {
-        "version": "bf1a590d292c830169b38685721503569c5bc22792e61724bbf5811d9138e166",
-        "signature": "b77f1298c1271577ca69b1d5bab1a733db6c058a988e7fdbcb3a26c96596c77d"
+        "version": "05e13c47fad358a694e17fe3a7566b9b9715b55bb5246706cb68ea49955e2a3e",
+        "signature": "656364cb33fdcecec8b8f26944c907df182743da82f34a7948fa91ee92785861"
       },
       "./src/services/project.ts": {
         "version": "2e5d8413d1a022ffa32f2b63f2bd0fb8819b9582f1c74164479cb12c97df6c81",
@@ -443,20 +443,20 @@
         "version": "1bec993d473c65a66335da69e61915364c22595e08c90239e6b8541de3c9b594",
         "signature": "184d2bbbd7ef923fe5ba999e42c775e346a2fb0e1cf30f8a04a1ce7681733377"
       },
-      "./src/components/flow-editor.ts": {
-        "version": "e963c6361838952fbc074e34d8002283f5616a22526d2b66e01a1ad21d5ebff6",
-        "signature": "05474ef5481a62a49061e3875f46ad9b80c571e2318ec4bb10ec642f652ef56f"
-      },
       "./src/components/node-panel.ts": {
-        "version": "78825ff1a64bd6102fe155d760d2517dece4b15b3654edd6ff7954e0b0e1671d",
-        "signature": "82099aff4f4a61ab2f473b5089051cf40ca179d546af41331866f767a206cae0"
+        "version": "5cde4fca37d47a39afd8e568035b4d8740e76e214f0d09c5280016e0cd1f4439",
+        "signature": "702366b7caefce1d02e0938fedd15c2e435d6388331c4f661e11c9aead54592a"
       },
       "./src/components/top-bar.ts": {
-        "version": "7a2091aa7b0b6c6a6c3ded6e7624b0043dbff764322e96ad18f8ae216456b21d",
-        "signature": "2265d2f0041b6c4cfd5297174f05271eac1e3f3a3bfd533914817a8678b3beae"
+        "version": "6cd1097677f7e439b92507f3866a2d9a74e145a481c2921cb29adf18db49c0d3",
+        "signature": "ffb8350d254ee85db7430fe3c454c310a4f1de91eb113f523efbc6402425e1fe"
+      },
+      "./src/components/flow-editor.ts": {
+        "version": "04ac4a0354a420fc24be1377f324017faa74578ef477655f908e5489b457097e",
+        "signature": "155bec1d898449879245f34aba46568032dbb63b937a09f1f907ec667f7f46c2"
       },
       "./src/components/node-menu-item.ts": {
-        "version": "09e5958dbae54b8c9fbebdb2cd866badff240593662054fb1f19b6e9aaa18c4f",
+        "version": "a61af24c08f70303ad43b55db4a801654c2f2c9981be5934a5b826d477b81a42",
         "signature": "a4181a62de88e2a280b631b4bde4292cbad7d9b90d3b0de2de3a4dd25c03270f"
       },
       "./src/components/connection-container.ts": {
@@ -2617,23 +2617,12 @@
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./src/components/flow-editor.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "./src/models/status.ts",
-        "./src/services/integration.ts",
-        "./src/services/copy-paste-manager.ts",
-        "./src/services/project.ts",
-        "./src/services/input.ts",
-        "./src/services/modal.ts",
-        "./src/services/exporter.ts",
-        "./src/services/shortcuts.ts",
-        "../../../node_modules/@types/node/util.d.ts",
-        "../../../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/components/node-panel.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
+        "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
+        "./src/components/flow-editor.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2644,6 +2633,23 @@
         "./src/utils.ts",
         "../../../openremote/ui/component/or-translate/dist/index.d.ts",
         "./src/components/flow-editor.ts",
+        "./src/components/node-panel.ts",
+        "../../../node_modules/@types/node/util.d.ts",
+        "../../../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./src/components/flow-editor.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "./src/models/status.ts",
+        "./src/services/integration.ts",
+        "./src/services/copy-paste-manager.ts",
+        "./src/services/project.ts",
+        "./src/services/input.ts",
+        "./src/services/modal.ts",
+        "./src/services/exporter.ts",
+        "./src/services/shortcuts.ts",
+        "./src/components/node-panel.ts",
+        "./src/components/editor-workspace.ts",
+        "./src/components/top-bar.ts",
         "../../../node_modules/@types/node/util.d.ts",
         "../../../node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -5552,6 +5558,7 @@
       "./src/components/editor-workspace.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "./src/models/camera.ts",
+        "./src/components/flow-editor.ts",
         "../../../openremote/ui/component/model/dist/index.d.ts"
       ],
       "./src/services/project.ts": [
@@ -5572,6 +5579,16 @@
       "./src/services/exporter.ts": [
         "../../../openremote/ui/component/model/dist/index.d.ts"
       ],
+      "./src/components/node-panel.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "../../../openremote/ui/component/model/dist/index.d.ts",
+        "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
+        "./src/components/flow-editor.ts"
+      ],
+      "./src/components/top-bar.ts": [
+        "../../../node_modules/lit-element/lit-element.d.ts",
+        "./src/components/flow-editor.ts"
+      ],
       "./src/components/flow-editor.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
         "./src/services/integration.ts",
@@ -5580,14 +5597,10 @@
         "./src/services/input.ts",
         "./src/services/modal.ts",
         "./src/services/exporter.ts",
-        "./src/services/shortcuts.ts"
-      ],
-      "./src/components/node-panel.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts",
-        "../../../openremote/ui/component/model/dist/index.d.ts"
-      ],
-      "./src/components/top-bar.ts": [
-        "../../../node_modules/lit-element/lit-element.d.ts"
+        "./src/services/shortcuts.ts",
+        "./src/components/node-panel.ts",
+        "./src/components/top-bar.ts",
+        "./src/components/editor-workspace.ts"
       ],
       "./src/components/node-menu-item.ts": [
         "../../../node_modules/lit-element/lit-element.d.ts",
@@ -8042,10 +8055,8 @@
       "../../../node_modules/@material/list/foundation.d.ts",
       "../../../node_modules/@material/list/component.d.ts",
       "../../../node_modules/@material/drawer/dist/mdc.drawer.d.ts",
-      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
       "./src/models/status.ts",
       "../../../node_modules/@types/events/index.d.ts",
-      "./src/services/integration.ts",
       "./src/models/light-node-collection.ts",
       "../../component/node-structure/src/utils.ts",
       "../../component/node-structure/src/identity.assigner.ts",
@@ -8059,37 +8070,17 @@
       "../../../node_modules/linqts/dist/src/enumerable.d.ts",
       "../../../node_modules/linqts/dist/index.d.ts",
       "./src/utils.ts",
-      "./src/components/flow-node-socket.ts",
+      "./src/styles/editor-workspace-style.ts",
       "./src/styles/flow-node-style.ts",
-      "./src/converters/node-converter.ts",
-      "./src/components/selectable-element.ts",
-      "./src/components/flow-node.ts",
       "../../../node_modules/resize-observer/lib/contentrect.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserverentry.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobservercallback.d.ts",
       "../../../node_modules/resize-observer/lib/resizeobserver.d.ts",
-      "./src/components/connection-line.ts",
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
-      "./src/components/editor-workspace.ts",
-      "./src/services/project.ts",
-      "./src/services/input.ts",
-      "./src/components/popup-modal.ts",
-      "./src/services/modal.ts",
-      "./src/services/exporter.ts",
-      "./src/services/shortcuts.ts",
-      "./src/components/flow-editor.ts",
-      "./src/components/node-panel.ts",
-      "./src/components/top-bar.ts",
-      "./src/components/node-menu-item.ts",
-      "./src/components/connection-container.ts",
-      "./src/components/selection-box.ts",
-      "./src/components/internal-picker.ts",
-      "./src/components/rule-browser.ts",
       "./src/components/confirmation-dialog.ts",
       "./src/components/notification-dialog.ts",
-      "./src/index.ts",
       "../../../node_modules/@types/chai/index.d.ts",
       "../../../node_modules/@types/chart.js/index.d.ts",
       "../../../node_modules/@types/geojson/index.d.ts",
@@ -8459,7 +8450,29 @@
       "../../../node_modules/@types/navigo/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
       "../../../node_modules/@types/simplebar/index.d.ts",
-      "./src/styles/editor-workspace-style.ts"
+      "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts",
+      "./src/components/node-panel.ts",
+      "./src/services/integration.ts",
+      "./src/components/flow-node-socket.ts",
+      "./src/converters/node-converter.ts",
+      "./src/components/selectable-element.ts",
+      "./src/components/flow-node.ts",
+      "./src/components/connection-line.ts",
+      "./src/components/editor-workspace.ts",
+      "./src/services/project.ts",
+      "./src/services/input.ts",
+      "./src/components/popup-modal.ts",
+      "./src/services/modal.ts",
+      "./src/services/exporter.ts",
+      "./src/services/shortcuts.ts",
+      "./src/components/top-bar.ts",
+      "./src/components/flow-editor.ts",
+      "./src/components/node-menu-item.ts",
+      "./src/components/connection-container.ts",
+      "./src/components/selection-box.ts",
+      "./src/components/internal-picker.ts",
+      "./src/components/rule-browser.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.6.4"

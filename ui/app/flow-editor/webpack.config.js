@@ -17,7 +17,6 @@ module.exports = {
         port: 1234,
         contentBase: './dist',
         watchContentBase: true,
-        liveReload: true,
         publicPath: "/" + __dirname.split(path.sep).slice(-1)[0]  + "/",
 
     },

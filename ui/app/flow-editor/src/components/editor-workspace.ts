@@ -11,7 +11,7 @@ import { FlowNode } from "./flow-node";
 import { ConnectionLine } from "./connection-line";
 import { ContextMenuButton, ContextMenuSeparator } from "../models/context-menu-button";
 import { ContextMenu } from "./context-menu";
-import { project, input, copyPasteManager, integration } from "./flow-editor";
+import { project, input, copyPasteManager, integration, FlowEditor } from "./flow-editor";
 import { Camera } from "../models/camera";
 import { Utilities } from "../utils";
 
@@ -24,6 +24,8 @@ export class EditorWorkspace extends LitElement {
     @property({ attribute: false }) public scrollSensitivity = 1.25;
     @property({ attribute: false }) public zoomLowerBound = .2;
     @property({ attribute: false }) public zoomUpperBound = 10;
+
+    @property({ attribute: false }) public application: FlowEditor;
 
     @property({ attribute: false }) private connectionDragging = false;
     @property({ attribute: false }) private connectionFrom: { x: number, y: number } = { x: 0, y: 0 };
@@ -206,6 +208,13 @@ export class EditorWorkspace extends LitElement {
 
     protected firstUpdated() {
         this.cachedClientRect = this.getBoundingClientRect();
+        this.application.nodePanel.drawer.addEventListener("or-mwc-drawer-changed", async (e: any) => {
+            this.style.width = e.detail ? "calc(100vw - 255px)" : null;
+            await this.updateComplete;
+            this.cachedClientRect = this.getBoundingClientRect();
+            this.dispatchEvent(new CustomEvent("pan"));
+            this.updateBackground();
+        });
     }
 
     protected render() {

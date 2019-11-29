@@ -1,9 +1,10 @@
-import { LitElement, html, customElement, css, } from "lit-element";
+import { LitElement, html, customElement, css, property } from "lit-element";
 import { IdentityDomLink } from "node-structure";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
-import { project, modal, input, exporter } from "./flow-editor";
+import { project, modal, input, exporter, FlowEditor } from "./flow-editor";
+import { NodePanel } from "./node-panel";
 
 @customElement("top-bar")
 export class TopBar extends LitElement {
@@ -16,6 +17,7 @@ export class TopBar extends LitElement {
             align-items: center;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -5px;
             line-height: var(--topbar-height);
+            z-index: 150;
         }
         .button{
             padding: 0 25px 0 25px;
@@ -31,8 +33,7 @@ export class TopBar extends LitElement {
             background: yellow;
         }
         .title{
-            margin: 0 0 0 15px;
-            width: calc(var(--node-panel-width) - 15px);
+            margin: 0 15px 0 15px;
             text-transform: uppercase;
             font-weight: bold;
         }
@@ -40,6 +41,8 @@ export class TopBar extends LitElement {
             margin-left: auto;
         }`;
     }
+
+    @property({ attribute: false }) public application: FlowEditor;
 
     protected firstUpdated() {
         project.addListener("unsavedstateset", () => {
@@ -60,6 +63,9 @@ export class TopBar extends LitElement {
         <a class="button" @click="${this.save}">${i18next.t("save")} <i>${Utilities.ellipsis(project.existingFlowRuleName)}</i>${project.unsavedState && project.existingFlowRuleId !== -1 ? "*" : ""}</a>
         ${project.existingFlowRuleId === -1 ? null : html`<a @click="${this.showSaveAsDialog}" class="button">Save as...</a>`}
         <a class="button" @click="${this.showRuleBrowser}">Open</a>
+        <a class="button right" @click="${() => {
+                this.application.nodePanel.drawer.toggle();
+            }}"><or-icon icon="menu"></or-icon></a>
         <!-- <a class="button">Help</a> -->
 
         <!-- <a class="debug button" @click="${() => { console.log(project); }}">project</a> -->
