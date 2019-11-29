@@ -51,16 +51,13 @@ export class CopyPasteManager {
             });
         });
 
-        clone.connections = clone.connections.filter((c) => {
-            return remapped[c.from.nodeId] && remapped[c.to.nodeId];
-        });
+        // clone.connections = clone.connections.filter((c) => {
+        //     return remapped[c.from.nodeId] && remapped[c.to.nodeId];
+        // });
 
         clone.connections.forEach((connection: NodeConnection) => {
-            connection.from.id = remapped[connection.from.id];
-            connection.from.nodeId = remapped[connection.from.nodeId];
-
-            connection.to.id = remapped[connection.to.id];
-            connection.to.nodeId = remapped[connection.to.nodeId];
+            connection.from = remapped[connection.from];
+            connection.to = remapped[connection.to];
         });
 
         return clone;

@@ -41,6 +41,10 @@ export class NodePanel extends LitElement {
     @query("or-mwc-drawer") public drawer: OrMwcDrawer;
     @property({ attribute: false }) public application: FlowEditor;
 
+    protected firstUpdated() {
+        this.drawer.open = true;
+    }
+
     protected render() {
         return html`
         <or-mwc-drawer rightsided dismissible>

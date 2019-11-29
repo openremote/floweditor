@@ -1,6 +1,6 @@
 import { Node, NodeConnection, NodeSocket, NodeCollection } from "@openremote/model";
 import { EventEmitter } from "events";
-import { SocketTypeMatcher } from "node-structure";
+import { SocketTypeMatcher, NodeUtilities } from "node-structure";
 import { EditorWorkspace } from "../components/editor-workspace";
 import { input } from "../components/flow-editor";
 
@@ -94,7 +94,11 @@ export class Project extends EventEmitter {
 
     public removeNode(node: Node) {
         input.clearSelection();
-        this.connections.filter((c) => c.from.nodeId === node.id || c.to.nodeId === node.id).forEach((c) => {
+        this.connections.filter((c) => {
+            const from = NodeUtilities.getSocketFromID(c.from, this.nodes);
+            const to = NodeUtilities.getSocketFromID(c.to, this.nodes);
+            return from.nodeId === node.id || to.nodeId === node.id;
+        }).forEach((c) => {
             this.removeConnection(c);
         });
         this.nodes.filter((n) => n.id === node.id).forEach((n) => {
@@ -132,12 +136,12 @@ export class Project extends EventEmitter {
 
         this.isConnecting = false;
         this.emit("connectionend", e, socket);
-        this.createConnection(this.connectionStartSocket, this.connectionEndSocket);
+        this.createConnection(this.connectionStartSocket.id, this.connectionEndSocket.id);
     }
 
     public removeConnection(connection: NodeConnection) {
         input.clearSelection();
-        this.connections.filter((c) => c.from.id === connection.from.id && c.to.id === connection.to.id).forEach((c) => {
+        this.connections.filter((c) => c.from === connection.from && c.to === connection.to).forEach((c) => {
             const index = this.connections.indexOf(c);
             if (index === -1) {
                 console.warn("attempt to delete nonexistent connection");
@@ -150,8 +154,8 @@ export class Project extends EventEmitter {
     }
 
     public isValidConnection(connection: NodeConnection) {
-        const fromSocket = connection.from;
-        const toSocket = connection.to;
+        const fromSocket = NodeUtilities.getSocketFromID(connection.from, this.nodes);
+        const toSocket = NodeUtilities.getSocketFromID(connection.to, this.nodes);
         if (!fromSocket ||
             !toSocket) {
             return false;
@@ -165,7 +169,7 @@ export class Project extends EventEmitter {
         return true;
     }
 
-    public createConnection(fromSocket: NodeSocket, toSocket: NodeSocket): boolean {
+    public createConnection(fromSocket: string, toSocket: string): boolean {
         const connection = {
             from: fromSocket,
             to: toSocket
@@ -173,7 +177,7 @@ export class Project extends EventEmitter {
 
         if (!this.isValidConnection(connection)) { return false; }
 
-        for (const c of this.connections.filter((j) => j.to.id === toSocket.id)) {
+        for (const c of this.connections.filter((j) => j.to === toSocket)) {
             this.removeConnection(c);
         }
 
@@ -181,5 +185,11 @@ export class Project extends EventEmitter {
         this.unsavedState = true;
         this.emit("connectioncreated", fromSocket, toSocket);
         return true;
+    }
+
+    public removeInvalidConnections() {
+        for (const c of this.connections.filter((j) => !this.isValidConnection(j))) {
+            this.removeConnection(c);
+        }
     }
 }

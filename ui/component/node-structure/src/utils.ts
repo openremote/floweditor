@@ -1,10 +1,21 @@
-import { Node, ValueType, NodeDataType, NodePosition } from "@openremote/model";
+import { Node, ValueType, NodeDataType, NodePosition, NodeConnection } from "@openremote/model";
 
 export class NodeUtilities {
     public static getNodeFromID(id: string, nodes: Node[]) {
         const node = nodes.find((n) => n.id === id);
         if (!node) { console.warn(`Node with ID ${id} not found`); }
         return node;
+    }
+
+    public static getSocketFromID(id: string, nodes: Node[]) {
+        for (const node of nodes) {
+            for (const input of node.inputs) {
+                if (input.id === id) { return input; }
+            }
+            for (const output of node.outputs) {
+                if (output.id === id) { return output; }
+            }
+        }
     }
 
     public static convertValueTypeToSocketType(value: ValueType): NodeDataType {

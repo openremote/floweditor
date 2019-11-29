@@ -331,11 +331,12 @@ export class EditorWorkspace extends LitElement {
     }
 
     private startPan(event: MouseEvent) {
-        if (this.connectionDragging) { return; }
-        if (event.buttons !== 4) { return; }
+        if (this.connectionDragging) { return false; }
+        if (event.buttons !== 4) { return false; }
         this.isPanning = true;
         window.addEventListener("mousemove", this.onMove);
         window.addEventListener("mouseup", this.stopPan);
+        event.preventDefault();
     }
 
     private onMove = (event: MouseEvent) => {

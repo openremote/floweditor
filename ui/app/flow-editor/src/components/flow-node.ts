@@ -85,8 +85,10 @@ export class FlowNode extends SelectableElement {
         ${(this.minimal) ? null : html`<div class="internal-container">${this.node.internals.map((i) =>
             html`<internal-picker @picked="${async () => {
                 project.unsavedState = true;
+                this.forceUpdate();
                 await this.updateComplete;
-                this.dispatchEvent(new CustomEvent("updated"));
+                console.log(this.node);
+                project.removeInvalidConnections();
             }}" .node="${this.node}" .internalIndex="${this.node.internals.indexOf(i)}"></internal-picker>`)}</div>`}
         ${this.node.outputs.length > 0 ? outputSide : spacer}
         `;

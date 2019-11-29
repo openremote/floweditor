@@ -29,6 +29,8 @@ export class SelectionBox extends LitElement {
             stroke-linejoin: round;
             transition: stroke-width 120ms;
             z-index: 1000;
+            width: 100vw;
+            height: 100vh;
         }
         rect{
             fill: var(--highlight-faded);

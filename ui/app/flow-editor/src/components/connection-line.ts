@@ -1,6 +1,6 @@
 import { html, customElement, css, property } from "lit-element";
 import { NodeConnection } from "@openremote/model";
-import { IdentityDomLink, IdentityAssigner } from "node-structure";
+import { IdentityDomLink, IdentityAssigner, NodeUtilities } from "node-structure";
 import { FlowNodeSocket } from "./flow-node-socket";
 import { ResizeObserver } from "resize-observer";
 import { SelectableElement } from "./selectable-element";
@@ -70,10 +70,12 @@ export class ConnectionLine extends SelectableElement {
 
     protected render() {
         if (this.isInvalid) {
-            this.fromNodeElement = IdentityDomLink.map[this.connection.from.nodeId];
-            this.toNodeElement = IdentityDomLink.map[this.connection.to.nodeId];
-            this.fromElement = IdentityDomLink.map[this.connection.from.id];
-            this.toElement = IdentityDomLink.map[this.connection.to.id];
+            const fromSocket = NodeUtilities.getSocketFromID(this.connection.from, project.nodes);
+            const toSocket = NodeUtilities.getSocketFromID(this.connection.to, project.nodes);
+            this.fromNodeElement = IdentityDomLink.map[fromSocket.nodeId];
+            this.toNodeElement = IdentityDomLink.map[toSocket.nodeId];
+            this.fromElement = IdentityDomLink.map[fromSocket.id];
+            this.toElement = IdentityDomLink.map[toSocket.id];
             if (this.isInvalid) {
                 console.warn(this.fromNodeElement);
                 console.warn(this.toNodeElement);
@@ -121,7 +123,6 @@ export class ConnectionLine extends SelectableElement {
         ${from.x - parentSize.left}, ${from.y - parentSize.top} 
         ${to.x - parentSize.left}, ${to.y - parentSize.top}"
         ></polyline>
-        <!-- <text x="${(from.x + to.x) / 2 - parentSize.left}" y="${(from.y + to.y) / 2 - parentSize.top}">${this.connection.from.nodeId} -> ${this.connection.to.nodeId}</text> -->
         </svg>`;
     }
 }

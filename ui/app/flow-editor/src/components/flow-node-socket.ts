@@ -1,19 +1,20 @@
-import { LitElement, customElement, property, html, css } from "lit-element";
+import { LitElement, customElement, property, html, css, query } from "lit-element";
 import { NodeSocket } from "@openremote/model";
 import { IdentityDomLink } from "node-structure";
 import { Utilities } from "../utils";
 import { i18next } from "@openremote/or-translate";
 import { project } from "./flow-editor";
+import { FlowNode } from "./flow-node";
 
 @customElement("flow-node-socket")
 export class FlowNodeSocket extends LitElement {
-    @property({ attribute: false }) public socket: NodeSocket;
+    @property({ type: Object }) public socket: NodeSocket;
     @property({ type: String }) public side: "input" | "output";
     @property({ type: Boolean }) public renderLabel = false;
 
     private identityDeleted = false;
+    @query("#circle")
     private circleElem: HTMLElement;
-    private readonly circleId = "circle";
 
     public get connectionPosition() {
         return Utilities.getCenter(this.circleElem.getBoundingClientRect());
@@ -63,6 +64,7 @@ export class FlowNodeSocket extends LitElement {
         project.removeListener("nodeadded", this.forceUpdate);
         project.removeListener("noderemoved", this.forceUpdate);
         project.removeListener("cleared", this.forceUpdate);
+        (IdentityDomLink.map[this.socket.nodeId] as FlowNode).removeEventListener("updated", this.forceUpdate);
     }
 
     public get socketTypeString() {
@@ -79,6 +81,7 @@ export class FlowNodeSocket extends LitElement {
         project.addListener("nodeadded", this.forceUpdate);
         project.addListener("noderemoved", this.forceUpdate);
         project.addListener("cleared", this.forceUpdate);
+        (IdentityDomLink.map[this.socket.nodeId] as FlowNode).addEventListener("updated", this.forceUpdate);
 
         const isInputSocket = this.side === "input";
 
@@ -105,14 +108,13 @@ export class FlowNodeSocket extends LitElement {
 
     protected updated() {
         this.linkIdentity();
-        this.circleElem = this.shadowRoot.getElementById(this.circleId);
     }
 
     protected render() {
         const color = `var(--${this.socketTypeString})`;
 
         const socket = html`<div class="socket">
-            <div class="circle" id=${this.circleId} style="background: ${color}"></div>
+            <div class="circle" id="circle" style="background: ${color}"></div>
             </div>`;
 
         if (!this.renderLabel) { return socket; }

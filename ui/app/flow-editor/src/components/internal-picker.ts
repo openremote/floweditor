@@ -1,5 +1,5 @@
 import { LitElement, property, customElement, html, css, TemplateResult } from "lit-element";
-import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset } from "@openremote/model";
+import { Node, PickerType, AssetAttributeInternalValue, AssetState, MetaItemType, Asset, NodeDataType } from "@openremote/model";
 import { nodeConverter } from "../converters/node-converter";
 import { OrInputChangedEvent } from "@openremote/or-input";
 import rest from "@openremote/rest";
@@ -8,6 +8,7 @@ import { OrAssetTreeRequestSelectEvent } from "@openremote/or-asset-tree";
 import { ResizeObserver } from "resize-observer";
 import i18next from "i18next";
 import { project, modal } from "./flow-editor";
+import { NodeUtilities } from "node-structure";
 
 @customElement("internal-picker")
 export class InternalPicker extends LitElement {
@@ -125,9 +126,12 @@ export class InternalPicker extends LitElement {
                 const meta = (this.selectedAsset.attributes[att] as AssetState).meta;
                 if (!meta) { continue; }
                 if (meta.find((m) => m.name === MetaItemType.RULE_STATE.urn && m.value === true)) {
+                    const foundLabel = meta.find((b) => b.name === MetaItemType.LABEL.urn && b.value);
+                    let label = att;
+                    if (foundLabel) { label = foundLabel.value; }
                     this.attributeNames.push({
                         name: att,
-                        label: meta.find((b) => b.name === MetaItemType.LABEL.urn && b.value).value || att
+                        label
                     });
                 }
             }
@@ -148,6 +152,36 @@ export class InternalPicker extends LitElement {
         this.assetIntialised = true;
     }
 
+    private async setSocketTypeDynamically(value: AssetAttributeInternalValue) {
+        const results = (await rest.api.AssetResource.queryAssets({
+            ids: [value.assetId],
+            select: {
+                excludeAttributeTimestamp: false,
+                excludeAttributeValue: false,
+                excludeAttributeType: false,
+                excludeAttributes: false,
+                attributes: [
+                    value.attributeName
+                ]
+            }
+        })).data;
+
+        const socket = this.node.outputs[0] || this.node.inputs[0];
+        socket.type = NodeDataType.ANY;
+        if (results == null) { return; }
+        if (results[0] == null) { return; }
+        if (results[0].attributes == null) { return; }
+        try {
+            const relevantAttribute = results[0].attributes[value.attributeName];
+            const descriptors = (await rest.api.AssetModelResource.getAttributeValueDescriptors()).data;
+            const relevantDescriptor = descriptors.find((c) => c.name === relevantAttribute.type);
+            socket.type = NodeUtilities.convertValueTypeToSocketType(relevantDescriptor.valueType);
+            console.log(socket.type);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     private get assetAttributeInput(): TemplateResult {
         const hasAssetSelected = this.selectedAsset;
         return html`
@@ -163,11 +197,12 @@ export class InternalPicker extends LitElement {
                 this.attributeNames.length === 0 ?
                     html`<span>${i18next.t("noRuleStateAttributes", "No rule state attributes")}</span>` :
                     html`        
-                <select id="attribute-select" style="margin-top: 10px" @input="${(e: any) => {
+                <select id="attribute-select" style="margin-top: 10px" @input="${async (e: any) => {
                             const value: AssetAttributeInternalValue = {
                                 assetId: this.selectedAsset.id,
                                 attributeName: e.target.value
                             };
+                            await this.setSocketTypeDynamically(value);
                             return this.setValue(value);
                         }}">
                     ${this.attributeNames.map((a) => html`<option value="${a.name}" title="${a.name}">${a.label}</option>`)}
