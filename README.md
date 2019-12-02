@@ -4,7 +4,11 @@ This project is a user interface for creating OpenRemote Flow rules using a drag
 
 ## Running the application
 
-*Describe how to run the application once finishing [this task](https://github.com/openremote/floweditor/projects/1#card-29775819)*
+Make sure your environment is configured correctly by [following this guide.](https://github.com/openremote/openremote/wiki/Developer-Guide%3A-Preparing-the-environment)
+
+After everything is set up correctly, start the keycloak service by navigating to the ``openremote`` submodule and running ``docker-compose -f /profile/dev-testing.yml up -d``. In the same directory, run ``gradlew gwtSuperDev`` to be able to open the manager. Make sure all components in both ``./openremote/ui/component/`` and ``./ui/component/`` directories are built. 
+
+Run the manager by following [following this guide](https://github.com/openremote/openremote/wiki/Developer-Guide%3A-Setting-up-an-IDE). Navigate to ``./ui/app/flow-editor`` and run ``yarn build && yarn serve`` to launch the application. Navigate to ``localhost:1234`` in Chrome or Firefox to use it.
 
 ## Using the application
 
@@ -35,7 +39,3 @@ A socket can only be connected to a socket with the same data type, unless eithe
 ![Simple processing example](https://i.imgur.com/kvVNA8s.png)
 
 *This flow sets the living room target temperature to half the bedroom target temperature*
-
-----
-
-
