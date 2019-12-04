@@ -222,7 +222,7 @@ export class InternalPicker extends LitElement {
     }
 
     private get dropdownInput(): TemplateResult {
-        return html`<select @input="${(e: any) => this.setValue(e.target.value)}">
+        return html`<select @input="${(e: any) => this.setValue(JSON.parse(e.target.value))}">
             ${this.internal.picker.options.map((o) => html`<option value="${o.value}" >${o.name}</option>`)}
         </select>`;
     }
@@ -258,6 +258,7 @@ export class InternalPicker extends LitElement {
 
     private setValue(value: any) {
         this.node.internals[this.internalIndex].value = value;
+        console.log(value);
         this.onPicked();
     }
 

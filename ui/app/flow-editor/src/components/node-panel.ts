@@ -30,6 +30,16 @@ export class NodePanel extends LitElement {
             color: rgb(125,125,125);
             padding: 0 0 15px 0 ;
         }
+        .small-node-grid{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            grid-gap: 6px;
+            justify-items: stretch;
+            align-items: stretch;
+            margin-bottom: 15px;
+            width: var(--nodepanel-width);
+        }
         .input-node{ background-color: var(--input-color); }
         .processor-node{ background-color: var(--processor-color); }
         .output-node{ background-color: var(--output-color); }
@@ -53,24 +63,27 @@ export class NodePanel extends LitElement {
         `;
     }
 
+    private nodeTemplate(node: Node) {
+        return html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`;
+    }
+
     private get listTemplate() {
-        const inputs = [];
-        const processors = [];
-        const outputs = [];
-        for (const node of this.nodes.filter((n) => n.type === NodeType.INPUT)) {
-            inputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
-        }
-        for (const node of this.nodes.filter((n) => n.type === NodeType.PROCESSOR)) {
-            processors.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
-        }
-        for (const node of this.nodes.filter((n) => n.type === NodeType.OUTPUT)) {
-            outputs.push(html`<node-menu-item class="node-item" .node="${node}"></node-menu-item>`);
-        }
         return html`
         <div class="list">
-            <div class="category"> <span>${i18next.t("input", "Input")}</span> ${inputs}</div>
-            <div class="category"> <span>${i18next.t("processors", "Processors")}</span> ${processors}</div>
-            <div class="category"> <span>${i18next.t("output", "Output")}</span> ${outputs}</div>
+            <div class="category"> <span>${i18next.t("input", "Input")}</span> 
+                ${this.nodes.filter((n) => n.type === NodeType.INPUT).map((n) => this.nodeTemplate(n))}
+            </div>
+
+            <div class="category"><span>${i18next.t("processors", "Processors")}</span> 
+                <div class="small-node-grid">
+                    ${this.nodes.filter((n) => n.type === NodeType.PROCESSOR && n.displayCharacter).map((n) => this.nodeTemplate(n))}
+                </div>
+                ${this.nodes.filter((n) => n.type === NodeType.PROCESSOR && !n.displayCharacter).map((n) => this.nodeTemplate(n))}
+            </div>
+
+            <div class="category"> <span>${i18next.t("output", "Output")}</span> 
+                ${this.nodes.filter((n) => n.type === NodeType.OUTPUT).map((n) => this.nodeTemplate(n))}
+            </div>
         </div>
         `;
     }

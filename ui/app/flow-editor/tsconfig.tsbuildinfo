@@ -298,8 +298,8 @@
         "signature": "d1e45268dac2a6a5e8ec4852dc8560f67f66f5aa108889d68a618f0c1a320d62"
       },
       "../../../openremote/ui/component/or-mwc-components/dist/or-mwc-drawer.d.ts": {
-        "version": "002ed3149ce011b0b828d6d84dccace5b84fb9063c53831ab8fae93867588a7d",
-        "signature": "002ed3149ce011b0b828d6d84dccace5b84fb9063c53831ab8fae93867588a7d"
+        "version": "ab0dda2567182b41f1d2ee30b8f5989edeacf0a9d4d638db5f91f33d8fd1334b",
+        "signature": "ab0dda2567182b41f1d2ee30b8f5989edeacf0a9d4d638db5f91f33d8fd1334b"
       },
       "./src/models/status.ts": {
         "version": "e31b2b54da65ac1c9525921d884e94ba8e4d92ff7a2f8714b477365adb2e420c",
@@ -327,7 +327,7 @@
         "version": "23293d5ec33da3dd377ccc0f85dc3896ca75e246c0201c743b2c12b7b002bab1"
       },
       "../../component/node-structure/src/socket.type.matcher.ts": {
-        "version": "6d245d137bf10d166a4eda220f3babcb0a3b92659371b69c15e8ed96ca389665"
+        "version": "a65c4210007f040a0eec339b56dd339e578610075ba102c1ac6c2680e24b0b63"
       },
       "../../component/node-structure/src/copy.machine.ts": {
         "version": "21626d4f88b587e1d68f4f67deac5a9f2677d189b7cd442ce578f8f057bb2789"
@@ -444,8 +444,8 @@
         "signature": "184d2bbbd7ef923fe5ba999e42c775e346a2fb0e1cf30f8a04a1ce7681733377"
       },
       "./src/components/node-panel.ts": {
-        "version": "36a6723eda7b8026e99b43ec9fcd832a6b7e3a831c3d5fc42e9848c0778a010d",
-        "signature": "91fc42b11bf2c8c3b7af496afb6eb5ed6555b8f99372ca8f0503c8b2d65638b7"
+        "version": "04c7a6496b23e2148e30df4101533a085b9e8c2e6c302c026c712cf122f22cc0",
+        "signature": "996b49313dc6fd5b999c0d72aee6f1d3a59e54844c0a4144c7e190e97fa48ec8"
       },
       "./src/components/top-bar.ts": {
         "version": "6cd1097677f7e439b92507f3866a2d9a74e145a481c2921cb29adf18db49c0d3",
@@ -456,7 +456,7 @@
         "signature": "f8076346a6610f76fa84f1d22518bfb816ab4df345df183a1c865bd04decc34e"
       },
       "./src/components/node-menu-item.ts": {
-        "version": "a61af24c08f70303ad43b55db4a801654c2f2c9981be5934a5b826d477b81a42",
+        "version": "63ec166dc6c7fb033fbbc8ec4ba51a2929e126ba40b6bbe51185139fa07e3500",
         "signature": "f4f3a65337eabfabe7b1952caa5148caf93fda805c89707596a4173811dce426"
       },
       "./src/components/connection-container.ts": {
@@ -468,7 +468,7 @@
         "signature": "847a17fdf24c50d1170feaf2212a856b2f0516809985010eba9c1e30fbd4da93"
       },
       "./src/components/internal-picker.ts": {
-        "version": "63e604e50a144eda2e1c731bbb9abb903a56a4e193d1ba9be6d98b7517d6f2c2",
+        "version": "299db1c34dd9b98052ac1867a3bc9e1b3e4591cce2700bf1af4761fb285c9671",
         "signature": "5f9594b50e72868bed409500b2089cf31ae8786e1b32d8babb065a416d1c1d08"
       },
       "./src/components/rule-browser.ts": {
@@ -9989,6 +9989,7 @@
       "./src/models/context-menu-button.ts",
       "./src/components/context-menu.ts",
       "./src/models/camera.ts",
+      "./src/components/editor-workspace.ts",
       "./src/services/project.ts",
       "./src/services/input.ts",
       "./src/components/popup-modal.ts",
@@ -9998,7 +9999,6 @@
       "./src/components/node-panel.ts",
       "./src/components/top-bar.ts",
       "./src/components/flow-editor.ts",
-      "./src/components/node-menu-item.ts",
       "./src/components/connection-container.ts",
       "./src/components/selection-box.ts",
       "./src/components/internal-picker.ts",
@@ -10376,7 +10376,7 @@
       "../../../node_modules/@types/navigo/index.d.ts",
       "../../../node_modules/@types/qs/index.d.ts",
       "../../../node_modules/@types/simplebar/index.d.ts",
-      "./src/components/editor-workspace.ts"
+      "./src/components/node-menu-item.ts"
     ]
   },
   "version": "3.7.2"

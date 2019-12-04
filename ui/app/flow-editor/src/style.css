@@ -20,6 +20,7 @@ body {
     --socket-display-size: 14px;
 
     --topbar-height: 50px;
+    --nodepanel-width: 200px;
     --roundness: 3px;
 
     --highlight-faded: hsla(102, 100%, 31%, 0.2);

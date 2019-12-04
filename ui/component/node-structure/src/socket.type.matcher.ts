@@ -14,6 +14,7 @@ export class SocketTypeMatcher {
             type: NodeDataType.NUMBER,
             matches: [
                 NodeDataType.NUMBER,
+                NodeDataType.STRING,
             ]
         },
         {
@@ -32,12 +33,14 @@ export class SocketTypeMatcher {
             type: NodeDataType.BOOLEAN,
             matches: [
                 NodeDataType.BOOLEAN,
+                NodeDataType.STRING,
             ]
         },
         {
             type: NodeDataType.COLOR,
             matches: [
                 NodeDataType.COLOR,
+                NodeDataType.STRING,
             ]
         },
     ];

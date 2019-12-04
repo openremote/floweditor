@@ -32,11 +32,17 @@ export class NodeMenuItem extends LitElement {
             border-radius: var(--roundness);
             box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -5px;
 
-            width: 200px;
+            width: calc(var(--nodepanel-width) - 4px * 2);
             height: 22px;
             line-height: 22px;
             cursor:grab;
             transition: box-shadow 150ms;
+        }
+        :host(.small), .small{
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            margin: 0;
         }
         .node-drag-item{
             z-index: 5000;
@@ -46,9 +52,7 @@ export class NodeMenuItem extends LitElement {
             filter: opacity(90%);
             pointer-events: none;
         }
-        .label::first-letter{
-            text-transform: uppercase;
-        }`;
+        `;
     }
 
     protected render() {
@@ -64,6 +68,10 @@ export class NodeMenuItem extends LitElement {
                 break;
         }
 
+        if (this.node.displayCharacter) {
+            this.classList.add("small");
+        }
+        this.title = i18next.t(this.node.name, Utilities.humanLike(this.node.name));
         return html`
         <div class="label">${this.flowNodeName}</div>
         ${this.isDragging ? this.dragNodeTemplate : null}
@@ -71,11 +79,12 @@ export class NodeMenuItem extends LitElement {
     }
 
     private get dragNodeTemplate() {
-        return html`<div class="node-drag-item" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px"><div class="label">${this.flowNodeName}</div></div>`;
+        return html`<div class="node-drag-item ${(this.node.displayCharacter ? "small" : null)}" style="top: ${this.y - this.yOffset}px; left: ${this.x - this.xOffset}px"><div class="label">${this.flowNodeName}</div></div>`;
     }
 
     private get flowNodeName() {
-        return i18next.t(this.node.name, Utilities.humanLike(this.node.name));
+        const n = this.node.displayCharacter || this.node.name;
+        return i18next.t(n, Utilities.humanLike(n));
     }
 
     private startDrag = (e: MouseEvent) => {
